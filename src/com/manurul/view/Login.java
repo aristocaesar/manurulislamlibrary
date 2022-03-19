@@ -22,7 +22,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         
         // SET TITLE
-        this.setTitle("MA Nurul Islam Libary Management");
+        this.setTitle("MA Nurul Islam Library Management");
         // SET SIZE
         this.setSize(1024, 650);
         this.setMaximumSize(new Dimension(1024, 650));
@@ -32,7 +32,7 @@ public class Login extends javax.swing.JFrame {
         // SET DISABLE RESIZESABLE
         this.setResizable(false);
         // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../src/ICO_MANURUL.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../src/LOGO_MANURUL.png")));
         
         // SET BORDER INPUT
         INPUT_USERNAME.setBorder(BorderFactory.createCompoundBorder(INPUT_USERNAME.getBorder(), BorderFactory.createEmptyBorder(0, 8, 0, 0)));
@@ -51,7 +51,7 @@ public class Login extends javax.swing.JFrame {
             if(!INPUT_USERNAME.getText().equals("") && !INPUT_PASSWORD.getText().equals("")){
                 
                 // CHECK DENGAN DATABASE
-                new Dashboard().setVisible(true);
+                new Dashboard(1, INPUT_USERNAME.getText()).setVisible(true);
                 this.dispose();
                 
             }else{
