@@ -26,7 +26,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="SIDEBAR" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="MAIN_FRAME" max="32767" attributes="0"/>
+              <Component id="MAIN_FRAME" pref="1278" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -209,15 +209,15 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="P_TABLE_LOG" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="P_TOTAL_BUKU" pref="292" max="32767" attributes="0"/>
+                              <Component id="P_TOTAL_BUKU" pref="289" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="P_DIPINJAM" pref="292" max="32767" attributes="0"/>
+                              <Component id="P_DIPINJAM" pref="291" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="P_BERMASALAH" pref="294" max="32767" attributes="0"/>
+                              <Component id="P_BERMASALAH" pref="291" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="P_ANGGOTA" pref="295" max="32767" attributes="0"/>
+                              <Component id="P_ANGGOTA" pref="292" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="TOPBAR" alignment="0" pref="1248" max="32767" attributes="0"/>
+                          <Component id="TOPBAR" alignment="0" pref="1238" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -347,7 +347,7 @@
                               <Component id="TITLE_TOTAL_BUKU" min="-2" max="-2" attributes="0"/>
                               <Component id="VALUE_TOTAL_BUKU" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="80" max="32767" attributes="0"/>
+                          <EmptySpace pref="77" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -428,7 +428,7 @@
                               <Component id="TITLE_DIPINJAM" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="VALUE_DIPINJAM" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="94" max="32767" attributes="0"/>
+                          <EmptySpace pref="93" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -512,7 +512,7 @@
                               <Component id="TITLE_BERMASALAH" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="VALUE_BERMASALAH" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="77" max="32767" attributes="0"/>
+                          <EmptySpace pref="74" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -785,7 +785,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1248" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1238" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -815,8 +815,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jPanel2" max="32767" attributes="0"/>
-                          <Component id="TOPBAR_DATABUKU" pref="1326" max="32767" attributes="0"/>
+                          <Component id="FRAME_DATABUKU" max="32767" attributes="0"/>
+                          <Component id="TOPBAR_DATABUKU" pref="1238" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -828,8 +828,8 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="TOPBAR_DATABUKU" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="jPanel2" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="FRAME_DATABUKU" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -838,7 +838,7 @@
             <Container class="javax.swing.JPanel" name="TOPBAR_DATABUKU">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="99" red="99" type="rgb"/>
+                  <Color blue="f5" green="f0" red="ef" type="rgb"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[353, 70]"/>
@@ -853,14 +853,14 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="T_DB_BUKU" pref="64" max="32767" attributes="0"/>
+                          <Component id="T_DB_BUKU" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="T_DB_KATEGORI" pref="89" max="32767" attributes="0"/>
+                          <Component id="T_DB_KATEGORI" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="T_DB_PENERBIT" pref="91" max="32767" attributes="0"/>
+                          <Component id="T_DB_PENERBIT" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="T_DB_RAK" pref="103" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="640" max="-2" attributes="0"/>
+                          <Component id="T_DB_RAK" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="USERNAME_DATABUKU" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Component id="ICON_DB_DATABUKU" min="-2" max="-2" attributes="0"/>
@@ -981,28 +981,345 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel2">
+            <Container class="javax.swing.JPanel" name="FRAME_DATABUKU">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ff" green="cc" red="99" type="rgb"/>
                 </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RoundedPanel(15, Color.WHITE)"/>
               </AuxValues>
 
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="629" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="F_DB_BUKU">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="f5" green="f0" red="ef" type="rgb"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RoundedPanel(15, Color.WHITE)"/>
+                  </AuxValues>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                      <CardConstraints cardName="card2"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="FILTER_KATEGORI_BUKU" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="KATEGORI_COMBOBOX_BUKU" min="-2" pref="141" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                                      <Component id="FILTER_TAMPIL_BUKU" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="TAMPILKAN_COMBOBOX_BUKU" min="-2" pref="141" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="TABLE_LIST_DB_BUKU" alignment="1" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="TITLE_FRAME_BUKU" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="629" max="32767" attributes="0"/>
+                                              <Component id="SEARCH_BUKU" min="-2" pref="256" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ICON_ADD_BUKU" min="-2" pref="34" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ICON_IMPORT_BUKU" min="-2" pref="34" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ICON_EXPORT_BUKU" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="TITLE_FRAME_BUKU" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ICON_IMPORT_BUKU" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="ICON_ADD_BUKU" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="ICON_EXPORT_BUKU" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="SEARCH_BUKU" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="TABLE_LIST_DB_BUKU" pref="486" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="TAMPILKAN_COMBOBOX_BUKU" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="FILTER_TAMPIL_BUKU" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="FILTER_KATEGORI_BUKU" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="KATEGORI_COMBOBOX_BUKU" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="TITLE_FRAME_BUKU">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="26" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Daftar Buku"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="ICON_EXPORT_BUKU">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/manurul/src/ICON_EXPORT.png"/>
+                        </Property>
+                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                          <Color id="Hand Cursor"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ICON_EXPORT_BUKUMouseClicked"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="ICON_IMPORT_BUKU">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/manurul/src/ICON_IMPORT.png"/>
+                        </Property>
+                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                          <Color id="Hand Cursor"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ICON_IMPORT_BUKUMouseClicked"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="ICON_ADD_BUKU">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/manurul/src/ICON_ADD.png"/>
+                        </Property>
+                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                          <Color id="Hand Cursor"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ICON_ADD_BUKUMouseClicked"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="SEARCH_BUKU">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SEARCH_BUKUKeyTyped"/>
+                      </Events>
+                    </Component>
+                    <Container class="javax.swing.JScrollPane" name="TABLE_LIST_DB_BUKU">
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JTable" name="TABLE_LIST_BUKU">
+                          <Properties>
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                              <Table columnCount="4" rowCount="4">
+                                <Column editable="true" title="Title 1fdsfsd" type="java.lang.Object">
+                                  <Data value="dfsd"/>
+                                  <Data value="fsdfds"/>
+                                  <Data value="ferf"/>
+                                  <Data value="dsff"/>
+                                </Column>
+                                <Column editable="true" title="Title 2fdfdsf" type="java.lang.Object">
+                                  <Data value="fdsfsdf"/>
+                                  <Data value="fsdfds"/>
+                                  <Data value="sdfsd"/>
+                                  <Data value="sdgfgf"/>
+                                </Column>
+                                <Column editable="true" title="Title 3dfdsf" type="java.lang.Object">
+                                  <Data value="sdfsdfsd"/>
+                                  <Data value="fsdfds"/>
+                                  <Data value="fsf"/>
+                                  <Data value="gfdg"/>
+                                </Column>
+                                <Column editable="true" title="Title 4" type="java.lang.Object">
+                                  <Data value="fsdfsd"/>
+                                  <Data value="fsdfsd"/>
+                                  <Data value="dsfsdfsd"/>
+                                  <Data value="fdfgfdgg"/>
+                                </Column>
+                              </Table>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Component class="javax.swing.JLabel" name="FILTER_TAMPIL_BUKU">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="18" style="0"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Tampilkan"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="TAMPILKAN_COMBOBOX_BUKU">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="0"/>
+                        </Property>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="4">
+                            <StringItem index="0" value="Item 1"/>
+                            <StringItem index="1" value="Item 2"/>
+                            <StringItem index="2" value="Item 3"/>
+                            <StringItem index="3" value="Item 4"/>
+                          </StringArray>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="FILTER_KATEGORI_BUKU">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="18" style="0"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Kategori"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="KATEGORI_COMBOBOX_BUKU">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="0"/>
+                        </Property>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="4">
+                            <StringItem index="0" value="Item 1"/>
+                            <StringItem index="1" value="Item 2"/>
+                            <StringItem index="2" value="Item 3"/>
+                            <StringItem index="3" value="Item 4"/>
+                          </StringArray>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="F_DB_KATEGORI">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="0" red="cc" type="rgb"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                      <CardConstraints cardName="card3"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="1238" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="638" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                </Container>
+                <Container class="javax.swing.JPanel" name="F_DB_PENERBIT">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="ff" red="33" type="rgb"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                      <CardConstraints cardName="card4"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="1238" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="638" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                </Container>
+                <Container class="javax.swing.JPanel" name="F_DB_RAK">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="cc" red="ff" type="rgb"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                      <CardConstraints cardName="card5"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="1238" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="638" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                </Container>
+              </SubComponents>
             </Container>
           </SubComponents>
         </Container>
@@ -1024,8 +1341,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="FRAME_USER" pref="0" max="32767" attributes="0"/>
-                          <Component id="TOPBAR_USER" pref="1248" max="32767" attributes="0"/>
+                          <Component id="FRAME_USER" max="32767" attributes="0"/>
+                          <Component id="TOPBAR_USER" pref="1238" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -1062,14 +1379,14 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="T_U_ANGGOTA" max="32767" attributes="0"/>
+                          <Component id="T_U_ANGGOTA" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="T_U_JURUSAN" max="32767" attributes="0"/>
+                          <Component id="T_U_JURUSAN" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="T_U_KELAS" max="32767" attributes="0"/>
+                          <Component id="T_U_KELAS" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="T_U_PENGURUS" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="640" max="-2" attributes="0"/>
+                          <Component id="T_U_PENGURUS" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="USERNAME_USER" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Component id="ICON_U_USER" min="-2" max="-2" attributes="0"/>
@@ -1235,7 +1552,7 @@
                                           <Component id="TABLE_LIST_U_ANGGOTA" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="TITLE_FRAME_USER" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="602" max="32767" attributes="0"/>
+                                              <EmptySpace pref="592" max="32767" attributes="0"/>
                                               <Component id="SEARCH_USER" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_USER" min="-2" pref="34" max="-2" attributes="0"/>
@@ -1482,7 +1799,7 @@
                                           <Component id="TABLE_LIST_JURUSAN" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="TITLE_FRAME_JURUSAN" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="707" max="32767" attributes="0"/>
+                                              <EmptySpace pref="697" max="32767" attributes="0"/>
                                               <Component id="SEARCH_JURUSAN" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_JURUSAN" min="-2" pref="34" max="-2" attributes="0"/>
@@ -1664,7 +1981,7 @@
                                           <Component id="TABLE_LIST_KELAS" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_KELAS" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="738" max="32767" attributes="0"/>
+                                              <EmptySpace pref="728" max="32767" attributes="0"/>
                                               <Component id="SEARCH_KELAS" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_KELAS" min="-2" pref="34" max="-2" attributes="0"/>
@@ -1846,7 +2163,7 @@
                                           <Component id="TABLE_LIST_PENGURUS" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_PENGURUS" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="692" max="32767" attributes="0"/>
+                                              <EmptySpace pref="682" max="32767" attributes="0"/>
                                               <Component id="SEARCH_PENGURUS" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_PENGURUS" min="-2" pref="34" max="-2" attributes="0"/>
@@ -2019,7 +2336,7 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="FRAME_MAIN_SETTING" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TOPBAR_SETTING" alignment="1" pref="1248" max="32767" attributes="0"/>
+                          <Component id="TOPBAR_SETTING" alignment="1" pref="1238" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -2144,7 +2461,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="LABEL_SET_RP" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                                          <Component id="INPUT_SET_1" max="32767" attributes="0"/>
+                                          <Component id="INPUT_SET_1" pref="337" max="32767" attributes="0"/>
                                           <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -2160,7 +2477,7 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="LABEL_SET_3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jComboBox1" pref="350" max="32767" attributes="0"/>
+                              <Component id="jComboBox1" pref="344" max="32767" attributes="0"/>
                               <Component id="BTN_SET_SIMAN" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>

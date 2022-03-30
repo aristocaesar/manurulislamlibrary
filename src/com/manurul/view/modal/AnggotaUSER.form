@@ -124,7 +124,7 @@
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="SPINNER_SKOR" min="-2" pref="286" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -144,10 +144,10 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="646" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LABEL_KESEMPATAN" alignment="0" pref="287" max="32767" attributes="0"/>
-                                  <Component id="INPUT_DIS_KESEMPATAN" alignment="0" pref="287" max="32767" attributes="0"/>
+                                  <Component id="LABEL_KESEMPATAN" alignment="0" pref="288" max="32767" attributes="0"/>
+                                  <Component id="INPUT_DIS_KESEMPATAN" alignment="0" pref="288" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
