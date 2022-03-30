@@ -26,7 +26,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
         initComponents();
         
         // SET SIZE
-        this.setSize(1024, 460);
+        this.setSize(1040, 460);
         
         // SET CENTER LOCATION
         this.setLocationRelativeTo(null);
@@ -58,7 +58,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
             LABEL_KESEMPATAN.setVisible(false);
             INPUT_DIS_KESEMPATAN.setVisible(false);
             
-            this.setSize(1024, 390);
+            this.setSize(1040, 400);
         
         }
         
@@ -219,7 +219,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
                                 .addGap(25, 25, 25))
                             .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
                                 .addComponent(SPINNER_SKOR, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(26, 26, 26))))
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,9 +233,9 @@ public class AnggotaUSER extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONTAINER_ANGGOTALayout.createSequentialGroup()
                         .addGap(646, 646, 646)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LABEL_KESEMPATAN, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                            .addComponent(INPUT_DIS_KESEMPATAN, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
-                        .addGap(26, 26, 26))))
+                            .addComponent(LABEL_KESEMPATAN, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                            .addComponent(INPUT_DIS_KESEMPATAN, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
+                        .addGap(25, 25, 25))))
         );
         CONTAINER_ANGGOTALayout.setVerticalGroup(
             CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
