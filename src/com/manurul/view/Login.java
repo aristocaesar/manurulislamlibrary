@@ -3,6 +3,7 @@
  */
 package com.manurul.view;
 
+import com.manurul.model.PengurusModel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -51,8 +52,15 @@ public class Login extends javax.swing.JFrame {
             if(!INPUT_USERNAME.getText().equals("") && !INPUT_PASSWORD.getText().equals("")){
                 
                 // CHECK DENGAN DATABASE
-                new Dashboard(1, INPUT_USERNAME.getText()).setVisible(true);
-                this.dispose();
+                PengurusModel PM = new PengurusModel();
+                PM.setUsername(INPUT_USERNAME.getText());
+                PM.setPassword(INPUT_PASSWORD.getText());
+                if(PM.loginCek()){
+                    new Dashboard(PM.getId(), PM.getNamaLengkap(), 0).setVisible(true);
+                    this.dispose();
+                }else{
+                    throw new Exception("Username atau Password salah cxc!");
+                }
                 
             }else{
                 throw new Exception("Username atau Password salah !");

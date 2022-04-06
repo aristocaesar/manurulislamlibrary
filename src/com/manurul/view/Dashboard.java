@@ -40,10 +40,11 @@ public class Dashboard extends javax.swing.JFrame {
     
     private int id_user;
     private String nama_user;
+    
     /**
      * INIT FORM DASHBOARD
      */
-    public Dashboard(int id_user, String nama_user) {
+    public Dashboard(int id_user, String nama_user, int role) {
         initComponents();
         
         // SET STATE
@@ -137,7 +138,11 @@ public class Dashboard extends javax.swing.JFrame {
             
         }else if(menuSelected.equals("TRANSAKSI")){
             
+            // SHOW PAGE SETTING
             MAIN_FRAME.add(TRANSAKSI);
+            
+            // SET TOP BAR
+            USERNAME_TRANSAKSI.setText(this.nama_user);
             
             // SET ICON ACTIVE
             BTN_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AIRPLAY_NON.png")));
@@ -148,7 +153,11 @@ public class Dashboard extends javax.swing.JFrame {
             
         }else if(menuSelected.equals("DATABUKU")){
             
+            // SHOW PAGE SETTING
             MAIN_FRAME.add(DATABUKU);
+            
+            // SET TOP BAR
+            USERNAME_DATABUKU.setText(this.nama_user);
             
             // SET ICON ACTIVE
             BTN_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AIRPLAY_NON.png")));
@@ -200,6 +209,48 @@ public class Dashboard extends javax.swing.JFrame {
     */
     
         // code
+    
+     /*
+    ------------------------
+        TRANSAKSI
+    ------------------------
+    */
+    
+        public void setTransaksiPageSelected(String selected){
+            
+            FRAME_TRANSAKSI.removeAll();
+            
+            if(selected.equals("PINJAM")){
+                
+                FRAME_TRANSAKSI.add(F_TR_PINJAM);
+                
+                T_TR_PINJAM.setForeground(new Color(78, 204, 121));
+                T_TR_KEMBALI.setForeground(new Color(96, 96, 96));
+                T_TR_LAPORAN.setForeground(new Color(96, 96, 96));
+                
+            
+            }else if(selected.equals("KEMBALI")){
+            
+                FRAME_TRANSAKSI.add(F_TR_KEMBALI);
+                
+                T_TR_PINJAM.setForeground(new Color(96, 96, 96));
+                T_TR_KEMBALI.setForeground(new Color(78, 204, 121));
+                T_TR_LAPORAN.setForeground(new Color(96, 96, 96));
+                
+            }else{
+            
+                FRAME_TRANSAKSI.add(F_TR_LAPORAN);
+                
+                T_TR_PINJAM.setForeground(new Color(96, 96, 96));
+                T_TR_KEMBALI.setForeground(new Color(96, 96, 96));
+                T_TR_LAPORAN.setForeground(new Color(78, 204, 121));
+                
+            }
+            
+            FRAME_TRANSAKSI.repaint();
+            FRAME_TRANSAKSI.revalidate();
+        
+        }
     
     /*
     ------------------------
@@ -352,12 +403,37 @@ public class Dashboard extends javax.swing.JFrame {
         VALUE_ANGGOTA = new javax.swing.JLabel();
         ICON_ANGGOTA = new javax.swing.JLabel();
         P_TABLE_LOG = new RoundedPanel(15, Color.WHITE);
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        LABEL_LOG = new javax.swing.JLabel();
+        LABEL_TAMPILKAN = new javax.swing.JLabel();
+        TABLE_LOG = new javax.swing.JScrollPane();
+        TABLE_LIST_LOG = new javax.swing.JTable();
+        SORT_LIST_LOG = new javax.swing.JComboBox<>();
         TRANSAKSI = new javax.swing.JPanel();
-        jPanel1 = new RoundedPanel(15, Color.WHITE);
+        TOPBAR_TRANSAKSI = new RoundedPanel(15, Color.WHITE);
+        T_TR_PINJAM = new javax.swing.JLabel();
+        T_TR_KEMBALI = new javax.swing.JLabel();
+        T_TR_LAPORAN = new javax.swing.JLabel();
+        USERNAME_TRANSAKSI = new javax.swing.JLabel();
+        ICON_TR_TRANSAKSI = new javax.swing.JLabel();
+        FRAME_TRANSAKSI = new RoundedPanel(15, Color.WHITE);
+        F_TR_LAPORAN = new javax.swing.JPanel();
+        F_TR_KEMBALI = new javax.swing.JPanel();
+        F_TR_PINJAM = new javax.swing.JPanel();
+        TITLE_FRAME_PINJAM = new javax.swing.JLabel();
+        T_PJ_BUKU = new javax.swing.JLabel();
+        TABLE_PINJAM = new javax.swing.JScrollPane();
+        TABLE_LIST_PINJAM = new javax.swing.JTable();
+        BTN_CETAK_PINJAMAN = new javax.swing.JButton();
+        PJ_INPUT_ID_TRANSAKSI = new javax.swing.JTextField();
+        PJ_ID_TRANSAKSI = new javax.swing.JLabel();
+        PJ_INPUT_PEMINJAM = new javax.swing.JTextField();
+        PJ_LABEL_PEMINJAM = new javax.swing.JLabel();
+        PJ_LABEL_KAT_BUKU = new javax.swing.JLabel();
+        PJ_LABEL_TGL_PINJAM = new javax.swing.JLabel();
+        PJ_LABEL_INFO_1 = new javax.swing.JLabel();
+        PJ_LABEL_INFO_2 = new javax.swing.JLabel();
+        PJ_INPUT_KAT_BUKU = new javax.swing.JComboBox<>();
+        PJ_INPUT_TGL_PINJAM = new javax.swing.JTextField();
         DATABUKU = new javax.swing.JPanel();
         TOPBAR_DATABUKU = new RoundedPanel(15, Color.WHITE);
         T_DB_BUKU = new javax.swing.JLabel();
@@ -772,15 +848,15 @@ public class Dashboard extends javax.swing.JFrame {
 
         P_TABLE_LOG.setBackground(new java.awt.Color(239, 240, 245));
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 28)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(96, 96, 96));
-        jLabel2.setText("Transaksi Terbaru");
+        LABEL_LOG.setFont(new java.awt.Font("Trebuchet MS", 1, 28)); // NOI18N
+        LABEL_LOG.setForeground(new java.awt.Color(96, 96, 96));
+        LABEL_LOG.setText("Transaksi Terbaru");
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("Tampilkan");
+        LABEL_TAMPILKAN.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        LABEL_TAMPILKAN.setForeground(new java.awt.Color(204, 204, 204));
+        LABEL_TAMPILKAN.setText("Tampilkan");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TABLE_LIST_LOG.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -791,7 +867,10 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        TABLE_LOG.setViewportView(TABLE_LIST_LOG);
+
+        SORT_LIST_LOG.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        SORT_LIST_LOG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout P_TABLE_LOGLayout = new javax.swing.GroupLayout(P_TABLE_LOG);
         P_TABLE_LOG.setLayout(P_TABLE_LOGLayout);
@@ -800,11 +879,14 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(P_TABLE_LOGLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(P_TABLE_LOGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(TABLE_LOG, javax.swing.GroupLayout.DEFAULT_SIZE, 1168, Short.MAX_VALUE)
                     .addGroup(P_TABLE_LOGLayout.createSequentialGroup()
                         .addGroup(P_TABLE_LOGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addGroup(P_TABLE_LOGLayout.createSequentialGroup()
+                                .addComponent(LABEL_TAMPILKAN)
+                                .addGap(18, 18, 18)
+                                .addComponent(SORT_LIST_LOG, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LABEL_LOG))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(35, 35, 35))
         );
@@ -812,11 +894,13 @@ public class Dashboard extends javax.swing.JFrame {
             P_TABLE_LOGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(P_TABLE_LOGLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel2)
+                .addComponent(LABEL_LOG)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addGroup(P_TABLE_LOGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LABEL_TAMPILKAN)
+                    .addComponent(SORT_LIST_LOG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addComponent(TABLE_LOG, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
 
@@ -857,34 +941,265 @@ public class Dashboard extends javax.swing.JFrame {
 
         MAIN_FRAME.add(DASHBOARD, "card2");
 
-        TRANSAKSI.setBackground(new java.awt.Color(102, 102, 255));
+        TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        TOPBAR_TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
+        TOPBAR_TRANSAKSI.setPreferredSize(new java.awt.Dimension(353, 70));
+
+        T_TR_PINJAM.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        T_TR_PINJAM.setForeground(new java.awt.Color(96, 96, 96));
+        T_TR_PINJAM.setText("Peminjaman Buku");
+        T_TR_PINJAM.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        T_TR_PINJAM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                T_TR_PINJAMMouseClicked(evt);
+            }
+        });
+
+        T_TR_KEMBALI.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        T_TR_KEMBALI.setForeground(new java.awt.Color(96, 96, 96));
+        T_TR_KEMBALI.setText("Pengembalian Buku");
+        T_TR_KEMBALI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        T_TR_KEMBALI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                T_TR_KEMBALIMouseClicked(evt);
+            }
+        });
+
+        T_TR_LAPORAN.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        T_TR_LAPORAN.setForeground(new java.awt.Color(96, 96, 96));
+        T_TR_LAPORAN.setText("Laporan");
+        T_TR_LAPORAN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        T_TR_LAPORAN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                T_TR_LAPORANMouseClicked(evt);
+            }
+        });
+
+        USERNAME_TRANSAKSI.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        USERNAME_TRANSAKSI.setForeground(new java.awt.Color(96, 96, 96));
+        USERNAME_TRANSAKSI.setText("USERNAME");
+
+        ICON_TR_TRANSAKSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AKUN_CIRCLE.png"))); // NOI18N
+
+        javax.swing.GroupLayout TOPBAR_TRANSAKSILayout = new javax.swing.GroupLayout(TOPBAR_TRANSAKSI);
+        TOPBAR_TRANSAKSI.setLayout(TOPBAR_TRANSAKSILayout);
+        TOPBAR_TRANSAKSILayout.setHorizontalGroup(
+            TOPBAR_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(T_TR_PINJAM)
+                .addGap(46, 46, 46)
+                .addComponent(T_TR_KEMBALI)
+                .addGap(46, 46, 46)
+                .addComponent(T_TR_LAPORAN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(USERNAME_TRANSAKSI)
+                .addGap(18, 18, 18)
+                .addComponent(ICON_TR_TRANSAKSI)
+                .addGap(27, 27, 27))
+        );
+        TOPBAR_TRANSAKSILayout.setVerticalGroup(
+            TOPBAR_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
+                .addGroup(TOPBAR_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(TOPBAR_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(T_TR_PINJAM)
+                            .addComponent(USERNAME_TRANSAKSI)
+                            .addComponent(T_TR_KEMBALI)
+                            .addComponent(T_TR_LAPORAN)))
+                    .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        FRAME_TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
+        FRAME_TRANSAKSI.setLayout(new java.awt.CardLayout());
+
+        F_TR_LAPORAN.setBackground(new java.awt.Color(204, 102, 0));
+
+        javax.swing.GroupLayout F_TR_LAPORANLayout = new javax.swing.GroupLayout(F_TR_LAPORAN);
+        F_TR_LAPORAN.setLayout(F_TR_LAPORANLayout);
+        F_TR_LAPORANLayout.setHorizontalGroup(
+            F_TR_LAPORANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1238, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+        F_TR_LAPORANLayout.setVerticalGroup(
+            F_TR_LAPORANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 638, Short.MAX_VALUE)
         );
+
+        FRAME_TRANSAKSI.add(F_TR_LAPORAN, "card2");
+
+        F_TR_KEMBALI.setBackground(new java.awt.Color(102, 153, 0));
+
+        javax.swing.GroupLayout F_TR_KEMBALILayout = new javax.swing.GroupLayout(F_TR_KEMBALI);
+        F_TR_KEMBALI.setLayout(F_TR_KEMBALILayout);
+        F_TR_KEMBALILayout.setHorizontalGroup(
+            F_TR_KEMBALILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1238, Short.MAX_VALUE)
+        );
+        F_TR_KEMBALILayout.setVerticalGroup(
+            F_TR_KEMBALILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 638, Short.MAX_VALUE)
+        );
+
+        FRAME_TRANSAKSI.add(F_TR_KEMBALI, "card2");
+
+        F_TR_PINJAM.setBackground(new java.awt.Color(255, 255, 255));
+
+        TITLE_FRAME_PINJAM.setFont(new java.awt.Font("Trebuchet MS", 1, 26)); // NOI18N
+        TITLE_FRAME_PINJAM.setForeground(new java.awt.Color(96, 96, 96));
+        TITLE_FRAME_PINJAM.setText("Form Peminjaman");
+
+        T_PJ_BUKU.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        T_PJ_BUKU.setForeground(new java.awt.Color(96, 96, 96));
+        T_PJ_BUKU.setText("Buku");
+
+        TABLE_LIST_PINJAM.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TABLE_PINJAM.setViewportView(TABLE_LIST_PINJAM);
+
+        BTN_CETAK_PINJAMAN.setBackground(new java.awt.Color(0, 171, 60));
+        BTN_CETAK_PINJAMAN.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        BTN_CETAK_PINJAMAN.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_CETAK_PINJAMAN.setText("Cetak Pinjaman");
+
+        PJ_INPUT_ID_TRANSAKSI.setEditable(false);
+        PJ_INPUT_ID_TRANSAKSI.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        PJ_INPUT_ID_TRANSAKSI.setForeground(new java.awt.Color(96, 96, 96));
+        PJ_INPUT_ID_TRANSAKSI.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+
+        PJ_ID_TRANSAKSI.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        PJ_ID_TRANSAKSI.setForeground(new java.awt.Color(96, 96, 96));
+        PJ_ID_TRANSAKSI.setText("ID Transkasi");
+
+        PJ_INPUT_PEMINJAM.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        PJ_INPUT_PEMINJAM.setForeground(new java.awt.Color(96, 96, 96));
+        PJ_INPUT_PEMINJAM.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+
+        PJ_LABEL_PEMINJAM.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        PJ_LABEL_PEMINJAM.setForeground(new java.awt.Color(96, 96, 96));
+        PJ_LABEL_PEMINJAM.setText("Peminjam");
+
+        PJ_LABEL_KAT_BUKU.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        PJ_LABEL_KAT_BUKU.setForeground(new java.awt.Color(96, 96, 96));
+        PJ_LABEL_KAT_BUKU.setText("Jenis Buku");
+
+        PJ_LABEL_TGL_PINJAM.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        PJ_LABEL_TGL_PINJAM.setForeground(new java.awt.Color(96, 96, 96));
+        PJ_LABEL_TGL_PINJAM.setText("Tanggal Meminjam");
+
+        PJ_LABEL_INFO_1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        PJ_LABEL_INFO_1.setForeground(new java.awt.Color(96, 96, 96));
+        PJ_LABEL_INFO_1.setText("Dengan meminjam buku, berarti peminjam sudah ");
+
+        PJ_LABEL_INFO_2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        PJ_LABEL_INFO_2.setForeground(new java.awt.Color(96, 96, 96));
+        PJ_LABEL_INFO_2.setText("memahi peraturan dan tata tertib perpustakaan.");
+
+        PJ_INPUT_KAT_BUKU.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        PJ_INPUT_KAT_BUKU.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UMM - Buku Umum", "PKT - Buku Paket" }));
+
+        PJ_INPUT_TGL_PINJAM.setEditable(false);
+        PJ_INPUT_TGL_PINJAM.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        PJ_INPUT_TGL_PINJAM.setForeground(new java.awt.Color(96, 96, 96));
+        PJ_INPUT_TGL_PINJAM.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+
+        javax.swing.GroupLayout F_TR_PINJAMLayout = new javax.swing.GroupLayout(F_TR_PINJAM);
+        F_TR_PINJAM.setLayout(F_TR_PINJAMLayout);
+        F_TR_PINJAMLayout.setHorizontalGroup(
+            F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(T_PJ_BUKU)
+                    .addComponent(TITLE_FRAME_PINJAM)
+                    .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
+                        .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BTN_CETAK_PINJAMAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PJ_INPUT_ID_TRANSAKSI)
+                            .addComponent(PJ_ID_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PJ_INPUT_PEMINJAM)
+                            .addComponent(PJ_LABEL_PEMINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PJ_LABEL_KAT_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PJ_LABEL_TGL_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PJ_LABEL_INFO_1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                            .addComponent(PJ_LABEL_INFO_2, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                            .addComponent(PJ_INPUT_KAT_BUKU, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PJ_INPUT_TGL_PINJAM))))
+                .addGap(25, 25, 25))
+        );
+        F_TR_PINJAMLayout.setVerticalGroup(
+            F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_TR_PINJAMLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(TITLE_FRAME_PINJAM)
+                .addGap(18, 18, 18)
+                .addComponent(T_PJ_BUKU)
+                .addGap(18, 18, 18)
+                .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
+                        .addComponent(PJ_ID_TRANSAKSI)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PJ_INPUT_ID_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(PJ_LABEL_PEMINJAM)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PJ_INPUT_PEMINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(PJ_LABEL_KAT_BUKU)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PJ_INPUT_KAT_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(PJ_LABEL_TGL_PINJAM)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PJ_INPUT_TGL_PINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(PJ_LABEL_INFO_1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PJ_LABEL_INFO_2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTN_CETAK_PINJAMAN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
+        );
+
+        FRAME_TRANSAKSI.add(F_TR_PINJAM, "card2");
 
         javax.swing.GroupLayout TRANSAKSILayout = new javax.swing.GroupLayout(TRANSAKSI);
         TRANSAKSI.setLayout(TRANSAKSILayout);
         TRANSAKSILayout.setHorizontalGroup(
             TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TRANSAKSILayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TRANSAKSILayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(FRAME_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TOPBAR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
         TRANSAKSILayout.setVerticalGroup(
             TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TRANSAKSILayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(678, Short.MAX_VALUE))
+                .addComponent(TOPBAR_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(FRAME_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
 
         MAIN_FRAME.add(TRANSAKSI, "card3");
@@ -2064,6 +2379,14 @@ public class Dashboard extends javax.swing.JFrame {
         // TAMPILKAN LAYOUT TRANSAKSI
         setSideBarApp("TRANSAKSI");
         
+        FRAME_TRANSAKSI.removeAll();
+        FRAME_TRANSAKSI.add(F_TR_PINJAM);
+        FRAME_TRANSAKSI.repaint();
+        FRAME_TRANSAKSI.revalidate();
+        
+        T_TR_PINJAM.setForeground(new Color(78, 204, 121));
+        T_TR_KEMBALI.setForeground(new Color(96, 96, 96));
+        T_TR_LAPORAN.setForeground(new Color(96, 96, 96));
     }//GEN-LAST:event_BTN_TRANSAKSIMouseClicked
 
     private void BTN_DATABUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_DATABUKUMouseClicked
@@ -2238,6 +2561,18 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SEARCH_RAKKeyTyped
 
+    private void T_TR_PINJAMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_TR_PINJAMMouseClicked
+        setTransaksiPageSelected("PINJAM");
+    }//GEN-LAST:event_T_TR_PINJAMMouseClicked
+
+    private void T_TR_KEMBALIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_TR_KEMBALIMouseClicked
+        setTransaksiPageSelected("KEMBALI");
+    }//GEN-LAST:event_T_TR_KEMBALIMouseClicked
+
+    private void T_TR_LAPORANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_TR_LAPORANMouseClicked
+        setTransaksiPageSelected("LAPORAN");
+    }//GEN-LAST:event_T_TR_LAPORANMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2268,12 +2603,13 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard(0, "").setVisible(true);
+                new Dashboard(0, "", 0).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTN_CETAK_PINJAMAN;
     private javax.swing.JLabel BTN_DASHBOARD;
     private javax.swing.JLabel BTN_DATABUKU;
     private javax.swing.JLabel BTN_EXIT;
@@ -2295,11 +2631,15 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel FILTER_TAMPIL_USER;
     private javax.swing.JPanel FRAME_DATABUKU;
     private javax.swing.JPanel FRAME_MAIN_SETTING;
+    private javax.swing.JPanel FRAME_TRANSAKSI;
     private javax.swing.JPanel FRAME_USER;
     private javax.swing.JPanel F_DB_BUKU;
     private javax.swing.JPanel F_DB_KATEGORI;
     private javax.swing.JPanel F_DB_PENERBIT;
     private javax.swing.JPanel F_DB_RAK;
+    private javax.swing.JPanel F_TR_KEMBALI;
+    private javax.swing.JPanel F_TR_LAPORAN;
+    private javax.swing.JPanel F_TR_PINJAM;
     private javax.swing.JPanel F_U_ANGGOTA;
     private javax.swing.JPanel F_U_JURUSAN;
     private javax.swing.JPanel F_U_KELAS;
@@ -2322,19 +2662,32 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel ICON_IMPORT_USER;
     private javax.swing.JLabel ICON_SETTING;
     private javax.swing.JLabel ICON_TOTAL_BUKU;
+    private javax.swing.JLabel ICON_TR_TRANSAKSI;
     private javax.swing.JLabel ICON_USER;
     private javax.swing.JLabel ICON_U_USER;
     private javax.swing.JTextField INPUT_SET_1;
     private javax.swing.JSpinner INPUT_SET_2;
     private javax.swing.JComboBox<String> KATEGORI_COMBOBOX_BUKU;
     private javax.swing.JComboBox<String> KELAS_COMBOBOX_USER;
+    private javax.swing.JLabel LABEL_LOG;
     private javax.swing.JLabel LABEL_SET_1;
     private javax.swing.JLabel LABEL_SET_2;
     private javax.swing.JLabel LABEL_SET_3;
     private javax.swing.JLabel LABEL_SET_RP;
+    private javax.swing.JLabel LABEL_TAMPILKAN;
     private javax.swing.JPanel MAIN_FRAME;
     private javax.swing.JLabel MAIN_TTILE;
     private javax.swing.JLabel MANURUL_LOGO;
+    private javax.swing.JLabel PJ_ID_TRANSAKSI;
+    private javax.swing.JTextField PJ_INPUT_ID_TRANSAKSI;
+    private javax.swing.JComboBox<String> PJ_INPUT_KAT_BUKU;
+    private javax.swing.JTextField PJ_INPUT_PEMINJAM;
+    private javax.swing.JTextField PJ_INPUT_TGL_PINJAM;
+    private javax.swing.JLabel PJ_LABEL_INFO_1;
+    private javax.swing.JLabel PJ_LABEL_INFO_2;
+    private javax.swing.JLabel PJ_LABEL_KAT_BUKU;
+    private javax.swing.JLabel PJ_LABEL_PEMINJAM;
+    private javax.swing.JLabel PJ_LABEL_TGL_PINJAM;
     private javax.swing.JPanel P_ANGGOTA;
     private javax.swing.JPanel P_BERMASALAH;
     private javax.swing.JPanel P_DIPINJAM;
@@ -2350,6 +2703,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField SEARCH_USER;
     private javax.swing.JPanel SETTING;
     private javax.swing.JPanel SIDEBAR;
+    private javax.swing.JComboBox<String> SORT_LIST_LOG;
     private javax.swing.JScrollPane TABLE_KATEGORI;
     private javax.swing.JTable TABLE_LIST_ANGGOTA;
     private javax.swing.JTable TABLE_LIST_BUKU;
@@ -2360,11 +2714,15 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane TABLE_LIST_JURUSAN;
     private javax.swing.JTable TABLE_LIST_KATEGORI;
     private javax.swing.JScrollPane TABLE_LIST_KELAS;
+    private javax.swing.JTable TABLE_LIST_LOG;
     private javax.swing.JTable TABLE_LIST_PENERBIT;
     private javax.swing.JScrollPane TABLE_LIST_PENGURUS;
+    private javax.swing.JTable TABLE_LIST_PINJAM;
     private javax.swing.JTable TABLE_LIST_RAK;
     private javax.swing.JScrollPane TABLE_LIST_U_ANGGOTA;
+    private javax.swing.JScrollPane TABLE_LOG;
     private javax.swing.JScrollPane TABLE_PENERBIT;
+    private javax.swing.JScrollPane TABLE_PINJAM;
     private javax.swing.JScrollPane TABLE_RAK;
     private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_BUKU;
     private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_JURUSAN;
@@ -2384,6 +2742,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel TITLE_FRAME_KELAS;
     private javax.swing.JLabel TITLE_FRAME_PENERBIT;
     private javax.swing.JLabel TITLE_FRAME_PENGURUS;
+    private javax.swing.JLabel TITLE_FRAME_PINJAM;
     private javax.swing.JLabel TITLE_FRAME_RAK;
     private javax.swing.JLabel TITLE_FRAME_USER;
     private javax.swing.JLabel TITLE_SETTING;
@@ -2391,12 +2750,17 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel TOPBAR;
     private javax.swing.JPanel TOPBAR_DATABUKU;
     private javax.swing.JPanel TOPBAR_SETTING;
+    private javax.swing.JPanel TOPBAR_TRANSAKSI;
     private javax.swing.JPanel TOPBAR_USER;
     private javax.swing.JPanel TRANSAKSI;
     private javax.swing.JLabel T_DB_BUKU;
     private javax.swing.JLabel T_DB_KATEGORI;
     private javax.swing.JLabel T_DB_PENERBIT;
     private javax.swing.JLabel T_DB_RAK;
+    private javax.swing.JLabel T_PJ_BUKU;
+    private javax.swing.JLabel T_TR_KEMBALI;
+    private javax.swing.JLabel T_TR_LAPORAN;
+    private javax.swing.JLabel T_TR_PINJAM;
     private javax.swing.JLabel T_U_ANGGOTA;
     private javax.swing.JLabel T_U_JURUSAN;
     private javax.swing.JLabel T_U_KELAS;
@@ -2405,17 +2769,13 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel USERNAME;
     private javax.swing.JLabel USERNAME_DATABUKU;
     private javax.swing.JLabel USERNAME_SETTING;
+    private javax.swing.JLabel USERNAME_TRANSAKSI;
     private javax.swing.JLabel USERNAME_USER;
     private javax.swing.JLabel VALUE_ANGGOTA;
     private javax.swing.JLabel VALUE_BERMASALAH;
     private javax.swing.JLabel VALUE_DIPINJAM;
     private javax.swing.JLabel VALUE_TOTAL_BUKU;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
 }
