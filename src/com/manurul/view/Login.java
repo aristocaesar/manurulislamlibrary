@@ -56,10 +56,10 @@ public class Login extends javax.swing.JFrame {
                 PM.setUsername(INPUT_USERNAME.getText());
                 PM.setPassword(INPUT_PASSWORD.getText());
                 if(PM.loginCek()){
-                    new Dashboard(PM.getId(), PM.getNamaLengkap(), 0).setVisible(true);
+                    new Dashboard(PM.getId(), PM.getNamaLengkap(), PM.getHakAkses()).setVisible(true);
                     this.dispose();
                 }else{
-                    throw new Exception("Username atau Password salah cxc!");
+                    throw new Exception("Username atau Password salah!");
                 }
                 
             }else{

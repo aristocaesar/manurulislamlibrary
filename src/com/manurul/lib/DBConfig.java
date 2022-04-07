@@ -8,6 +8,7 @@ package com.manurul.lib;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,9 +25,11 @@ public class DBConfig {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException ex) {
-            System.out.println("Could not find database driver class");
+            JOptionPane.showMessageDialog(null, "Driver database tidak ditemukan !", "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
+            JOptionPane.showMessageDialog(null, "Konfigurasi database tidak valid !", "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
         return conn;
     }

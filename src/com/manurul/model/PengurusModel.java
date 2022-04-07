@@ -41,6 +41,10 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
         this.nip = nip;
     }
     
+    public String getNip(){
+        return this.nip;
+    }
+    
     public void setNamaLengkap(String nama_lengkap){
         this.nama_lengkap = nama_lengkap;
     }
@@ -53,8 +57,24 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
         this.username = username;
     }
     
+    public String getUsername(){
+        return this.username;
+    }
+    
     public void setPassword(String password){
         this.password = password;
+    }
+    
+    public String getPassword(){
+        return this.password;
+    }
+    
+    public void setHakAkses(String hak_akses){
+        this.hak_akses = hak_akses;
+    }
+    
+    public String getHakAkses(){
+        return this.hak_akses;
     }
     
     public boolean loginCek(){
@@ -70,9 +90,9 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
                 return false;
             }
             
-            this.id = res.getInt("id");
-            this.nama_lengkap = res.getString("nama_lengkap");
-            this.hak_akses = res.getString("role");
+            setId(res.getInt("id"));
+            setNamaLengkap(res.getString("nama_lengkap"));
+            setHakAkses(res.getString("hak_akses"));
             
             return true;
         }catch(SQLException err){

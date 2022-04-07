@@ -54,9 +54,9 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="420" max="-2" attributes="0"/>
-                          <Component id="BTN_HAPUS_JUR" max="32767" attributes="0"/>
+                          <Component id="BTN_HAPUS_JUR" pref="0" max="32767" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Component id="BTN_SIMPAN_JUR" max="32767" attributes="0"/>
+                          <Component id="BTN_SIMPAN_JUR" min="-2" pref="287" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>

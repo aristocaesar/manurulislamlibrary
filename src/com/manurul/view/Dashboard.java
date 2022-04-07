@@ -40,16 +40,18 @@ public class Dashboard extends javax.swing.JFrame {
     
     private int id_user;
     private String nama_user;
+    private String hak_akses;
     
     /**
      * INIT FORM DASHBOARD
      */
-    public Dashboard(int id_user, String nama_user, int role) {
+    public Dashboard(int id_user, String nama_user, String hak_akses) {
         initComponents();
         
         // SET STATE
         this.id_user = id_user;
         this.nama_user = nama_user;
+        this.hak_akses = hak_akses;
         
         // SET TITLE
         setTitleApp("Dashboard");
@@ -2603,7 +2605,7 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard(0, "", 0).setVisible(true);
+                new Dashboard(0, "", "").setVisible(true);
             }
         });
     }
