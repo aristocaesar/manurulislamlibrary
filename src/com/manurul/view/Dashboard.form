@@ -3426,8 +3426,8 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="LABEL_SET_3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jComboBox1" pref="344" max="32767" attributes="0"/>
-                              <Component id="BTN_SET_SIMAN" alignment="0" max="32767" attributes="0"/>
+                              <Component id="INPUT_SET_3" pref="344" max="32767" attributes="0"/>
+                              <Component id="BTN_SET_SIMPAN" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
@@ -3450,11 +3450,11 @@
                                   <Component id="INPUT_SET_1" alignment="3" max="32767" attributes="0"/>
                                   <Component id="LABEL_SET_RP" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="INPUT_SET_3" alignment="0" max="32767" attributes="0"/>
                               <Component id="INPUT_SET_2" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="410" max="32767" attributes="0"/>
-                          <Component id="BTN_SET_SIMAN" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="BTN_SET_SIMPAN" min="-2" pref="45" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -3514,6 +3514,9 @@
                       <Dimension value="[340, 45]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="LABEL_SET_2">
                   <Properties>
@@ -3538,6 +3541,9 @@
                       <Border info="null"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="LABEL_SET_3">
                   <Properties>
@@ -3550,7 +3556,7 @@
                     <Property name="text" type="java.lang.String" value="Backup Database"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="BTN_SET_SIMAN">
+                <Component class="javax.swing.JButton" name="BTN_SET_SIMPAN">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="3c" green="ab" red="0" type="rgb"/>
@@ -3563,8 +3569,11 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Simpan Perubahan"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SET_SIMPANMouseClicked"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="INPUT_SET_3">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Trebuchet MS" size="14" style="0"/>
@@ -3582,6 +3591,7 @@
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                 </Component>
               </SubComponents>

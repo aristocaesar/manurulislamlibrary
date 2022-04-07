@@ -19,7 +19,7 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     public static Connection conn = (Connection)getConnection();
     
     private  String table = "ma_pengelola";
-    private  int id;
+    private  String id;
     private  String nip;
     private  String nama_lengkap;
     private  String username;
@@ -29,11 +29,11 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     private  String created_at;
     private  String updated_at;
     
-    public void setId(int id){
+    public void setId(String id){
         this.id = id;
     }
     
-    public int getId(){
+    public String getId(){
         return this.id;
     }
     
@@ -90,7 +90,7 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
                 return false;
             }
             
-            setId(res.getInt("id"));
+            setId(res.getString("id"));
             setNamaLengkap(res.getString("nama_lengkap"));
             setHakAkses(res.getString("hak_akses"));
             

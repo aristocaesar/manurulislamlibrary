@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import javax.swing.BorderFactory;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.SettingModel;
 import com.manurul.view.modal.BukuDATABUKU;
 import com.manurul.view.modal.KategoriDATABUKU;
 import com.manurul.view.modal.KelasUSER;
@@ -35,17 +36,22 @@ import javax.swing.JOptionPane;
  */
 public class Dashboard extends javax.swing.JFrame {
 
-    // INIT STATE
+    // INIT STATE || GLOBAL VARIABEL
     private String title = "Dahsboard";
     
-    private int id_user;
+    private String id_user;
     private String nama_user;
     private String hak_akses;
+    
+        // SETTING
+        public static int Denda;
+        public static int MaxPinjamBukuUmum;
+        public static int BackupDatabase;
     
     /**
      * INIT FORM DASHBOARD
      */
-    public Dashboard(int id_user, String nama_user, String hak_akses) {
+    public Dashboard(String id_user, String nama_user, String hak_akses) {
         initComponents();
         
         // SET STATE
@@ -539,8 +545,8 @@ public class Dashboard extends javax.swing.JFrame {
         LABEL_SET_2 = new javax.swing.JLabel();
         INPUT_SET_2 = new javax.swing.JSpinner();
         LABEL_SET_3 = new javax.swing.JLabel();
-        BTN_SET_SIMAN = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        BTN_SET_SIMPAN = new javax.swing.JButton();
+        INPUT_SET_3 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -2260,14 +2266,19 @@ public class Dashboard extends javax.swing.JFrame {
         LABEL_SET_3.setForeground(new java.awt.Color(96, 96, 96));
         LABEL_SET_3.setText("Backup Database");
 
-        BTN_SET_SIMAN.setBackground(new java.awt.Color(0, 171, 60));
-        BTN_SET_SIMAN.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        BTN_SET_SIMAN.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_SET_SIMAN.setText("Simpan Perubahan");
+        BTN_SET_SIMPAN.setBackground(new java.awt.Color(0, 171, 60));
+        BTN_SET_SIMPAN.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        BTN_SET_SIMPAN.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_SET_SIMPAN.setText("Simpan Perubahan");
+        BTN_SET_SIMPAN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_SET_SIMPANMouseClicked(evt);
+            }
+        });
 
-        jComboBox1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(96, 96, 96));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Per 1 Jam", "Per 2 Jam", "Per 3 Jam" }));
+        INPUT_SET_3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        INPUT_SET_3.setForeground(new java.awt.Color(96, 96, 96));
+        INPUT_SET_3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Per 1 Jam", "Per 2 Jam", "Per 3 Jam" }));
 
         javax.swing.GroupLayout FRAME_MAIN_SETTINGLayout = new javax.swing.GroupLayout(FRAME_MAIN_SETTING);
         FRAME_MAIN_SETTING.setLayout(FRAME_MAIN_SETTINGLayout);
@@ -2297,8 +2308,8 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGap(69, 69, 69)))
                 .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LABEL_SET_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, 344, Short.MAX_VALUE)
-                    .addComponent(BTN_SET_SIMAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(INPUT_SET_3, 0, 344, Short.MAX_VALUE)
+                    .addComponent(BTN_SET_SIMPAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
         FRAME_MAIN_SETTINGLayout.setVerticalGroup(
@@ -2316,10 +2327,10 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(LABEL_SET_RP))
-                    .addComponent(jComboBox1)
+                    .addComponent(INPUT_SET_3)
                     .addComponent(INPUT_SET_2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
-                .addComponent(BTN_SET_SIMAN, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BTN_SET_SIMPAN, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
 
@@ -2428,6 +2439,9 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_USERMouseClicked
 
     private void BTN_SETTINGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SETTINGMouseClicked
+        // INIT SEETING MODEL
+        new SettingModel();
+        
         // UBAH TITLE
         setTitleApp("Pengaturan");
         
@@ -2575,6 +2589,20 @@ public class Dashboard extends javax.swing.JFrame {
         setTransaksiPageSelected("LAPORAN");
     }//GEN-LAST:event_T_TR_LAPORANMouseClicked
 
+    private void BTN_SET_SIMPANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SET_SIMPANMouseClicked
+        // GET VALUE IN FORM
+        int Denda = Integer.parseInt(INPUT_SET_1.getText());
+        int MaxPinjamBukuUmum = Integer.parseInt(INPUT_SET_2.getValue().toString());
+        int BackupDatabase = INPUT_SET_3.getSelectedIndex();
+        
+        if(this.Denda == Denda && this.MaxPinjamBukuUmum == MaxPinjamBukuUmum && this.BackupDatabase == BackupDatabase){
+            JOptionPane.showMessageDialog(null, "Tidak ada perubahan data", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            SettingModel.update(Denda, MaxPinjamBukuUmum, BackupDatabase);
+        }
+        
+    }//GEN-LAST:event_BTN_SET_SIMPANMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2605,7 +2633,7 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard(0, "", "").setVisible(true);
+                new Dashboard("", "", "").setVisible(true);
             }
         });
     }
@@ -2616,7 +2644,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel BTN_DATABUKU;
     private javax.swing.JLabel BTN_EXIT;
     private javax.swing.JLabel BTN_SETTING;
-    private javax.swing.JButton BTN_SET_SIMAN;
+    private javax.swing.JButton BTN_SET_SIMPAN;
     private javax.swing.JLabel BTN_TRANSAKSI;
     private javax.swing.JLabel BTN_USER;
     private javax.swing.JPanel DASHBOARD;
@@ -2667,8 +2695,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel ICON_TR_TRANSAKSI;
     private javax.swing.JLabel ICON_USER;
     private javax.swing.JLabel ICON_U_USER;
-    private javax.swing.JTextField INPUT_SET_1;
-    private javax.swing.JSpinner INPUT_SET_2;
+    public static javax.swing.JTextField INPUT_SET_1;
+    public static javax.swing.JSpinner INPUT_SET_2;
+    public static javax.swing.JComboBox<String> INPUT_SET_3;
     private javax.swing.JComboBox<String> KATEGORI_COMBOBOX_BUKU;
     private javax.swing.JComboBox<String> KELAS_COMBOBOX_USER;
     private javax.swing.JLabel LABEL_LOG;
@@ -2777,7 +2806,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel VALUE_BERMASALAH;
     private javax.swing.JLabel VALUE_DIPINJAM;
     private javax.swing.JLabel VALUE_TOTAL_BUKU;
-    private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
 
 }
