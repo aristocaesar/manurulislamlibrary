@@ -18,7 +18,7 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     
     public static Connection conn = (Connection)getConnection();
     
-    private  String table = "ma_pengelola";
+    private  String table = "ma_pengurus";
     private  String id;
     private  String nip;
     private  String nama_lengkap;
@@ -80,7 +80,7 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     public boolean loginCek(){
     
         try{
-            String sql = "SELECT id,nama_lengkap,hak_akses FROM " + this.table + " WHERE username = ? && u_password = ?";
+            String sql = "SELECT id,nama_lengkap,hak_akses FROM " + this.table + " WHERE username = ? && password = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, this.username);
             pst.setString(2, this.password);
@@ -89,6 +89,8 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
             if(!res.next()){
                 return false;
             }
+            
+             System.out.println("ajiseto12345");
             
             setId(res.getString("id"));
             setNamaLengkap(res.getString("nama_lengkap"));

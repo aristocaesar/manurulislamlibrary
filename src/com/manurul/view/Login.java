@@ -63,7 +63,7 @@ public class Login extends javax.swing.JFrame {
                 }
                 
             }else{
-                throw new Exception("Username atau Password salah !");
+                throw new Exception("Username atau Password salah!");
             }
             
         }catch(Exception error){

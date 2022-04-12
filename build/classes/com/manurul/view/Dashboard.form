@@ -998,9 +998,12 @@
                 <Container class="javax.swing.JPanel" name="F_TR_PINJAM">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="f5" green="f0" red="ef" type="rgb"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RoundedPanel(15, Color.WHITE)"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                       <CardConstraints cardName="card2"/>
@@ -1016,20 +1019,20 @@
                                   <Component id="T_PJ_BUKU" min="-2" max="-2" attributes="0"/>
                                   <Component id="TITLE_FRAME_PINJAM" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="TABLE_PINJAM" min="-2" pref="800" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="TABLE_PINJAM" pref="800" max="32767" attributes="0"/>
+                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="BTN_CETAK_PINJAMAN" max="32767" attributes="0"/>
-                                          <Component id="PJ_INPUT_ID_TRANSAKSI" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="PJ_ID_TRANSAKSI" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="PJ_INPUT_PEMINJAM" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="PJ_LABEL_PEMINJAM" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="PJ_LABEL_KAT_BUKU" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="PJ_LABEL_TGL_PINJAM" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="PJ_LABEL_INFO_1" alignment="0" pref="368" max="32767" attributes="0"/>
-                                          <Component id="PJ_LABEL_INFO_2" alignment="0" pref="368" max="32767" attributes="0"/>
-                                          <Component id="PJ_INPUT_KAT_BUKU" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="PJ_INPUT_TGL_PINJAM" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="BTN_CETAK_PINJAMAN" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_INPUT_ID_TRANSAKSI" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_ID_TRANSAKSI" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_INPUT_PEMINJAM" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_LABEL_PEMINJAM" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_LABEL_KAT_BUKU" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_LABEL_TGL_PINJAM" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_LABEL_INFO_1" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_LABEL_INFO_2" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_INPUT_KAT_BUKU" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_INPUT_TGL_PINJAM" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -3282,10 +3285,18 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="FRAME_MAIN_SETTING" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TOPBAR_SETTING" alignment="1" pref="1238" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="BTN_SET_SIMPAN" min="-2" pref="352" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="FRAME_MAIN_SETTING" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="TOPBAR_SETTING" alignment="1" pref="1278" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -3298,6 +3309,8 @@
                       <Component id="TOPBAR_SETTING" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="FRAME_MAIN_SETTING" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="BTN_SET_SIMPAN" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -3394,42 +3407,41 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="MAIN_TTILE" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="LABEL_SET_1" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
-                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="LABEL_SET_RP" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                                          <Component id="INPUT_SET_1" pref="337" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                          <Component id="INPUT_SET_1" pref="341" max="32767" attributes="0"/>
                                       </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="LABEL_SET_2" max="32767" attributes="0"/>
-                                          <EmptySpace pref="132" max="-2" attributes="0"/>
+                                          <Component id="LABEL_SET_1" max="32767" attributes="0"/>
+                                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="INPUT_SET_2" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="LABEL_SET_2" pref="366" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="INPUT_SET_2" max="32767" attributes="0"/>
+                                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="LABEL_SET_3" pref="366" max="32767" attributes="0"/>
+                                      <Component id="INPUT_SET_3" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="MAIN_TTILE" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="LABEL_SET_3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="INPUT_SET_3" pref="344" max="32767" attributes="0"/>
-                              <Component id="BTN_SET_SIMPAN" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3445,17 +3457,13 @@
                               <Component id="LABEL_SET_3" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="INPUT_SET_1" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="LABEL_SET_RP" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="INPUT_SET_3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="INPUT_SET_2" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="INPUT_SET_1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="LABEL_SET_RP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPUT_SET_2" alignment="3" pref="45" max="32767" attributes="0"/>
+                              <Component id="INPUT_SET_3" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="410" max="32767" attributes="0"/>
-                          <Component id="BTN_SET_SIMPAN" min="-2" pref="45" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="240" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3556,23 +3564,6 @@
                     <Property name="text" type="java.lang.String" value="Backup Database"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="BTN_SET_SIMPAN">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="3c" green="ab" red="0" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Trebuchet MS" size="18" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Simpan Perubahan"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SET_SIMPANMouseClicked"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JComboBox" name="INPUT_SET_3">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -3596,6 +3587,24 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="BTN_SET_SIMPAN">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="3c" green="ab" red="0" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Trebuchet MS" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Simpan Perubahan"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SET_SIMPANMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_SET_SIMPANActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

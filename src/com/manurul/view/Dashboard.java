@@ -426,7 +426,7 @@ public class Dashboard extends javax.swing.JFrame {
         FRAME_TRANSAKSI = new RoundedPanel(15, Color.WHITE);
         F_TR_LAPORAN = new javax.swing.JPanel();
         F_TR_KEMBALI = new javax.swing.JPanel();
-        F_TR_PINJAM = new javax.swing.JPanel();
+        F_TR_PINJAM = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PINJAM = new javax.swing.JLabel();
         T_PJ_BUKU = new javax.swing.JLabel();
         TABLE_PINJAM = new javax.swing.JScrollPane();
@@ -545,8 +545,8 @@ public class Dashboard extends javax.swing.JFrame {
         LABEL_SET_2 = new javax.swing.JLabel();
         INPUT_SET_2 = new javax.swing.JSpinner();
         LABEL_SET_3 = new javax.swing.JLabel();
-        BTN_SET_SIMPAN = new javax.swing.JButton();
         INPUT_SET_3 = new javax.swing.JComboBox<>();
+        BTN_SET_SIMPAN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1057,7 +1057,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         FRAME_TRANSAKSI.add(F_TR_KEMBALI, "card2");
 
-        F_TR_PINJAM.setBackground(new java.awt.Color(255, 255, 255));
+        F_TR_PINJAM.setBackground(new java.awt.Color(239, 240, 245));
 
         TITLE_FRAME_PINJAM.setFont(new java.awt.Font("Trebuchet MS", 1, 26)); // NOI18N
         TITLE_FRAME_PINJAM.setForeground(new java.awt.Color(96, 96, 96));
@@ -1136,20 +1136,20 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(T_PJ_BUKU)
                     .addComponent(TITLE_FRAME_PINJAM)
                     .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
-                        .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BTN_CETAK_PINJAMAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PJ_INPUT_ID_TRANSAKSI)
-                            .addComponent(PJ_ID_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PJ_INPUT_PEMINJAM)
-                            .addComponent(PJ_LABEL_PEMINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PJ_LABEL_KAT_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PJ_LABEL_TGL_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PJ_LABEL_INFO_1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
-                            .addComponent(PJ_LABEL_INFO_2, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
-                            .addComponent(PJ_INPUT_KAT_BUKU, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PJ_INPUT_TGL_PINJAM))))
+                            .addComponent(BTN_CETAK_PINJAMAN, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_INPUT_ID_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_ID_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_INPUT_PEMINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_LABEL_PEMINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_LABEL_KAT_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_LABEL_TGL_PINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_LABEL_INFO_1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_LABEL_INFO_2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_INPUT_KAT_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_INPUT_TGL_PINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(25, 25, 25))
         );
         F_TR_PINJAMLayout.setVerticalGroup(
@@ -2266,16 +2266,6 @@ public class Dashboard extends javax.swing.JFrame {
         LABEL_SET_3.setForeground(new java.awt.Color(96, 96, 96));
         LABEL_SET_3.setText("Backup Database");
 
-        BTN_SET_SIMPAN.setBackground(new java.awt.Color(0, 171, 60));
-        BTN_SET_SIMPAN.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        BTN_SET_SIMPAN.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_SET_SIMPAN.setText("Simpan Perubahan");
-        BTN_SET_SIMPAN.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BTN_SET_SIMPANMouseClicked(evt);
-            }
-        });
-
         INPUT_SET_3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_SET_3.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_SET_3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Per 1 Jam", "Per 2 Jam", "Per 3 Jam" }));
@@ -2287,30 +2277,29 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                        .addComponent(MAIN_TTILE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FRAME_MAIN_SETTINGLayout.createSequentialGroup()
                         .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                                .addComponent(LABEL_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(143, 143, 143))
                             .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
                                 .addComponent(LABEL_SET_RP)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                                .addGap(70, 70, 70)))
-                        .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
                             .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                                .addComponent(LABEL_SET_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(INPUT_SET_2))
-                        .addGap(69, 69, 69)))
-                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LABEL_SET_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(INPUT_SET_3, 0, 344, Short.MAX_VALUE)
-                    .addComponent(BTN_SET_SIMPAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27))
+                                .addComponent(LABEL_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(2, 2, 2)))
+                        .addGap(63, 63, 63)
+                        .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LABEL_SET_2, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                            .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
+                                .addComponent(INPUT_SET_2)
+                                .addGap(2, 2, 2)))
+                        .addGap(63, 63, 63)
+                        .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LABEL_SET_3, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                            .addComponent(INPUT_SET_3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27))
+                    .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
+                        .addComponent(MAIN_TTILE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         FRAME_MAIN_SETTINGLayout.setVerticalGroup(
             FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2323,26 +2312,43 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(LABEL_SET_2)
                     .addComponent(LABEL_SET_3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LABEL_SET_RP))
-                    .addComponent(INPUT_SET_3)
-                    .addComponent(INPUT_SET_2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
-                .addComponent(BTN_SET_SIMPAN, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPUT_SET_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LABEL_SET_RP)
+                    .addComponent(INPUT_SET_2, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(INPUT_SET_3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(240, 240, 240))
         );
+
+        BTN_SET_SIMPAN.setBackground(new java.awt.Color(0, 171, 60));
+        BTN_SET_SIMPAN.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        BTN_SET_SIMPAN.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_SET_SIMPAN.setText("Simpan Perubahan");
+        BTN_SET_SIMPAN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_SET_SIMPANMouseClicked(evt);
+            }
+        });
+        BTN_SET_SIMPAN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SET_SIMPANActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout SETTINGLayout = new javax.swing.GroupLayout(SETTING);
         SETTING.setLayout(SETTINGLayout);
         SETTINGLayout.setHorizontalGroup(
             SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SETTINGLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(FRAME_MAIN_SETTING, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TOPBAR_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE))
+                    .addGroup(SETTINGLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTN_SET_SIMPAN, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SETTINGLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(FRAME_MAIN_SETTING, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TOPBAR_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE))))
                 .addGap(20, 20, 20))
         );
         SETTINGLayout.setVerticalGroup(
@@ -2352,6 +2358,8 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(TOPBAR_SETTING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(FRAME_MAIN_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
+                .addComponent(BTN_SET_SIMPAN, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
 
@@ -2602,6 +2610,10 @@ public class Dashboard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_BTN_SET_SIMPANMouseClicked
+
+    private void BTN_SET_SIMPANActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SET_SIMPANActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTN_SET_SIMPANActionPerformed
 
     /**
      * @param args the command line arguments
