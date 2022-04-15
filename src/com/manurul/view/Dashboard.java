@@ -2329,11 +2329,6 @@ public class Dashboard extends javax.swing.JFrame {
                 BTN_SET_SIMPANMouseClicked(evt);
             }
         });
-        BTN_SET_SIMPAN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_SET_SIMPANActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout SETTINGLayout = new javax.swing.GroupLayout(SETTING);
         SETTING.setLayout(SETTINGLayout);
@@ -2348,7 +2343,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addGroup(SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(FRAME_MAIN_SETTING, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TOPBAR_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE))))
+                            .addComponent(TOPBAR_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE))))
                 .addGap(20, 20, 20))
         );
         SETTINGLayout.setVerticalGroup(
@@ -2599,21 +2594,18 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void BTN_SET_SIMPANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SET_SIMPANMouseClicked
         // GET VALUE IN FORM
-        int Denda = Integer.parseInt(INPUT_SET_1.getText());
+        int Denda = Integer.parseInt(INPUT_SET_1.getText().replaceAll("[a-zA-Z]", ""));
         int MaxPinjamBukuUmum = Integer.parseInt(INPUT_SET_2.getValue().toString());
         int BackupDatabase = INPUT_SET_3.getSelectedIndex();
         
         if(this.Denda == Denda && this.MaxPinjamBukuUmum == MaxPinjamBukuUmum && this.BackupDatabase == BackupDatabase){
             JOptionPane.showMessageDialog(null, "Tidak ada perubahan data", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            new SettingModel();
         }else{
             SettingModel.update(Denda, MaxPinjamBukuUmum, BackupDatabase);
         }
         
     }//GEN-LAST:event_BTN_SET_SIMPANMouseClicked
-
-    private void BTN_SET_SIMPANActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SET_SIMPANActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTN_SET_SIMPANActionPerformed
 
     /**
      * @param args the command line arguments

@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import java.sql.Timestamp;
 
 /**
  *
@@ -49,6 +50,7 @@ public class SettingModel extends DBConfig{
         }catch(SQLException error){
         
             JOptionPane.showMessageDialog(null, error, "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
             
         }
         
@@ -60,7 +62,7 @@ public class SettingModel extends DBConfig{
             
             int updated;
             
-            PreparedStatement pst = conn.prepareCall("UPDATE ma_setting SET denda_terlambat = ?, max_pinjam_buku_umum = ?, time_backup_database = ? WHERE id = 1");
+            PreparedStatement pst = conn.prepareCall("UPDATE ma_setting SET denda_terlambat = ?, max_pinjam_buku_umum = ?, time_backup_database = ?, updated_at = ? WHERE id = 1");
             pst.setInt(1, Denda);
             pst.setInt(2, MaxPinjamBuku);
             pst.setInt(3, BackupDatabase);

@@ -3294,7 +3294,7 @@
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="FRAME_MAIN_SETTING" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="TOPBAR_SETTING" alignment="1" pref="1278" max="32767" attributes="0"/>
+                                  <Component id="TOPBAR_SETTING" alignment="1" pref="1238" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -3602,7 +3602,6 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SET_SIMPANMouseClicked"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_SET_SIMPANActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

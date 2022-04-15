@@ -51,7 +51,7 @@ public class Login extends javax.swing.JFrame {
             // CHECK VALIDASI TEXTFIELD
             if(!INPUT_USERNAME.getText().equals("") && !INPUT_PASSWORD.getText().equals("")){
                 
-                // CHECK DENGAN DATABASE
+                // CHECK DENGAN MODEL 
                 PengurusModel PM = new PengurusModel();
                 PM.setUsername(INPUT_USERNAME.getText());
                 PM.setPassword(INPUT_PASSWORD.getText());
