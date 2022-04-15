@@ -25,9 +25,11 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     private  String username;
     private  String password;
     private  String hak_akses;
-    private  int status;
+    private  String status;
     private  String created_at;
     private  String updated_at;
+    
+    private String error;
     
     public void setId(String id){
         this.id = id;
@@ -77,27 +79,45 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
         return this.hak_akses;
     }
     
+    public void setStatus(String status){
+        this.status = status;
+    }
+    
+    public String getStatus(){
+        return this.status;
+    }
+    
+    public void setError(String error){
+        this.error = error;
+    }
+    
+    public String getError(){
+        return this.error;
+    }
+    
     public boolean loginCek(){
     
         try{
-            String sql = "SELECT id,nama_lengkap,hak_akses FROM " + this.table + " WHERE username = ? && password = ?";
+            String sql = "SELECT id,nama_lengkap,hak_akses,status FROM " + this.table + " WHERE username = ? && password = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, this.username);
             pst.setString(2, this.password);
             ResultSet res = pst.executeQuery();
 
             if(!res.next()){
-                return false;
+                throw new SQLException("Username atau Password salah !");
+            }else if(!res.getString("status").equals("AKTIF")) {
+                throw new SQLException("Akses anda sedang dinonaktifkan !");
             }
-            
-             System.out.println("ajiseto12345");
             
             setId(res.getString("id"));
             setNamaLengkap(res.getString("nama_lengkap"));
             setHakAkses(res.getString("hak_akses"));
+            setStatus(res.getString("status"));
             
             return true;
         }catch(SQLException err){
+            this.error = err.getMessage();
             return false;
         }
         
