@@ -6,12 +6,10 @@
 package com.manurul.model;
 
 import com.manurul.lib.DBConfig;
+import com.manurul.lib.SqlTime;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Calendar;
 
 /**
  *
@@ -20,41 +18,38 @@ import java.util.Calendar;
 public class LogModel extends DBConfig{
     
    public static Connection conn = (Connection)DBConfig.getConnection();
+   public String error;
    
-   public void Action(String Process, String Message){
+   
+   public void Action(String Process, String Message, String Petugas){
        
        try{
            
-           if(Process.equals("") && Message.equals("")){
+           if(Process.equals("") || Message.equals("")){
             throw new SQLException("Terjadi kesalahan pada data aktifitas !");
            }
            
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_log (process, message, created_at) VALUES (?, ?, ?)");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_log (process, message, petugas, created_at) VALUES (?, ?, ?, ?) ");
             pst.setString(1, Process);
             pst.setString(2, Message);
+            pst.setString(3, Petugas);
             
-            Calendar cal = Calendar.getInstance();
-            Timestamp updated_at = new java.sql.Timestamp(cal.getTimeInMillis());
             
-            pst.setTimestamp(3, updated_at);
+            pst.setTimestamp(4, new SqlTime().getTimeStamp());
             
             
             if(pst.execute()){
                 throw new SQLException("Terjadi kesalahan pada data aktifitas !");
             }
             
-            System.out.println("ok");
-            
        }catch(SQLException error){
-       
-           System.out.println(error);
-           
+           this.error = error.getMessage();
        }
        
    }
    
-    public static void main(String[] args) {
-        new LogModel().Action("", "test massej");
-    }
+   public String getError(){
+       return this.error;
+   }
    
 }

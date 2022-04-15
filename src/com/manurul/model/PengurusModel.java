@@ -115,6 +115,8 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
             setHakAkses(res.getString("hak_akses"));
             setStatus(res.getString("status"));
             
+            new LogModel().Action("Login", "Akses login berhasil", res.getString("nama_lengkap"));
+            
             return true;
         }catch(SQLException err){
             this.error = err.getMessage();

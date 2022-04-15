@@ -6,6 +6,7 @@
 package com.manurul.model;
 
 import com.manurul.lib.DBConfig;
+import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -66,6 +67,7 @@ public class SettingModel extends DBConfig{
             pst.setInt(1, Denda);
             pst.setInt(2, MaxPinjamBuku);
             pst.setInt(3, BackupDatabase);
+            pst.setTimestamp(4, new SqlTime().getTimeStamp());
             updated = pst.executeUpdate();
             
             if(updated == 0){
@@ -74,7 +76,7 @@ public class SettingModel extends DBConfig{
             
             new SettingModel();
             JOptionPane.showMessageDialog(null, "Data berhasil diperbarui!", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
-            
+            new LogModel().Action("Update Pengaturan", "Memperbarui data pengaturan", Dashboard.nama_user);
         
         } catch (SQLException error) {
             

@@ -9,9 +9,8 @@ import com.manurul.view.modal.JurusanUSER;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
-import javax.swing.BorderFactory;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.lib.SideBar;
 import com.manurul.model.SettingModel;
 import com.manurul.view.modal.BukuDATABUKU;
 import com.manurul.view.modal.KategoriDATABUKU;
@@ -19,16 +18,7 @@ import com.manurul.view.modal.KelasUSER;
 import com.manurul.view.modal.PenerbitDATABUKU;
 import com.manurul.view.modal.PengurusUSER;
 import com.manurul.view.modal.RakDATABUKU;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-//import org.apache.poi.ss.usermodel.Cell;
-//import org.apache.poi.ss.usermodel.Row;
-//import org.apache.poi.ss.usermodel.Sheet;
-//import org.apache.poi.ss.usermodel.Workbook;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -40,7 +30,7 @@ public class Dashboard extends javax.swing.JFrame {
     private String title = "Dahsboard";
     
     private String id_user;
-    private String nama_user;
+    public static String nama_user;
     private String hak_akses;
     
         // SETTING
@@ -60,7 +50,7 @@ public class Dashboard extends javax.swing.JFrame {
         this.hak_akses = hak_akses;
         
         // SET TITLE
-        setTitleApp("Dashboard");
+        this.setTitleApp("Dashboard");
         
         // SET TOP BAR
         USERNAME.setText(nama_user);
@@ -78,11 +68,7 @@ public class Dashboard extends javax.swing.JFrame {
         this.setMinimumSize(new Dimension(1366, 768));
         
         // DEFAULT SIDEBAR ICON SELECTED
-        BTN_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AIRPLAY.png")));
-        BTN_TRANSAKSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_TRANSAKSI_NON.png")));
-        BTN_DATABUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_DATABUKU_NON.png")));
-        BTN_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_USER_NON.png")));
-        BTN_SETTING.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_SETTING_NON.png")));
+        new SideBar().setBar("DASHBOARD");
         
         //SET BORDER FOR INPUT
         
@@ -103,114 +89,30 @@ public class Dashboard extends javax.swing.JFrame {
             InputBorder.set(INPUT_SET_1, 8);
             
         // KONFIRMASI KELUAR APP ( WINDOWS CLOSING )
-//         this.addWindowListener(new java.awt.event.WindowAdapter() {
-//            @Override
-//            public void windowClosing(java.awt.event.WindowEvent e) {
-//                int close = JOptionPane.showOptionDialog(null, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-//                if(close == 0){
-//                    System.exit(0);
-//                }
-//            }
-//        });
+         this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                int close = JOptionPane.showOptionDialog(null, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                if(close == 0){
+                    System.exit(0);
+                }
+            }
+        });
         
         
     }
     
     /*
+    ------------------------
         SET TITLE APP
+    ------------------------
     */
-    private void setTitleApp(String title){
-        this.title = title;
-        this.setTitle("MA Nurul Islam Library Management - " + title);
-    }
-    
-    /*
-        SET SIDE BAR APP
-    */
-    private void setSideBarApp(String menuSelected){
-        
-        // SET LAYOUT TO MAIN CONTENT
-        MAIN_FRAME.removeAll();
-        
-        if(menuSelected.equals("DASHBOARD")){
-            
-            MAIN_FRAME.add(DASHBOARD);
-            
-            
-            // SET ICON ACTIVE
-            BTN_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AIRPLAY.png")));
-            BTN_TRANSAKSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_TRANSAKSI_NON.png")));
-            BTN_DATABUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_DATABUKU_NON.png")));
-            BTN_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_USER_NON.png")));
-            BTN_SETTING.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_SETTING_NON.png")));
-            
-        }else if(menuSelected.equals("TRANSAKSI")){
-            
-            // SHOW PAGE SETTING
-            MAIN_FRAME.add(TRANSAKSI);
-            
-            // SET TOP BAR
-            USERNAME_TRANSAKSI.setText(this.nama_user);
-            
-            // SET ICON ACTIVE
-            BTN_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AIRPLAY_NON.png")));
-            BTN_TRANSAKSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_TRANSAKSI.png")));
-            BTN_DATABUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_DATABUKU_NON.png")));
-            BTN_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_USER_NON.png")));
-            BTN_SETTING.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_SETTING_NON.png")));
-            
-        }else if(menuSelected.equals("DATABUKU")){
-            
-            // SHOW PAGE SETTING
-            MAIN_FRAME.add(DATABUKU);
-            
-            // SET TOP BAR
-            USERNAME_DATABUKU.setText(this.nama_user);
-            
-            // SET ICON ACTIVE
-            BTN_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AIRPLAY_NON.png")));
-            BTN_TRANSAKSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_TRANSAKSI_NON.png")));
-            BTN_DATABUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_DATABUKU.png")));
-            BTN_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_USER_NON.png")));
-            BTN_SETTING.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_SETTING_NON.png")));
-            
-        }else if(menuSelected.equals("USER")){
-        
-            // SHOW PAGE SETTING
-            MAIN_FRAME.add(USER);
-            
-            // SET TOP BAR
-            USERNAME_USER.setText(this.nama_user);
-            
-            // SET ICON ACTIVE
-            BTN_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AIRPLAY_NON.png")));
-            BTN_TRANSAKSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_TRANSAKSI_NON.png")));
-            BTN_DATABUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_DATABUKU_NON.png")));
-            BTN_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_USER.png")));
-            BTN_SETTING.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_SETTING_NON.png")));
-            
-        }else if(menuSelected.equals("PENGATURAN")){
-        
-            // SHOW PAGE SETTING
-            MAIN_FRAME.add(SETTING);
-            
-            // SET TOP BAR
-            USERNAME_SETTING.setText(this.nama_user);
-            
-            // SET ICON ACTIVE
-            BTN_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AIRPLAY_NON.png")));
-            BTN_TRANSAKSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_TRANSAKSI_NON.png")));
-            BTN_DATABUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_DATABUKU_NON.png")));
-            BTN_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_USER_NON.png")));
-            BTN_SETTING.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_SETTING.png")));
-        
+        public void setTitleApp(String title){
+            this.setTitle("MA Nurul Islam Library Management - " + title);
         }
-        
-        MAIN_FRAME.repaint();
-        MAIN_FRAME.revalidate();
-    }   
-    
     /*
+        
+        
     ------------------------
         DASHBOARD
     ------------------------
@@ -219,6 +121,8 @@ public class Dashboard extends javax.swing.JFrame {
         // code
     
      /*
+        
+        
     ------------------------
         TRANSAKSI
     ------------------------
@@ -2380,20 +2284,22 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_DASHBOARDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_DASHBOARDMouseClicked
+
         // SET TITLE
-        setTitleApp("Dashboard");
+        this.setTitleApp("Dashboard");
         
         // TAMPILKAN LAYOUT DASHBOARD
-        setSideBarApp("DASHBOARD");
+        new SideBar().setBar("DASHBOARD");
         
     }//GEN-LAST:event_BTN_DASHBOARDMouseClicked
 
     private void BTN_TRANSAKSIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_TRANSAKSIMouseClicked
-        // UBAH TITLE
-        setTitleApp("Transaksi");
+
+        // SET TITLE
+        this.setTitleApp("Transaksi");
         
         // TAMPILKAN LAYOUT TRANSAKSI
-        setSideBarApp("TRANSAKSI");
+        new SideBar().setBar("TRANSAKSI");
         
         FRAME_TRANSAKSI.removeAll();
         FRAME_TRANSAKSI.add(F_TR_PINJAM);
@@ -2406,11 +2312,12 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_TRANSAKSIMouseClicked
 
     private void BTN_DATABUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_DATABUKUMouseClicked
-        // UBAH TITLE
-        setTitleApp("Data Buku");
+
+        // SET TITLE
+        this.setTitleApp("Data Buku");
         
         // TAMPILKAN LAYOUT DATA BUKU
-        setSideBarApp("DATABUKU");
+        new SideBar().setBar("DATABUKU");
         
         FRAME_DATABUKU.removeAll();
         FRAME_DATABUKU.add(F_DB_BUKU);
@@ -2424,11 +2331,12 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_DATABUKUMouseClicked
 
     private void BTN_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_USERMouseClicked
-        // UBAH TITLE
-        setTitleApp("User");
+
+        // SET TITLE
+        this.setTitleApp("User");
         
         // TAMPILKAN LAYOUT USER
-        setSideBarApp("USER");
+        new SideBar().setBar("USER");
         
         FRAME_USER.removeAll();
         FRAME_USER.add(F_U_ANGGOTA);
@@ -2442,15 +2350,15 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_USERMouseClicked
 
     private void BTN_SETTINGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SETTINGMouseClicked
-        // INIT SEETING MODEL
-        new SettingModel();
-        
-        // UBAH TITLE
-        setTitleApp("Pengaturan");
+
+        // SET TITLE
+        this.setTitleApp("Pengaturan");
         
         // TAMPILKAN LAYOUT SETTING
-        setSideBarApp("PENGATURAN");
+        new SideBar().setBar("PENGATURAN");
         
+        // SETTING MODEL
+        new SettingModel();
     }//GEN-LAST:event_BTN_SETTINGMouseClicked
 
     private void BTN_EXITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_EXITMouseClicked
@@ -2644,15 +2552,15 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_CETAK_PINJAMAN;
-    private javax.swing.JLabel BTN_DASHBOARD;
-    private javax.swing.JLabel BTN_DATABUKU;
+    public static javax.swing.JLabel BTN_DASHBOARD;
+    public static javax.swing.JLabel BTN_DATABUKU;
     private javax.swing.JLabel BTN_EXIT;
-    private javax.swing.JLabel BTN_SETTING;
+    public static javax.swing.JLabel BTN_SETTING;
     private javax.swing.JButton BTN_SET_SIMPAN;
-    private javax.swing.JLabel BTN_TRANSAKSI;
-    private javax.swing.JLabel BTN_USER;
-    private javax.swing.JPanel DASHBOARD;
-    private javax.swing.JPanel DATABUKU;
+    public static javax.swing.JLabel BTN_TRANSAKSI;
+    public static javax.swing.JLabel BTN_USER;
+    public static javax.swing.JPanel DASHBOARD;
+    public static javax.swing.JPanel DATABUKU;
     private javax.swing.JLabel FILTER_KATEGORI_BUKU;
     private javax.swing.JLabel FILTER_KELAS_USER;
     private javax.swing.JLabel FILTER_TAMPIL_BUKU;
@@ -2710,7 +2618,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel LABEL_SET_3;
     private javax.swing.JLabel LABEL_SET_RP;
     private javax.swing.JLabel LABEL_TAMPILKAN;
-    private javax.swing.JPanel MAIN_FRAME;
+    public static javax.swing.JPanel MAIN_FRAME;
     private javax.swing.JLabel MAIN_TTILE;
     private javax.swing.JLabel MANURUL_LOGO;
     private javax.swing.JLabel PJ_ID_TRANSAKSI;
@@ -2736,7 +2644,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField SEARCH_PENGURUS;
     private javax.swing.JTextField SEARCH_RAK;
     private javax.swing.JTextField SEARCH_USER;
-    private javax.swing.JPanel SETTING;
+    public static javax.swing.JPanel SETTING;
     private javax.swing.JPanel SIDEBAR;
     private javax.swing.JComboBox<String> SORT_LIST_LOG;
     private javax.swing.JScrollPane TABLE_KATEGORI;
@@ -2787,7 +2695,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel TOPBAR_SETTING;
     private javax.swing.JPanel TOPBAR_TRANSAKSI;
     private javax.swing.JPanel TOPBAR_USER;
-    private javax.swing.JPanel TRANSAKSI;
+    public static javax.swing.JPanel TRANSAKSI;
     private javax.swing.JLabel T_DB_BUKU;
     private javax.swing.JLabel T_DB_KATEGORI;
     private javax.swing.JLabel T_DB_PENERBIT;
@@ -2800,7 +2708,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel T_U_JURUSAN;
     private javax.swing.JLabel T_U_KELAS;
     private javax.swing.JLabel T_U_PENGURUS;
-    private javax.swing.JPanel USER;
+    public static javax.swing.JPanel USER;
     private javax.swing.JLabel USERNAME;
     private javax.swing.JLabel USERNAME_DATABUKU;
     private javax.swing.JLabel USERNAME_SETTING;
