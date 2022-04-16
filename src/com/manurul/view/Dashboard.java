@@ -72,17 +72,15 @@ public class Dashboard extends javax.swing.JFrame {
         
         //SET BORDER FOR INPUT
         
-            // DATA BUKU - BUKU
+            // DATA BUKU
             InputBorder.set(SEARCH_BUKU, 8);
             InputBorder.set(SEARCH_KATEGORI, 8);
             InputBorder.set(SEARCH_PENERBIT, 8);
             InputBorder.set(SEARCH_RAK, 8);
         
-            // USER - ANGGOTA
+            // USER
             InputBorder.set(SEARCH_USER, 8);
-            // USER - JURUSAN
             InputBorder.set(SEARCH_JURUSAN, 8);
-            // USER - KELAS
             InputBorder.set(SEARCH_KELAS, 8);
         
             //SETTING
@@ -111,169 +109,6 @@ public class Dashboard extends javax.swing.JFrame {
             this.setTitle("MA Nurul Islam Library Management - " + title);
         }
     /*
-        
-        
-    ------------------------
-        DASHBOARD
-    ------------------------
-    */
-    
-        // code
-    
-     /*
-        
-        
-    ------------------------
-        TRANSAKSI
-    ------------------------
-    */
-    
-        public void setTransaksiPageSelected(String selected){
-            
-            FRAME_TRANSAKSI.removeAll();
-            
-            if(selected.equals("PINJAM")){
-                
-                FRAME_TRANSAKSI.add(F_TR_PINJAM);
-                
-                T_TR_PINJAM.setForeground(new Color(78, 204, 121));
-                T_TR_KEMBALI.setForeground(new Color(96, 96, 96));
-                T_TR_LAPORAN.setForeground(new Color(96, 96, 96));
-                
-            
-            }else if(selected.equals("KEMBALI")){
-            
-                FRAME_TRANSAKSI.add(F_TR_KEMBALI);
-                
-                T_TR_PINJAM.setForeground(new Color(96, 96, 96));
-                T_TR_KEMBALI.setForeground(new Color(78, 204, 121));
-                T_TR_LAPORAN.setForeground(new Color(96, 96, 96));
-                
-            }else{
-            
-                FRAME_TRANSAKSI.add(F_TR_LAPORAN);
-                
-                T_TR_PINJAM.setForeground(new Color(96, 96, 96));
-                T_TR_KEMBALI.setForeground(new Color(96, 96, 96));
-                T_TR_LAPORAN.setForeground(new Color(78, 204, 121));
-                
-            }
-            
-            FRAME_TRANSAKSI.repaint();
-            FRAME_TRANSAKSI.revalidate();
-        
-        }
-    
-    /*
-    ------------------------
-        BUKU
-    ------------------------
-    */
-    
-        public void setBukuPageSelected(String selected){
-            
-            FRAME_DATABUKU.removeAll();
-            
-            if(selected.equals("BUKU")){
-                
-                FRAME_DATABUKU.add(F_DB_BUKU);
-                
-                T_DB_BUKU.setForeground(new Color(78, 204, 121));
-                T_DB_KATEGORI.setForeground(new Color(96, 96, 96));
-                T_DB_PENERBIT.setForeground(new Color(96, 96, 96));
-                T_DB_RAK.setForeground(new Color(96, 96, 96));
-                
-            
-            }else if(selected.equals("KATEGORI")){
-            
-                FRAME_DATABUKU.add(F_DB_KATEGORI);
-                
-                T_DB_BUKU.setForeground(new Color(96, 96, 96));
-                T_DB_KATEGORI.setForeground(new Color(78, 204, 121));
-                T_DB_PENERBIT.setForeground(new Color(96, 96, 96));
-                T_DB_RAK.setForeground(new Color(96, 96, 96));
-                
-            }else if(selected.equals("PENERBIT")){
-            
-                FRAME_DATABUKU.add(F_DB_PENERBIT);
-                
-                T_DB_BUKU.setForeground(new Color(96, 96, 96));
-                T_DB_KATEGORI.setForeground(new Color(96, 96, 96));
-                T_DB_PENERBIT.setForeground(new Color(78, 204, 121));
-                T_DB_RAK.setForeground(new Color(96, 96, 96));
-                
-            }else{
-                
-                FRAME_DATABUKU.add(F_DB_RAK);
-                
-                T_DB_BUKU.setForeground(new Color(96, 96, 96));
-                T_DB_KATEGORI.setForeground(new Color(96, 96, 96));
-                T_DB_PENERBIT.setForeground(new Color(96, 96, 96));
-                T_DB_RAK.setForeground(new Color(78, 204, 121));
-                
-            }
-            
-            FRAME_DATABUKU.repaint();
-            FRAME_DATABUKU.revalidate();
-        
-        }
-    
-    /*
-    ------------------------
-        USERS
-    ------------------------
-    */
-    
-        public void setUserPageSelected(String selected){
-            
-            FRAME_USER.removeAll();
-            
-            if(selected.equals("ANGGOTA")){
-            
-                FRAME_USER.add(F_U_ANGGOTA);
-                
-                T_U_ANGGOTA.setForeground(new Color(78, 204, 121));
-                T_U_JURUSAN.setForeground(new Color(96, 96, 96));
-                T_U_KELAS.setForeground(new Color(96, 96, 96));
-                T_U_PENGURUS.setForeground(new Color(96, 96, 96));
-                
-            }else if(selected.equals("JURUSAN")){
-                
-                FRAME_USER.add(F_U_JURUSAN);
-                
-                T_U_ANGGOTA.setForeground(new Color(96, 96, 96));
-                T_U_JURUSAN.setForeground(new Color(78, 204, 121));
-                T_U_KELAS.setForeground(new Color(96, 96, 96));
-                T_U_PENGURUS.setForeground(new Color(96, 96, 96));
-            
-            }else if(selected.equals("KELAS")) {
-                
-                FRAME_USER.add(F_U_KELAS);
-            
-                T_U_ANGGOTA.setForeground(new Color(96, 96, 96));
-                T_U_JURUSAN.setForeground(new Color(96, 96, 96));
-                T_U_KELAS.setForeground(new Color(78, 204, 121));
-                T_U_PENGURUS.setForeground(new Color(96, 96, 96));
-                
-            } else {
-                
-                FRAME_USER.add(F_U_PENGURUS);
-                
-                T_U_ANGGOTA.setForeground(new Color(96, 96, 96));
-                T_U_JURUSAN.setForeground(new Color(96, 96, 96));
-                T_U_KELAS.setForeground(new Color(96, 96, 96));
-                T_U_PENGURUS.setForeground(new Color(78, 204, 121));
-            
-            }
-            
-            FRAME_USER.repaint();
-            FRAME_USER.revalidate();
-            
-        }
-    
-    /*
-    ------------------------
-    */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -2284,79 +2119,41 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_DASHBOARDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_DASHBOARDMouseClicked
-
         // SET TITLE
         this.setTitleApp("Dashboard");
-        
         // TAMPILKAN LAYOUT DASHBOARD
         new SideBar().setBar("DASHBOARD");
-        
     }//GEN-LAST:event_BTN_DASHBOARDMouseClicked
 
     private void BTN_TRANSAKSIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_TRANSAKSIMouseClicked
-
         // SET TITLE
         this.setTitleApp("Transaksi");
-        
         // TAMPILKAN LAYOUT TRANSAKSI
         new SideBar().setBar("TRANSAKSI");
-        
-        FRAME_TRANSAKSI.removeAll();
-        FRAME_TRANSAKSI.add(F_TR_PINJAM);
-        FRAME_TRANSAKSI.repaint();
-        FRAME_TRANSAKSI.revalidate();
-        
-        T_TR_PINJAM.setForeground(new Color(78, 204, 121));
-        T_TR_KEMBALI.setForeground(new Color(96, 96, 96));
-        T_TR_LAPORAN.setForeground(new Color(96, 96, 96));
+        new SideBar().setTransaksiPageSelected("PINJAM");
     }//GEN-LAST:event_BTN_TRANSAKSIMouseClicked
 
     private void BTN_DATABUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_DATABUKUMouseClicked
-
         // SET TITLE
         this.setTitleApp("Data Buku");
-        
         // TAMPILKAN LAYOUT DATA BUKU
         new SideBar().setBar("DATABUKU");
-        
-        FRAME_DATABUKU.removeAll();
-        FRAME_DATABUKU.add(F_DB_BUKU);
-        FRAME_DATABUKU.repaint();
-        FRAME_DATABUKU.revalidate();
-        
-        T_DB_BUKU.setForeground(new Color(78, 204, 121));
-        T_DB_KATEGORI.setForeground(new Color(96, 96, 96));
-        T_DB_PENERBIT.setForeground(new Color(96, 96, 96));
-        T_DB_RAK.setForeground(new Color(96, 96, 96));
+        new SideBar().setBukuPageSelected("BUKU");
     }//GEN-LAST:event_BTN_DATABUKUMouseClicked
 
     private void BTN_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_USERMouseClicked
-
         // SET TITLE
         this.setTitleApp("User");
-        
         // TAMPILKAN LAYOUT USER
         new SideBar().setBar("USER");
-        
-        FRAME_USER.removeAll();
-        FRAME_USER.add(F_U_ANGGOTA);
-        FRAME_USER.repaint();
-        FRAME_USER.revalidate();
-        
-        T_U_ANGGOTA.setForeground(new Color(78, 204, 121));
-        T_U_JURUSAN.setForeground(new Color(96, 96, 96));
-        T_U_KELAS.setForeground(new Color(96, 96, 96));
-        T_U_PENGURUS.setForeground(new Color(96, 96, 96));
+        new SideBar().setUserPageSelected("ANGGOTA");
     }//GEN-LAST:event_BTN_USERMouseClicked
 
     private void BTN_SETTINGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SETTINGMouseClicked
-
         // SET TITLE
         this.setTitleApp("Pengaturan");
-        
         // TAMPILKAN LAYOUT SETTING
         new SideBar().setBar("PENGATURAN");
-        
         // SETTING MODEL
         new SettingModel();
     }//GEN-LAST:event_BTN_SETTINGMouseClicked
@@ -2370,19 +2167,19 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_EXITMouseClicked
 
     private void T_U_ANGGOTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_ANGGOTAMouseClicked
-        setUserPageSelected("ANGGOTA");
+        new SideBar().setUserPageSelected("ANGGOTA");
     }//GEN-LAST:event_T_U_ANGGOTAMouseClicked
 
     private void T_U_JURUSANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_JURUSANMouseClicked
-        setUserPageSelected("JURUSAN");
+        new SideBar().setUserPageSelected("JURUSAN");
     }//GEN-LAST:event_T_U_JURUSANMouseClicked
 
     private void T_U_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_KELASMouseClicked
-        setUserPageSelected("KELAS");
+        new SideBar().setUserPageSelected("KELAS");
     }//GEN-LAST:event_T_U_KELASMouseClicked
 
     private void T_U_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_PENGURUSMouseClicked
-        setUserPageSelected("PENGURUS");
+        new SideBar().setUserPageSelected("PENGURUS");
     }//GEN-LAST:event_T_U_PENGURUSMouseClicked
 
     private void ICON_ADD_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_USERMouseClicked
@@ -2398,7 +2195,6 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void ICON_EXPORT_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_EXPORT_USERMouseClicked
         // EXPORT DATA USER
-//        s
     }//GEN-LAST:event_ICON_EXPORT_USERMouseClicked
 
     private void SEARCH_USERKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_USERKeyTyped
@@ -2433,19 +2229,19 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_SEARCH_PENGURUSKeyTyped
 
     private void T_DB_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_BUKUMouseClicked
-        setBukuPageSelected("BUKU");
+        new SideBar().setBukuPageSelected("BUKU");
     }//GEN-LAST:event_T_DB_BUKUMouseClicked
 
     private void T_DB_KATEGORIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_KATEGORIMouseClicked
-        setBukuPageSelected("KATEGORI");
+        new SideBar().setBukuPageSelected("KATEGORI");
     }//GEN-LAST:event_T_DB_KATEGORIMouseClicked
 
     private void T_DB_PENERBITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_PENERBITMouseClicked
-        setBukuPageSelected("PENERBIT");
+        new SideBar().setBukuPageSelected("PENERBIT");
     }//GEN-LAST:event_T_DB_PENERBITMouseClicked
 
     private void T_DB_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_RAKMouseClicked
-        setBukuPageSelected("RAK");
+        new SideBar().setBukuPageSelected("RAK");
     }//GEN-LAST:event_T_DB_RAKMouseClicked
 
     private void ICON_EXPORT_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_EXPORT_BUKUMouseClicked
@@ -2489,15 +2285,15 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_SEARCH_RAKKeyTyped
 
     private void T_TR_PINJAMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_TR_PINJAMMouseClicked
-        setTransaksiPageSelected("PINJAM");
+        new SideBar().setTransaksiPageSelected("PINJAM");
     }//GEN-LAST:event_T_TR_PINJAMMouseClicked
 
     private void T_TR_KEMBALIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_TR_KEMBALIMouseClicked
-        setTransaksiPageSelected("KEMBALI");
+        new SideBar().setTransaksiPageSelected("KEMBALI");
     }//GEN-LAST:event_T_TR_KEMBALIMouseClicked
 
     private void T_TR_LAPORANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_TR_LAPORANMouseClicked
-        setTransaksiPageSelected("LAPORAN");
+        new SideBar().setTransaksiPageSelected("LAPORAN");
     }//GEN-LAST:event_T_TR_LAPORANMouseClicked
 
     private void BTN_SET_SIMPANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SET_SIMPANMouseClicked
@@ -2512,7 +2308,6 @@ public class Dashboard extends javax.swing.JFrame {
         }else{
             SettingModel.update(Denda, MaxPinjamBukuUmum, BackupDatabase);
         }
-        
     }//GEN-LAST:event_BTN_SET_SIMPANMouseClicked
 
     /**
@@ -2571,21 +2366,21 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel FILTER_TAMPIL_PENGURUS;
     private javax.swing.JLabel FILTER_TAMPIL_RAK;
     private javax.swing.JLabel FILTER_TAMPIL_USER;
-    private javax.swing.JPanel FRAME_DATABUKU;
+    public static javax.swing.JPanel FRAME_DATABUKU;
     private javax.swing.JPanel FRAME_MAIN_SETTING;
-    private javax.swing.JPanel FRAME_TRANSAKSI;
-    private javax.swing.JPanel FRAME_USER;
-    private javax.swing.JPanel F_DB_BUKU;
-    private javax.swing.JPanel F_DB_KATEGORI;
-    private javax.swing.JPanel F_DB_PENERBIT;
-    private javax.swing.JPanel F_DB_RAK;
-    private javax.swing.JPanel F_TR_KEMBALI;
-    private javax.swing.JPanel F_TR_LAPORAN;
-    private javax.swing.JPanel F_TR_PINJAM;
-    private javax.swing.JPanel F_U_ANGGOTA;
-    private javax.swing.JPanel F_U_JURUSAN;
-    private javax.swing.JPanel F_U_KELAS;
-    private javax.swing.JPanel F_U_PENGURUS;
+    public static javax.swing.JPanel FRAME_TRANSAKSI;
+    public static javax.swing.JPanel FRAME_USER;
+    public static javax.swing.JPanel F_DB_BUKU;
+    public static javax.swing.JPanel F_DB_KATEGORI;
+    public static javax.swing.JPanel F_DB_PENERBIT;
+    public static javax.swing.JPanel F_DB_RAK;
+    public static javax.swing.JPanel F_TR_KEMBALI;
+    public static javax.swing.JPanel F_TR_LAPORAN;
+    public static javax.swing.JPanel F_TR_PINJAM;
+    public static javax.swing.JPanel F_U_ANGGOTA;
+    public static javax.swing.JPanel F_U_JURUSAN;
+    public static javax.swing.JPanel F_U_KELAS;
+    public static javax.swing.JPanel F_U_PENGURUS;
     private javax.swing.JLabel ICON_ADD_BUKU;
     private javax.swing.JLabel ICON_ADD_JURUSAN;
     private javax.swing.JLabel ICON_ADD_KATEGORI;
@@ -2696,24 +2491,24 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel TOPBAR_TRANSAKSI;
     private javax.swing.JPanel TOPBAR_USER;
     public static javax.swing.JPanel TRANSAKSI;
-    private javax.swing.JLabel T_DB_BUKU;
-    private javax.swing.JLabel T_DB_KATEGORI;
-    private javax.swing.JLabel T_DB_PENERBIT;
-    private javax.swing.JLabel T_DB_RAK;
+    public static javax.swing.JLabel T_DB_BUKU;
+    public static javax.swing.JLabel T_DB_KATEGORI;
+    public static javax.swing.JLabel T_DB_PENERBIT;
+    public static javax.swing.JLabel T_DB_RAK;
     private javax.swing.JLabel T_PJ_BUKU;
-    private javax.swing.JLabel T_TR_KEMBALI;
-    private javax.swing.JLabel T_TR_LAPORAN;
-    private javax.swing.JLabel T_TR_PINJAM;
-    private javax.swing.JLabel T_U_ANGGOTA;
-    private javax.swing.JLabel T_U_JURUSAN;
-    private javax.swing.JLabel T_U_KELAS;
-    private javax.swing.JLabel T_U_PENGURUS;
+    public static javax.swing.JLabel T_TR_KEMBALI;
+    public static javax.swing.JLabel T_TR_LAPORAN;
+    public static javax.swing.JLabel T_TR_PINJAM;
+    public static javax.swing.JLabel T_U_ANGGOTA;
+    public static javax.swing.JLabel T_U_JURUSAN;
+    public static javax.swing.JLabel T_U_KELAS;
+    public static javax.swing.JLabel T_U_PENGURUS;
     public static javax.swing.JPanel USER;
     private javax.swing.JLabel USERNAME;
-    private javax.swing.JLabel USERNAME_DATABUKU;
-    private javax.swing.JLabel USERNAME_SETTING;
-    private javax.swing.JLabel USERNAME_TRANSAKSI;
-    private javax.swing.JLabel USERNAME_USER;
+    public static javax.swing.JLabel USERNAME_DATABUKU;
+    public static javax.swing.JLabel USERNAME_SETTING;
+    public static javax.swing.JLabel USERNAME_TRANSAKSI;
+    public static javax.swing.JLabel USERNAME_USER;
     private javax.swing.JLabel VALUE_ANGGOTA;
     private javax.swing.JLabel VALUE_BERMASALAH;
     private javax.swing.JLabel VALUE_DIPINJAM;
