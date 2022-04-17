@@ -2828,25 +2828,15 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="FILTER_TAMPIL_JURUSAN" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="TAMPILKAN_COMBOBOX_JURUSAN" min="-2" pref="141" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="TABLE_LIST_JURUSAN" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="TITLE_FRAME_JURUSAN" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="697" max="32767" attributes="0"/>
-                                              <Component id="SEARCH_JURUSAN" min="-2" pref="256" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Component id="ICON_ADD_JURUSAN" min="-2" pref="34" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                  <Component id="TABLE_LIST_JURUSAN" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="TITLE_FRAME_JURUSAN" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="697" max="32767" attributes="0"/>
+                                      <Component id="SEARCH_JURUSAN" min="-2" pref="256" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="ICON_ADD_JURUSAN" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -2863,13 +2853,8 @@
                                   <Component id="SEARCH_JURUSAN" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="TABLE_LIST_JURUSAN" pref="486" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="TAMPILKAN_COMBOBOX_JURUSAN" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="FILTER_TAMPIL_JURUSAN" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="TABLE_LIST_JURUSAN" pref="521" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2928,6 +2913,12 @@
                       <SubComponents>
                         <Component class="javax.swing.JTable" name="TABLE_LIST_ITEM_JURUSAN">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Trebuchet MS" size="14" style="0"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="18" green="18" red="18" type="rgb"/>
+                            </Property>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="4" rowCount="4">
                                 <Column editable="true" title="Title 1fdsfsd" type="java.lang.Object">
@@ -2956,39 +2947,18 @@
                                 </Column>
                               </Table>
                             </Property>
+                            <Property name="rowHeight" type="int" value="30"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TABLE_LIST_ITEM_JURUSANMouseClicked"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;&#xa;    private static final long serialVersionUID = 1L;&#xa;&#xa;    public boolean isCellEditable(int row, int column) {                &#xa;            return false;               &#xa;    };&#xa;    &#xa;}"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="FILTER_TAMPIL_JURUSAN">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="18" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Tampilkan"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="TAMPILKAN_COMBOBOX_JURUSAN">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="0"/>
-                        </Property>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="F_U_KELAS">
@@ -3011,25 +2981,15 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="TABLE_LIST_KELAS" alignment="1" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="FILTER_TAMPIL_KELAS" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="TAMPILKAN_COMBOBOX_KELAS" min="-2" pref="141" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="TABLE_LIST_KELAS" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="TITLE_FRAME_KELAS" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="728" max="32767" attributes="0"/>
-                                              <Component id="SEARCH_KELAS" min="-2" pref="256" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Component id="ICON_ADD_KELAS" min="-2" pref="34" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="TITLE_FRAME_KELAS" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="728" max="32767" attributes="0"/>
+                                      <Component id="SEARCH_KELAS" min="-2" pref="256" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="ICON_ADD_KELAS" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -3046,13 +3006,8 @@
                                   <Component id="SEARCH_KELAS" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="TABLE_LIST_KELAS" pref="486" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="TAMPILKAN_COMBOBOX_KELAS" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="FILTER_TAMPIL_KELAS" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="TABLE_LIST_KELAS" pref="521" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -3143,35 +3098,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="FILTER_TAMPIL_KELAS">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="18" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Tampilkan"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="TAMPILKAN_COMBOBOX_KELAS">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="0"/>
-                        </Property>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="F_U_PENGURUS">
@@ -3194,25 +3120,15 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="TABLE_LIST_PENGURUS" alignment="1" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="FILTER_TAMPIL_PENGURUS" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="TAMPILKAN_COMBOBOX_PENGURUS" min="-2" pref="141" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="TABLE_LIST_PENGURUS" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="TITLE_FRAME_PENGURUS" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="682" max="32767" attributes="0"/>
-                                              <Component id="SEARCH_PENGURUS" min="-2" pref="256" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Component id="ICON_ADD_PENGURUS" min="-2" pref="34" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="TITLE_FRAME_PENGURUS" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="682" max="32767" attributes="0"/>
+                                      <Component id="SEARCH_PENGURUS" min="-2" pref="256" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="ICON_ADD_PENGURUS" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -3229,13 +3145,8 @@
                                   <Component id="SEARCH_PENGURUS" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="TABLE_LIST_PENGURUS" pref="486" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="TAMPILKAN_COMBOBOX_PENGURUS" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="FILTER_TAMPIL_PENGURUS" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="TABLE_LIST_PENGURUS" pref="521" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -3326,35 +3237,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="FILTER_TAMPIL_PENGURUS">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="18" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Tampilkan"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="TAMPILKAN_COMBOBOX_PENGURUS">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="0"/>
-                        </Property>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>

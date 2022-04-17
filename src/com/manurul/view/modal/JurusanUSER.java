@@ -8,7 +8,11 @@ package com.manurul.view.modal;
 import com.manurul.lib.InputBorder;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.JurusanModel;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,10 +23,20 @@ public class JurusanUSER extends javax.swing.JFrame {
     /**
      * Creates new form JurusanUSER
      */
-    String title = "Edit";
+    private String title = "Edit";
     
-    public JurusanUSER(String Action, int ID) {
+    private String action;
+    private String kode;
+    private String nama;
+    
+    private ImageIcon successIcon;
+    
+    public JurusanUSER(String Action, String Kode) {
         initComponents();
+        
+        // INIT GLOBAL VARIBLE
+        this.action = Action;
+        this.kode = Kode;
         
         // SET SIZE
         this.setSize(1024, 345);
@@ -40,7 +54,7 @@ public class JurusanUSER extends javax.swing.JFrame {
         InputBorder.set(INPUT_KODE_JUR, 8);
         InputBorder.set(INPUT_NAMA_JUR, 8);
         InputBorder.set(INPUT_LAST_UPDATE_JUR, 8);
-        InputBorder.set(INPUT_LAST_CREATED_JUR, 8);
+        InputBorder.set(INPUT_CREATED_JUR, 8);
         
         // SET COMPONENT BASED ON ACTION
         if(Action.equals("ADD")){
@@ -52,13 +66,23 @@ public class JurusanUSER extends javax.swing.JFrame {
             LABEL_LAST_UPDATE_JUR.setVisible(false);
             INPUT_LAST_UPDATE_JUR.setVisible(false);
             LABEL_LAST_CREATED_JUR.setVisible(false);
-            INPUT_LAST_CREATED_JUR.setVisible(false);
+            INPUT_CREATED_JUR.setVisible(false);
+            
+            BTN_HAPUS_JUR.setVisible(false);
         
+        }else{
+            JurusanModel JM = new JurusanModel();
+            JM.getSelected(Kode);
+            kode = JM.getKode();
+            nama = JM.getNama();
         }
         
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - " + this.title + " Jurusan");
         
+        // SET SUCCESS ICON
+        ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
+        this.successIcon = successIcon;
     }
 
     /**
@@ -78,13 +102,12 @@ public class JurusanUSER extends javax.swing.JFrame {
         LABEL_NAMA_JUR = new javax.swing.JLabel();
         LABEL_LAST_UPDATE_JUR = new javax.swing.JLabel();
         INPUT_LAST_UPDATE_JUR = new javax.swing.JTextField();
-        INPUT_LAST_CREATED_JUR = new javax.swing.JTextField();
+        INPUT_CREATED_JUR = new javax.swing.JTextField();
         LABEL_LAST_CREATED_JUR = new javax.swing.JLabel();
         BTN_HAPUS_JUR = new javax.swing.JButton();
         BTN_SIMPAN_JUR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 300));
         setType(java.awt.Window.Type.POPUP);
 
         MAIN_FRAME.setBackground(new java.awt.Color(239, 240, 245));
@@ -94,17 +117,22 @@ public class JurusanUSER extends javax.swing.JFrame {
         INPUT_KODE_JUR.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_KODE_JUR.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_KODE_JUR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+        INPUT_KODE_JUR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                INPUT_KODE_JURKeyPressed(evt);
+            }
+        });
 
         LABEL_KODE_JUR.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_KODE_JUR.setForeground(new java.awt.Color(96, 96, 96));
-        LABEL_KODE_JUR.setText("Kode Jurusan ( Alias )");
+        LABEL_KODE_JUR.setText("Kode Jurusan");
 
         INPUT_NAMA_JUR.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_NAMA_JUR.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_NAMA_JUR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        INPUT_NAMA_JUR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                INPUT_NAMA_JURActionPerformed(evt);
+        INPUT_NAMA_JUR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                INPUT_NAMA_JURKeyPressed(evt);
             }
         });
 
@@ -121,10 +149,10 @@ public class JurusanUSER extends javax.swing.JFrame {
         INPUT_LAST_UPDATE_JUR.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_LAST_UPDATE_JUR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
 
-        INPUT_LAST_CREATED_JUR.setEditable(false);
-        INPUT_LAST_CREATED_JUR.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        INPUT_LAST_CREATED_JUR.setForeground(new java.awt.Color(96, 96, 96));
-        INPUT_LAST_CREATED_JUR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+        INPUT_CREATED_JUR.setEditable(false);
+        INPUT_CREATED_JUR.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        INPUT_CREATED_JUR.setForeground(new java.awt.Color(96, 96, 96));
+        INPUT_CREATED_JUR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
 
         LABEL_LAST_CREATED_JUR.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_LAST_CREATED_JUR.setForeground(new java.awt.Color(96, 96, 96));
@@ -147,7 +175,7 @@ public class JurusanUSER extends javax.swing.JFrame {
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(INPUT_LAST_UPDATE_JUR)
                     .addComponent(LABEL_LAST_UPDATE_JUR, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-                    .addComponent(INPUT_LAST_CREATED_JUR)
+                    .addComponent(INPUT_CREATED_JUR)
                     .addComponent(LABEL_LAST_CREATED_JUR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
         );
@@ -167,7 +195,7 @@ public class JurusanUSER extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(LABEL_LAST_CREATED_JUR)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(INPUT_LAST_CREATED_JUR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(INPUT_CREATED_JUR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
 
@@ -176,12 +204,22 @@ public class JurusanUSER extends javax.swing.JFrame {
         BTN_HAPUS_JUR.setForeground(new java.awt.Color(255, 255, 255));
         BTN_HAPUS_JUR.setText("Hapus");
         BTN_HAPUS_JUR.setBorder(null);
+        BTN_HAPUS_JUR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_HAPUS_JURMouseClicked(evt);
+            }
+        });
 
         BTN_SIMPAN_JUR.setBackground(new java.awt.Color(0, 171, 60));
         BTN_SIMPAN_JUR.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         BTN_SIMPAN_JUR.setForeground(new java.awt.Color(255, 255, 255));
         BTN_SIMPAN_JUR.setText("Simpan");
         BTN_SIMPAN_JUR.setBorder(null);
+        BTN_SIMPAN_JUR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_SIMPAN_JURMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout MAIN_FRAMELayout = new javax.swing.GroupLayout(MAIN_FRAME);
         MAIN_FRAME.setLayout(MAIN_FRAMELayout);
@@ -193,10 +231,10 @@ public class JurusanUSER extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(CONTAINER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(MAIN_FRAMELayout.createSequentialGroup()
-                        .addGap(420, 420, 420)
-                        .addComponent(BTN_HAPUS_JUR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(420, Short.MAX_VALUE)
+                        .addComponent(BTN_HAPUS_JUR, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BTN_SIMPAN_JUR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(BTN_SIMPAN_JUR, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
         MAIN_FRAMELayout.setVerticalGroup(
@@ -225,9 +263,121 @@ public class JurusanUSER extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void INPUT_NAMA_JURActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_NAMA_JURActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_INPUT_NAMA_JURActionPerformed
+    private boolean cekValidasi(String Action){
+        
+        try{
+            
+            // apakah input kosong ?
+            if(INPUT_KODE_JUR.getText().equals("") || INPUT_NAMA_JUR.getText().equals("")){
+                throw new Exception("Nilai input harus terisi!");
+            }
+            
+            if(!Action.equals("DELETE")){
+                System.out.println("ok");
+                // apakah input sama dengan data lama
+                if(INPUT_KODE_JUR.getText().equals(kode) && INPUT_NAMA_JUR.getText().equals(nama)){
+                    throw new Exception("Tidak ada perubahan data!");
+                }
+            }
+
+            return true;
+        
+        }catch(Exception error){
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+    
+    }
+    
+    private void simpan(){
+        
+        if(cekValidasi("INSERT")){
+            JurusanModel JM = new JurusanModel();
+
+            JM.setKode(INPUT_KODE_JUR.getText());
+            JM.setNama(INPUT_NAMA_JUR.getText());
+
+            if(JM.insertData()){
+                JOptionPane.showMessageDialog(null, JM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                JM.getDataTable("");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, JM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void update(){
+        
+        if(cekValidasi("INSERT")){
+            JurusanModel JM = new JurusanModel();
+        
+            JM.setKode(INPUT_KODE_JUR.getText());
+            JM.setNama(INPUT_NAMA_JUR.getText());
+
+            if(JM.updateData(kode)){
+                JOptionPane.showMessageDialog(null, JM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                JM.getDataTable("");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, JM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    }
+    
+    private void BTN_SIMPAN_JURMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_JURMouseClicked
+        if(this.action.equals("ADD")){
+            simpan();
+        }else{
+            update();
+        }
+    }//GEN-LAST:event_BTN_SIMPAN_JURMouseClicked
+
+    private void BTN_HAPUS_JURMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_JURMouseClicked
+        
+        INPUT_KODE_JUR.setText(kode);
+        INPUT_NAMA_JUR.setText(nama);
+        
+        // apakah input kosong ?
+        if(cekValidasi("DELETE")){
+            int hapus = JOptionPane.showConfirmDialog(null, "Benarkan anda ingin mengapus jurusan "+kode+" ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if(hapus == 0){
+                JurusanModel JM = new JurusanModel();
+
+                JM.setKode(kode);
+
+                if(JM.deleteData()){
+                    JOptionPane.showMessageDialog(null, JM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                    JM.getDataTable("");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, JM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_BTN_HAPUS_JURMouseClicked
+
+    private void INPUT_KODE_JURKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_INPUT_KODE_JURKeyPressed
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            if(this.action.equals("ADD")){
+                simpan();
+            }else{
+                update();
+            }
+        }
+    }//GEN-LAST:event_INPUT_KODE_JURKeyPressed
+
+    private void INPUT_NAMA_JURKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_INPUT_NAMA_JURKeyPressed
+       if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            if(this.action.equals("ADD")){
+                simpan();
+            }else{
+                update();
+            }
+        }
+    }//GEN-LAST:event_INPUT_NAMA_JURKeyPressed
 
     /**
      * @param args the command line arguments
@@ -259,7 +409,7 @@ public class JurusanUSER extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JurusanUSER("", 0).setVisible(true);
+                new JurusanUSER("", "").setVisible(true);
             }
         });
     }
@@ -268,10 +418,10 @@ public class JurusanUSER extends javax.swing.JFrame {
     private javax.swing.JButton BTN_HAPUS_JUR;
     private javax.swing.JButton BTN_SIMPAN_JUR;
     private javax.swing.JPanel CONTAINER;
-    private javax.swing.JTextField INPUT_KODE_JUR;
-    private javax.swing.JTextField INPUT_LAST_CREATED_JUR;
-    private javax.swing.JTextField INPUT_LAST_UPDATE_JUR;
-    private javax.swing.JTextField INPUT_NAMA_JUR;
+    public static javax.swing.JTextField INPUT_CREATED_JUR;
+    public static javax.swing.JTextField INPUT_KODE_JUR;
+    public static javax.swing.JTextField INPUT_LAST_UPDATE_JUR;
+    public static javax.swing.JTextField INPUT_NAMA_JUR;
     private javax.swing.JLabel LABEL_KODE_JUR;
     private javax.swing.JLabel LABEL_LAST_CREATED_JUR;
     private javax.swing.JLabel LABEL_LAST_UPDATE_JUR;

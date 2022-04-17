@@ -3,9 +3,6 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1024, 300]"/>
-    </Property>
     <Property name="type" type="java.awt.Window$Type" editor="org.netbeans.modules.form.editors.EnumEditor">
       <Value id="POPUP"/>
     </Property>
@@ -56,10 +53,10 @@
                           <Component id="CONTAINER" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="420" max="-2" attributes="0"/>
-                          <Component id="BTN_HAPUS_JUR" max="32767" attributes="0"/>
+                          <EmptySpace pref="420" max="32767" attributes="0"/>
+                          <Component id="BTN_HAPUS_JUR" min="-2" pref="279" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Component id="BTN_SIMPAN_JUR" max="32767" attributes="0"/>
+                          <Component id="BTN_SIMPAN_JUR" min="-2" pref="287" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -110,7 +107,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="INPUT_LAST_UPDATE_JUR" alignment="0" max="32767" attributes="0"/>
                           <Component id="LABEL_LAST_UPDATE_JUR" alignment="0" pref="325" max="32767" attributes="0"/>
-                          <Component id="INPUT_LAST_CREATED_JUR" alignment="0" max="32767" attributes="0"/>
+                          <Component id="INPUT_CREATED_JUR" alignment="0" max="32767" attributes="0"/>
                           <Component id="LABEL_LAST_CREATED_JUR" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -135,7 +132,7 @@
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="LABEL_LAST_CREATED_JUR" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="INPUT_LAST_CREATED_JUR" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="INPUT_CREATED_JUR" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -158,6 +155,12 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="INPUT_KODE_JURKeyPressed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_KODE_JUR">
               <Properties>
@@ -167,7 +170,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="60" green="60" red="60" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Kode Jurusan ( Alias )"/>
+                <Property name="text" type="java.lang.String" value="Kode Jurusan"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="INPUT_NAMA_JUR">
@@ -187,8 +190,11 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPUT_NAMA_JURActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="INPUT_NAMA_JURKeyPressed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_NAMA_JUR">
               <Properties>
@@ -229,8 +235,11 @@
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_LAST_CREATED_JUR">
+            <Component class="javax.swing.JTextField" name="INPUT_CREATED_JUR">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -247,6 +256,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_LAST_CREATED_JUR">
               <Properties>
@@ -277,6 +289,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_HAPUS_JURMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BTN_SIMPAN_JUR">
           <Properties>
@@ -294,6 +309,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SIMPAN_JURMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
