@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.lib.SideBar;
+import com.manurul.model.JurusanModel;
 import com.manurul.model.SettingModel;
 import com.manurul.view.modal.BukuDATABUKU;
 import com.manurul.view.modal.KategoriDATABUKU;
@@ -18,6 +19,7 @@ import com.manurul.view.modal.KelasUSER;
 import com.manurul.view.modal.PenerbitDATABUKU;
 import com.manurul.view.modal.PengurusUSER;
 import com.manurul.view.modal.RakDATABUKU;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +34,7 @@ public class Dashboard extends javax.swing.JFrame {
     private String id_user;
     public static String nama_user;
     private String hak_akses;
+    private ImageIcon successIcon;
     
         // SETTING
         public static int Denda;
@@ -48,6 +51,7 @@ public class Dashboard extends javax.swing.JFrame {
         this.id_user = id_user;
         this.nama_user = nama_user;
         this.hak_akses = hak_akses;
+        
         
         // SET TITLE
         this.setTitleApp("Dashboard");
@@ -86,16 +90,20 @@ public class Dashboard extends javax.swing.JFrame {
             //SETTING
             InputBorder.set(INPUT_SET_1, 8);
             
+        // SET SUCCESS ICON
+        ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
+        this.successIcon = successIcon;
+            
         // KONFIRMASI KELUAR APP ( WINDOWS CLOSING )
-         this.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
-                int close = JOptionPane.showOptionDialog(null, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-                if(close == 0){
-                    System.exit(0);
-                }
-            }
-        });
+//         this.addWindowListener(new java.awt.event.WindowAdapter() {
+//            @Override
+//            public void windowClosing(java.awt.event.WindowEvent e) {
+//                int close = JOptionPane.showOptionDialog(null, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+//                if(close == 0){
+//                    System.exit(0);
+//                }
+//            }
+//        });
         
         
     }
@@ -252,25 +260,27 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_ADD_JURUSAN = new javax.swing.JLabel();
         SEARCH_JURUSAN = new javax.swing.JTextField();
         TABLE_LIST_JURUSAN = new javax.swing.JScrollPane();
-        TABLE_LIST_ITEM_JURUSAN = new javax.swing.JTable();
-        FILTER_TAMPIL_JURUSAN = new javax.swing.JLabel();
-        TAMPILKAN_COMBOBOX_JURUSAN = new javax.swing.JComboBox<>();
+        TABLE_LIST_ITEM_JURUSAN = new javax.swing.JTable(){
+
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+
+        };
         F_U_KELAS = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_KELAS = new javax.swing.JLabel();
         ICON_ADD_KELAS = new javax.swing.JLabel();
         SEARCH_KELAS = new javax.swing.JTextField();
         TABLE_LIST_KELAS = new javax.swing.JScrollPane();
         TABLE_LIST_ITEM_KELAS = new javax.swing.JTable();
-        FILTER_TAMPIL_KELAS = new javax.swing.JLabel();
-        TAMPILKAN_COMBOBOX_KELAS = new javax.swing.JComboBox<>();
         F_U_PENGURUS = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PENGURUS = new javax.swing.JLabel();
         ICON_ADD_PENGURUS = new javax.swing.JLabel();
         SEARCH_PENGURUS = new javax.swing.JTextField();
         TABLE_LIST_PENGURUS = new javax.swing.JScrollPane();
         TABLE_LIST_ITEM_PENGURUS = new javax.swing.JTable();
-        FILTER_TAMPIL_PENGURUS = new javax.swing.JLabel();
-        TAMPILKAN_COMBOBOX_PENGURUS = new javax.swing.JComboBox<>();
         SETTING = new javax.swing.JPanel();
         TOPBAR_SETTING = new RoundedPanel(15, Color.WHITE);
         TITLE_SETTING = new javax.swing.JLabel();
@@ -1676,6 +1686,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        TABLE_LIST_ITEM_JURUSAN.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        TABLE_LIST_ITEM_JURUSAN.setForeground(new java.awt.Color(24, 24, 24));
         TABLE_LIST_ITEM_JURUSAN.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"dfsd", "fdsfsdf", "sdfsdfsd", "fsdfsd"},
@@ -1687,36 +1699,28 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1fdsfsd", "Title 2fdfdsf", "Title 3dfdsf", "Title 4"
             }
         ));
+        TABLE_LIST_ITEM_JURUSAN.setRowHeight(30);
+        TABLE_LIST_ITEM_JURUSAN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_ITEM_JURUSANMouseClicked(evt);
+            }
+        });
         TABLE_LIST_JURUSAN.setViewportView(TABLE_LIST_ITEM_JURUSAN);
-
-        FILTER_TAMPIL_JURUSAN.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        FILTER_TAMPIL_JURUSAN.setForeground(new java.awt.Color(96, 96, 96));
-        FILTER_TAMPIL_JURUSAN.setText("Tampilkan");
-
-        TAMPILKAN_COMBOBOX_JURUSAN.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TAMPILKAN_COMBOBOX_JURUSAN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout F_U_JURUSANLayout = new javax.swing.GroupLayout(F_U_JURUSAN);
         F_U_JURUSAN.setLayout(F_U_JURUSANLayout);
         F_U_JURUSANLayout.setHorizontalGroup(
             F_U_JURUSANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_U_JURUSANLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(F_U_JURUSANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TABLE_LIST_JURUSAN)
                     .addGroup(F_U_JURUSANLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(FILTER_TAMPIL_JURUSAN)
+                        .addComponent(TITLE_FRAME_JURUSAN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 697, Short.MAX_VALUE)
+                        .addComponent(SEARCH_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(TAMPILKAN_COMBOBOX_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(F_U_JURUSANLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(F_U_JURUSANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TABLE_LIST_JURUSAN)
-                            .addGroup(F_U_JURUSANLayout.createSequentialGroup()
-                                .addComponent(TITLE_FRAME_JURUSAN)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 697, Short.MAX_VALUE)
-                                .addComponent(SEARCH_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ICON_ADD_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(ICON_ADD_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27))
         );
         F_U_JURUSANLayout.setVerticalGroup(
@@ -1728,12 +1732,8 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_ADD_JURUSAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_JURUSAN))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_LIST_JURUSAN, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(F_U_JURUSANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TAMPILKAN_COMBOBOX_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FILTER_TAMPIL_JURUSAN))
-                .addGap(20, 20, 20))
+                .addComponent(TABLE_LIST_JURUSAN, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
         );
 
         FRAME_USER.add(F_U_JURUSAN, "card2");
@@ -1774,34 +1774,20 @@ public class Dashboard extends javax.swing.JFrame {
         ));
         TABLE_LIST_KELAS.setViewportView(TABLE_LIST_ITEM_KELAS);
 
-        FILTER_TAMPIL_KELAS.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        FILTER_TAMPIL_KELAS.setForeground(new java.awt.Color(96, 96, 96));
-        FILTER_TAMPIL_KELAS.setText("Tampilkan");
-
-        TAMPILKAN_COMBOBOX_KELAS.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TAMPILKAN_COMBOBOX_KELAS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout F_U_KELASLayout = new javax.swing.GroupLayout(F_U_KELAS);
         F_U_KELAS.setLayout(F_U_KELASLayout);
         F_U_KELASLayout.setHorizontalGroup(
             F_U_KELASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_U_KELASLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(F_U_KELASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TABLE_LIST_KELAS)
                     .addGroup(F_U_KELASLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(FILTER_TAMPIL_KELAS)
+                        .addComponent(TITLE_FRAME_KELAS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 728, Short.MAX_VALUE)
+                        .addComponent(SEARCH_KELAS, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(TAMPILKAN_COMBOBOX_KELAS, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(F_U_KELASLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(F_U_KELASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TABLE_LIST_KELAS)
-                            .addGroup(F_U_KELASLayout.createSequentialGroup()
-                                .addComponent(TITLE_FRAME_KELAS)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 728, Short.MAX_VALUE)
-                                .addComponent(SEARCH_KELAS, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ICON_ADD_KELAS, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(ICON_ADD_KELAS, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27))
         );
         F_U_KELASLayout.setVerticalGroup(
@@ -1813,12 +1799,8 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_ADD_KELAS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_KELAS))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_LIST_KELAS, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(F_U_KELASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TAMPILKAN_COMBOBOX_KELAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FILTER_TAMPIL_KELAS))
-                .addGap(20, 20, 20))
+                .addComponent(TABLE_LIST_KELAS, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
         );
 
         FRAME_USER.add(F_U_KELAS, "card2");
@@ -1859,34 +1841,20 @@ public class Dashboard extends javax.swing.JFrame {
         ));
         TABLE_LIST_PENGURUS.setViewportView(TABLE_LIST_ITEM_PENGURUS);
 
-        FILTER_TAMPIL_PENGURUS.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        FILTER_TAMPIL_PENGURUS.setForeground(new java.awt.Color(96, 96, 96));
-        FILTER_TAMPIL_PENGURUS.setText("Tampilkan");
-
-        TAMPILKAN_COMBOBOX_PENGURUS.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TAMPILKAN_COMBOBOX_PENGURUS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout F_U_PENGURUSLayout = new javax.swing.GroupLayout(F_U_PENGURUS);
         F_U_PENGURUS.setLayout(F_U_PENGURUSLayout);
         F_U_PENGURUSLayout.setHorizontalGroup(
             F_U_PENGURUSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_U_PENGURUSLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(F_U_PENGURUSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TABLE_LIST_PENGURUS)
                     .addGroup(F_U_PENGURUSLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(FILTER_TAMPIL_PENGURUS)
+                        .addComponent(TITLE_FRAME_PENGURUS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 682, Short.MAX_VALUE)
+                        .addComponent(SEARCH_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(TAMPILKAN_COMBOBOX_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(F_U_PENGURUSLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(F_U_PENGURUSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TABLE_LIST_PENGURUS)
-                            .addGroup(F_U_PENGURUSLayout.createSequentialGroup()
-                                .addComponent(TITLE_FRAME_PENGURUS)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 682, Short.MAX_VALUE)
-                                .addComponent(SEARCH_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ICON_ADD_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(ICON_ADD_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27))
         );
         F_U_PENGURUSLayout.setVerticalGroup(
@@ -1898,12 +1866,8 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_ADD_PENGURUS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_PENGURUS))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_LIST_PENGURUS, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(F_U_PENGURUSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TAMPILKAN_COMBOBOX_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FILTER_TAMPIL_PENGURUS))
-                .addGap(20, 20, 20))
+                .addComponent(TABLE_LIST_PENGURUS, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
         );
 
         FRAME_USER.add(F_U_PENGURUS, "card2");
@@ -2172,6 +2136,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void T_U_JURUSANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_JURUSANMouseClicked
         new SideBar().setUserPageSelected("JURUSAN");
+        new JurusanModel().getDataTable("");
     }//GEN-LAST:event_T_U_JURUSANMouseClicked
 
     private void T_U_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_KELASMouseClicked
@@ -2203,11 +2168,11 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void ICON_ADD_JURUSANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_JURUSANMouseClicked
         // OPEN MODAL JURUSAN
-        new JurusanUSER("EDIT", 0).setVisible(true);
+        new JurusanUSER("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_JURUSANMouseClicked
 
     private void SEARCH_JURUSANKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_JURUSANKeyTyped
-        // TODO add your handling code here:
+        new JurusanModel().getDataTable(SEARCH_JURUSAN.getText());
     }//GEN-LAST:event_SEARCH_JURUSANKeyTyped
 
     private void ICON_ADD_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_KELASMouseClicked
@@ -2306,9 +2271,25 @@ public class Dashboard extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Tidak ada perubahan data", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             new SettingModel();
         }else{
-            SettingModel.update(Denda, MaxPinjamBukuUmum, BackupDatabase);
+            SettingModel SM = new SettingModel();
+            if(SM.update(Denda, MaxPinjamBukuUmum, BackupDatabase)){
+                JOptionPane.showMessageDialog(null, SM.getMessage(), "Sukses !", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+            }else{
+                JOptionPane.showMessageDialog(null, SM.getMessage(), "Terjadi kesalahan !", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_BTN_SET_SIMPANMouseClicked
+
+    private void TABLE_LIST_ITEM_JURUSANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_ITEM_JURUSANMouseClicked
+       
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_ITEM_JURUSAN.getSelectedRow();
+
+            String kode = TABLE_LIST_ITEM_JURUSAN.getValueAt(index, 1).toString();
+            new JurusanUSER("EDIT", kode).setVisible(true);
+        }
+        
+    }//GEN-LAST:event_TABLE_LIST_ITEM_JURUSANMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2359,11 +2340,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel FILTER_KATEGORI_BUKU;
     private javax.swing.JLabel FILTER_KELAS_USER;
     private javax.swing.JLabel FILTER_TAMPIL_BUKU;
-    private javax.swing.JLabel FILTER_TAMPIL_JURUSAN;
     private javax.swing.JLabel FILTER_TAMPIL_KATEGORI;
-    private javax.swing.JLabel FILTER_TAMPIL_KELAS;
     private javax.swing.JLabel FILTER_TAMPIL_PENERBIT;
-    private javax.swing.JLabel FILTER_TAMPIL_PENGURUS;
     private javax.swing.JLabel FILTER_TAMPIL_RAK;
     private javax.swing.JLabel FILTER_TAMPIL_USER;
     public static javax.swing.JPanel FRAME_DATABUKU;
@@ -2446,7 +2424,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTable TABLE_LIST_ANGGOTA;
     private javax.swing.JTable TABLE_LIST_BUKU;
     private javax.swing.JScrollPane TABLE_LIST_DB_BUKU;
-    private javax.swing.JTable TABLE_LIST_ITEM_JURUSAN;
+    public static javax.swing.JTable TABLE_LIST_ITEM_JURUSAN;
     private javax.swing.JTable TABLE_LIST_ITEM_KELAS;
     private javax.swing.JTable TABLE_LIST_ITEM_PENGURUS;
     private javax.swing.JScrollPane TABLE_LIST_JURUSAN;
@@ -2463,9 +2441,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane TABLE_PINJAM;
     private javax.swing.JScrollPane TABLE_RAK;
     private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_BUKU;
-    private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_JURUSAN;
-    private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_KELAS;
-    private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_PENGURUS;
     private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_USER;
     private javax.swing.JComboBox<String> TAMPILKAN_KATEGORI;
     private javax.swing.JComboBox<String> TAMPILKAN_PENERBIT;

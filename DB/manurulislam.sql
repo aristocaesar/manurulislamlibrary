@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2022 at 02:36 PM
+-- Generation Time: Apr 17, 2022 at 11:18 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -29,16 +29,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ma_anggota` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `id_anggota` varchar(16) NOT NULL,
-  `nis` int(11) NOT NULL,
-  `nama_lengkap` varchar(64) NOT NULL,
-  `id_kelas` int(11) UNSIGNED NOT NULL,
-  `jumlah_buku_dipinjam` int(8) NOT NULL,
-  `skor` int(8) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id` varchar(16) NOT NULL,
+  `nis` varchar(28) NOT NULL,
+  `nama_lengkap` varchar(128) NOT NULL,
+  `jurusan` int(11) UNSIGNED NOT NULL,
+  `kelas` int(11) UNSIGNED NOT NULL,
+  `jumlah_buku_dipinjam` int(11) NOT NULL,
+  `skor` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,6 @@ CREATE TABLE `ma_detail_transaksi` (
 --
 
 CREATE TABLE `ma_jurusan` (
-  `id` int(11) UNSIGNED NOT NULL,
   `kode` varchar(8) NOT NULL,
   `nama` varchar(32) NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -123,9 +122,15 @@ CREATE TABLE `ma_jurusan` (
 -- Dumping data for table `ma_jurusan`
 --
 
-INSERT INTO `ma_jurusan` (`id`, `kode`, `nama`, `created_at`, `updated_at`) VALUES
-(1, 'IPA', 'Ilmu Pengetahuan Alam', '2022-03-23 10:18:50', '2022-03-23 10:18:50'),
-(2, 'IPS', 'Ilmu Pengetahuan Sosial', '2022-03-23 10:18:50', '2022-03-23 10:18:50');
+INSERT INTO `ma_jurusan` (`kode`, `nama`, `created_at`, `updated_at`) VALUES
+('AK', 'Akustansi', '2022-04-17 15:50:09', '2022-04-17 16:08:43'),
+('APK', 'Administrator Perkantoran', '2022-04-17 15:54:08', '2022-04-17 16:06:54'),
+('MIF', 'Manajemen Informatika', '2022-04-17 15:47:01', '2022-04-17 16:09:10'),
+('TGK', 'Teknik Geomatika', '2022-04-17 16:09:50', '2022-04-17 16:09:50'),
+('TKJ', 'Teknik Komputer Dan Jaringan', '2022-04-17 15:48:21', '2022-04-17 16:07:10'),
+('TPL', 'Teknik Perkapalan', '2022-04-17 16:10:32', '2022-04-17 16:10:32'),
+('TPU', 'Teknologi Pesawat Udara', '2022-04-17 16:10:08', '2022-04-17 16:10:08'),
+('TSM', 'Teknik Sepeda Motor', '2022-03-23 10:18:50', '2022-04-17 16:09:05');
 
 -- --------------------------------------------------------
 
@@ -157,8 +162,7 @@ INSERT INTO `ma_kategori` (`id`, `kode`, `nama`, `deskripsi`, `created_at`, `upd
 --
 
 CREATE TABLE `ma_kelas` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `kelas` varchar(8) NOT NULL,
+  `kode` varchar(8) NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -167,10 +171,10 @@ CREATE TABLE `ma_kelas` (
 -- Dumping data for table `ma_kelas`
 --
 
-INSERT INTO `ma_kelas` (`id`, `kelas`, `created_at`, `updated_at`) VALUES
-(1, 'X', '2022-03-23 10:19:54', '2022-03-23 10:19:54'),
-(2, 'XI', '2022-03-23 10:19:54', '2022-03-23 10:19:54'),
-(3, 'XII', '2022-03-23 10:19:54', '2022-03-23 10:19:54');
+INSERT INTO `ma_kelas` (`kode`, `created_at`, `updated_at`) VALUES
+('X', '2022-03-23 10:19:54', '2022-03-23 10:19:54'),
+('XI', '2022-03-23 10:19:54', '2022-03-23 10:19:54'),
+('XII', '2022-03-23 10:19:54', '2022-03-23 10:19:54');
 
 -- --------------------------------------------------------
 
@@ -182,6 +186,7 @@ CREATE TABLE `ma_log` (
   `id` int(11) NOT NULL,
   `process` varchar(64) NOT NULL,
   `message` text NOT NULL,
+  `petugas` varchar(128) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -189,10 +194,127 @@ CREATE TABLE `ma_log` (
 -- Dumping data for table `ma_log`
 --
 
-INSERT INTO `ma_log` (`id`, `process`, `message`, `created_at`) VALUES
-(1, 'Login', 'test massej', '2022-04-15 02:16:06'),
-(2, 'Login', 'test massej', '2022-04-15 02:16:56'),
-(3, '', 'test massej', '2022-04-15 02:18:22');
+INSERT INTO `ma_log` (`id`, `process`, `message`, `petugas`, `created_at`) VALUES
+(1, 'Login', 'test massej', '', '2022-04-15 02:16:06'),
+(2, 'Login', 'test massej', '', '2022-04-15 02:16:56'),
+(3, '', 'test massej', '', '2022-04-15 02:18:22'),
+(4, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-15 21:27:15'),
+(5, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-15 21:36:18'),
+(6, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-15 21:37:24'),
+(7, 'Update Pengaturan', 'Memperbarui data pengaturan', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-15 21:37:31'),
+(8, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-15 23:16:35'),
+(9, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 01:44:36'),
+(10, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 01:45:06'),
+(11, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 01:49:24'),
+(12, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 01:49:47'),
+(13, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 01:58:08'),
+(14, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:02:54'),
+(15, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:03:44'),
+(16, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:08:16'),
+(17, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:12:02'),
+(18, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:13:20'),
+(19, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:14:43'),
+(20, 'Update Pengaturan', 'Memperbarui data pengaturan', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:14:58'),
+(21, 'Update Pengaturan', 'Memperbarui data pengaturan', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:15:02'),
+(22, 'Update Pengaturan', 'Memperbarui data pengaturan', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:15:06'),
+(23, 'Update Pengaturan', 'Memperbarui data pengaturan', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:15:09'),
+(24, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:19:34'),
+(25, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 02:23:42'),
+(26, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 11:53:34'),
+(27, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 12:04:09'),
+(28, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 12:05:16'),
+(29, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 12:41:55'),
+(30, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 12:51:32'),
+(31, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:04:37'),
+(32, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:10:59'),
+(33, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:13:57'),
+(34, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:18:20'),
+(35, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:24:40'),
+(36, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:26:35'),
+(37, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:28:18'),
+(38, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:46:40'),
+(39, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:48:25'),
+(40, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:50:41'),
+(41, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:52:41'),
+(42, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:55:04'),
+(43, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 13:57:16'),
+(44, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:00:28'),
+(45, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:08:54'),
+(46, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:10:54'),
+(47, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:11:36'),
+(48, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:12:09'),
+(49, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:29:56'),
+(50, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:31:11'),
+(51, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:31:45'),
+(52, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:32:50'),
+(53, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:34:43'),
+(54, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 14:35:37'),
+(55, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 15:43:06'),
+(56, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 15:43:56'),
+(57, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 15:44:38'),
+(58, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 15:45:07'),
+(59, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 15:55:20'),
+(60, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 15:58:16'),
+(61, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:01:02'),
+(62, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:04:11'),
+(63, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:05:05'),
+(64, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:07:11'),
+(65, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:16:20'),
+(66, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:28:28'),
+(67, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:30:20'),
+(68, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:34:52'),
+(69, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:36:06'),
+(70, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:40:06'),
+(71, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:42:22'),
+(72, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 16:45:22'),
+(73, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 17:24:43'),
+(74, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 17:25:45'),
+(75, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-16 17:41:29'),
+(76, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 01:36:31'),
+(77, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 01:49:09'),
+(78, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:05:00'),
+(79, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:06:03'),
+(80, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:06:46'),
+(81, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:10:16'),
+(82, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:11:26'),
+(83, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:11:52'),
+(84, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:12:40'),
+(85, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:14:27'),
+(86, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:15:08'),
+(87, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:28:01'),
+(88, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:28:40'),
+(89, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:30:32'),
+(90, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:30:59'),
+(91, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:32:32'),
+(92, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:41:16'),
+(93, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:41:48'),
+(94, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:42:37'),
+(95, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:55:54'),
+(96, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 02:56:29'),
+(97, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 14:54:05'),
+(98, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:09:42'),
+(99, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:11:13'),
+(100, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:15:09'),
+(101, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:16:24'),
+(102, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:16:49'),
+(103, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:22:03'),
+(104, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:27:20'),
+(105, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:29:42'),
+(106, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:36:43'),
+(107, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:38:47'),
+(108, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:46:42'),
+(109, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:48:14'),
+(110, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:50:24'),
+(111, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:53:56'),
+(112, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 15:59:14'),
+(113, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:01:45'),
+(114, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:02:58'),
+(115, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:04:25'),
+(116, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:05:51'),
+(117, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:08:25'),
+(118, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:11:35'),
+(119, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:13:49'),
+(120, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:16:15');
 
 -- --------------------------------------------------------
 
@@ -239,7 +361,7 @@ CREATE TABLE `ma_pengurus` (
 --
 
 INSERT INTO `ma_pengurus` (`id`, `nip`, `username`, `password`, `nama_lengkap`, `hak_akses`, `status`, `created_at`, `updated_at`) VALUES
-('PGS-10000', '198511282008121002', 'a', 'a', 'Aji Seto Arifianto, S.ST., M.T.', 'ADMINISTRATOR', 'AKTIF', '2022-03-23 10:10:48', '2022-03-23 10:10:48');
+('PGS-63486', '198511282008121002', 'a', 'a', 'Aji Seto Arifianto, S.ST., M.T.', 'ADMINISTRATOR', 'AKTIF', '2022-03-23 10:10:48', '2022-03-23 10:10:48');
 
 -- --------------------------------------------------------
 
@@ -281,7 +403,7 @@ CREATE TABLE `ma_setting` (
 --
 
 INSERT INTO `ma_setting` (`id`, `denda_terlambat`, `max_pinjam_buku_umum`, `time_backup_database`, `updated_at`) VALUES
-(1, 200011, 7, 1, '2022-03-23 10:13:34');
+(1, 2000, 3, 0, '2022-04-16 02:15:08');
 
 -- --------------------------------------------------------
 
@@ -311,7 +433,8 @@ CREATE TABLE `ma_transaksi` (
 --
 ALTER TABLE `ma_anggota`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Kelas` (`id_kelas`);
+  ADD KEY `FK_Kelas` (`kelas`),
+  ADD KEY `FK_Jurusan` (`jurusan`);
 
 --
 -- Indexes for table `ma_buku`
@@ -338,18 +461,13 @@ ALTER TABLE `ma_detail_transaksi`
 -- Indexes for table `ma_jurusan`
 --
 ALTER TABLE `ma_jurusan`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `KODE_uniq` (`kode`),
+  ADD UNIQUE KEY `NAMA_uniq` (`nama`);
 
 --
 -- Indexes for table `ma_kategori`
 --
 ALTER TABLE `ma_kategori`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ma_kelas`
---
-ALTER TABLE `ma_kelas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -387,19 +505,11 @@ ALTER TABLE `ma_setting`
 -- Indexes for table `ma_transaksi`
 --
 ALTER TABLE `ma_transaksi`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Anggota` (`id_anggota`),
-  ADD KEY `FK_Pengelola` (`id_pengelola`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `ma_anggota`
---
-ALTER TABLE `ma_anggota`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ma_buku`
@@ -420,28 +530,16 @@ ALTER TABLE `ma_detail_transaksi`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ma_jurusan`
---
-ALTER TABLE `ma_jurusan`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `ma_kategori`
 --
 ALTER TABLE `ma_kategori`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `ma_kelas`
---
-ALTER TABLE `ma_kelas`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `ma_log`
 --
 ALTER TABLE `ma_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `ma_penerbit`
@@ -472,12 +570,6 @@ ALTER TABLE `ma_transaksi`
 --
 
 --
--- Constraints for table `ma_anggota`
---
-ALTER TABLE `ma_anggota`
-  ADD CONSTRAINT `FK_Kelas` FOREIGN KEY (`id_kelas`) REFERENCES `ma_kelas` (`id`);
-
---
 -- Constraints for table `ma_buku`
 --
 ALTER TABLE `ma_buku`
@@ -489,12 +581,6 @@ ALTER TABLE `ma_buku`
 --
 ALTER TABLE `ma_detail_transaksi`
   ADD CONSTRAINT `FK_Transaksi` FOREIGN KEY (`id_transaksi`) REFERENCES `ma_transaksi` (`id`);
-
---
--- Constraints for table `ma_transaksi`
---
-ALTER TABLE `ma_transaksi`
-  ADD CONSTRAINT `FK_Anggota` FOREIGN KEY (`id_anggota`) REFERENCES `ma_anggota` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
