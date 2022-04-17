@@ -27,6 +27,16 @@ public class SettingModel extends DBConfig{
     public int MaxPinjamBuku;
     public int BackupDatabase;
     
+    public String message;
+    
+    public void setMessage(String message){
+        this.message = message;
+    }
+    
+    public String getMessage(){
+        return this.message;
+    }
+    
     public SettingModel(){
         
         // AMBIL DATA DARI DATABASE
@@ -57,7 +67,7 @@ public class SettingModel extends DBConfig{
         
     }
     
-    public static void update(int Denda, int MaxPinjamBuku, int BackupDatabase){
+    public boolean update(int Denda, int MaxPinjamBuku, int BackupDatabase){
     
         try {
             
@@ -75,12 +85,15 @@ public class SettingModel extends DBConfig{
             }
             
             new SettingModel();
-            JOptionPane.showMessageDialog(null, "Data berhasil diperbarui!", "Sukses!", JOptionPane.INFORMATION_MESSAGE);
-            new LogModel().Action("Update Pengaturan", "Memperbarui data pengaturan", Dashboard.nama_user);
+            new LogModel().Action("UPDATE PENGATURAN", "Memperbarui data pengaturan", Dashboard.nama_user);
+            
+            setMessage("Pengaturan berhasil diperbarui!");
+            return true;
         
         } catch (SQLException error) {
             
-            JOptionPane.showMessageDialog(null, error, "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            setMessage(error.getMessage());
+            return false;
             
         }
         

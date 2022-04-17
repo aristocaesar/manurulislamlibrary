@@ -9,6 +9,8 @@ import com.manurul.lib.InputBorder;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.model.JurusanModel;
+import com.manurul.model.LogModel;
+import com.manurul.view.Dashboard;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
@@ -299,6 +301,7 @@ public class JurusanUSER extends javax.swing.JFrame {
 
             if(JM.insertData()){
                 JOptionPane.showMessageDialog(null, JM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                new LogModel().Action("TAMBAH JURUSAN", "Menambahkan jurusan "+INPUT_NAMA_JUR.getText(), Dashboard.nama_user);
                 JM.getDataTable("");
                 this.dispose();
             }else{
@@ -317,6 +320,7 @@ public class JurusanUSER extends javax.swing.JFrame {
 
             if(JM.updateData(kode)){
                 JOptionPane.showMessageDialog(null, JM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                new LogModel().Action("UPDATE JURUSAN", "Memperbarui jurusan "+INPUT_NAMA_JUR.getText(), Dashboard.nama_user);
                 JM.getDataTable("");
                 this.dispose();
             }else{
@@ -349,6 +353,7 @@ public class JurusanUSER extends javax.swing.JFrame {
 
                 if(JM.deleteData()){
                     JOptionPane.showMessageDialog(null, JM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                    new LogModel().Action("HAPUS JURUSAN", "Menghapus jurusan "+INPUT_NAMA_JUR.getText(), Dashboard.nama_user);
                     JM.getDataTable("");
                     this.dispose();
                 }else{

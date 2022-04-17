@@ -19,6 +19,7 @@ import com.manurul.view.modal.KelasUSER;
 import com.manurul.view.modal.PenerbitDATABUKU;
 import com.manurul.view.modal.PengurusUSER;
 import com.manurul.view.modal.RakDATABUKU;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,6 +34,7 @@ public class Dashboard extends javax.swing.JFrame {
     private String id_user;
     public static String nama_user;
     private String hak_akses;
+    private ImageIcon successIcon;
     
         // SETTING
         public static int Denda;
@@ -49,6 +51,7 @@ public class Dashboard extends javax.swing.JFrame {
         this.id_user = id_user;
         this.nama_user = nama_user;
         this.hak_akses = hak_akses;
+        
         
         // SET TITLE
         this.setTitleApp("Dashboard");
@@ -87,16 +90,20 @@ public class Dashboard extends javax.swing.JFrame {
             //SETTING
             InputBorder.set(INPUT_SET_1, 8);
             
+        // SET SUCCESS ICON
+        ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
+        this.successIcon = successIcon;
+            
         // KONFIRMASI KELUAR APP ( WINDOWS CLOSING )
-         this.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
-                int close = JOptionPane.showOptionDialog(null, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-                if(close == 0){
-                    System.exit(0);
-                }
-            }
-        });
+//         this.addWindowListener(new java.awt.event.WindowAdapter() {
+//            @Override
+//            public void windowClosing(java.awt.event.WindowEvent e) {
+//                int close = JOptionPane.showOptionDialog(null, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+//                if(close == 0){
+//                    System.exit(0);
+//                }
+//            }
+//        });
         
         
     }
@@ -2264,7 +2271,12 @@ public class Dashboard extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Tidak ada perubahan data", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             new SettingModel();
         }else{
-            SettingModel.update(Denda, MaxPinjamBukuUmum, BackupDatabase);
+            SettingModel SM = new SettingModel();
+            if(SM.update(Denda, MaxPinjamBukuUmum, BackupDatabase)){
+                JOptionPane.showMessageDialog(null, SM.getMessage(), "Sukses !", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+            }else{
+                JOptionPane.showMessageDialog(null, SM.getMessage(), "Terjadi kesalahan !", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_BTN_SET_SIMPANMouseClicked
 
