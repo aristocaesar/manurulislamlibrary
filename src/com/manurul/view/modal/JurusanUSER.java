@@ -275,7 +275,6 @@ public class JurusanUSER extends javax.swing.JFrame {
             }
             
             if(!Action.equals("DELETE")){
-                System.out.println("ok");
                 // apakah input sama dengan data lama
                 if(INPUT_KODE_JUR.getText().equals(kode) && INPUT_NAMA_JUR.getText().equals(nama)){
                     throw new Exception("Tidak ada perubahan data!");
@@ -312,7 +311,7 @@ public class JurusanUSER extends javax.swing.JFrame {
     
     private void update(){
         
-        if(cekValidasi("INSERT")){
+        if(cekValidasi("UPDATE")){
             JurusanModel JM = new JurusanModel();
         
             JM.setKode(INPUT_KODE_JUR.getText());

@@ -53,10 +53,10 @@
                           <Component id="CONTAINER" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="420" max="-2" attributes="0"/>
-                          <Component id="BTN_HAPUS_JUR" max="32767" attributes="0"/>
+                          <EmptySpace pref="420" max="32767" attributes="0"/>
+                          <Component id="BTN_HAPUS_KELAS" min="-2" pref="279" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Component id="BTN_SIMPAN_JUR" max="32767" attributes="0"/>
+                          <Component id="BTN_SIMPAN_KELAS" min="-2" pref="287" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -70,8 +70,8 @@
                   <Component id="CONTAINER" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BTN_SIMPAN_JUR" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="BTN_HAPUS_JUR" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="BTN_SIMPAN_KELAS" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="BTN_HAPUS_KELAS" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
@@ -95,20 +95,20 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="INPUT_KODE_JUR" alignment="0" max="32767" attributes="0"/>
-                          <Component id="LABEL_KODE_JUR" alignment="0" pref="282" max="32767" attributes="0"/>
+                          <Component id="INPUT_KODE_KELAS" alignment="0" pref="280" max="32767" attributes="0"/>
+                          <Component id="LABEL_KODE_KELAS" alignment="0" pref="280" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="INPUT_LAST_UPDATED_KEL" alignment="0" max="32767" attributes="0"/>
-                          <Component id="LABEL_LAST_UPDATED_KEL" alignment="0" pref="253" max="32767" attributes="0"/>
+                          <Component id="INPUT_LAST_UPDATED_KELAS" alignment="0" pref="252" max="32767" attributes="0"/>
+                          <Component id="LABEL_LAST_UPDATED_KEL" alignment="0" pref="252" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="INPUT_LAST_CREATED_KEL" alignment="0" max="32767" attributes="0"/>
-                          <Component id="LABEL_LAST_CREATED_KEL" alignment="0" pref="325" max="32767" attributes="0"/>
+                          <Component id="INPUT_CREATED_KELAS" alignment="0" pref="324" max="32767" attributes="0"/>
+                          <Component id="LABEL_CREATED_KEL" alignment="0" pref="324" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -117,15 +117,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="LABEL_KODE_JUR" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_KODE_KELAS" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LABEL_LAST_UPDATED_KEL" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="LABEL_LAST_CREATED_KEL" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_CREATED_KEL" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="INPUT_KODE_JUR" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="INPUT_LAST_CREATED_KEL" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="INPUT_LAST_UPDATED_KEL" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="INPUT_KODE_KELAS" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="INPUT_CREATED_KELAS" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="INPUT_LAST_UPDATED_KELAS" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
@@ -133,7 +133,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="INPUT_KODE_JUR">
+            <Component class="javax.swing.JTextField" name="INPUT_KODE_KELAS">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="0"/>
@@ -150,10 +150,13 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPUT_KODE_JURActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="INPUT_KODE_KELASKeyPressed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="LABEL_KODE_JUR">
+            <Component class="javax.swing.JLabel" name="LABEL_KODE_KELAS">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="1"/>
@@ -161,10 +164,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="60" green="60" red="60" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Kode Kelas"/>
+                <Property name="text" type="java.lang.String" value="Kode"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_LAST_UPDATED_KEL">
+            <Component class="javax.swing.JTextField" name="INPUT_LAST_UPDATED_KELAS">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -181,9 +184,9 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPUT_LAST_UPDATED_KELActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_LAST_UPDATED_KEL">
               <Properties>
@@ -196,7 +199,7 @@
                 <Property name="text" type="java.lang.String" value="Terakhir Diperbarui"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="LABEL_LAST_CREATED_KEL">
+            <Component class="javax.swing.JLabel" name="LABEL_CREATED_KEL">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="1"/>
@@ -207,7 +210,7 @@
                 <Property name="text" type="java.lang.String" value="Tanggal Dibuat"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_LAST_CREATED_KEL">
+            <Component class="javax.swing.JTextField" name="INPUT_CREATED_KELAS">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -224,10 +227,13 @@
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="BTN_HAPUS_JUR">
+        <Component class="javax.swing.JButton" name="BTN_HAPUS_KELAS">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -244,7 +250,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BTN_SIMPAN_JUR">
+        <Component class="javax.swing.JButton" name="BTN_SIMPAN_KELAS">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="ab" red="0" type="rgb"/>
@@ -260,6 +266,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SIMPAN_KELASMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
