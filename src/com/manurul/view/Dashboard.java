@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.lib.SideBar;
 import com.manurul.model.JurusanModel;
+import com.manurul.model.KelasModel;
 import com.manurul.model.SettingModel;
 import com.manurul.view.modal.BukuDATABUKU;
 import com.manurul.view.modal.KategoriDATABUKU;
@@ -274,7 +275,15 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_ADD_KELAS = new javax.swing.JLabel();
         SEARCH_KELAS = new javax.swing.JTextField();
         TABLE_LIST_KELAS = new javax.swing.JScrollPane();
-        TABLE_LIST_ITEM_KELAS = new javax.swing.JTable();
+        TABLE_LIST_ITEM_KELAS = new javax.swing.JTable(){
+
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+
+        };
         F_U_PENGURUS = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PENGURUS = new javax.swing.JLabel();
         ICON_ADD_PENGURUS = new javax.swing.JLabel();
@@ -1761,6 +1770,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        TABLE_LIST_ITEM_KELAS.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         TABLE_LIST_ITEM_KELAS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"dfsd", "fdsfsdf", "sdfsdfsd", "fsdfsd"},
@@ -1772,6 +1782,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1fdsfsd", "Title 2fdfdsf", "Title 3dfdsf", "Title 4"
             }
         ));
+        TABLE_LIST_ITEM_KELAS.setRowHeight(30);
+        TABLE_LIST_ITEM_KELAS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_ITEM_KELASMouseClicked(evt);
+            }
+        });
         TABLE_LIST_KELAS.setViewportView(TABLE_LIST_ITEM_KELAS);
 
         javax.swing.GroupLayout F_U_KELASLayout = new javax.swing.GroupLayout(F_U_KELAS);
@@ -2141,6 +2157,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void T_U_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_KELASMouseClicked
         new SideBar().setUserPageSelected("KELAS");
+        new KelasModel().getDataTable("");
     }//GEN-LAST:event_T_U_KELASMouseClicked
 
     private void T_U_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_PENGURUSMouseClicked
@@ -2177,11 +2194,11 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void ICON_ADD_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_KELASMouseClicked
         // OPEN MODAL KELAS
-        new KelasUSER("ADD", 0).setVisible(true);
+        new KelasUSER("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_KELASMouseClicked
 
     private void SEARCH_KELASKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_KELASKeyTyped
-        // TODO add your handling code here:
+        new KelasModel().getDataTable(SEARCH_KELAS.getText());
     }//GEN-LAST:event_SEARCH_KELASKeyTyped
 
     private void ICON_ADD_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_PENGURUSMouseClicked
@@ -2290,6 +2307,17 @@ public class Dashboard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_TABLE_LIST_ITEM_JURUSANMouseClicked
+
+    private void TABLE_LIST_ITEM_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_ITEM_KELASMouseClicked
+        
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_ITEM_KELAS.getSelectedRow();
+
+            String kode = TABLE_LIST_ITEM_KELAS.getValueAt(index, 1).toString();
+            new KelasUSER("EDIT", kode).setVisible(true);
+        }
+        
+    }//GEN-LAST:event_TABLE_LIST_ITEM_KELASMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2425,7 +2453,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTable TABLE_LIST_BUKU;
     private javax.swing.JScrollPane TABLE_LIST_DB_BUKU;
     public static javax.swing.JTable TABLE_LIST_ITEM_JURUSAN;
-    private javax.swing.JTable TABLE_LIST_ITEM_KELAS;
+    public static javax.swing.JTable TABLE_LIST_ITEM_KELAS;
     private javax.swing.JTable TABLE_LIST_ITEM_PENGURUS;
     private javax.swing.JScrollPane TABLE_LIST_JURUSAN;
     private javax.swing.JTable TABLE_LIST_KATEGORI;
