@@ -27,14 +27,23 @@ public class KelasModel {
     private static Connection conn = (Connection)DBConfig.getConnection();
     private DefaultTableModel tabel_model = new DefaultTableModel();
     
+    private int ID;
     private String kode;
     private String message;
+    
+    public void setID(int id){
+        this.ID = id;
+    }
+    
+    public int getID(){
+        return this.ID;
+    }
     
     public void setKode(String Kode){
         this.kode = Kode;
     }
     
-    private String getKode(){
+    public String getKode(){
         return this.kode;
     }
     
@@ -93,7 +102,8 @@ public class KelasModel {
                 throw new SQLException("Gagal memuat data kelas!");
             }
             
-            setKode(Kode);
+            setID(res.getInt("id"));
+            
             KelasUSER.INPUT_KODE_KELAS.setText(res.getString("kode"));
             KelasUSER.INPUT_LAST_UPDATED_KELAS.setText(res.getString("updated_at"));
             KelasUSER.INPUT_CREATED_KELAS.setText(res.getString("created_at"));
@@ -128,6 +138,8 @@ public class KelasModel {
         
             if(error.getErrorCode() == 1062){
                 setMessage("Kelas ini sudah tersedia !");
+            }else if(error.getErrorCode() == 1406){
+                setMessage("Nilai input melebihi kapasitas !");
             }else{
                 setMessage(error.getMessage());
             }
@@ -138,8 +150,69 @@ public class KelasModel {
     
     }
     
-//    public boolean updateData(int ID){
-//    
-//    }
+    public boolean updateData(){
+        try{
+            
+            System.out.println(getID());
+            
+            if(getID() == 0){
+                throw new SQLException("Gagal memperbarui kelas!");
+            }
+        
+            PreparedStatement pst =  conn.prepareStatement("UPDATE "+table+ " SET kode = ?, updated_at = ? WHERE id = ?");
+            pst.setString(1, getKode().toUpperCase());
+            pst.setTimestamp(2, new SqlTime().getTimeStamp());
+            pst.setInt(3, getID());
+            
+            int updated = pst.executeUpdate();
+            
+            if(updated == 0){
+                throw new SQLException("Gagal memperbarui kelas!");
+            }
+            
+            setMessage("Berhasil memperbarui kelas!");
+            return true;
+            
+        }catch(SQLException error){
+            
+            if(error.getErrorCode() == 1062){
+                setMessage("Kelas ini sudah tersedia !");
+            }else if(error.getErrorCode() == 1406){
+                setMessage("Nilai input melebihi kapasitas !");
+            }else{
+                setMessage(error.getMessage());
+            }
+            return false;
+        
+        }
+    
+    }
+    
+    public boolean deleteData(){
+    
+        try{
+            
+            if(getID() == 0){
+                throw new SQLException("Gagal memperbarui kelas!");
+            }
+            
+            PreparedStatement pst =  conn.prepareStatement("DELETE FROM "+table+" WHERE id = ?");
+            pst.setInt(1, getID());
+            
+            boolean deleted = pst.execute();
+            
+            if(deleted){
+                throw new SQLException("Gagal memperbarui kelas!");
+            }
+        
+            setMessage("Berhasil menghapus kelas!");
+            return true;
+            
+        }catch(SQLException error){
+            setMessage(error.getMessage());
+            return false;
+        }
+        
+    }
     
 }

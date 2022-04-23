@@ -28,6 +28,7 @@ public class KelasUSER extends javax.swing.JFrame {
      */
     private String title = "Edit";
     
+    private String Action;
     private String kode;
     
     ImageIcon successIcon;
@@ -36,8 +37,10 @@ public class KelasUSER extends javax.swing.JFrame {
     
     public KelasUSER(String Action, String Kode) {
         initComponents();
+        System.out.println(Kode);
         
         // INIT STATE
+        this.Action = Action;
         this.kode = Kode;
         
         // SET SIZE
@@ -96,7 +99,7 @@ public class KelasUSER extends javax.swing.JFrame {
 
         MAIN_FRAME = new javax.swing.JPanel();
         CONTAINER = new RoundedPanel(15, Color.WHITE);
-        INPUT_KODE_KELAS = new javax.swing.JTextField();
+        INPUT_KODE_KELAS = new javax.swing.JTextField("", 8);
         LABEL_KODE_KELAS = new javax.swing.JLabel();
         INPUT_LAST_UPDATED_KELAS = new javax.swing.JTextField();
         LABEL_LAST_UPDATED_KEL = new javax.swing.JLabel();
@@ -150,7 +153,7 @@ public class KelasUSER extends javax.swing.JFrame {
             .addGroup(CONTAINERLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(INPUT_KODE_KELAS, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(INPUT_KODE_KELAS, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LABEL_KODE_KELAS, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
                 .addGap(37, 37, 37)
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,6 +186,11 @@ public class KelasUSER extends javax.swing.JFrame {
         BTN_HAPUS_KELAS.setForeground(new java.awt.Color(255, 255, 255));
         BTN_HAPUS_KELAS.setText("Hapus");
         BTN_HAPUS_KELAS.setBorder(null);
+        BTN_HAPUS_KELAS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_HAPUS_KELASMouseClicked(evt);
+            }
+        });
 
         BTN_SIMPAN_KELAS.setBackground(new java.awt.Color(0, 171, 60));
         BTN_SIMPAN_KELAS.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -247,12 +255,17 @@ public class KelasUSER extends javax.swing.JFrame {
             }
             
             // apakah action = delete
+            if(!Action.equals("DELETE")){
+                if(INPUT_KODE_KELAS.getText().equals(kode)){
+                    throw new Exception("Tidak ada perubahan data!");
+                }
+            }
             
             return true;
             
         }catch(Exception error){
             
-            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         
@@ -272,15 +285,62 @@ public class KelasUSER extends javax.swing.JFrame {
         }
     }
     
+    private void update(){
+    
+        if(cekValidasi("UPDATE")){
+            KM.setKode(INPUT_KODE_KELAS.getText());
+            if(KM.updateData()){
+                    JOptionPane.showMessageDialog(null, KM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                    new LogModel().Action("UPDATE KELAS", "Memperbarui kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
+                    KM.getDataTable("");
+                    this.dispose();
+            }else{
+                    JOptionPane.showMessageDialog(null, KM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    
+    }
+    
+    private void hapus(){
+    
+        if(cekValidasi("DELETE")){
+            INPUT_KODE_KELAS.setText(KM.getKode());
+            if(KM.deleteData()){
+                    JOptionPane.showMessageDialog(null, KM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                    new LogModel().Action("HAPUS KELAS", "Mengahapus kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
+                    KM.getDataTable("");
+                    this.dispose();
+            }else{
+                    JOptionPane.showMessageDialog(null, KM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    }
+    
     private void BTN_SIMPAN_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_KELASMouseClicked
-        simpan();
+        if(this.Action.equals("ADD")){
+            simpan(); 
+        }else{
+            update();
+        }
     }//GEN-LAST:event_BTN_SIMPAN_KELASMouseClicked
 
     private void INPUT_KODE_KELASKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_INPUT_KODE_KELASKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            simpan();
+            if(this.Action.equals("ADD")){
+                simpan(); 
+            }else{
+                update();
+            }
         }
     }//GEN-LAST:event_INPUT_KODE_KELASKeyPressed
+
+    private void BTN_HAPUS_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_KELASMouseClicked
+        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus kelas ini ?", "Konfirmasi!", JOptionPane.OK_CANCEL_OPTION);
+        if(hapus == 0){
+            hapus();
+        }
+    }//GEN-LAST:event_BTN_HAPUS_KELASMouseClicked
 
     /**
      * @param args the command line arguments

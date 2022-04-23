@@ -95,7 +95,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="INPUT_KODE_KELAS" alignment="0" pref="280" max="32767" attributes="0"/>
+                          <Component id="INPUT_KODE_KELAS" alignment="0" max="32767" attributes="0"/>
                           <Component id="LABEL_KODE_KELAS" alignment="0" pref="280" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -153,6 +153,7 @@
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="INPUT_KODE_KELASKeyPressed"/>
               </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(&quot;&quot;, 8)"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
@@ -249,6 +250,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_HAPUS_KELASMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BTN_SIMPAN_KELAS">
           <Properties>
