@@ -5,10 +5,16 @@
  */
 package com.manurul.view.modal;
 
+import com.manurul.lib.GenKode;
 import com.manurul.lib.InputBorder;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.PengurusModel;
+import com.manurul.view.Dashboard;
+import com.manurul.view.Login;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,10 +25,27 @@ public class PengurusUSER extends javax.swing.JFrame {
     /**
      * Creates new form JurusanUSER
      */
-    String title = "Edit";
+    private String title = "Edit";
     
-    public PengurusUSER(String Action, int ID) {
+    private String Action;
+    
+    private String nip;
+    private String username;
+    private String password;
+    private String nama_lengkap;
+    private String hak_akses;
+    private String status;
+    
+    ImageIcon successIcon;
+    
+    PengurusModel PM = new PengurusModel();
+    
+    
+    public PengurusUSER(String Action, String Kode) {
         initComponents();
+        
+        // INIT STATE
+        this.Action = Action;
         
         // SET SIZE
         this.setSize(1024, 450);
@@ -54,13 +77,26 @@ public class PengurusUSER extends javax.swing.JFrame {
             INPUT_CREATED.setVisible(false);
             LABEL_UPDATED.setVisible(false);
             INPUT_UPDATED.setVisible(false);
-            BTN_HAPUS_JUR.setVisible(false);
+            BTN_HAPUS_PENGURUS.setVisible(false);
             
-        
+            // DEFAULT SET VALUE
+            INPUT_ID_PENGURUS.setText(GenKode.RandomInt("PGS", 5));
+        }else{
+            PM.getSelected(Kode);
+            this.nip = PM.getNip();
+            this.username = PM.getUsername();
+            this.password = PM.getPassword();
+            this.nama_lengkap = PM.getNamaLengkap();
+            this.hak_akses = PM.getHakAkses();
+            this.status = PM.getStatus();
         }
         
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - " + this.title + " Pengurus");
+        
+        // SET SUCCESS ICON
+        ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
+        this.successIcon = successIcon;
         
     }
 
@@ -93,8 +129,8 @@ public class PengurusUSER extends javax.swing.JFrame {
         INPUT_CREATED = new javax.swing.JTextField();
         COMBOBOX_STATUS = new javax.swing.JComboBox<>();
         COMBOBOX_HAK_AKSES = new javax.swing.JComboBox<>();
-        BTN_HAPUS_JUR = new javax.swing.JButton();
-        BTN_SIMPAN_JUR = new javax.swing.JButton();
+        BTN_HAPUS_PENGURUS = new javax.swing.JButton();
+        BTN_SIMPAN_PENGURUS = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.POPUP);
@@ -110,16 +146,11 @@ public class PengurusUSER extends javax.swing.JFrame {
 
         LABEL_ID_PENGURUS.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_ID_PENGURUS.setForeground(new java.awt.Color(96, 96, 96));
-        LABEL_ID_PENGURUS.setText("ID Pengurus");
+        LABEL_ID_PENGURUS.setText("Kode Pengurus");
 
         INPUT_USERNAME.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_USERNAME.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_USERNAME.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        INPUT_USERNAME.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                INPUT_USERNAMEActionPerformed(evt);
-            }
-        });
 
         LABEL_USERNAME.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_USERNAME.setForeground(new java.awt.Color(96, 96, 96));
@@ -152,11 +183,6 @@ public class PengurusUSER extends javax.swing.JFrame {
         INPUT_PASSWORD.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_PASSWORD.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_PASSWORD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        INPUT_PASSWORD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                INPUT_PASSWORDActionPerformed(evt);
-            }
-        });
 
         LABEL_STATUS.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_STATUS.setForeground(new java.awt.Color(96, 96, 96));
@@ -166,11 +192,6 @@ public class PengurusUSER extends javax.swing.JFrame {
         INPUT_UPDATED.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_UPDATED.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_UPDATED.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        INPUT_UPDATED.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                INPUT_UPDATEDActionPerformed(evt);
-            }
-        });
 
         LABEL_UPDATED.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_UPDATED.setForeground(new java.awt.Color(96, 96, 96));
@@ -191,7 +212,7 @@ public class PengurusUSER extends javax.swing.JFrame {
 
         COMBOBOX_HAK_AKSES.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         COMBOBOX_HAK_AKSES.setForeground(new java.awt.Color(96, 96, 96));
-        COMBOBOX_HAK_AKSES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administartor", "Staff" }));
+        COMBOBOX_HAK_AKSES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "Staf" }));
 
         javax.swing.GroupLayout CONTAINERLayout = new javax.swing.GroupLayout(CONTAINER);
         CONTAINER.setLayout(CONTAINERLayout);
@@ -264,17 +285,27 @@ public class PengurusUSER extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
         );
 
-        BTN_HAPUS_JUR.setBackground(new java.awt.Color(153, 153, 153));
-        BTN_HAPUS_JUR.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        BTN_HAPUS_JUR.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_HAPUS_JUR.setText("Hapus");
-        BTN_HAPUS_JUR.setBorder(null);
+        BTN_HAPUS_PENGURUS.setBackground(new java.awt.Color(153, 153, 153));
+        BTN_HAPUS_PENGURUS.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        BTN_HAPUS_PENGURUS.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_HAPUS_PENGURUS.setText("Hapus");
+        BTN_HAPUS_PENGURUS.setBorder(null);
+        BTN_HAPUS_PENGURUS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_HAPUS_PENGURUSMouseClicked(evt);
+            }
+        });
 
-        BTN_SIMPAN_JUR.setBackground(new java.awt.Color(0, 171, 60));
-        BTN_SIMPAN_JUR.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        BTN_SIMPAN_JUR.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_SIMPAN_JUR.setText("Simpan");
-        BTN_SIMPAN_JUR.setBorder(null);
+        BTN_SIMPAN_PENGURUS.setBackground(new java.awt.Color(0, 171, 60));
+        BTN_SIMPAN_PENGURUS.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        BTN_SIMPAN_PENGURUS.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_SIMPAN_PENGURUS.setText("Simpan");
+        BTN_SIMPAN_PENGURUS.setBorder(null);
+        BTN_SIMPAN_PENGURUS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_SIMPAN_PENGURUSMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout MAIN_FRAMELayout = new javax.swing.GroupLayout(MAIN_FRAME);
         MAIN_FRAME.setLayout(MAIN_FRAMELayout);
@@ -287,9 +318,9 @@ public class PengurusUSER extends javax.swing.JFrame {
                         .addComponent(CONTAINER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(MAIN_FRAMELayout.createSequentialGroup()
                         .addGap(420, 420, 420)
-                        .addComponent(BTN_HAPUS_JUR, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(BTN_HAPUS_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(BTN_SIMPAN_JUR, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BTN_SIMPAN_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
         MAIN_FRAMELayout.setVerticalGroup(
@@ -299,8 +330,8 @@ public class PengurusUSER extends javax.swing.JFrame {
                 .addComponent(CONTAINER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addGroup(MAIN_FRAMELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BTN_SIMPAN_JUR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTN_HAPUS_JUR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BTN_SIMPAN_PENGURUS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_HAPUS_PENGURUS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -318,17 +349,121 @@ public class PengurusUSER extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void INPUT_USERNAMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_USERNAMEActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_INPUT_USERNAMEActionPerformed
+    private boolean cekValidasi(String Action){
+    
+        try{
+      
+            String Nip = INPUT_NIP.getText();
+            String Username = INPUT_USERNAME.getText();
+            String Password = INPUT_PASSWORD.getText();
+            String NamaLengkap = INPUT_NAMA.getText();
+            String HakAkses = COMBOBOX_HAK_AKSES.getSelectedItem().toString();
+            String Status = COMBOBOX_STATUS.getSelectedItem().toString();
+            
+            // cek apakah semua tidak kosong
+            if(Nip.equals("") || Username.equals("") || Password.equals("") || NamaLengkap.equals("")){
+                throw new Exception("Semua nilai input harus terisi!");
+            }
+            
+            // cek apakah semua tidak kosong
+            if(!Action.equals("DELETE")){
+                if(Nip.equals(this.nip) && Username.equals(this.username) && Password.equals(this.password) 
+                  && NamaLengkap.equals(this.nama_lengkap) && HakAkses.equals(this.hak_akses) && Status.equals(this.status) ){
+                    throw new Exception("Tidak ada perubahan data !");
+                }
+            }
+            
+            return true;
+        
+        }catch(Exception error){
+        
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        
+        }
+        
+    }
+    
+    private void simpan(){
+        if(cekValidasi("ADD")){
+            PM.setKode(INPUT_ID_PENGURUS.getText());
+            PM.setNip(INPUT_NIP.getText());
+            PM.setUsername(INPUT_USERNAME.getText());
+            PM.setPassword(INPUT_PASSWORD.getText());
+            PM.setNamaLengkap(INPUT_NAMA.getText());
+            PM.setHakAkses(COMBOBOX_HAK_AKSES.getSelectedItem().toString());
+            PM.setStatus(COMBOBOX_STATUS.getSelectedItem().toString());
+            if(PM.insertData()){
+                    JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+//                    new LogModel().Action("TAMBAH KELAS", "Menambahkan kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
+                    PM.getDataTable("");
+                    this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, PM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void update(){
+        if(cekValidasi("UPDATE")){
+            PM.setKode(INPUT_ID_PENGURUS.getText());
+            PM.setNip(INPUT_NIP.getText());
+            PM.setUsername(INPUT_USERNAME.getText());
+            PM.setPassword(INPUT_PASSWORD.getText());
+            PM.setNamaLengkap(INPUT_NAMA.getText());
+            PM.setHakAkses(COMBOBOX_HAK_AKSES.getSelectedItem().toString());
+            PM.setStatus(COMBOBOX_STATUS.getSelectedItem().toString());
+            if(PM.updateData()){
+                    JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+//                    new LogModel().Action("TAMBAH KELAS", "Menambahkan kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
+                    if(PM.getId().equals(Dashboard.id_user)){
+                        JOptionPane.showMessageDialog(null, "Silakan login kembali untuk memuat informasi yang terbaru", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                        System.exit(0);
+                    }else{
+                        PM.getDataTable("");
+                        this.dispose();
+                    }
+            }else{
+                JOptionPane.showMessageDialog(null, PM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void delete(){
+        INPUT_NIP.setText(PM.getNip());
+        INPUT_USERNAME.setText(PM.getUsername());
+        INPUT_PASSWORD.setText(PM.getPassword());
+        INPUT_NAMA.setText(PM.getNamaLengkap());
+        COMBOBOX_HAK_AKSES.setSelectedItem(PM.getHakAkses());
+        COMBOBOX_STATUS.setSelectedItem(PM.getStatus());
+        if(cekValidasi("DELETE")){
+            if(PM.deleteData()){
+                    JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+//                    new LogModel().Action("TAMBAH KELAS", "Menambahkan kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
+                    PM.getDataTable("");
+                    this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, PM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void BTN_SIMPAN_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_PENGURUSMouseClicked
+       
+        if(this.Action.equals("ADD")){
+            simpan();
+        }else{
+            update();
+        }
+        
+    }//GEN-LAST:event_BTN_SIMPAN_PENGURUSMouseClicked
 
-    private void INPUT_UPDATEDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_UPDATEDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_INPUT_UPDATEDActionPerformed
-
-    private void INPUT_PASSWORDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_PASSWORDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_INPUT_PASSWORDActionPerformed
+    private void BTN_HAPUS_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_PENGURUSMouseClicked
+        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus pengurus ini ?", "Konfirmasi!", JOptionPane.OK_CANCEL_OPTION);
+        if(hapus == 0){
+            delete();
+        }
+    }//GEN-LAST:event_BTN_HAPUS_PENGURUSMouseClicked
 
     /**
      * @param args the command line arguments
@@ -361,24 +496,24 @@ public class PengurusUSER extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PengurusUSER("", 0).setVisible(true);
+                new PengurusUSER("", "").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_HAPUS_JUR;
-    private javax.swing.JButton BTN_SIMPAN_JUR;
-    private javax.swing.JComboBox<String> COMBOBOX_HAK_AKSES;
-    private javax.swing.JComboBox<String> COMBOBOX_STATUS;
+    private javax.swing.JButton BTN_HAPUS_PENGURUS;
+    private javax.swing.JButton BTN_SIMPAN_PENGURUS;
+    public static javax.swing.JComboBox<String> COMBOBOX_HAK_AKSES;
+    public static javax.swing.JComboBox<String> COMBOBOX_STATUS;
     private javax.swing.JPanel CONTAINER;
-    private javax.swing.JTextField INPUT_CREATED;
-    private javax.swing.JTextField INPUT_ID_PENGURUS;
-    private javax.swing.JTextField INPUT_NAMA;
-    private javax.swing.JTextField INPUT_NIP;
-    private javax.swing.JTextField INPUT_PASSWORD;
-    private javax.swing.JTextField INPUT_UPDATED;
-    private javax.swing.JTextField INPUT_USERNAME;
+    public static javax.swing.JTextField INPUT_CREATED;
+    public static javax.swing.JTextField INPUT_ID_PENGURUS;
+    public static javax.swing.JTextField INPUT_NAMA;
+    public static javax.swing.JTextField INPUT_NIP;
+    public static javax.swing.JTextField INPUT_PASSWORD;
+    public static javax.swing.JTextField INPUT_UPDATED;
+    public static javax.swing.JTextField INPUT_USERNAME;
     private javax.swing.JLabel LABEL_CREATED;
     private javax.swing.JLabel LABEL_HAK_AKSES;
     private javax.swing.JLabel LABEL_ID_PENGURUS;

@@ -60,7 +60,7 @@ public class Login extends javax.swing.JFrame {
                      new Dashboard(PM.getId(), PM.getNamaLengkap(), PM.getHakAkses()).setVisible(true);
                      this.dispose();
                 }else{
-                    throw new Exception(PM.getError());
+                    throw new Exception(PM.getMessage());
                 }
                 
             }else{

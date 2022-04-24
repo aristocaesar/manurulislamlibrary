@@ -13,6 +13,7 @@ import com.manurul.lib.RoundedPanel;
 import com.manurul.lib.SideBar;
 import com.manurul.model.JurusanModel;
 import com.manurul.model.KelasModel;
+import com.manurul.model.PengurusModel;
 import com.manurul.model.SettingModel;
 import com.manurul.view.modal.BukuDATABUKU;
 import com.manurul.view.modal.KategoriDATABUKU;
@@ -32,7 +33,7 @@ public class Dashboard extends javax.swing.JFrame {
     // INIT STATE || GLOBAL VARIABEL
     private String title = "Dahsboard";
     
-    private String id_user;
+    public static String id_user;
     public static String nama_user;
     private String hak_akses;
     private ImageIcon successIcon;
@@ -45,12 +46,12 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * INIT FORM DASHBOARD
      */
-    public Dashboard(String id_user, String nama_user, String hak_akses) {
+    public Dashboard(String id_user, String nama, String hak_akses) {
         initComponents();
         
         // SET STATE
         this.id_user = id_user;
-        this.nama_user = nama_user;
+        nama_user = nama;
         this.hak_akses = hak_akses;
         
         
@@ -87,6 +88,7 @@ public class Dashboard extends javax.swing.JFrame {
             InputBorder.set(SEARCH_USER, 8);
             InputBorder.set(SEARCH_JURUSAN, 8);
             InputBorder.set(SEARCH_KELAS, 8);
+            InputBorder.set(SEARCH_PENGURUS, 8);
         
             //SETTING
             InputBorder.set(INPUT_SET_1, 8);
@@ -94,6 +96,11 @@ public class Dashboard extends javax.swing.JFrame {
         // SET SUCCESS ICON
         ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
         this.successIcon = successIcon;
+        
+        // SET ROLE PERMISSION
+        if(this.hak_akses.equals("STAF")){
+            BTN_USER.setVisible(false);
+        }
             
         // KONFIRMASI KELUAR APP ( WINDOWS CLOSING )
 //         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -289,7 +296,15 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_ADD_PENGURUS = new javax.swing.JLabel();
         SEARCH_PENGURUS = new javax.swing.JTextField();
         TABLE_LIST_PENGURUS = new javax.swing.JScrollPane();
-        TABLE_LIST_ITEM_PENGURUS = new javax.swing.JTable();
+        TABLE_LIST_ITEM_PENGURUS = new javax.swing.JTable(){
+
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+
+        };
         SETTING = new javax.swing.JPanel();
         TOPBAR_SETTING = new RoundedPanel(15, Color.WHITE);
         TITLE_SETTING = new javax.swing.JLabel();
@@ -386,18 +401,18 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(MANURUL_LOGO)
                 .addGap(46, 46, 46)
-                .addComponent(BTN_DASHBOARD)
+                .addComponent(BTN_DASHBOARD, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addComponent(BTN_TRANSAKSI)
+                .addComponent(BTN_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addComponent(BTN_DATABUKU)
+                .addComponent(BTN_DATABUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addComponent(BTN_USER)
+                .addComponent(BTN_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(BTN_SETTING)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(265, 265, 265)
                 .addComponent(BTN_EXIT)
-                .addGap(46, 46, 46))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         MAIN_FRAME.setBackground(new java.awt.Color(239, 240, 245));
@@ -1855,6 +1870,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1fdsfsd", "Title 2fdfdsf", "Title 3dfdsf", "Title 4"
             }
         ));
+        TABLE_LIST_ITEM_PENGURUS.setRowHeight(30);
+        TABLE_LIST_ITEM_PENGURUS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_ITEM_PENGURUSMouseClicked(evt);
+            }
+        });
         TABLE_LIST_PENGURUS.setViewportView(TABLE_LIST_ITEM_PENGURUS);
 
         javax.swing.GroupLayout F_U_PENGURUSLayout = new javax.swing.GroupLayout(F_U_PENGURUS);
@@ -2162,6 +2183,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void T_U_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_PENGURUSMouseClicked
         new SideBar().setUserPageSelected("PENGURUS");
+        new PengurusModel().getDataTable("");
     }//GEN-LAST:event_T_U_PENGURUSMouseClicked
 
     private void ICON_ADD_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_USERMouseClicked
@@ -2203,11 +2225,11 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void ICON_ADD_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_PENGURUSMouseClicked
         // OPEN MODAL PENGURUS
-        new PengurusUSER("ADD", 0).setVisible(true);
+        new PengurusUSER("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_PENGURUSMouseClicked
 
     private void SEARCH_PENGURUSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_PENGURUSKeyTyped
-        // TODO add your handling code here:
+        new PengurusModel().getDataTable(SEARCH_PENGURUS.getText());
     }//GEN-LAST:event_SEARCH_PENGURUSKeyTyped
 
     private void T_DB_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_BUKUMouseClicked
@@ -2318,6 +2340,15 @@ public class Dashboard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_TABLE_LIST_ITEM_KELASMouseClicked
+
+    private void TABLE_LIST_ITEM_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_ITEM_PENGURUSMouseClicked
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_ITEM_PENGURUS.getSelectedRow();
+
+            String kode = TABLE_LIST_ITEM_PENGURUS.getValueAt(index, 1).toString();
+            new PengurusUSER("EDIT", kode).setVisible(true);
+        }
+    }//GEN-LAST:event_TABLE_LIST_ITEM_PENGURUSMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2454,7 +2485,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane TABLE_LIST_DB_BUKU;
     public static javax.swing.JTable TABLE_LIST_ITEM_JURUSAN;
     public static javax.swing.JTable TABLE_LIST_ITEM_KELAS;
-    private javax.swing.JTable TABLE_LIST_ITEM_PENGURUS;
+    public static javax.swing.JTable TABLE_LIST_ITEM_PENGURUS;
     private javax.swing.JScrollPane TABLE_LIST_JURUSAN;
     private javax.swing.JTable TABLE_LIST_KATEGORI;
     private javax.swing.JScrollPane TABLE_LIST_KELAS;

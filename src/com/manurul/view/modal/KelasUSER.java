@@ -37,7 +37,6 @@ public class KelasUSER extends javax.swing.JFrame {
     
     public KelasUSER(String Action, String Kode) {
         initComponents();
-        System.out.println(Kode);
         
         // INIT STATE
         this.Action = Action;

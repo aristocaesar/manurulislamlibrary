@@ -9,9 +9,19 @@ melakukan validasi data +
 uppercase input +
 
 # - PENGURUS
-tampil ditable 
-menambahkan data 
-memperbarui data 
-menghapus data & konfirmasi hapus 
-melakukan validasi data 
-relasi dengan transaksi
+tampil ditable +
+menambahkan data +
+memperbarui data +
+menghapus data & konfirmasi hapus + 
+melakukan validasi data +
+relasi dengan transaksi -
+
+
+# - ANGGOTA
+tampil ditable -
+menambahkan data -
+memperbarui data -
+export data import data dengan exel -
+menghapus data & konfirmasi hapus - 
+melakukan validasi data -
+relasi dengan transaksi -
