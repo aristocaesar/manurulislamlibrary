@@ -73,21 +73,21 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="MANURUL_LOGO" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                  <Component id="BTN_DASHBOARD" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_DASHBOARD" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                  <Component id="BTN_TRANSAKSI" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_TRANSAKSI" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                  <Component id="BTN_DATABUKU" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_DATABUKU" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                  <Component id="BTN_USER" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_USER" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Component id="BTN_SETTING" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
                   <Component id="BTN_EXIT" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -3244,7 +3244,15 @@
                                 </Column>
                               </Table>
                             </Property>
+                            <Property name="rowHeight" type="int" value="30"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TABLE_LIST_ITEM_PENGURUSMouseClicked"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;&#xa;    private static final long serialVersionUID = 1L;&#xa;&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        return false;&#xa;    };&#xa;&#xa;}"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>

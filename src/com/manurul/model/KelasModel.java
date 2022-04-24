@@ -153,8 +153,6 @@ public class KelasModel {
     public boolean updateData(){
         try{
             
-            System.out.println(getID());
-            
             if(getID() == 0){
                 throw new SQLException("Gagal memperbarui kelas!");
             }

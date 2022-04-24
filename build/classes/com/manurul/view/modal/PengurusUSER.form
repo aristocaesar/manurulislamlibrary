@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="type" type="java.awt.Window$Type" editor="org.netbeans.modules.form.editors.EnumEditor">
@@ -54,9 +54,9 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="420" max="-2" attributes="0"/>
-                          <Component id="BTN_HAPUS_JUR" pref="0" max="32767" attributes="0"/>
+                          <Component id="BTN_HAPUS_PENGURUS" pref="0" max="32767" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Component id="BTN_SIMPAN_JUR" min="-2" pref="287" max="-2" attributes="0"/>
+                          <Component id="BTN_SIMPAN_PENGURUS" min="-2" pref="287" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -70,8 +70,8 @@
                   <Component id="CONTAINER" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BTN_SIMPAN_JUR" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="BTN_HAPUS_JUR" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="BTN_SIMPAN_PENGURUS" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="BTN_HAPUS_PENGURUS" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
@@ -193,6 +193,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_ID_PENGURUS">
               <Properties>
@@ -202,7 +205,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="60" green="60" red="60" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="ID Pengurus"/>
+                <Property name="text" type="java.lang.String" value="Kode Pengurus"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="INPUT_USERNAME">
@@ -221,9 +224,9 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPUT_USERNAMEActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_USERNAME">
               <Properties>
@@ -263,6 +266,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_HAK_AKSES">
               <Properties>
@@ -302,6 +308,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_PASSWORD">
               <Properties>
@@ -330,9 +339,9 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPUT_PASSWORDActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_STATUS">
               <Properties>
@@ -362,9 +371,9 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPUT_UPDATEDActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_UPDATED">
               <Properties>
@@ -405,6 +414,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JComboBox" name="COMBOBOX_STATUS">
               <Properties>
@@ -423,6 +435,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JComboBox" name="COMBOBOX_HAK_AKSES">
@@ -435,18 +448,19 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
-                    <StringItem index="0" value="Administartor"/>
-                    <StringItem index="1" value="Staff"/>
+                    <StringItem index="0" value="Administrator"/>
+                    <StringItem index="1" value="Staf"/>
                   </StringArray>
                 </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="BTN_HAPUS_JUR">
+        <Component class="javax.swing.JButton" name="BTN_HAPUS_PENGURUS">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -462,8 +476,11 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_HAPUS_PENGURUSMouseClicked"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="BTN_SIMPAN_JUR">
+        <Component class="javax.swing.JButton" name="BTN_SIMPAN_PENGURUS">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="ab" red="0" type="rgb"/>
@@ -479,6 +496,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SIMPAN_PENGURUSMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
