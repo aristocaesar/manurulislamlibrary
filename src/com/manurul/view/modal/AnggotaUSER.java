@@ -22,6 +22,8 @@ public class AnggotaUSER extends javax.swing.JFrame {
     
     String title = "Edit";
     
+    
+    
     public AnggotaUSER(String Action, int ID) {
         initComponents();
         

@@ -56,14 +56,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="BTN_TRANSAKSI" max="32767" attributes="0"/>
-                              <Component id="BTN_DASHBOARD" max="32767" attributes="0"/>
-                              <Component id="BTN_DATABUKU" alignment="1" max="32767" attributes="0"/>
-                              <Component id="BTN_USER" alignment="1" max="32767" attributes="0"/>
-                              <Component id="BTN_SETTING" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BTN_TRANSAKSI" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTN_DASHBOARD" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTN_DATABUKU" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTN_USER" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTN_SETTING" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="BTN_EXIT" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -72,7 +71,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="MANURUL_LOGO" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
@@ -85,9 +84,9 @@
                   <Component id="BTN_USER" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Component id="BTN_SETTING" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
-                  <Component id="BTN_EXIT" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="BTN_EXIT" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -303,7 +302,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_USER" pref="48" max="32767" attributes="0"/>
+                          <Component id="ICON_USER" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -877,7 +876,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_TR_TRANSAKSI" pref="48" max="32767" attributes="0"/>
+                                  <Component id="ICON_TR_TRANSAKSI" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1412,7 +1411,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_DB_DATABUKU" pref="48" max="32767" attributes="0"/>
+                                  <Component id="ICON_DB_DATABUKU" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -2432,7 +2431,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_U_USER" pref="48" max="32767" attributes="0"/>
+                                  <Component id="ICON_U_USER" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -2579,9 +2578,9 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="FILTER_KELAS_USER" min="-2" max="-2" attributes="0"/>
+                                      <Component id="GROUP_KELAS_USER" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="KELAS_COMBOBOX_USER" min="-2" pref="141" max="-2" attributes="0"/>
+                                      <Component id="GROUP_COMBOBOX_USER" min="-2" pref="141" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                                       <Component id="FILTER_TAMPIL_USER" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -2621,15 +2620,15 @@
                                   <Component id="SEARCH_USER" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="TABLE_LIST_U_ANGGOTA" pref="486" max="32767" attributes="0"/>
+                              <Component id="TABLE_LIST_U_ANGGOTA" pref="489" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="TAMPILKAN_COMBOBOX_USER" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="FILTER_TAMPIL_USER" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="FILTER_KELAS_USER" min="-2" max="-2" attributes="0"/>
-                                  <Component id="KELAS_COMBOBOX_USER" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="GROUP_KELAS_USER" min="-2" max="-2" attributes="0"/>
+                                  <Component id="GROUP_COMBOBOX_USER" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
@@ -2716,6 +2715,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JTable" name="TABLE_LIST_ANGGOTA">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Trebuchet MS" size="14" style="0"/>
+                            </Property>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="4" rowCount="4">
                                 <Column editable="true" title="Title 1fdsfsd" type="java.lang.Object">
@@ -2744,7 +2746,12 @@
                                 </Column>
                               </Table>
                             </Property>
+                            <Property name="rowHeight" type="int" value="30"/>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;&#xa;    private static final long serialVersionUID = 1L;&#xa;&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        return false;&#xa;    };&#xa;&#xa;}"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2766,10 +2773,10 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
+                            <StringItem index="0" value="10"/>
+                            <StringItem index="1" value="25"/>
+                            <StringItem index="2" value="50"/>
+                            <StringItem index="3" value="100"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -2777,7 +2784,7 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="FILTER_KELAS_USER">
+                    <Component class="javax.swing.JLabel" name="GROUP_KELAS_USER">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="18" style="0"/>
@@ -2785,23 +2792,25 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="60" green="60" red="60" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Kelas"/>
+                        <Property name="text" type="java.lang.String" value="Group"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="KELAS_COMBOBOX_USER">
+                    <Component class="javax.swing.JComboBox" name="GROUP_COMBOBOX_USER">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="14" style="0"/>
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
+                          <StringArray count="3">
+                            <StringItem index="0" value="Semua"/>
+                            <StringItem index="1" value="Kelas"/>
+                            <StringItem index="2" value="Jurusan"/>
                           </StringArray>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="GROUP_COMBOBOX_USERItemStateChanged"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
@@ -3352,7 +3361,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_SETTING" pref="48" max="32767" attributes="0"/>
+                          <Component id="ICON_SETTING" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
