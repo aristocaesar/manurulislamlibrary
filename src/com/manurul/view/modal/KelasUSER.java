@@ -275,7 +275,7 @@ public class KelasUSER extends javax.swing.JFrame {
             KM.setKode(INPUT_KODE_KELAS.getText());
             if(KM.insertData()){
                     JOptionPane.showMessageDialog(null, KM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                    new LogModel().Action("TAMBAH KELAS", "Menambahkan kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
+                    
                     KM.getDataTable("");
                     this.dispose();
             }else{
@@ -290,7 +290,7 @@ public class KelasUSER extends javax.swing.JFrame {
             KM.setKode(INPUT_KODE_KELAS.getText());
             if(KM.updateData()){
                     JOptionPane.showMessageDialog(null, KM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                    new LogModel().Action("UPDATE KELAS", "Memperbarui kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
+                    
                     KM.getDataTable("");
                     this.dispose();
             }else{
@@ -304,9 +304,9 @@ public class KelasUSER extends javax.swing.JFrame {
     
         if(cekValidasi("DELETE")){
             INPUT_KODE_KELAS.setText(KM.getKode());
-            if(KM.deleteData()){
+            if(KM.deleteData(KM.getKode())){
                     JOptionPane.showMessageDialog(null, KM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                    new LogModel().Action("HAPUS KELAS", "Mengahapus kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
+                    
                     KM.getDataTable("");
                     this.dispose();
             }else{

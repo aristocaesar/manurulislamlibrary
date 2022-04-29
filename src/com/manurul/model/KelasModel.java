@@ -131,6 +131,8 @@ public class KelasModel {
                 throw new SQLException("Gagal menambahkan kelas!");
             }
             
+            new LogModel().Action("TAMBAH KELAS", "Menambahkan kelas "+ getKode(), Dashboard.nama_user);
+            
             setMessage("Berhasil menambahkan kelas!");
             return true;
             
@@ -168,7 +170,9 @@ public class KelasModel {
                 throw new SQLException("Gagal memperbarui kelas!");
             }
             
-            setMessage("Berhasil memperbarui kelas!");
+            new LogModel().Action("UPDATE KELAS", "Memperbarui kelas "+ getKode(), Dashboard.nama_user);
+            
+            setMessage("Berhasil memperbarui kelas " + getKode());
             return true;
             
         }catch(SQLException error){
@@ -186,7 +190,7 @@ public class KelasModel {
     
     }
     
-    public boolean deleteData(){
+    public boolean deleteData(String kode){
     
         try{
             
@@ -202,8 +206,10 @@ public class KelasModel {
             if(deleted){
                 throw new SQLException("Gagal memperbarui kelas!");
             }
+            
+            new LogModel().Action("HAPUS KELAS", "Menghapus kelas "+ kode, Dashboard.nama_user);
         
-            setMessage("Berhasil menghapus kelas!");
+            setMessage("Berhasil menghapus kelas "+ kode);
             return true;
             
         }catch(SQLException error){

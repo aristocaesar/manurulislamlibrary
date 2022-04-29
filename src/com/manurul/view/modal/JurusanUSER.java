@@ -300,7 +300,7 @@ public class JurusanUSER extends javax.swing.JFrame {
 
             if(JM.insertData()){
                 JOptionPane.showMessageDialog(null, JM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                new LogModel().Action("TAMBAH JURUSAN", "Menambahkan jurusan "+INPUT_NAMA_JUR.getText(), Dashboard.nama_user);
+                
                 JM.getDataTable("");
                 this.dispose();
             }else{
@@ -319,7 +319,6 @@ public class JurusanUSER extends javax.swing.JFrame {
 
             if(JM.updateData(kode)){
                 JOptionPane.showMessageDialog(null, JM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                new LogModel().Action("UPDATE JURUSAN", "Memperbarui jurusan "+INPUT_NAMA_JUR.getText(), Dashboard.nama_user);
                 JM.getDataTable("");
                 this.dispose();
             }else{
@@ -350,9 +349,8 @@ public class JurusanUSER extends javax.swing.JFrame {
 
                 JM.setKode(kode);
 
-                if(JM.deleteData()){
+                if(JM.deleteData(JM.getKode())){
                     JOptionPane.showMessageDialog(null, JM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                    new LogModel().Action("HAPUS JURUSAN", "Menghapus jurusan "+INPUT_NAMA_JUR.getText(), Dashboard.nama_user);
                     JM.getDataTable("");
                     this.dispose();
                 }else{

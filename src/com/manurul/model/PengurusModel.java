@@ -129,7 +129,7 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
             setHakAkses(res.getString("hak_akses"));
             setStatus(res.getString("status"));
             
-//            new LogModel().Action("LOGIN", "Akses login berhasil", res.getString("nama_lengkap"));
+            new LogModel().Action("LOGIN", "Akses login berhasil", res.getString("nama_lengkap"));
             
             return true;
         }catch(SQLException err){
@@ -205,7 +205,9 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
                 throw new SQLException("Gagal menambahkan pengurus !");
             }
             
-            setMessage("Berhasil menambahkan pengurus !");
+            new LogModel().Action("TAMBAH PENGURUS", "Berhasil menambahkan pengurus " + getNamaLengkap(), Dashboard.nama_user);
+            
+            setMessage("Berhasil menambahkan pengurus " + nama );
             return true;
             
         }catch(SQLException error){
@@ -291,7 +293,9 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
                 throw new SQLException("Gagal memperbarui pengurus !");
             }
             
-            setMessage("Berhasil memperbarui pengurus !");
+            new LogModel().Action("UPDATE PENGURUS", "Berhasil memperbarui pengurus " + NamaLengkap, Dashboard.nama_user);
+            
+            setMessage("Berhasil memperbarui pengurus " + NamaLengkap);
             return true;
         
         }catch(SQLException error){
@@ -310,7 +314,7 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     }
     
     
-    public boolean deleteData(){
+    public boolean deleteData(String nama){
     
         try{
         
@@ -322,8 +326,10 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
             if(deleted){
                 throw new SQLException("Gagal menghapus pengurus !");
             }
+            
+            new LogModel().Action("HAPUS PENGURUS", "Berhasil menghapus pengurus " + nama , Dashboard.nama_user);
         
-            setMessage("Berhasil menghapus pengurus !");
+            setMessage("Berhasil menghapus pengurus " + nama );
             return true;
             
         }catch(SQLException error){
