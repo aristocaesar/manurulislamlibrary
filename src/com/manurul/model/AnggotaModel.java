@@ -8,10 +8,13 @@ package com.manurul.model;
 import com.manurul.lib.DBConfig;
 import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
+import com.manurul.view.modal.AnggotaUSER;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +28,7 @@ public class AnggotaModel extends DBConfig{
     private String table = "ma_anggota";
     
     private int id;
+    private String kode;
     private String nis;
     private String nama_lengkap;
     private String jurusan;
@@ -46,6 +50,14 @@ public class AnggotaModel extends DBConfig{
     public int getId(){
         return this.id;
     }
+    
+    public void setKode(String kode){
+        this.kode = kode;
+    }
+    
+   public String getKode(){
+       return this.kode;
+   }
     
     public void setNis(String nis){
         this.nis = nis;
@@ -99,7 +111,7 @@ public class AnggotaModel extends DBConfig{
         this.message = message;
     }
     
-    private String getMessage(){
+    public String getMessage(){
         return this.message;
     }
     
@@ -157,24 +169,76 @@ public class AnggotaModel extends DBConfig{
         
     }
     
+    public void setJurusanKelas(String Jurusan, String Kelas){
+    
+        try{
+            
+            //set jurusan
+            PreparedStatement pst_jur = conn.prepareStatement("SELECT nama FROM ma_jurusan");
+            ResultSet res = pst_jur.executeQuery();
+            
+            while(res.next()){
+                AnggotaUSER.COMBO_BOX_JURUSAN.addItem(res.getString("nama"));
+            }
+            
+                if(!Jurusan.equals("")){
+                    AnggotaUSER.COMBO_BOX_JURUSAN.setSelectedItem(Jurusan);
+                }
+            
+            //set kelas
+            PreparedStatement pst_kelas = conn.prepareStatement("SELECT kode FROM ma_kelas");
+            ResultSet res_kelas = pst_kelas.executeQuery();
+            
+            while(res_kelas.next()){
+                AnggotaUSER.COMBO_BOX_KELAS.addItem(res_kelas.getString("kode"));
+            }
+                
+                if(!Kelas.equals("")){
+                    AnggotaUSER.COMBO_BOX_KELAS.setSelectedItem(Kelas);
+                }
+            
+            
+        }catch(SQLException error){
+        
+        }
+        
+    }
+    
     //insert data
     public boolean insertData(){
     
         try{
             
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_anggota (nis, nama_lengkap, jurusan, kelas, jumlah_buku_dipinjam, skor, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            pst.setString(1, getNis());
-            pst.setString(2, getNama());
-            pst.setString(3, getJurusan());
-            pst.setString(4, getKelas());
-            pst.setString(5, getJumlahBukuDipinjam());
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_anggota (kode, nis, nama_lengkap, jurusan, kelas, "
+                    + " skor, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ? )");
+            
+            pst.setString(1, getKode());
+            pst.setString(2, getNis());
+            pst.setString(3, getNama());
+            
+            // get id jurusan
+            PreparedStatement getJurId = conn.prepareStatement("SELECT id FROM ma_jurusan WHERE nama = '"+ getJurusan() + "'");
+            ResultSet ResJur = getJurId.executeQuery();
+            if(ResJur.next()){
+                pst.setString(4, ResJur.getString("id"));
+            }
+            
+            // get id kelas
+            PreparedStatement getKelasId = conn.prepareStatement("SELECT id FROM ma_kelas WHERE kode = '" + getKelas() + "'");
+            ResultSet ResKel = getKelasId.executeQuery();
+            if(ResKel.next()){
+                pst.setString(5, ResKel.getString("id"));
+            }
+            
             pst.setInt(6, Integer.parseInt(getSkor()));
             pst.setTimestamp(7, new SqlTime().getTimeStamp());
             pst.setTimestamp(8, new SqlTime().getTimeStamp());
             
             if(pst.execute()){
-                throw new SQLException("Gagal menambahkan jurusan!");
+                throw new SQLException("Gagal menambahkan anggota!");
             }
+            
+            new LogModel().Action("TAMBAH ANGGIOTA", "Menambahkan anggota "+ getNama(), Dashboard.nama_user);
             
             setMessage("Berhasil menambahkan anggota!");
             return true;
@@ -198,5 +262,4 @@ public class AnggotaModel extends DBConfig{
     //update data
     
     //delete data
-    
 }

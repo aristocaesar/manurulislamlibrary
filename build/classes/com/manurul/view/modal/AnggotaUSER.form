@@ -132,12 +132,12 @@
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="LABEL_CREATED" alignment="0" pref="287" max="32767" attributes="0"/>
-                                  <Component id="INPUT_DIS_CREATED" alignment="0" pref="287" max="32767" attributes="0"/>
+                                  <Component id="INPUT_CREATED" alignment="0" pref="287" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="LABEL_UPDATED" alignment="0" pref="287" max="32767" attributes="0"/>
-                                  <Component id="INPUT_DIS_UPDATED" alignment="0" pref="287" max="32767" attributes="0"/>
+                                  <Component id="INPUT_UPDATED" alignment="0" pref="287" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
                           </Group>
@@ -145,7 +145,7 @@
                               <EmptySpace min="-2" pref="646" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="LABEL_KESEMPATAN" alignment="0" pref="288" max="32767" attributes="0"/>
-                                  <Component id="INPUT_DIS_KESEMPATAN" alignment="0" pref="288" max="32767" attributes="0"/>
+                                  <Component id="INPUT_KESEMPATAN" alignment="0" pref="288" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
@@ -188,18 +188,18 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="LABEL_UPDATED" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="INPUT_DIS_UPDATED" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="INPUT_UPDATED" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="LABEL_CREATED" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="INPUT_DIS_CREATED" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="INPUT_CREATED" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="LABEL_KESEMPATAN" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="INPUT_DIS_KESEMPATAN" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="INPUT_KESEMPATAN" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -253,9 +253,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPUT_NISActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="INPUT_NAMA_LENGKAP">
               <Properties>
@@ -338,12 +335,7 @@
                   <Color blue="60" green="60" red="60" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -351,6 +343,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JComboBox" name="COMBO_BOX_KELAS">
@@ -362,12 +355,7 @@
                   <Color blue="60" green="60" red="60" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -375,6 +363,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_UPDATED">
@@ -388,7 +377,7 @@
                 <Property name="text" type="java.lang.String" value="Terakhir Diperbarui"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_DIS_UPDATED">
+            <Component class="javax.swing.JTextField" name="INPUT_UPDATED">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -417,7 +406,7 @@
                 <Property name="text" type="java.lang.String" value="Tanggal Register"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_DIS_CREATED">
+            <Component class="javax.swing.JTextField" name="INPUT_CREATED">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -448,7 +437,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_DIS_KESEMPATAN">
+            <Component class="javax.swing.JTextField" name="INPUT_KESEMPATAN">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -495,6 +484,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SIMPAN_ANGGOTAMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BTN_HAPUS_ANGGOTA">
           <Properties>

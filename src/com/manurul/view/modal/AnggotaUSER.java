@@ -5,10 +5,15 @@
  */
 package com.manurul.view.modal;
 
+import com.manurul.lib.Characters;
+import com.manurul.lib.GenKode;
 import com.manurul.lib.InputBorder;
 import java.awt.Color;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.AnggotaModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,11 +26,17 @@ public class AnggotaUSER extends javax.swing.JFrame {
      */
     
     String title = "Edit";
+    String action;
     
+    private ImageIcon successIcon;
     
+    AnggotaModel AM = new AnggotaModel();
     
     public AnggotaUSER(String Action, int ID) {
         initComponents();
+        
+        // SET INI
+        this.action = Action;
         
         // SET SIZE
         this.setSize(1040, 460);
@@ -43,30 +54,97 @@ public class AnggotaUSER extends javax.swing.JFrame {
         InputBorder.set(INPUT_ID_USER, 8);
         InputBorder.set(INPUT_NIS, 8);
         InputBorder.set(INPUT_NAMA_LENGKAP, 8);
-        InputBorder.set(INPUT_DIS_CREATED, 8);
-        InputBorder.set(INPUT_DIS_KESEMPATAN, 8);
-        InputBorder.set(INPUT_DIS_UPDATED, 8);
+        InputBorder.set(INPUT_CREATED, 8);
+        InputBorder.set(INPUT_KESEMPATAN, 8);
+        InputBorder.set(INPUT_UPDATED, 8);
+        
+        // GET DATA FROM Jurusan & Kelas
+        new AnggotaModel().setJurusanKelas("", "");
         
         // VISIBLE COMPONECT BASED ON ACTION
         if(Action.equals("ADD")){
             
             this.title = "Tambah";
+            this.setSize(1040, 400);
+            
+            INPUT_ID_USER.setText(GenKode.RandomInt("MRD", 8));
+            
+            SPINNER_SKOR.setValue(100);
+            SPINNER_SKOR.setEnabled(false);
             
             BTN_HAPUS_ANGGOTA.setVisible(false);
             LABEL_CREATED.setVisible(false);
-            INPUT_DIS_CREATED.setVisible(false);
+            INPUT_CREATED.setVisible(false);
             LABEL_UPDATED.setVisible(false);
-            INPUT_DIS_UPDATED.setVisible(false);
+            INPUT_UPDATED.setVisible(false);
             LABEL_KESEMPATAN.setVisible(false);
-            INPUT_DIS_KESEMPATAN.setVisible(false);
-            
-            this.setSize(1040, 400);
+            INPUT_KESEMPATAN.setVisible(false);
         
+        }else{
+            //get data selected
         }
         
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - "+this.title+" Anggota");
         
+        // SET SUCCESS ICON
+        ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
+        this.successIcon = successIcon;
+        
+    }
+    
+    private boolean cekValidasi(String Action){
+        
+        try{
+        
+            String nis = INPUT_NIS.getText().replaceAll("[a-zA-Z]", "");
+            String nama = INPUT_NAMA_LENGKAP.getText().replaceAll("[0-9]", "");
+            int skor = Integer.parseInt(SPINNER_SKOR.getValue().toString());
+            
+
+            //cek jika semua kosong
+//            if(nis.equals("") || nama.equals("")){
+//                if(skor == 0){
+//                    throw new Exception("Nilai skor harus terisi!");
+//                }else{
+//                    throw new Exception("Nilai input harus terisi!");
+//                }
+//            }
+//            
+        }catch(Exception error){
+            
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+            
+        }
+        
+        return true;
+        
+    }
+    
+    private void simpan(){
+        if(cekValidasi("ADD")){
+            
+            AM.setKode(INPUT_ID_USER.getText());
+            AM.setNis(INPUT_NIS.getText().replaceAll("[a-zA-Z]", ""));
+            AM.setNama(Characters.ucwords(INPUT_NAMA_LENGKAP.getText()));
+            AM.setJurusan(COMBO_BOX_JURUSAN.getSelectedItem().toString());
+            AM.setKelas(COMBO_BOX_KELAS.getSelectedItem().toString());
+            AM.setSkor("100");
+            
+            if(AM.insertData()){
+                JOptionPane.showMessageDialog(null, AM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                
+//                AM.getDataTable("");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, AM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void update(){
+        System.out.println("update");
     }
 
     /**
@@ -92,11 +170,11 @@ public class AnggotaUSER extends javax.swing.JFrame {
         COMBO_BOX_JURUSAN = new javax.swing.JComboBox<>();
         COMBO_BOX_KELAS = new javax.swing.JComboBox<>();
         LABEL_UPDATED = new javax.swing.JLabel();
-        INPUT_DIS_UPDATED = new javax.swing.JTextField();
+        INPUT_UPDATED = new javax.swing.JTextField();
         LABEL_CREATED = new javax.swing.JLabel();
-        INPUT_DIS_CREATED = new javax.swing.JTextField();
+        INPUT_CREATED = new javax.swing.JTextField();
         SPINNER_SKOR = new javax.swing.JSpinner();
-        INPUT_DIS_KESEMPATAN = new javax.swing.JTextField();
+        INPUT_KESEMPATAN = new javax.swing.JTextField();
         LABEL_KESEMPATAN = new javax.swing.JLabel();
         BTN_SIMPAN_ANGGOTA = new javax.swing.JButton();
         BTN_HAPUS_ANGGOTA = new javax.swing.JButton();
@@ -121,11 +199,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
         INPUT_NIS.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_NIS.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_NIS.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        INPUT_NIS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                INPUT_NISActionPerformed(evt);
-            }
-        });
 
         INPUT_NAMA_LENGKAP.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_NAMA_LENGKAP.setForeground(new java.awt.Color(96, 96, 96));
@@ -153,40 +226,38 @@ public class AnggotaUSER extends javax.swing.JFrame {
 
         COMBO_BOX_JURUSAN.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         COMBO_BOX_JURUSAN.setForeground(new java.awt.Color(96, 96, 96));
-        COMBO_BOX_JURUSAN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         COMBO_BOX_JURUSAN.setBorder(null);
 
         COMBO_BOX_KELAS.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         COMBO_BOX_KELAS.setForeground(new java.awt.Color(96, 96, 96));
-        COMBO_BOX_KELAS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         COMBO_BOX_KELAS.setBorder(null);
 
         LABEL_UPDATED.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_UPDATED.setForeground(new java.awt.Color(96, 96, 96));
         LABEL_UPDATED.setText("Terakhir Diperbarui");
 
-        INPUT_DIS_UPDATED.setEditable(false);
-        INPUT_DIS_UPDATED.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        INPUT_DIS_UPDATED.setForeground(new java.awt.Color(96, 96, 96));
-        INPUT_DIS_UPDATED.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+        INPUT_UPDATED.setEditable(false);
+        INPUT_UPDATED.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        INPUT_UPDATED.setForeground(new java.awt.Color(96, 96, 96));
+        INPUT_UPDATED.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
 
         LABEL_CREATED.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_CREATED.setForeground(new java.awt.Color(96, 96, 96));
         LABEL_CREATED.setText("Tanggal Register");
 
-        INPUT_DIS_CREATED.setEditable(false);
-        INPUT_DIS_CREATED.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        INPUT_DIS_CREATED.setForeground(new java.awt.Color(96, 96, 96));
-        INPUT_DIS_CREATED.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+        INPUT_CREATED.setEditable(false);
+        INPUT_CREATED.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        INPUT_CREATED.setForeground(new java.awt.Color(96, 96, 96));
+        INPUT_CREATED.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
 
         SPINNER_SKOR.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         SPINNER_SKOR.setModel(new javax.swing.SpinnerNumberModel(100, 0, 100, 1));
         SPINNER_SKOR.setBorder(null);
 
-        INPUT_DIS_KESEMPATAN.setEditable(false);
-        INPUT_DIS_KESEMPATAN.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        INPUT_DIS_KESEMPATAN.setForeground(new java.awt.Color(96, 96, 96));
-        INPUT_DIS_KESEMPATAN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+        INPUT_KESEMPATAN.setEditable(false);
+        INPUT_KESEMPATAN.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        INPUT_KESEMPATAN.setForeground(new java.awt.Color(96, 96, 96));
+        INPUT_KESEMPATAN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
 
         LABEL_KESEMPATAN.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_KESEMPATAN.setForeground(new java.awt.Color(96, 96, 96));
@@ -226,17 +297,17 @@ public class AnggotaUSER extends javax.swing.JFrame {
                         .addGap(1, 1, 1)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LABEL_CREATED, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                            .addComponent(INPUT_DIS_CREATED, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                            .addComponent(INPUT_CREATED, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
                         .addGap(37, 37, 37)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LABEL_UPDATED, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                            .addComponent(INPUT_DIS_UPDATED, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                            .addComponent(INPUT_UPDATED, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
                         .addGap(347, 347, 347))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONTAINER_ANGGOTALayout.createSequentialGroup()
                         .addGap(646, 646, 646)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LABEL_KESEMPATAN, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                            .addComponent(INPUT_DIS_KESEMPATAN, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
+                            .addComponent(INPUT_KESEMPATAN, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
                         .addGap(25, 25, 25))))
         );
         CONTAINER_ANGGOTALayout.setVerticalGroup(
@@ -269,15 +340,15 @@ public class AnggotaUSER extends javax.swing.JFrame {
                         .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
                             .addComponent(LABEL_UPDATED)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(INPUT_DIS_UPDATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(INPUT_UPDATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
                             .addComponent(LABEL_CREATED)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(INPUT_DIS_CREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(INPUT_CREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
                         .addComponent(LABEL_KESEMPATAN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(INPUT_DIS_KESEMPATAN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(INPUT_KESEMPATAN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
 
@@ -286,6 +357,11 @@ public class AnggotaUSER extends javax.swing.JFrame {
         BTN_SIMPAN_ANGGOTA.setForeground(new java.awt.Color(255, 255, 255));
         BTN_SIMPAN_ANGGOTA.setText("Simpan");
         BTN_SIMPAN_ANGGOTA.setBorder(null);
+        BTN_SIMPAN_ANGGOTA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_SIMPAN_ANGGOTAMouseClicked(evt);
+            }
+        });
 
         BTN_HAPUS_ANGGOTA.setBackground(new java.awt.Color(153, 153, 153));
         BTN_HAPUS_ANGGOTA.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -336,9 +412,15 @@ public class AnggotaUSER extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void INPUT_NISActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_NISActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_INPUT_NISActionPerformed
+    private void BTN_SIMPAN_ANGGOTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_ANGGOTAMouseClicked
+        
+        if(this.action.equals("ADD")){
+            simpan();
+        }else{
+            update();
+        }
+        
+    }//GEN-LAST:event_BTN_SIMPAN_ANGGOTAMouseClicked
 
     /**
      * @param args the command line arguments
@@ -379,16 +461,16 @@ public class AnggotaUSER extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_HAPUS_ANGGOTA;
     private javax.swing.JButton BTN_SIMPAN_ANGGOTA;
-    private javax.swing.JComboBox<String> COMBO_BOX_JURUSAN;
-    private javax.swing.JComboBox<String> COMBO_BOX_KELAS;
+    public static javax.swing.JComboBox<String> COMBO_BOX_JURUSAN;
+    public static javax.swing.JComboBox<String> COMBO_BOX_KELAS;
     private javax.swing.JPanel CONTAINER_ANGGOTA;
     private javax.swing.JPanel FRAME_MAIN_ANGGOTA;
-    private javax.swing.JTextField INPUT_DIS_CREATED;
-    private javax.swing.JTextField INPUT_DIS_KESEMPATAN;
-    private javax.swing.JTextField INPUT_DIS_UPDATED;
+    private javax.swing.JTextField INPUT_CREATED;
     private javax.swing.JTextField INPUT_ID_USER;
+    private javax.swing.JTextField INPUT_KESEMPATAN;
     private javax.swing.JTextField INPUT_NAMA_LENGKAP;
     private javax.swing.JTextField INPUT_NIS;
+    private javax.swing.JTextField INPUT_UPDATED;
     private javax.swing.JLabel LABEL_CREATED;
     private javax.swing.JLabel LABEL_ID_USER;
     private javax.swing.JLabel LABEL_JURUSAN;
