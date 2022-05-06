@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.model.AnggotaModel;
+import com.manurul.model.SettingModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -59,7 +60,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
         InputBorder.set(INPUT_UPDATED, 8);
         
         // GET DATA FROM Jurusan & Kelas
-        new AnggotaModel().setJurusanKelas("", "");
+        AM.setJurusanKelas("", "");
         
         // VISIBLE COMPONECT BASED ON ACTION
         if(Action.equals("ADD")){
@@ -82,7 +83,23 @@ public class AnggotaUSER extends javax.swing.JFrame {
         
         }else{
             //get data selected
-            System.out.println(ID);
+            AM.getSelectedData(ID);
+            
+            INPUT_ID_USER.setText(AM.getKode());
+            INPUT_NIS.setText(AM.getNis());
+            INPUT_NAMA_LENGKAP.setText(AM.getNama());
+            COMBO_BOX_JURUSAN.setSelectedItem(AM.getJurusan());
+            COMBO_BOX_KELAS.setSelectedItem(AM.getKelas());
+            SPINNER_SKOR.setValue(Integer.parseInt(AM.getSkor()));
+            INPUT_CREATED.setText(AM.getCreated());
+            INPUT_UPDATED.setText(AM.getUpdated());
+            
+            int buku_dipinjam = Integer.parseInt(AM.getJumlahBukuDipinjam());
+            int max_pinjam = new SettingModel().getMaxPinjam();
+            
+            int kesempatan = max_pinjam - buku_dipinjam;
+            
+            INPUT_KESEMPATAN.setText(String.valueOf(kesempatan));
         }
         
         // SET TITLE

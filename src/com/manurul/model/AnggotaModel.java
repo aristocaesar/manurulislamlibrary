@@ -35,6 +35,8 @@ public class AnggotaModel extends DBConfig{
     private String kelas;
     private String jumlah_buku_dipinjam;
     private String skor;
+    private String created_at;
+    private String updated_at;
     
     private String message;
     
@@ -107,6 +109,22 @@ public class AnggotaModel extends DBConfig{
         return this.skor;
     }
     
+    public void setCreated(String tgl){
+        this.created_at = tgl;
+    }
+    
+    public String getCreated(){
+        return this.created_at;
+    }
+    
+    public void setUpdated(String tgl){
+        this.updated_at = tgl;
+    }
+    
+    public String getUpdated(){
+        return this.updated_at;
+    }
+    
     public void setMessage(String message){
         this.message = message;
     }
@@ -121,6 +139,7 @@ public class AnggotaModel extends DBConfig{
     
         table_model.setColumnCount(0);
         table_model.addColumn("No");
+        table_model.addColumn("Kode");
         table_model.addColumn("NIS");
         table_model.addColumn("Nama Lengkap");
         table_model.addColumn("Jurusan");
@@ -145,7 +164,7 @@ public class AnggotaModel extends DBConfig{
                 limited = " LIMIT " + Showing;
             }
             
-            String sql = "SELECT ma_anggota.nis, ma_anggota.nama_lengkap, ma_jurusan.nama AS jurusan, ma_kelas.kode AS kode_kelas "
+            String sql = "SELECT ma_anggota.kode, ma_anggota.nis, ma_anggota.nama_lengkap, ma_jurusan.nama AS jurusan, ma_kelas.kode AS kode_kelas "
                     + "FROM ma_anggota JOIN ma_jurusan ON ma_anggota.jurusan = ma_jurusan.id "
                     + "JOIN ma_kelas ON ma_anggota.kelas = ma_kelas.id WHERE ma_anggota.nis LIKE '%"+Key+"%' OR ma_anggota.nama_lengkap LIKE '%"+Key+"%' ORDER BY "+GroupSelected+limited;
             
@@ -156,6 +175,7 @@ public class AnggotaModel extends DBConfig{
             while(res.next()){
                 table_model.addRow(new Object[]{
                     i++,
+                    res.getString("kode"),
                     res.getString("nis"),
                     res.getString("nama_lengkap"),
                     res.getString("jurusan"),
@@ -199,7 +219,7 @@ public class AnggotaModel extends DBConfig{
             
             
         }catch(SQLException error){
-        
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahaan!", JOptionPane.ERROR_MESSAGE);
         }
         
     }
@@ -262,6 +282,51 @@ public class AnggotaModel extends DBConfig{
     }
     
     //getSelected
+    public void getSelectedData(String Kode){
+        
+        try{
+        
+            String sql = "SELECT * FROM ma_anggota WHERE kode = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, Kode);
+            
+            ResultSet res = pst.executeQuery();
+            
+            if(res.next()){
+            
+                setId(res.getInt("id"));
+                setKode(res.getString("kode"));
+                setNis(res.getString("nis"));
+                setNama(res.getString("nama_lengkap"));
+                
+                PreparedStatement pst_jur = conn.prepareStatement("SELECT nama FROM ma_jurusan WHERE id = ?");
+                pst_jur.setString(1, res.getString("jurusan"));
+                
+                ResultSet res_jur = pst_jur.executeQuery();
+                if(res_jur.next()){
+                    setJurusan(res_jur.getString("nama"));
+                }
+               
+                PreparedStatement pst_kelas = conn.prepareStatement("SELECT kode FROM ma_kelas WHERE id = ?");
+                pst_kelas.setString(1, res.getString("kelas"));
+                
+                ResultSet res_kelas = pst_kelas.executeQuery();
+                if(res_kelas.next()){
+                    setKelas(res_kelas.getString("kode"));
+                }
+                
+                setJumlahBukuDipinjam(res.getString("jumlah_buku_dipinjam"));
+                setSkor(res.getString("skor"));
+                setCreated(res.getString("created_at"));
+                setUpdated(res.getString("updated_at"));
+                
+            }
+            
+        }catch(SQLException error){
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahaan!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
     
     //update data
     
