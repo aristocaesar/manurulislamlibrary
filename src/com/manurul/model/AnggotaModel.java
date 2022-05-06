@@ -145,9 +145,9 @@ public class AnggotaModel extends DBConfig{
                 limited = " LIMIT " + Showing;
             }
             
-            String sql = "SELECT ma_anggota.nis, ma_anggota.nama_lengkap, ma_jurusan.kode AS jurusan, ma_jurusan.nama AS nama_jurusan, ma_kelas.kode AS kode_kelas "
+            String sql = "SELECT ma_anggota.nis, ma_anggota.nama_lengkap, ma_jurusan.nama AS jurusan, ma_kelas.kode AS kode_kelas "
                     + "FROM ma_anggota JOIN ma_jurusan ON ma_anggota.jurusan = ma_jurusan.id "
-                    + "JOIN ma_kelas ON ma_anggota.kelas = ma_kelas.id WHERE ma_anggota.nis LIKE '%"+Key+"%' OR ma_anggota.nama_lengkap LIKE '%"+Key+"%' GROUP BY "+GroupSelected+limited;
+                    + "JOIN ma_kelas ON ma_anggota.kelas = ma_kelas.id WHERE ma_anggota.nis LIKE '%"+Key+"%' OR ma_anggota.nama_lengkap LIKE '%"+Key+"%' ORDER BY "+GroupSelected+limited;
             
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet res = pst.executeQuery();
@@ -238,9 +238,13 @@ public class AnggotaModel extends DBConfig{
                 throw new SQLException("Gagal menambahkan anggota!");
             }
             
+            // cetak log
             new LogModel().Action("TAMBAH ANGGIOTA", "Menambahkan anggota "+ getNama(), Dashboard.nama_user);
             
-            setMessage("Berhasil menambahkan anggota!");
+            // refresh
+            new AnggotaModel().getDataTable(Dashboard.SEARCH_USER.getText(), Dashboard.GROUP_COMBOBOX_USER.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
+            
+            setMessage("Berhasil menambahkan anggota !");
             return true;
         
         }catch(SQLException error){

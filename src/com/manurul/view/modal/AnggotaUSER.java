@@ -32,7 +32,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
     
     AnggotaModel AM = new AnggotaModel();
     
-    public AnggotaUSER(String Action, int ID) {
+    public AnggotaUSER(String Action, String ID) {
         initComponents();
         
         // SET INI
@@ -82,6 +82,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
         
         }else{
             //get data selected
+            System.out.println(ID);
         }
         
         // SET TITLE
@@ -101,16 +102,18 @@ public class AnggotaUSER extends javax.swing.JFrame {
             String nama = INPUT_NAMA_LENGKAP.getText().replaceAll("[0-9]", "");
             int skor = Integer.parseInt(SPINNER_SKOR.getValue().toString());
             
-
-            //cek jika semua kosong
-//            if(nis.equals("") || nama.equals("")){
-//                if(skor == 0){
-//                    throw new Exception("Nilai skor harus terisi!");
-//                }else{
-//                    throw new Exception("Nilai input harus terisi!");
-//                }
-//            }
-//            
+            if(nis.equals("")){
+                throw new Exception("Nilai NIS harus terisi dan berupa angka !");
+            }
+            
+            if(nama.equals("")){
+                throw new Exception("Nilai nama harus terisi !");
+            }
+            
+            if(skor <= 0){
+                throw new Exception("Nilai skor terlalu rendah !");
+            }
+            
         }catch(Exception error){
             
             JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
@@ -453,7 +456,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AnggotaUSER("", 0).setVisible(true);
+                new AnggotaUSER("", "").setVisible(true);
             }
         });
     }

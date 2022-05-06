@@ -464,7 +464,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBARLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -801,7 +801,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_TR_LAPORAN)))
                     .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1077,7 +1077,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_DB_RAK)))
                     .addGroup(TOPBAR_DATABUKULayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1567,7 +1567,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_U_PENGURUS)))
                     .addGroup(TOPBAR_USERLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1607,6 +1607,11 @@ public class Dashboard extends javax.swing.JFrame {
         SEARCH_USER.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         SEARCH_USER.setForeground(new java.awt.Color(96, 96, 96));
         SEARCH_USER.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+        SEARCH_USER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SEARCH_USERActionPerformed(evt);
+            }
+        });
         SEARCH_USER.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 SEARCH_USERKeyTyped(evt);
@@ -1626,6 +1631,11 @@ public class Dashboard extends javax.swing.JFrame {
             }
         ));
         TABLE_LIST_ANGGOTA.setRowHeight(30);
+        TABLE_LIST_ANGGOTA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_ANGGOTAMouseClicked(evt);
+            }
+        });
         TABLE_LIST_U_ANGGOTA.setViewportView(TABLE_LIST_ANGGOTA);
 
         FILTER_TAMPIL_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -1985,7 +1995,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBAR_SETTINGLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2163,6 +2173,8 @@ public class Dashboard extends javax.swing.JFrame {
         // TAMPILKAN LAYOUT USER
         new SideBar().setBar("USER");
         new SideBar().setUserPageSelected("ANGGOTA");
+        // GET DATA TABLE USER
+        new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
     }//GEN-LAST:event_BTN_USERMouseClicked
 
     private void BTN_SETTINGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SETTINGMouseClicked
@@ -2204,12 +2216,11 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void ICON_ADD_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_USERMouseClicked
         // OPEN MODAL ANGGOTA
-        new AnggotaUSER("ADD", 0).setVisible(true);
+        new AnggotaUSER("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_USERMouseClicked
 
     private void ICON_IMPORT_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_IMPORT_USERMouseClicked
         // OPEN MODAL ANGGOTA
-        new AnggotaUSER("UPDATE", 0).setVisible(true);
     }//GEN-LAST:event_ICON_IMPORT_USERMouseClicked
 
     private void ICON_EXPORT_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_EXPORT_USERMouseClicked
@@ -2369,6 +2380,19 @@ public class Dashboard extends javax.swing.JFrame {
         new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
     }//GEN-LAST:event_GROUP_COMBOBOX_USERItemStateChanged
 
+    private void SEARCH_USERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SEARCH_USERActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SEARCH_USERActionPerformed
+
+    private void TABLE_LIST_ANGGOTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_ANGGOTAMouseClicked
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_ANGGOTA.getSelectedRow();
+
+            String kode = TABLE_LIST_ANGGOTA.getValueAt(index, 1).toString();
+            new AnggotaUSER("EDIT", kode).setVisible(true);
+        }
+    }//GEN-LAST:event_TABLE_LIST_ANGGOTAMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2436,7 +2460,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel F_U_JURUSAN;
     public static javax.swing.JPanel F_U_KELAS;
     public static javax.swing.JPanel F_U_PENGURUS;
-    private javax.swing.JComboBox<String> GROUP_COMBOBOX_USER;
+    public static javax.swing.JComboBox<String> GROUP_COMBOBOX_USER;
     private javax.swing.JLabel GROUP_KELAS_USER;
     private javax.swing.JLabel ICON_ADD_BUKU;
     private javax.swing.JLabel ICON_ADD_JURUSAN;
@@ -2494,7 +2518,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField SEARCH_PENERBIT;
     private javax.swing.JTextField SEARCH_PENGURUS;
     private javax.swing.JTextField SEARCH_RAK;
-    private javax.swing.JTextField SEARCH_USER;
+    public static javax.swing.JTextField SEARCH_USER;
     public static javax.swing.JPanel SETTING;
     private javax.swing.JPanel SIDEBAR;
     private javax.swing.JComboBox<String> SORT_LIST_LOG;
@@ -2519,7 +2543,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane TABLE_PINJAM;
     private javax.swing.JScrollPane TABLE_RAK;
     private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_BUKU;
-    private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_USER;
+    public static javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_USER;
     private javax.swing.JComboBox<String> TAMPILKAN_KATEGORI;
     private javax.swing.JComboBox<String> TAMPILKAN_PENERBIT;
     private javax.swing.JComboBox<String> TAMPILKAN_RAK;

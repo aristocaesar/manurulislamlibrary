@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2022 at 12:43 PM
+-- Generation Time: May 06, 2022 at 04:44 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -29,16 +29,31 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ma_anggota` (
-  `id` varchar(16) NOT NULL,
+  `id` int(11) NOT NULL,
+  `kode` varchar(18) NOT NULL,
   `nis` varchar(28) NOT NULL,
   `nama_lengkap` varchar(128) NOT NULL,
-  `jurusan` int(11) UNSIGNED NOT NULL,
-  `kelas` int(11) UNSIGNED NOT NULL,
-  `jumlah_buku_dipinjam` int(11) NOT NULL,
+  `jurusan` int(11) NOT NULL,
+  `kelas` int(11) NOT NULL,
+  `jumlah_buku_dipinjam` int(11) NOT NULL DEFAULT '0',
   `skor` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ma_anggota`
+--
+
+INSERT INTO `ma_anggota` (`id`, `kode`, `nis`, `nama_lengkap`, `jurusan`, `kelas`, `jumlah_buku_dipinjam`, `skor`, `created_at`, `updated_at`) VALUES
+(1, 'MRD - 57428631', '3545345435', 'Sads', 2, 20, 0, 100, '2022-04-30 02:44:48', '2022-04-30 02:44:48'),
+(3, 'MRD - 21251616', '545', 'Hana Wulan', 3, 21, 0, 100, '2022-05-06 00:56:27', '2022-05-06 00:56:27'),
+(4, 'MRD - 45281281', '45454', 'Fifa Fajar', 2, 20, 0, 100, '2022-05-06 00:58:03', '2022-05-06 00:58:03'),
+(5, 'MRD - 61253578', '33243', 'Mega Kharisma', 2, 20, 0, 100, '2022-05-06 00:58:18', '2022-05-06 00:58:18'),
+(6, 'MRD - 52157052', '34343', 'Fira Ariani', 3, 20, 0, 100, '2022-05-06 00:58:41', '2022-05-06 00:58:41'),
+(7, 'MRD - 84722260', '1411739', 'Sadsadsadsad', 2, 20, 0, 100, '2022-05-06 01:07:40', '2022-05-06 01:07:40'),
+(8, 'MRD - 75415520', '5656', 'Sdsadsd', 2, 20, 0, 100, '2022-05-06 01:10:46', '2022-05-06 01:10:46'),
+(9, 'MRD - 71716155', '66546433`123', 'Wulan Agusta', 5, 21, 0, 100, '2022-05-06 01:11:10', '2022-05-06 01:11:10');
 
 -- --------------------------------------------------------
 
@@ -130,9 +145,7 @@ INSERT INTO `ma_jurusan` (`id`, `kode`, `nama`, `created_at`, `updated_at`) VALU
 (4, 'RPL', 'Rekayasa Perangkat Lunak', '2022-04-17 16:44:01', '2022-04-17 16:44:01'),
 (5, 'TGK', 'Teknik Geomatika dan Fisika', '2022-04-17 16:09:50', '2022-04-17 16:44:35'),
 (6, 'TKJ', 'Teknik Komputer Dan Jaringan', '2022-04-17 15:48:21', '2022-04-17 16:07:10'),
-(7, 'TPL', 'Teknik Perkapalan', '2022-04-17 16:10:32', '2022-04-17 16:10:32'),
-(8, 'TPU', 'Teknologi Pesawat Udara', '2022-04-17 16:10:08', '2022-04-17 16:10:08'),
-(9, 'TSM', 'Teknik Sepeda Motor', '2022-03-23 10:18:50', '2022-04-17 16:09:05');
+(7, 'TPL', 'Teknik Perkapalan', '2022-04-17 16:10:32', '2022-04-17 16:10:32');
 
 -- --------------------------------------------------------
 
@@ -176,9 +189,7 @@ CREATE TABLE `ma_kelas` (
 
 INSERT INTO `ma_kelas` (`id`, `kode`, `created_at`, `updated_at`) VALUES
 (20, 'X', '2022-04-24 01:30:17', '2022-04-24 16:49:30'),
-(21, 'XXI', '2022-04-24 01:30:22', '2022-04-24 01:59:02'),
-(33, 'XII', '2022-04-24 01:58:33', '2022-04-24 01:58:51'),
-(34, 'V', '2022-04-24 02:08:10', '2022-04-24 02:08:17');
+(21, 'XXI', '2022-04-24 01:30:22', '2022-04-24 01:59:02');
 
 -- --------------------------------------------------------
 
@@ -324,7 +335,8 @@ CREATE TABLE `ma_pengurus` (
 --
 
 INSERT INTO `ma_pengurus` (`id`, `kode`, `nip`, `username`, `password`, `nama_lengkap`, `hak_akses`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'PGS-69698', '343243243243243', 'a', 'a', 'Hana Wulan Agusta', 'ADMINISTRATOR', 'AKTIF', '2022-04-24 16:03:17', '2022-04-24 16:21:34');
+(10, 'PGS-69696', '5345435', 'a', 'a', 'Aristo Caesar Pratama', 'ADMINISTRATOR', 'AKTIF', '2022-04-29 21:59:11', '2022-04-29 22:06:34'),
+(16, 'PGS-42681', '35435', 'hana', 'hana', 'Aristo Caesar Ptratamna', 'ADMINISTRATOR', 'AKTIF', '2022-04-29 22:24:24', '2022-04-29 22:24:24');
 
 -- --------------------------------------------------------
 
@@ -396,8 +408,10 @@ CREATE TABLE `ma_transaksi` (
 --
 ALTER TABLE `ma_anggota`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Kelas` (`kelas`),
-  ADD KEY `FK_Jurusan` (`jurusan`);
+  ADD UNIQUE KEY `kode` (`kode`),
+  ADD UNIQUE KEY `nis` (`nis`),
+  ADD KEY `FK_Jurusan` (`jurusan`),
+  ADD KEY `FK_Kelas` (`kelas`);
 
 --
 -- Indexes for table `ma_buku`
@@ -483,6 +497,12 @@ ALTER TABLE `ma_transaksi`
 --
 
 --
+-- AUTO_INCREMENT for table `ma_anggota`
+--
+ALTER TABLE `ma_anggota`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `ma_buku`
 --
 ALTER TABLE `ma_buku`
@@ -504,7 +524,7 @@ ALTER TABLE `ma_detail_transaksi`
 -- AUTO_INCREMENT for table `ma_jurusan`
 --
 ALTER TABLE `ma_jurusan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `ma_kategori`
@@ -516,7 +536,7 @@ ALTER TABLE `ma_kategori`
 -- AUTO_INCREMENT for table `ma_kelas`
 --
 ALTER TABLE `ma_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `ma_log`
@@ -534,7 +554,7 @@ ALTER TABLE `ma_penerbit`
 -- AUTO_INCREMENT for table `ma_pengurus`
 --
 ALTER TABLE `ma_pengurus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ma_rak`
@@ -557,6 +577,13 @@ ALTER TABLE `ma_transaksi`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `ma_anggota`
+--
+ALTER TABLE `ma_anggota`
+  ADD CONSTRAINT `FK_Jurusan` FOREIGN KEY (`jurusan`) REFERENCES `ma_jurusan` (`id`),
+  ADD CONSTRAINT `FK_Kelas` FOREIGN KEY (`kelas`) REFERENCES `ma_kelas` (`id`);
 
 --
 -- Constraints for table `ma_buku`
