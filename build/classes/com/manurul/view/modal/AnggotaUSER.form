@@ -99,34 +99,26 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="COMBO_BOX_JURUSAN" min="-2" pref="285" max="-2" attributes="0"/>
-                                  <Component id="INPUT_ID_USER" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="LABEL_ID_USER" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="LABEL_JURUSAN" alignment="0" min="-2" pref="285" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="INPUT_NIS" max="32767" attributes="0"/>
-                                  <Component id="LABEL_NIS" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="LABEL_JURUSAN" min="-2" pref="285" max="-2" attributes="0"/>
+                                      <EmptySpace pref="39" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="COMBO_BOX_JURUSAN" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="LABEL_KELAS" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
                                   <Component id="COMBO_BOX_KELAS" alignment="1" min="-2" pref="286" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="INPUT_NAMA_LENGKAP" max="32767" attributes="0"/>
-                                          <Component id="LABEL_NAMA_LENGKAP" max="32767" attributes="0"/>
-                                          <Component id="LABEL_SKOR" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="SPINNER_SKOR" min="-2" pref="286" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="LABEL_SKOR" min="-2" pref="286" max="-2" attributes="0"/>
+                                  <Component id="SPINNER_SKOR" min="-2" pref="286" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
@@ -149,6 +141,18 @@
                               </Group>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="LABEL_NIS" pref="450" max="32767" attributes="0"/>
+                                  <Component id="INPUT_NIS" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LABEL_NAMA_LENGKAP" min="-2" pref="450" max="-2" attributes="0"/>
+                                  <Component id="INPUT_NAMA_LENGKAP" min="-2" pref="450" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -158,13 +162,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="LABEL_ID_USER" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LABEL_NIS" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LABEL_NAMA_LENGKAP" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="INPUT_ID_USER" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="INPUT_NAMA_LENGKAP" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="INPUT_NIS" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
@@ -208,35 +210,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="LABEL_ID_USER">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="ID USER"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_ID_USER">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder>
-                      <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
-                    </LineBorder>
-                  </Border>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="INPUT_NIS">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -504,6 +477,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BTN_HAPUS_ANGGOTAKeyPressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

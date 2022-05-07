@@ -6,13 +6,15 @@
 package com.manurul.view.modal;
 
 import com.manurul.lib.Characters;
-import com.manurul.lib.GenKode;
 import com.manurul.lib.InputBorder;
 import java.awt.Color;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.model.AnggotaModel;
 import com.manurul.model.SettingModel;
+import static com.manurul.view.Dashboard.GROUP_COMBOBOX_USER;
+import static com.manurul.view.Dashboard.SEARCH_USER;
+import static com.manurul.view.Dashboard.TAMPILKAN_COMBOBOX_USER;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -29,6 +31,12 @@ public class AnggotaUSER extends javax.swing.JFrame {
     String title = "Edit";
     String action;
     
+    String nis;
+    String nama;
+    String jurusan;
+    String kelas;
+    String skor;
+    
     private ImageIcon successIcon;
     
     AnggotaModel AM = new AnggotaModel();
@@ -36,7 +44,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
     public AnggotaUSER(String Action, String ID) {
         initComponents();
         
-        // SET INI
+        // SET STATE
         this.action = Action;
         
         // SET SIZE
@@ -52,7 +60,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
         
         // INIT INPUT BORDER PADDING
-        InputBorder.set(INPUT_ID_USER, 8);
         InputBorder.set(INPUT_NIS, 8);
         InputBorder.set(INPUT_NAMA_LENGKAP, 8);
         InputBorder.set(INPUT_CREATED, 8);
@@ -67,8 +74,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
             
             this.title = "Tambah";
             this.setSize(1040, 400);
-            
-            INPUT_ID_USER.setText(GenKode.RandomInt("MRD", 8));
             
             SPINNER_SKOR.setValue(100);
             SPINNER_SKOR.setEnabled(false);
@@ -85,7 +90,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
             //get data selected
             AM.getSelectedData(ID);
             
-            INPUT_ID_USER.setText(AM.getKode());
             INPUT_NIS.setText(AM.getNis());
             INPUT_NAMA_LENGKAP.setText(AM.getNama());
             COMBO_BOX_JURUSAN.setSelectedItem(AM.getJurusan());
@@ -100,6 +104,13 @@ public class AnggotaUSER extends javax.swing.JFrame {
             int kesempatan = max_pinjam - buku_dipinjam;
             
             INPUT_KESEMPATAN.setText(String.valueOf(kesempatan));
+            
+            this.nis = AM.getNis();
+            this.nama = AM.getNama();
+            this.jurusan = AM.getJurusan();
+            this.kelas = AM.getKelas();
+            this.skor = AM.getSkor();
+            
         }
         
         // SET TITLE
@@ -111,7 +122,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
         
     }
     
-    private boolean cekValidasi(String Action){
+    private boolean cekValidasi(){
         
         try{
         
@@ -142,10 +153,19 @@ public class AnggotaUSER extends javax.swing.JFrame {
         
     }
     
+    private void inputRevalidate(){
+    
+        INPUT_NIS.setText(this.nis);
+        INPUT_NAMA_LENGKAP.setText(this.nama);
+        COMBO_BOX_JURUSAN.setSelectedItem(this.jurusan);
+        COMBO_BOX_KELAS.setSelectedItem(this.kelas);
+        SPINNER_SKOR.setValue(Integer.parseInt(this.skor));
+        
+    }
+    
     private void simpan(){
-        if(cekValidasi("ADD")){
+        if(cekValidasi()){
             
-            AM.setKode(INPUT_ID_USER.getText());
             AM.setNis(INPUT_NIS.getText().replaceAll("[a-zA-Z]", ""));
             AM.setNama(Characters.ucwords(INPUT_NAMA_LENGKAP.getText()));
             AM.setJurusan(COMBO_BOX_JURUSAN.getSelectedItem().toString());
@@ -155,16 +175,54 @@ public class AnggotaUSER extends javax.swing.JFrame {
             if(AM.insertData()){
                 JOptionPane.showMessageDialog(null, AM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
                 
-//                AM.getDataTable("");
+                new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, AM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, AM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
     
     private void update(){
-        System.out.println("update");
+        
+        if(cekValidasi()){
+            
+            String nis = INPUT_NIS.getText(); 
+            String nama = INPUT_NAMA_LENGKAP.getText();
+            String jurusan = COMBO_BOX_JURUSAN.getSelectedItem().toString();
+            String kelas = COMBO_BOX_KELAS.getSelectedItem().toString();
+            String skor = SPINNER_SKOR.getValue().toString();
+            
+            // cek perubahan
+            if(!nis.equals(this.nis)
+                    || !nama.equals(this.nama)
+                    || !jurusan.equals(this.jurusan)
+                    || !kelas.equals(this.kelas)
+                    || !skor.equals(this.skor)){
+                
+                AM.setNis(nis);
+                AM.setNama(nama);
+                AM.setJurusan(jurusan);
+                AM.setKelas(kelas);
+                AM.setSkor(skor);
+                
+                if(AM.updateData()){
+                    JOptionPane.showMessageDialog(null, AM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+                    new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
+                    
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, AM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+                    inputRevalidate();
+                } 
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Tidak ada perubahan !", "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        }
+        
     }
 
     /**
@@ -178,8 +236,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
 
         FRAME_MAIN_ANGGOTA = new javax.swing.JPanel();
         CONTAINER_ANGGOTA = new RoundedPanel(15, Color.WHITE);
-        LABEL_ID_USER = new javax.swing.JLabel();
-        INPUT_ID_USER = new javax.swing.JTextField();
         INPUT_NIS = new javax.swing.JTextField();
         INPUT_NAMA_LENGKAP = new javax.swing.JTextField();
         LABEL_NIS = new javax.swing.JLabel();
@@ -206,15 +262,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
         FRAME_MAIN_ANGGOTA.setPreferredSize(new java.awt.Dimension(1024, 414));
 
         CONTAINER_ANGGOTA.setBackground(new java.awt.Color(239, 240, 245));
-
-        LABEL_ID_USER.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        LABEL_ID_USER.setForeground(new java.awt.Color(96, 96, 96));
-        LABEL_ID_USER.setText("ID USER");
-
-        INPUT_ID_USER.setEditable(false);
-        INPUT_ID_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        INPUT_ID_USER.setForeground(new java.awt.Color(96, 96, 96));
-        INPUT_ID_USER.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
 
         INPUT_NIS.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_NIS.setForeground(new java.awt.Color(96, 96, 96));
@@ -291,28 +338,21 @@ public class AnggotaUSER extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(COMBO_BOX_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(INPUT_ID_USER, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LABEL_ID_USER, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(LABEL_JURUSAN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(INPUT_NIS)
-                            .addComponent(LABEL_NIS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
+                                .addComponent(LABEL_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE))
+                            .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
+                                .addComponent(COMBO_BOX_JURUSAN, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(37, 37, 37)))
+                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LABEL_KELAS, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(COMBO_BOX_KELAS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                                .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(INPUT_NAMA_LENGKAP)
-                                    .addComponent(LABEL_NAMA_LENGKAP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(LABEL_SKOR, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(25, 25, 25))
-                            .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                                .addComponent(SPINNER_SKOR, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))))
+                            .addComponent(LABEL_SKOR, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SPINNER_SKOR, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,19 +368,26 @@ public class AnggotaUSER extends javax.swing.JFrame {
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LABEL_KESEMPATAN, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                             .addComponent(INPUT_KESEMPATAN, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
-                        .addGap(25, 25, 25))))
+                        .addGap(25, 25, 25))
+                    .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
+                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LABEL_NIS, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                            .addComponent(INPUT_NIS))
+                        .addGap(33, 33, 33)
+                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LABEL_NAMA_LENGKAP, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(INPUT_NAMA_LENGKAP, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         CONTAINER_ANGGOTALayout.setVerticalGroup(
             CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LABEL_ID_USER)
                     .addComponent(LABEL_NIS)
                     .addComponent(LABEL_NAMA_LENGKAP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(INPUT_ID_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(INPUT_NAMA_LENGKAP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(INPUT_NIS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
@@ -388,6 +435,11 @@ public class AnggotaUSER extends javax.swing.JFrame {
         BTN_HAPUS_ANGGOTA.setForeground(new java.awt.Color(255, 255, 255));
         BTN_HAPUS_ANGGOTA.setText("Hapus");
         BTN_HAPUS_ANGGOTA.setBorder(null);
+        BTN_HAPUS_ANGGOTA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BTN_HAPUS_ANGGOTAKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout FRAME_MAIN_ANGGOTALayout = new javax.swing.GroupLayout(FRAME_MAIN_ANGGOTA);
         FRAME_MAIN_ANGGOTA.setLayout(FRAME_MAIN_ANGGOTALayout);
@@ -442,6 +494,24 @@ public class AnggotaUSER extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BTN_SIMPAN_ANGGOTAMouseClicked
 
+    private void BTN_HAPUS_ANGGOTAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BTN_HAPUS_ANGGOTAKeyPressed
+        
+        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin mengapus "+AM.getNama()+" ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        System.out.println("ok");
+        if(hapus == 0){
+            if(AM.deleteData()){
+                JOptionPane.showMessageDialog(null, AM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+                new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
+                
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, AM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        
+    }//GEN-LAST:event_BTN_HAPUS_ANGGOTAKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -486,13 +556,11 @@ public class AnggotaUSER extends javax.swing.JFrame {
     private javax.swing.JPanel CONTAINER_ANGGOTA;
     private javax.swing.JPanel FRAME_MAIN_ANGGOTA;
     private javax.swing.JTextField INPUT_CREATED;
-    private javax.swing.JTextField INPUT_ID_USER;
     private javax.swing.JTextField INPUT_KESEMPATAN;
     private javax.swing.JTextField INPUT_NAMA_LENGKAP;
     private javax.swing.JTextField INPUT_NIS;
     private javax.swing.JTextField INPUT_UPDATED;
     private javax.swing.JLabel LABEL_CREATED;
-    private javax.swing.JLabel LABEL_ID_USER;
     private javax.swing.JLabel LABEL_JURUSAN;
     private javax.swing.JLabel LABEL_KELAS;
     private javax.swing.JLabel LABEL_KESEMPATAN;

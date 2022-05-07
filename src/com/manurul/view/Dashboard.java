@@ -15,6 +15,7 @@ import com.manurul.model.AnggotaModel;
 import com.manurul.model.JurusanModel;
 import com.manurul.model.KelasModel;
 import com.manurul.model.PengurusModel;
+import com.manurul.model.RakModel;
 import com.manurul.model.SettingModel;
 import com.manurul.view.modal.BukuDATABUKU;
 import com.manurul.view.modal.KategoriDATABUKU;
@@ -240,7 +241,15 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_ADD_RAK = new javax.swing.JLabel();
         SEARCH_RAK = new javax.swing.JTextField();
         TABLE_RAK = new javax.swing.JScrollPane();
-        TABLE_LIST_RAK = new javax.swing.JTable();
+        TABLE_LIST_RAK = new javax.swing.JTable(){
+
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+
+        };
         FILTER_TAMPIL_RAK = new javax.swing.JLabel();
         TAMPILKAN_RAK = new javax.swing.JComboBox<>();
         USER = new javax.swing.JPanel();
@@ -1398,6 +1407,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        TABLE_LIST_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         TABLE_LIST_RAK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"dfsd", "fdsfsdf", "sdfsdfsd", "fsdfsd"},
@@ -1409,6 +1419,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1fdsfsd", "Title 2fdfdsf", "Title 3dfdsf", "Title 4"
             }
         ));
+        TABLE_LIST_RAK.setRowHeight(30);
+        TABLE_LIST_RAK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_RAKMouseClicked(evt);
+            }
+        });
         TABLE_RAK.setViewportView(TABLE_LIST_RAK);
 
         FILTER_TAMPIL_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -1416,7 +1432,12 @@ public class Dashboard extends javax.swing.JFrame {
         FILTER_TAMPIL_RAK.setText("Tampilkan");
 
         TAMPILKAN_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TAMPILKAN_RAK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TAMPILKAN_RAK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "10", "20", "50", "100" }));
+        TAMPILKAN_RAK.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TAMPILKAN_RAKItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout F_DB_RAKLayout = new javax.swing.GroupLayout(F_DB_RAK);
         F_DB_RAK.setLayout(F_DB_RAKLayout);
@@ -1643,7 +1664,12 @@ public class Dashboard extends javax.swing.JFrame {
         FILTER_TAMPIL_USER.setText("Tampilkan");
 
         TAMPILKAN_COMBOBOX_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TAMPILKAN_COMBOBOX_USER.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "25", "50", "100" }));
+        TAMPILKAN_COMBOBOX_USER.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "10", "25", "50", "100" }));
+        TAMPILKAN_COMBOBOX_USER.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TAMPILKAN_COMBOBOX_USERItemStateChanged(evt);
+            }
+        });
 
         GROUP_KELAS_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         GROUP_KELAS_USER.setForeground(new java.awt.Color(96, 96, 96));
@@ -2272,6 +2298,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void T_DB_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_RAKMouseClicked
         new SideBar().setBukuPageSelected("RAK");
+        new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());
     }//GEN-LAST:event_T_DB_RAKMouseClicked
 
     private void ICON_EXPORT_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_EXPORT_BUKUMouseClicked
@@ -2307,11 +2334,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_SEARCH_PENERBITKeyTyped
 
     private void ICON_ADD_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_RAKMouseClicked
-        new RakDATABUKU("EDIT", 0).setVisible(true);
+        new RakDATABUKU("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_RAKMouseClicked
 
     private void SEARCH_RAKKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_RAKKeyTyped
-        // TODO add your handling code here:
+        new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());
     }//GEN-LAST:event_SEARCH_RAKKeyTyped
 
     private void T_TR_PINJAMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_TR_PINJAMMouseClicked
@@ -2388,10 +2415,27 @@ public class Dashboard extends javax.swing.JFrame {
         if(evt.getClickCount() == 2){
             int index = TABLE_LIST_ANGGOTA.getSelectedRow();
 
-            String kode = TABLE_LIST_ANGGOTA.getValueAt(index, 1).toString();
-            new AnggotaUSER("EDIT", kode).setVisible(true);
+            String nis = TABLE_LIST_ANGGOTA.getValueAt(index, 1).toString();
+            new AnggotaUSER("EDIT", nis).setVisible(true);
         }
     }//GEN-LAST:event_TABLE_LIST_ANGGOTAMouseClicked
+
+    private void TAMPILKAN_COMBOBOX_USERItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TAMPILKAN_COMBOBOX_USERItemStateChanged
+        new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
+    }//GEN-LAST:event_TAMPILKAN_COMBOBOX_USERItemStateChanged
+
+    private void TAMPILKAN_RAKItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TAMPILKAN_RAKItemStateChanged
+        new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());        
+    }//GEN-LAST:event_TAMPILKAN_RAKItemStateChanged
+
+    private void TABLE_LIST_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_RAKMouseClicked
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_RAK.getSelectedRow();
+
+            String kode = TABLE_LIST_RAK.getValueAt(index, 1).toString();
+            new RakDATABUKU("EDIT", kode).setVisible(true);
+        }
+    }//GEN-LAST:event_TABLE_LIST_RAKMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2517,7 +2561,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField SEARCH_KELAS;
     private javax.swing.JTextField SEARCH_PENERBIT;
     private javax.swing.JTextField SEARCH_PENGURUS;
-    private javax.swing.JTextField SEARCH_RAK;
+    public static javax.swing.JTextField SEARCH_RAK;
     public static javax.swing.JTextField SEARCH_USER;
     public static javax.swing.JPanel SETTING;
     private javax.swing.JPanel SIDEBAR;
@@ -2536,7 +2580,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTable TABLE_LIST_PENERBIT;
     private javax.swing.JScrollPane TABLE_LIST_PENGURUS;
     private javax.swing.JTable TABLE_LIST_PINJAM;
-    private javax.swing.JTable TABLE_LIST_RAK;
+    public static javax.swing.JTable TABLE_LIST_RAK;
     private javax.swing.JScrollPane TABLE_LIST_U_ANGGOTA;
     private javax.swing.JScrollPane TABLE_LOG;
     private javax.swing.JScrollPane TABLE_PENERBIT;
@@ -2546,7 +2590,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_USER;
     private javax.swing.JComboBox<String> TAMPILKAN_KATEGORI;
     private javax.swing.JComboBox<String> TAMPILKAN_PENERBIT;
-    private javax.swing.JComboBox<String> TAMPILKAN_RAK;
+    public static javax.swing.JComboBox<String> TAMPILKAN_RAK;
     private javax.swing.JLabel TITLE_ANGGOTA;
     private javax.swing.JLabel TITLE_BERMASALAH;
     private javax.swing.JLabel TITLE_DASHBOARD;

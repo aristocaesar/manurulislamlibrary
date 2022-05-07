@@ -6,6 +6,7 @@
 package com.manurul.lib;
 
 import com.manurul.model.AnggotaModel;
+import com.manurul.model.RakModel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
 

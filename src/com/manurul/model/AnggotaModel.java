@@ -13,8 +13,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,10 +23,8 @@ import javax.swing.table.DefaultTableModel;
 public class AnggotaModel extends DBConfig{
     
     //init state
-    private String table = "ma_anggota";
     
     private int id;
-    private String kode;
     private String nis;
     private String nama_lengkap;
     private String jurusan;
@@ -52,14 +48,6 @@ public class AnggotaModel extends DBConfig{
     public int getId(){
         return this.id;
     }
-    
-    public void setKode(String kode){
-        this.kode = kode;
-    }
-    
-   public String getKode(){
-       return this.kode;
-   }
     
     public void setNis(String nis){
         this.nis = nis;
@@ -139,7 +127,6 @@ public class AnggotaModel extends DBConfig{
     
         table_model.setColumnCount(0);
         table_model.addColumn("No");
-        table_model.addColumn("Kode");
         table_model.addColumn("NIS");
         table_model.addColumn("Nama Lengkap");
         table_model.addColumn("Jurusan");
@@ -164,7 +151,7 @@ public class AnggotaModel extends DBConfig{
                 limited = " LIMIT " + Showing;
             }
             
-            String sql = "SELECT ma_anggota.kode, ma_anggota.nis, ma_anggota.nama_lengkap, ma_jurusan.nama AS jurusan, ma_kelas.kode AS kode_kelas "
+            String sql = "SELECT ma_anggota.nis, ma_anggota.nama_lengkap, ma_jurusan.nama AS jurusan, ma_kelas.kode AS kode_kelas "
                     + "FROM ma_anggota JOIN ma_jurusan ON ma_anggota.jurusan = ma_jurusan.id "
                     + "JOIN ma_kelas ON ma_anggota.kelas = ma_kelas.id WHERE ma_anggota.nis LIKE '%"+Key+"%' OR ma_anggota.nama_lengkap LIKE '%"+Key+"%' ORDER BY "+GroupSelected+limited;
             
@@ -175,7 +162,6 @@ public class AnggotaModel extends DBConfig{
             while(res.next()){
                 table_model.addRow(new Object[]{
                     i++,
-                    res.getString("kode"),
                     res.getString("nis"),
                     res.getString("nama_lengkap"),
                     res.getString("jurusan"),
@@ -229,42 +215,41 @@ public class AnggotaModel extends DBConfig{
     
         try{
             
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_anggota (kode, nis, nama_lengkap, jurusan, kelas, "
-                    + " skor, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ? )");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_anggota ( nis, nama_lengkap, jurusan, kelas, "
+                    + " skor, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ? )");
             
-            pst.setString(1, getKode());
-            pst.setString(2, getNis());
-            pst.setString(3, getNama());
+            pst.setString(1, getNis());
+            pst.setString(2, getNama());
             
             // get id jurusan
             PreparedStatement getJurId = conn.prepareStatement("SELECT id FROM ma_jurusan WHERE nama = '"+ getJurusan() + "'");
             ResultSet ResJur = getJurId.executeQuery();
             if(ResJur.next()){
-                pst.setString(4, ResJur.getString("id"));
+                pst.setString(3, ResJur.getString("id"));
             }
             
             // get id kelas
             PreparedStatement getKelasId = conn.prepareStatement("SELECT id FROM ma_kelas WHERE kode = '" + getKelas() + "'");
             ResultSet ResKel = getKelasId.executeQuery();
             if(ResKel.next()){
-                pst.setString(5, ResKel.getString("id"));
+                pst.setString(4, ResKel.getString("id"));
             }
             
-            pst.setInt(6, Integer.parseInt(getSkor()));
+            pst.setInt(5, Integer.parseInt(getSkor()));
+            pst.setTimestamp(6, new SqlTime().getTimeStamp());
             pst.setTimestamp(7, new SqlTime().getTimeStamp());
-            pst.setTimestamp(8, new SqlTime().getTimeStamp());
             
             if(pst.execute()){
                 throw new SQLException("Gagal menambahkan anggota!");
             }
             
             // cetak log
-            new LogModel().Action("TAMBAH ANGGIOTA", "Menambahkan anggota "+ getNama(), Dashboard.nama_user);
+            new LogModel().Action("TAMBAH ANGGOTA", "Menambahkan anggota "+ getNama(), Dashboard.nama_user);
             
             // refresh
             new AnggotaModel().getDataTable(Dashboard.SEARCH_USER.getText(), Dashboard.GROUP_COMBOBOX_USER.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
             
-            setMessage("Berhasil menambahkan anggota !");
+            setMessage("Berhasil menambahkan anggota " + getNama());
             return true;
         
         }catch(SQLException error){
@@ -282,20 +267,19 @@ public class AnggotaModel extends DBConfig{
     }
     
     //getSelected
-    public void getSelectedData(String Kode){
+    public void getSelectedData(String Nis){
         
         try{
         
-            String sql = "SELECT * FROM ma_anggota WHERE kode = ?";
+            String sql = "SELECT * FROM ma_anggota WHERE nis = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, Kode);
+            pst.setString(1, Nis);
             
             ResultSet res = pst.executeQuery();
             
             if(res.next()){
             
                 setId(res.getInt("id"));
-                setKode(res.getString("kode"));
                 setNis(res.getString("nis"));
                 setNama(res.getString("nama_lengkap"));
                 
@@ -329,6 +313,100 @@ public class AnggotaModel extends DBConfig{
     }
     
     //update data
+    public boolean updateData(){
+        
+        try{
+            
+            String sql = "UPDATE ma_anggota SET "
+                    + "nis = ?,"
+                    + "nama_lengkap = ?,"
+                    + "jurusan = ?,"
+                    + "kelas = ?,"
+                    + "skor = ?,"
+                    + "updated_at = ?"
+                    + " WHERE id = ?";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, getNis());
+            pst.setString(2, getNama());
+            
+            PreparedStatement pst_jur = conn.prepareStatement("SELECT id FROM ma_jurusan WHERE nama = ?");
+            pst_jur.setString(1, getJurusan());
+
+            ResultSet res_jur = pst_jur.executeQuery();
+            if(res_jur.next()){
+                pst.setString(3, res_jur.getString("id"));
+            }
+
+            PreparedStatement pst_kelas = conn.prepareStatement("SELECT id FROM ma_kelas WHERE kode = ?");
+            pst_kelas.setString(1, getKelas());
+
+            ResultSet res_kelas = pst_kelas.executeQuery();
+            if(res_kelas.next()){
+                pst.setString(4, res_kelas.getString("id"));
+            }
+            
+            pst.setInt(5, Integer.parseInt(getSkor()));
+            pst.setTimestamp(6, new SqlTime().getTimeStamp());
+            pst.setInt(7, getId());
+            
+            int updated = pst.executeUpdate();
+            
+            if(updated == 0){
+                throw new SQLException("Gagal memperbarui anggota " + getNama());
+            }
+            
+            // cetak log
+            new LogModel().Action("UPDATE ANGGOTA", "Memperbarui anggota "+ getNama(), Dashboard.nama_user);
+            
+            // refresh
+            new AnggotaModel().getDataTable(Dashboard.SEARCH_USER.getText(), Dashboard.GROUP_COMBOBOX_USER.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
+            
+            setMessage("Berhasil memperbarui anggota " + getNama());
+            return true;
+        
+        }catch(SQLException error){
+            if(error.getErrorCode() == 1062){
+                setMessage("Anggota ini sudah tersedia !");
+            }else{
+                setMessage(error.getMessage());
+            }
+            
+            return false;
+        }
+    
+    }
     
     //delete data
+    public boolean deleteData(){
+    
+        try{
+            
+            String sql = "DELETE FROM ma_anggota WHERE id = ?";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, getId());
+            
+            if(pst.execute()){
+                throw new SQLException("Gagal menghapus anggota " + getNama());
+            }
+            
+            // cetak log
+            new LogModel().Action("DELETE ANGGOTA", "Menghapus anggota "+ getNama(), Dashboard.nama_user);
+            
+            // refresh
+            new AnggotaModel().getDataTable(Dashboard.SEARCH_USER.getText(), Dashboard.GROUP_COMBOBOX_USER.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
+            
+            setMessage("Berhasil menghapus anggota " + getNama());
+            return true;
+        
+        }catch(SQLException error){
+            
+            setMessage(error.getMessage());
+            
+            return false;
+        }
+        
+    }
+    
 }
