@@ -14,6 +14,7 @@ import com.manurul.lib.SideBar;
 import com.manurul.model.AnggotaModel;
 import com.manurul.model.JurusanModel;
 import com.manurul.model.KelasModel;
+import com.manurul.model.PenerbitModel;
 import com.manurul.model.PengurusModel;
 import com.manurul.model.RakModel;
 import com.manurul.model.SettingModel;
@@ -233,7 +234,15 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_ADD_PENERBIT = new javax.swing.JLabel();
         SEARCH_PENERBIT = new javax.swing.JTextField();
         TABLE_PENERBIT = new javax.swing.JScrollPane();
-        TABLE_LIST_PENERBIT = new javax.swing.JTable();
+        TABLE_LIST_PENERBIT = new javax.swing.JTable(){
+
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+
+        };
         FILTER_TAMPIL_PENERBIT = new javax.swing.JLabel();
         TAMPILKAN_PENERBIT = new javax.swing.JComboBox<>();
         F_DB_RAK = new RoundedPanel(15, Color.WHITE);
@@ -1322,6 +1331,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        TABLE_LIST_PENERBIT.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         TABLE_LIST_PENERBIT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"dfsd", "fdsfsdf", "sdfsdfsd", "fsdfsd"},
@@ -1333,6 +1343,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1fdsfsd", "Title 2fdfdsf", "Title 3dfdsf", "Title 4"
             }
         ));
+        TABLE_LIST_PENERBIT.setRowHeight(30);
+        TABLE_LIST_PENERBIT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_PENERBITMouseClicked(evt);
+            }
+        });
         TABLE_PENERBIT.setViewportView(TABLE_LIST_PENERBIT);
 
         FILTER_TAMPIL_PENERBIT.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -1340,7 +1356,12 @@ public class Dashboard extends javax.swing.JFrame {
         FILTER_TAMPIL_PENERBIT.setText("Tampilkan");
 
         TAMPILKAN_PENERBIT.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TAMPILKAN_PENERBIT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TAMPILKAN_PENERBIT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "10", "20", "50", "100" }));
+        TAMPILKAN_PENERBIT.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TAMPILKAN_PENERBITItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout F_DB_PENERBITLayout = new javax.swing.GroupLayout(F_DB_PENERBIT);
         F_DB_PENERBIT.setLayout(F_DB_PENERBITLayout);
@@ -2294,6 +2315,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void T_DB_PENERBITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_PENERBITMouseClicked
         new SideBar().setBukuPageSelected("PENERBIT");
+        new PenerbitModel().getDataTable(SEARCH_PENERBIT.getText(), TAMPILKAN_PENERBIT.getSelectedItem().toString());
     }//GEN-LAST:event_T_DB_PENERBITMouseClicked
 
     private void T_DB_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_RAKMouseClicked
@@ -2326,11 +2348,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_SEARCH_KATEGORIKeyTyped
 
     private void ICON_ADD_PENERBITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_PENERBITMouseClicked
-        new PenerbitDATABUKU("ADD", 0).setVisible(true);
+        new PenerbitDATABUKU("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_PENERBITMouseClicked
 
     private void SEARCH_PENERBITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_PENERBITKeyTyped
-        // TODO add your handling code here:
+       new PenerbitModel().getDataTable(SEARCH_PENERBIT.getText(), TAMPILKAN_PENERBIT.getSelectedItem().toString());
     }//GEN-LAST:event_SEARCH_PENERBITKeyTyped
 
     private void ICON_ADD_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_RAKMouseClicked
@@ -2436,6 +2458,19 @@ public class Dashboard extends javax.swing.JFrame {
             new RakDATABUKU("EDIT", kode).setVisible(true);
         }
     }//GEN-LAST:event_TABLE_LIST_RAKMouseClicked
+
+    private void TAMPILKAN_PENERBITItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TAMPILKAN_PENERBITItemStateChanged
+        new PenerbitModel().getDataTable(SEARCH_PENERBIT.getText(), TAMPILKAN_PENERBIT.getSelectedItem().toString());
+    }//GEN-LAST:event_TAMPILKAN_PENERBITItemStateChanged
+
+    private void TABLE_LIST_PENERBITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_PENERBITMouseClicked
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_PENERBIT.getSelectedRow();
+
+            String nama = TABLE_LIST_PENERBIT.getValueAt(index, 1).toString();
+            new PenerbitDATABUKU("EDIT", nama).setVisible(true);
+        }
+    }//GEN-LAST:event_TABLE_LIST_PENERBITMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2559,7 +2594,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField SEARCH_JURUSAN;
     private javax.swing.JTextField SEARCH_KATEGORI;
     private javax.swing.JTextField SEARCH_KELAS;
-    private javax.swing.JTextField SEARCH_PENERBIT;
+    public static javax.swing.JTextField SEARCH_PENERBIT;
     private javax.swing.JTextField SEARCH_PENGURUS;
     public static javax.swing.JTextField SEARCH_RAK;
     public static javax.swing.JTextField SEARCH_USER;
@@ -2577,7 +2612,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTable TABLE_LIST_KATEGORI;
     private javax.swing.JScrollPane TABLE_LIST_KELAS;
     private javax.swing.JTable TABLE_LIST_LOG;
-    private javax.swing.JTable TABLE_LIST_PENERBIT;
+    public static javax.swing.JTable TABLE_LIST_PENERBIT;
     private javax.swing.JScrollPane TABLE_LIST_PENGURUS;
     private javax.swing.JTable TABLE_LIST_PINJAM;
     public static javax.swing.JTable TABLE_LIST_RAK;
@@ -2589,7 +2624,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_BUKU;
     public static javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_USER;
     private javax.swing.JComboBox<String> TAMPILKAN_KATEGORI;
-    private javax.swing.JComboBox<String> TAMPILKAN_PENERBIT;
+    public static javax.swing.JComboBox<String> TAMPILKAN_PENERBIT;
     public static javax.swing.JComboBox<String> TAMPILKAN_RAK;
     private javax.swing.JLabel TITLE_ANGGOTA;
     private javax.swing.JLabel TITLE_BERMASALAH;
