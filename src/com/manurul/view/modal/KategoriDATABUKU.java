@@ -5,10 +5,15 @@
  */
 package com.manurul.view.modal;
 
+import com.manurul.lib.Characters;
 import com.manurul.lib.InputBorder;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.KategoriModel;
+import com.manurul.view.Dashboard;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,8 +26,22 @@ public class KategoriDATABUKU extends javax.swing.JFrame {
      */
     String title = "Edit";
     
-    public KategoriDATABUKU(String Action, int ID) {
+    String action;
+    
+    String kode;
+    String nama;
+    String deskripsi;
+    
+    ImageIcon successIcon;
+    
+    KategoriModel KM = new KategoriModel();
+    
+    public KategoriDATABUKU(String Action, String Kode) {
         initComponents();
+        
+        // SET INIT
+        this.action = Action;
+        this.kode = Kode;
         
         // SET SIZE
         this.setSize(1024, 345);
@@ -57,11 +76,30 @@ public class KategoriDATABUKU extends javax.swing.JFrame {
             INPUT_CREATED.setVisible(false);
             
             BTN_HAPUS_KATEGORI.setVisible(false);
-        
+            
+        }else{
+            System.out.println(Kode);
+            
+            KM.getSelectedData(Kode);
+            
+            this.kode = KM.getKode();
+            this.nama = KM.getNama();
+            this.deskripsi = KM.getDeskripsi();
+            
+            INPUT_KODE_KATEGORI.setText(KM.getKode());
+            INPUT_NAMA_KATEGORI.setText(KM.getNama());
+            INPUT_DESKRIPSI.setText(KM.getDeskripsi());
+            INPUT_CREATED.setText(KM.getCreated());
+            INPUT_UPDATE.setText(KM.getUpdated());
+           
         }
         
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - " + this.title + " Kategori Buku");
+        
+        // SET SUCCESS ICON
+        ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
+        this.successIcon = successIcon;
         
     }
 
@@ -96,7 +134,6 @@ public class KategoriDATABUKU extends javax.swing.JFrame {
 
         CONTAINER.setBackground(new java.awt.Color(239, 240, 245));
 
-        INPUT_KODE_KATEGORI.setEditable(false);
         INPUT_KODE_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_KODE_KATEGORI.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_KODE_KATEGORI.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
@@ -108,11 +145,6 @@ public class KategoriDATABUKU extends javax.swing.JFrame {
         INPUT_NAMA_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_NAMA_KATEGORI.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_NAMA_KATEGORI.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        INPUT_NAMA_KATEGORI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                INPUT_NAMA_KATEGORIActionPerformed(evt);
-            }
-        });
 
         LABEL_NAMA_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_NAMA_KATEGORI.setForeground(new java.awt.Color(96, 96, 96));
@@ -200,12 +232,22 @@ public class KategoriDATABUKU extends javax.swing.JFrame {
         BTN_HAPUS_KATEGORI.setForeground(new java.awt.Color(255, 255, 255));
         BTN_HAPUS_KATEGORI.setText("Hapus");
         BTN_HAPUS_KATEGORI.setBorder(null);
+        BTN_HAPUS_KATEGORI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_HAPUS_KATEGORIMouseClicked(evt);
+            }
+        });
 
         BTN_SIMPAN_KATEGORI.setBackground(new java.awt.Color(0, 171, 60));
         BTN_SIMPAN_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         BTN_SIMPAN_KATEGORI.setForeground(new java.awt.Color(255, 255, 255));
         BTN_SIMPAN_KATEGORI.setText("Simpan");
         BTN_SIMPAN_KATEGORI.setBorder(null);
+        BTN_SIMPAN_KATEGORI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_SIMPAN_KATEGORIMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout MAIN_FRAMELayout = new javax.swing.GroupLayout(MAIN_FRAME);
         MAIN_FRAME.setLayout(MAIN_FRAMELayout);
@@ -249,9 +291,121 @@ public class KategoriDATABUKU extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void INPUT_NAMA_KATEGORIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_NAMA_KATEGORIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_INPUT_NAMA_KATEGORIActionPerformed
+    private void inputRevalidate(){
+    
+        INPUT_KODE_KATEGORI.setText(KM.getKode());
+        INPUT_NAMA_KATEGORI.setText(KM.getNama());
+        INPUT_DESKRIPSI.setText(KM.getDeskripsi());
+        
+    }
+    
+    private boolean cekValidasi(){
+        
+        try{
+        
+            String kode = INPUT_KODE_KATEGORI.getText().replaceAll("[0-9]", "").toUpperCase().trim();
+            String nama = Characters.ucwords(INPUT_NAMA_KATEGORI.getText());
+            String deskripsi = INPUT_DESKRIPSI.getText().trim();
+            
+            if(kode.equals("")){
+                throw new Exception("Nilai kode harus terisi dan tidak berisi angka!");
+            }
+            
+            if(nama.equals("")){
+                throw new Exception("Nilai nama harus terisi !");
+            }
+            
+            if(deskripsi.equals("")){
+                throw new Exception("Nilai deskripsi harus terisi !");
+            }
+            
+            KM.setKode(kode);
+            KM.setNama(nama);
+            KM.setDeskripsi(deskripsi);
+            
+            return true;
+            
+        }catch(Exception error){
+        
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+            
+        }
+    
+    }
+    
+    private void simpan(){
+        if(cekValidasi()){
+            if(KM.insertData()){
+            
+                JOptionPane.showMessageDialog(null, KM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                
+                // refresh
+                KM.getDataTable(Dashboard.SEARCH_KATEGORI.getText(), Dashboard.TAMPILKAN_KATEGORI.getSelectedItem().toString());
+                
+                this.dispose();
+            
+            }else{
+                JOptionPane.showMessageDialog(null, KM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }    
+    }
+    
+    private void update(){
+        if(cekValidasi()){
+            if((!KM.getKode().equals(this.kode) ||
+                    !KM.getNama().equals(this.nama) ) ||
+                    !KM.getDeskripsi().equals(this.deskripsi)){
+                if(KM.updatedData()){
+
+                    JOptionPane.showMessageDialog(null, KM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+                    // refresh
+                    KM.getDataTable(Dashboard.SEARCH_KATEGORI.getText(), Dashboard.TAMPILKAN_KATEGORI.getSelectedItem().toString());
+
+                    this.dispose();
+
+                }else{
+                    JOptionPane.showMessageDialog(null, KM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                    JOptionPane.showMessageDialog(null, "Tidak ada perubahan data", "Infromasi", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }   
+    }
+    
+    private void delete(){
+        
+        inputRevalidate();
+        
+        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin mengapus kategoti "+KM.getNama()+" ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+        if(hapus == 0){
+            if(KM.deleteData()){
+                JOptionPane.showMessageDialog(null, KM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+                // refresh
+                KM.getDataTable(Dashboard.SEARCH_KATEGORI.getText(), Dashboard.TAMPILKAN_KATEGORI.getSelectedItem().toString());
+
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, KM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    }
+    
+    private void BTN_SIMPAN_KATEGORIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_KATEGORIMouseClicked
+        if(this.action.equals("ADD")){
+            simpan();
+        }else{
+            update();
+        }
+    }//GEN-LAST:event_BTN_SIMPAN_KATEGORIMouseClicked
+
+    private void BTN_HAPUS_KATEGORIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_KATEGORIMouseClicked
+        delete();
+    }//GEN-LAST:event_BTN_HAPUS_KATEGORIMouseClicked
 
     /**
      * @param args the command line arguments
@@ -284,7 +438,7 @@ public class KategoriDATABUKU extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KategoriDATABUKU("", 0).setVisible(true);
+                new KategoriDATABUKU("", "").setVisible(true);
             }
         });
     }

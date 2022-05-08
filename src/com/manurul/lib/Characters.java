@@ -13,6 +13,10 @@ public class Characters {
     
     public static String ucwords(String str){
         
+        if(str.equals("")){
+            return "";
+        }
+        
         String result = "";
         
         String[] strs = str.split(" ");

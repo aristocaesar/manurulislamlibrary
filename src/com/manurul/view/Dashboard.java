@@ -13,6 +13,7 @@ import com.manurul.lib.RoundedPanel;
 import com.manurul.lib.SideBar;
 import com.manurul.model.AnggotaModel;
 import com.manurul.model.JurusanModel;
+import com.manurul.model.KategoriModel;
 import com.manurul.model.KelasModel;
 import com.manurul.model.PenerbitModel;
 import com.manurul.model.PengurusModel;
@@ -226,7 +227,13 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_ADD_KATEGORI = new javax.swing.JLabel();
         SEARCH_KATEGORI = new javax.swing.JTextField();
         TABLE_KATEGORI = new javax.swing.JScrollPane();
-        TABLE_LIST_KATEGORI = new javax.swing.JTable();
+        TABLE_LIST_KATEGORI = new javax.swing.JTable(){
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+        };
         FILTER_TAMPIL_KATEGORI = new javax.swing.JLabel();
         TAMPILKAN_KATEGORI = new javax.swing.JComboBox<>();
         F_DB_PENERBIT = new RoundedPanel(15, Color.WHITE);
@@ -1246,6 +1253,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        TABLE_LIST_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         TABLE_LIST_KATEGORI.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"dfsd", "fdsfsdf", "sdfsdfsd", "fsdfsd"},
@@ -1257,6 +1265,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1fdsfsd", "Title 2fdfdsf", "Title 3dfdsf", "Title 4"
             }
         ));
+        TABLE_LIST_KATEGORI.setRowHeight(30);
+        TABLE_LIST_KATEGORI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_KATEGORIMouseClicked(evt);
+            }
+        });
         TABLE_KATEGORI.setViewportView(TABLE_LIST_KATEGORI);
 
         FILTER_TAMPIL_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -1264,7 +1278,12 @@ public class Dashboard extends javax.swing.JFrame {
         FILTER_TAMPIL_KATEGORI.setText("Tampilkan");
 
         TAMPILKAN_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TAMPILKAN_KATEGORI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TAMPILKAN_KATEGORI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "10", "20", "50", "100" }));
+        TAMPILKAN_KATEGORI.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TAMPILKAN_KATEGORIItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout F_DB_KATEGORILayout = new javax.swing.GroupLayout(F_DB_KATEGORI);
         F_DB_KATEGORI.setLayout(F_DB_KATEGORILayout);
@@ -2311,6 +2330,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void T_DB_KATEGORIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_KATEGORIMouseClicked
         new SideBar().setBukuPageSelected("KATEGORI");
+        new KategoriModel().getDataTable(SEARCH_KATEGORI.getText(), TAMPILKAN_KATEGORI.getSelectedItem().toString());
     }//GEN-LAST:event_T_DB_KATEGORIMouseClicked
 
     private void T_DB_PENERBITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_PENERBITMouseClicked
@@ -2340,11 +2360,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_SEARCH_BUKUKeyTyped
 
     private void ICON_ADD_KATEGORIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_KATEGORIMouseClicked
-        new KategoriDATABUKU("ADD", 0).setVisible(true);
+        new KategoriDATABUKU("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_KATEGORIMouseClicked
 
     private void SEARCH_KATEGORIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_KATEGORIKeyTyped
-        // TODO add your handling code here:
+       new KategoriModel().getDataTable(SEARCH_KATEGORI.getText(), TAMPILKAN_KATEGORI.getSelectedItem().toString());
     }//GEN-LAST:event_SEARCH_KATEGORIKeyTyped
 
     private void ICON_ADD_PENERBITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_PENERBITMouseClicked
@@ -2472,6 +2492,19 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TABLE_LIST_PENERBITMouseClicked
 
+    private void TABLE_LIST_KATEGORIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_KATEGORIMouseClicked
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_KATEGORI.getSelectedRow();
+
+            String kode = TABLE_LIST_KATEGORI.getValueAt(index, 1).toString();
+            new KategoriDATABUKU("EDIT", kode).setVisible(true);
+        }
+    }//GEN-LAST:event_TABLE_LIST_KATEGORIMouseClicked
+
+    private void TAMPILKAN_KATEGORIItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TAMPILKAN_KATEGORIItemStateChanged
+        new KategoriModel().getDataTable(SEARCH_KATEGORI.getText(), TAMPILKAN_KATEGORI.getSelectedItem().toString());
+    }//GEN-LAST:event_TAMPILKAN_KATEGORIItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -2592,7 +2625,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel P_TOTAL_BUKU;
     private javax.swing.JTextField SEARCH_BUKU;
     private javax.swing.JTextField SEARCH_JURUSAN;
-    private javax.swing.JTextField SEARCH_KATEGORI;
+    public static javax.swing.JTextField SEARCH_KATEGORI;
     private javax.swing.JTextField SEARCH_KELAS;
     public static javax.swing.JTextField SEARCH_PENERBIT;
     private javax.swing.JTextField SEARCH_PENGURUS;
@@ -2609,7 +2642,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JTable TABLE_LIST_ITEM_KELAS;
     public static javax.swing.JTable TABLE_LIST_ITEM_PENGURUS;
     private javax.swing.JScrollPane TABLE_LIST_JURUSAN;
-    private javax.swing.JTable TABLE_LIST_KATEGORI;
+    public static javax.swing.JTable TABLE_LIST_KATEGORI;
     private javax.swing.JScrollPane TABLE_LIST_KELAS;
     private javax.swing.JTable TABLE_LIST_LOG;
     public static javax.swing.JTable TABLE_LIST_PENERBIT;
@@ -2623,7 +2656,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane TABLE_RAK;
     private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_BUKU;
     public static javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_USER;
-    private javax.swing.JComboBox<String> TAMPILKAN_KATEGORI;
+    public static javax.swing.JComboBox<String> TAMPILKAN_KATEGORI;
     public static javax.swing.JComboBox<String> TAMPILKAN_PENERBIT;
     public static javax.swing.JComboBox<String> TAMPILKAN_RAK;
     private javax.swing.JLabel TITLE_ANGGOTA;
