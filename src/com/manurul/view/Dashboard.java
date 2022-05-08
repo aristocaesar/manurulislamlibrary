@@ -11,9 +11,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.lib.SideBar;
+import com.manurul.model.AnggotaModel;
 import com.manurul.model.JurusanModel;
 import com.manurul.model.KelasModel;
 import com.manurul.model.PengurusModel;
+import com.manurul.model.RakModel;
 import com.manurul.model.SettingModel;
 import com.manurul.view.modal.BukuDATABUKU;
 import com.manurul.view.modal.KategoriDATABUKU;
@@ -239,7 +241,15 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_ADD_RAK = new javax.swing.JLabel();
         SEARCH_RAK = new javax.swing.JTextField();
         TABLE_RAK = new javax.swing.JScrollPane();
-        TABLE_LIST_RAK = new javax.swing.JTable();
+        TABLE_LIST_RAK = new javax.swing.JTable(){
+
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+
+        };
         FILTER_TAMPIL_RAK = new javax.swing.JLabel();
         TAMPILKAN_RAK = new javax.swing.JComboBox<>();
         USER = new javax.swing.JPanel();
@@ -258,11 +268,19 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_ADD_USER = new javax.swing.JLabel();
         SEARCH_USER = new javax.swing.JTextField();
         TABLE_LIST_U_ANGGOTA = new javax.swing.JScrollPane();
-        TABLE_LIST_ANGGOTA = new javax.swing.JTable();
+        TABLE_LIST_ANGGOTA = new javax.swing.JTable(){
+
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+
+        };
         FILTER_TAMPIL_USER = new javax.swing.JLabel();
         TAMPILKAN_COMBOBOX_USER = new javax.swing.JComboBox<>();
-        FILTER_KELAS_USER = new javax.swing.JLabel();
-        KELAS_COMBOBOX_USER = new javax.swing.JComboBox<>();
+        GROUP_KELAS_USER = new javax.swing.JLabel();
+        GROUP_COMBOBOX_USER = new javax.swing.JComboBox<>();
         F_U_JURUSAN = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_JURUSAN = new javax.swing.JLabel();
         ICON_ADD_JURUSAN = new javax.swing.JLabel();
@@ -386,18 +404,17 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(SIDEBARLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(SIDEBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BTN_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTN_DASHBOARD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTN_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTN_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTN_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTN_EXIT))
-                        .addGap(12, 12, 12)))
+                            .addComponent(BTN_TRANSAKSI)
+                            .addComponent(BTN_DASHBOARD)
+                            .addComponent(BTN_DATABUKU)
+                            .addComponent(BTN_USER)
+                            .addComponent(BTN_SETTING)
+                            .addComponent(BTN_EXIT))))
                 .addGap(19, 19, 19))
         );
         SIDEBARLayout.setVerticalGroup(
             SIDEBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SIDEBARLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SIDEBARLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(MANURUL_LOGO)
                 .addGap(46, 46, 46)
@@ -410,9 +427,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(BTN_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(BTN_SETTING)
-                .addGap(265, 265, 265)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BTN_EXIT)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         MAIN_FRAME.setBackground(new java.awt.Color(239, 240, 245));
@@ -1390,6 +1407,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        TABLE_LIST_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         TABLE_LIST_RAK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"dfsd", "fdsfsdf", "sdfsdfsd", "fsdfsd"},
@@ -1401,6 +1419,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1fdsfsd", "Title 2fdfdsf", "Title 3dfdsf", "Title 4"
             }
         ));
+        TABLE_LIST_RAK.setRowHeight(30);
+        TABLE_LIST_RAK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_RAKMouseClicked(evt);
+            }
+        });
         TABLE_RAK.setViewportView(TABLE_LIST_RAK);
 
         FILTER_TAMPIL_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -1408,7 +1432,12 @@ public class Dashboard extends javax.swing.JFrame {
         FILTER_TAMPIL_RAK.setText("Tampilkan");
 
         TAMPILKAN_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TAMPILKAN_RAK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TAMPILKAN_RAK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "10", "20", "50", "100" }));
+        TAMPILKAN_RAK.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TAMPILKAN_RAKItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout F_DB_RAKLayout = new javax.swing.GroupLayout(F_DB_RAK);
         F_DB_RAK.setLayout(F_DB_RAKLayout);
@@ -1599,12 +1628,18 @@ public class Dashboard extends javax.swing.JFrame {
         SEARCH_USER.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         SEARCH_USER.setForeground(new java.awt.Color(96, 96, 96));
         SEARCH_USER.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+        SEARCH_USER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SEARCH_USERActionPerformed(evt);
+            }
+        });
         SEARCH_USER.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 SEARCH_USERKeyTyped(evt);
             }
         });
 
+        TABLE_LIST_ANGGOTA.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         TABLE_LIST_ANGGOTA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"dfsd", "fdsfsdf", "sdfsdfsd", "fsdfsd"},
@@ -1616,6 +1651,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1fdsfsd", "Title 2fdfdsf", "Title 3dfdsf", "Title 4"
             }
         ));
+        TABLE_LIST_ANGGOTA.setRowHeight(30);
+        TABLE_LIST_ANGGOTA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_ANGGOTAMouseClicked(evt);
+            }
+        });
         TABLE_LIST_U_ANGGOTA.setViewportView(TABLE_LIST_ANGGOTA);
 
         FILTER_TAMPIL_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -1623,14 +1664,24 @@ public class Dashboard extends javax.swing.JFrame {
         FILTER_TAMPIL_USER.setText("Tampilkan");
 
         TAMPILKAN_COMBOBOX_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TAMPILKAN_COMBOBOX_USER.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        TAMPILKAN_COMBOBOX_USER.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "10", "25", "50", "100" }));
+        TAMPILKAN_COMBOBOX_USER.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TAMPILKAN_COMBOBOX_USERItemStateChanged(evt);
+            }
+        });
 
-        FILTER_KELAS_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        FILTER_KELAS_USER.setForeground(new java.awt.Color(96, 96, 96));
-        FILTER_KELAS_USER.setText("Kelas");
+        GROUP_KELAS_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        GROUP_KELAS_USER.setForeground(new java.awt.Color(96, 96, 96));
+        GROUP_KELAS_USER.setText("Group");
 
-        KELAS_COMBOBOX_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        KELAS_COMBOBOX_USER.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        GROUP_COMBOBOX_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        GROUP_COMBOBOX_USER.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Kelas", "Jurusan" }));
+        GROUP_COMBOBOX_USER.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                GROUP_COMBOBOX_USERItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout F_U_ANGGOTALayout = new javax.swing.GroupLayout(F_U_ANGGOTA);
         F_U_ANGGOTA.setLayout(F_U_ANGGOTALayout);
@@ -1640,9 +1691,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(F_U_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(F_U_ANGGOTALayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(FILTER_KELAS_USER)
+                        .addComponent(GROUP_KELAS_USER)
                         .addGap(18, 18, 18)
-                        .addComponent(KELAS_COMBOBOX_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(GROUP_COMBOBOX_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(67, 67, 67)
                         .addComponent(FILTER_TAMPIL_USER)
                         .addGap(18, 18, 18)
@@ -1674,14 +1725,14 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_EXPORT_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_USER))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_LIST_U_ANGGOTA, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addComponent(TABLE_LIST_U_ANGGOTA, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(F_U_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(F_U_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(TAMPILKAN_COMBOBOX_USER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(FILTER_TAMPIL_USER))
-                    .addComponent(FILTER_KELAS_USER)
-                    .addComponent(KELAS_COMBOBOX_USER))
+                    .addComponent(GROUP_KELAS_USER)
+                    .addComponent(GROUP_COMBOBOX_USER))
                 .addGap(20, 20, 20))
         );
 
@@ -2148,6 +2199,8 @@ public class Dashboard extends javax.swing.JFrame {
         // TAMPILKAN LAYOUT USER
         new SideBar().setBar("USER");
         new SideBar().setUserPageSelected("ANGGOTA");
+        // GET DATA TABLE USER
+        new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
     }//GEN-LAST:event_BTN_USERMouseClicked
 
     private void BTN_SETTINGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SETTINGMouseClicked
@@ -2169,6 +2222,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void T_U_ANGGOTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_ANGGOTAMouseClicked
         new SideBar().setUserPageSelected("ANGGOTA");
+        new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
     }//GEN-LAST:event_T_U_ANGGOTAMouseClicked
 
     private void T_U_JURUSANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_JURUSANMouseClicked
@@ -2188,13 +2242,11 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void ICON_ADD_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_USERMouseClicked
         // OPEN MODAL ANGGOTA
-        AnggotaUSER AU = new AnggotaUSER("ADD", 0);
-        AU.setVisible(true);
+        new AnggotaUSER("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_USERMouseClicked
 
     private void ICON_IMPORT_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_IMPORT_USERMouseClicked
         // OPEN MODAL ANGGOTA
-        new AnggotaUSER("UPDATE", 0).setVisible(true);
     }//GEN-LAST:event_ICON_IMPORT_USERMouseClicked
 
     private void ICON_EXPORT_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_EXPORT_USERMouseClicked
@@ -2202,7 +2254,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_ICON_EXPORT_USERMouseClicked
 
     private void SEARCH_USERKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_USERKeyTyped
-        // TODO add your handling code here:
+        new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
     }//GEN-LAST:event_SEARCH_USERKeyTyped
 
     private void ICON_ADD_JURUSANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_JURUSANMouseClicked
@@ -2246,6 +2298,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void T_DB_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_DB_RAKMouseClicked
         new SideBar().setBukuPageSelected("RAK");
+        new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());
     }//GEN-LAST:event_T_DB_RAKMouseClicked
 
     private void ICON_EXPORT_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_EXPORT_BUKUMouseClicked
@@ -2281,11 +2334,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_SEARCH_PENERBITKeyTyped
 
     private void ICON_ADD_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_RAKMouseClicked
-        new RakDATABUKU("EDIT", 0).setVisible(true);
+        new RakDATABUKU("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_RAKMouseClicked
 
     private void SEARCH_RAKKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_RAKKeyTyped
-        // TODO add your handling code here:
+        new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());
     }//GEN-LAST:event_SEARCH_RAKKeyTyped
 
     private void T_TR_PINJAMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_TR_PINJAMMouseClicked
@@ -2350,6 +2403,40 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TABLE_LIST_ITEM_PENGURUSMouseClicked
 
+    private void GROUP_COMBOBOX_USERItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_GROUP_COMBOBOX_USERItemStateChanged
+        new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
+    }//GEN-LAST:event_GROUP_COMBOBOX_USERItemStateChanged
+
+    private void SEARCH_USERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SEARCH_USERActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SEARCH_USERActionPerformed
+
+    private void TABLE_LIST_ANGGOTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_ANGGOTAMouseClicked
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_ANGGOTA.getSelectedRow();
+
+            String nis = TABLE_LIST_ANGGOTA.getValueAt(index, 1).toString();
+            new AnggotaUSER("EDIT", nis).setVisible(true);
+        }
+    }//GEN-LAST:event_TABLE_LIST_ANGGOTAMouseClicked
+
+    private void TAMPILKAN_COMBOBOX_USERItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TAMPILKAN_COMBOBOX_USERItemStateChanged
+        new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
+    }//GEN-LAST:event_TAMPILKAN_COMBOBOX_USERItemStateChanged
+
+    private void TAMPILKAN_RAKItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TAMPILKAN_RAKItemStateChanged
+        new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());        
+    }//GEN-LAST:event_TAMPILKAN_RAKItemStateChanged
+
+    private void TABLE_LIST_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_RAKMouseClicked
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_RAK.getSelectedRow();
+
+            String kode = TABLE_LIST_RAK.getValueAt(index, 1).toString();
+            new RakDATABUKU("EDIT", kode).setVisible(true);
+        }
+    }//GEN-LAST:event_TABLE_LIST_RAKMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2397,7 +2484,6 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel DASHBOARD;
     public static javax.swing.JPanel DATABUKU;
     private javax.swing.JLabel FILTER_KATEGORI_BUKU;
-    private javax.swing.JLabel FILTER_KELAS_USER;
     private javax.swing.JLabel FILTER_TAMPIL_BUKU;
     private javax.swing.JLabel FILTER_TAMPIL_KATEGORI;
     private javax.swing.JLabel FILTER_TAMPIL_PENERBIT;
@@ -2418,6 +2504,8 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel F_U_JURUSAN;
     public static javax.swing.JPanel F_U_KELAS;
     public static javax.swing.JPanel F_U_PENGURUS;
+    public static javax.swing.JComboBox<String> GROUP_COMBOBOX_USER;
+    private javax.swing.JLabel GROUP_KELAS_USER;
     private javax.swing.JLabel ICON_ADD_BUKU;
     private javax.swing.JLabel ICON_ADD_JURUSAN;
     private javax.swing.JLabel ICON_ADD_KATEGORI;
@@ -2443,7 +2531,6 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JSpinner INPUT_SET_2;
     public static javax.swing.JComboBox<String> INPUT_SET_3;
     private javax.swing.JComboBox<String> KATEGORI_COMBOBOX_BUKU;
-    private javax.swing.JComboBox<String> KELAS_COMBOBOX_USER;
     private javax.swing.JLabel LABEL_LOG;
     private javax.swing.JLabel LABEL_SET_1;
     private javax.swing.JLabel LABEL_SET_2;
@@ -2474,13 +2561,13 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField SEARCH_KELAS;
     private javax.swing.JTextField SEARCH_PENERBIT;
     private javax.swing.JTextField SEARCH_PENGURUS;
-    private javax.swing.JTextField SEARCH_RAK;
-    private javax.swing.JTextField SEARCH_USER;
+    public static javax.swing.JTextField SEARCH_RAK;
+    public static javax.swing.JTextField SEARCH_USER;
     public static javax.swing.JPanel SETTING;
     private javax.swing.JPanel SIDEBAR;
     private javax.swing.JComboBox<String> SORT_LIST_LOG;
     private javax.swing.JScrollPane TABLE_KATEGORI;
-    private javax.swing.JTable TABLE_LIST_ANGGOTA;
+    public static javax.swing.JTable TABLE_LIST_ANGGOTA;
     private javax.swing.JTable TABLE_LIST_BUKU;
     private javax.swing.JScrollPane TABLE_LIST_DB_BUKU;
     public static javax.swing.JTable TABLE_LIST_ITEM_JURUSAN;
@@ -2493,17 +2580,17 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTable TABLE_LIST_PENERBIT;
     private javax.swing.JScrollPane TABLE_LIST_PENGURUS;
     private javax.swing.JTable TABLE_LIST_PINJAM;
-    private javax.swing.JTable TABLE_LIST_RAK;
+    public static javax.swing.JTable TABLE_LIST_RAK;
     private javax.swing.JScrollPane TABLE_LIST_U_ANGGOTA;
     private javax.swing.JScrollPane TABLE_LOG;
     private javax.swing.JScrollPane TABLE_PENERBIT;
     private javax.swing.JScrollPane TABLE_PINJAM;
     private javax.swing.JScrollPane TABLE_RAK;
     private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_BUKU;
-    private javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_USER;
+    public static javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_USER;
     private javax.swing.JComboBox<String> TAMPILKAN_KATEGORI;
     private javax.swing.JComboBox<String> TAMPILKAN_PENERBIT;
-    private javax.swing.JComboBox<String> TAMPILKAN_RAK;
+    public static javax.swing.JComboBox<String> TAMPILKAN_RAK;
     private javax.swing.JLabel TITLE_ANGGOTA;
     private javax.swing.JLabel TITLE_BERMASALAH;
     private javax.swing.JLabel TITLE_DASHBOARD;

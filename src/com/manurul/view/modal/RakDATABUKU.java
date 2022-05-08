@@ -5,10 +5,16 @@
  */
 package com.manurul.view.modal;
 
+import com.manurul.lib.Characters;
 import com.manurul.lib.InputBorder;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.RakModel;
+import static com.manurul.view.Dashboard.SEARCH_RAK;
+import static com.manurul.view.Dashboard.TAMPILKAN_RAK;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,9 +26,22 @@ public class RakDATABUKU extends javax.swing.JFrame {
      * Creates new form RakDATABUKU
      */
     String title = "Edit";
+    String Action;
     
-    public RakDATABUKU(String Action, int ID) {
+    // STATE VALUE INPUT
+    String kode;
+    String nama;
+    String deskripsi;
+    
+    ImageIcon successIcon;
+    
+    RakModel RM = new RakModel();
+    
+    public RakDATABUKU(String Action, String Kode) {
         initComponents();
+        
+        // SET STATE
+        this.Action = Action;
         
         // SET SIZE
         this.setSize(1024, 345);
@@ -38,7 +57,7 @@ public class RakDATABUKU extends javax.swing.JFrame {
         
         // INIT INPUT BORDER PADDING
         InputBorder.set(INPUT_KODE_RAK, 8);
-        InputBorder.set(INPUT_NAMA_KATEGORI, 8);
+        InputBorder.set(INPUT_NAMA_RAK, 8);
         InputBorder.set(INPUT_DESKRIPSI, 8);
         InputBorder.set(INPUT_UPDATE, 8);
         InputBorder.set(INPUT_CREATED, 8);
@@ -58,10 +77,28 @@ public class RakDATABUKU extends javax.swing.JFrame {
             
             BTN_HAPUS_RAK.setVisible(false);
         
+        }else{
+            
+            RM.getSelectedData(Kode);
+            
+            this.kode = RM.getKode();
+            this.nama = RM.getNama();
+            this.deskripsi = RM.getDeskripsi();
+            
+            INPUT_KODE_RAK.setText(RM.getKode());
+            INPUT_NAMA_RAK.setText(RM.getNama());
+            INPUT_DESKRIPSI.setText(RM.getDeskripsi());
+            INPUT_CREATED.setText(RM.getCreated());
+            INPUT_UPDATE.setText(RM.getUpdated());
+            
         }
         
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - " + this.title + " Rak Buku");
+        
+        // SET SUCCESS ICON
+        ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
+        this.successIcon = successIcon;
         
     }
 
@@ -78,7 +115,7 @@ public class RakDATABUKU extends javax.swing.JFrame {
         CONTAINER = new RoundedPanel(15, Color.WHITE);
         INPUT_KODE_RAK = new javax.swing.JTextField();
         LABEL_KODE_RAK = new javax.swing.JLabel();
-        INPUT_NAMA_KATEGORI = new javax.swing.JTextField();
+        INPUT_NAMA_RAK = new javax.swing.JTextField();
         LABEL_NAMA_RAK = new javax.swing.JLabel();
         LABEL_UPDATE = new javax.swing.JLabel();
         INPUT_UPDATE = new javax.swing.JTextField();
@@ -96,7 +133,6 @@ public class RakDATABUKU extends javax.swing.JFrame {
 
         CONTAINER.setBackground(new java.awt.Color(239, 240, 245));
 
-        INPUT_KODE_RAK.setEditable(false);
         INPUT_KODE_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_KODE_RAK.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_KODE_RAK.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
@@ -105,14 +141,9 @@ public class RakDATABUKU extends javax.swing.JFrame {
         LABEL_KODE_RAK.setForeground(new java.awt.Color(96, 96, 96));
         LABEL_KODE_RAK.setText("Kode Rak");
 
-        INPUT_NAMA_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        INPUT_NAMA_KATEGORI.setForeground(new java.awt.Color(96, 96, 96));
-        INPUT_NAMA_KATEGORI.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        INPUT_NAMA_KATEGORI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                INPUT_NAMA_KATEGORIActionPerformed(evt);
-            }
-        });
+        INPUT_NAMA_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        INPUT_NAMA_RAK.setForeground(new java.awt.Color(96, 96, 96));
+        INPUT_NAMA_RAK.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
 
         LABEL_NAMA_RAK.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_NAMA_RAK.setForeground(new java.awt.Color(96, 96, 96));
@@ -157,7 +188,7 @@ public class RakDATABUKU extends javax.swing.JFrame {
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(INPUT_CREATED)
                     .addComponent(LABEL_CREATED, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(INPUT_NAMA_KATEGORI)
+                    .addComponent(INPUT_NAMA_RAK)
                     .addComponent(LABEL_NAMA_RAK, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
                 .addGap(37, 37, 37)
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +210,7 @@ public class RakDATABUKU extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(INPUT_KODE_RAK)
-                            .addComponent(INPUT_NAMA_KATEGORI)))
+                            .addComponent(INPUT_NAMA_RAK)))
                     .addGroup(CONTAINERLayout.createSequentialGroup()
                         .addComponent(LABEL_DESKRIPSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -200,12 +231,22 @@ public class RakDATABUKU extends javax.swing.JFrame {
         BTN_HAPUS_RAK.setForeground(new java.awt.Color(255, 255, 255));
         BTN_HAPUS_RAK.setText("Hapus");
         BTN_HAPUS_RAK.setBorder(null);
+        BTN_HAPUS_RAK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_HAPUS_RAKMouseClicked(evt);
+            }
+        });
 
         BTN_SIMPAN_RAK.setBackground(new java.awt.Color(0, 171, 60));
         BTN_SIMPAN_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         BTN_SIMPAN_RAK.setForeground(new java.awt.Color(255, 255, 255));
         BTN_SIMPAN_RAK.setText("Simpan");
         BTN_SIMPAN_RAK.setBorder(null);
+        BTN_SIMPAN_RAK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_SIMPAN_RAKMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout MAIN_FRAMELayout = new javax.swing.GroupLayout(MAIN_FRAME);
         MAIN_FRAME.setLayout(MAIN_FRAMELayout);
@@ -249,9 +290,130 @@ public class RakDATABUKU extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void INPUT_NAMA_KATEGORIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_NAMA_KATEGORIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_INPUT_NAMA_KATEGORIActionPerformed
+    private boolean cekValidasi(){
+    
+        try{
+        
+            String kode = INPUT_KODE_RAK.getText();
+            String nama = INPUT_NAMA_RAK.getText().replaceAll("[0-9]", "");
+            String deskripsi = INPUT_DESKRIPSI.getText();
+            
+            if(kode.equals("")){
+                throw new Exception("Nilai Kode harus terisi !");
+            }
+            
+            if(nama.equals("")){
+                throw new Exception("Nilai Nama harus terisi dan tidak berisi angka !");
+            }
+            
+            if(deskripsi.equals("")){
+                throw new Exception("Nilai Deskripsi harus terisi !");  
+            }
+            
+            return true;
+            
+        }catch(Exception error){
+        
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+            
+        }
+        
+    }
+    
+    private void inputRevalidate(){
+        
+        INPUT_KODE_RAK.setText(this.kode);
+        INPUT_NAMA_RAK.setText(this.nama);
+        INPUT_DESKRIPSI.setText(this.deskripsi);
+        
+    }
+    
+    private void simpan(){
+    
+        if(cekValidasi()){
+         
+            RM.setKode(INPUT_KODE_RAK.getText().toUpperCase());
+            RM.setNama(Characters.ucwords(INPUT_NAMA_RAK.getText()));
+            RM.setDeskripsi(INPUT_DESKRIPSI.getText());
+            
+            if(RM.insertData()){
+                JOptionPane.showMessageDialog(null, RM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                
+                new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());
+                
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, RM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        }
+        
+    }
+    
+    private void update(){
+        
+        if(cekValidasi()){
+            
+            // cek perubahan
+            String kode = INPUT_KODE_RAK.getText().toUpperCase();
+            String nama = Characters.ucwords(INPUT_NAMA_RAK.getText());
+            String deskripsi = INPUT_DESKRIPSI.getText();
+            
+            if(!kode.equals(this.kode) || !nama.equals(this.nama) || !deskripsi.equals(this.deskripsi)){
+                RM.setKode(kode);
+                RM.setNama(nama);
+                RM.setDeskripsi(deskripsi);
+
+                if(RM.updatedData()){
+                    JOptionPane.showMessageDialog(null, RM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+                    new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());
+
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, RM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+                    inputRevalidate();
+                }              
+            }else{
+                JOptionPane.showMessageDialog(null, "Tidak ada perubahan !", "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            
+        }
+        
+    }
+    
+    
+    private void BTN_SIMPAN_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_RAKMouseClicked
+        if(this.Action.equals("ADD")){
+            simpan();
+        }else{
+            update();
+        }
+    }//GEN-LAST:event_BTN_SIMPAN_RAKMouseClicked
+
+    private void BTN_HAPUS_RAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_RAKMouseClicked
+        
+        INPUT_KODE_RAK.setText(RM.getKode());
+        INPUT_NAMA_RAK.setText(RM.getNama());
+        INPUT_DESKRIPSI.setText(RM.getDeskripsi());
+        
+        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin mengapus rak "+RM.getKode()+" ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+        if(hapus == 0){
+            if(RM.deleteData()){
+                JOptionPane.showMessageDialog(null, RM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+                new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());
+
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, RM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    }//GEN-LAST:event_BTN_HAPUS_RAKMouseClicked
 
     /**
      * @param args the command line arguments
@@ -286,7 +448,7 @@ public class RakDATABUKU extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RakDATABUKU("", 0).setVisible(true);
+                new RakDATABUKU("", "").setVisible(true);
             }
         });
     }
@@ -298,7 +460,7 @@ public class RakDATABUKU extends javax.swing.JFrame {
     private javax.swing.JTextField INPUT_CREATED;
     private javax.swing.JTextField INPUT_DESKRIPSI;
     private javax.swing.JTextField INPUT_KODE_RAK;
-    private javax.swing.JTextField INPUT_NAMA_KATEGORI;
+    private javax.swing.JTextField INPUT_NAMA_RAK;
     private javax.swing.JTextField INPUT_UPDATE;
     private javax.swing.JLabel LABEL_CREATED;
     private javax.swing.JLabel LABEL_DESKRIPSI;

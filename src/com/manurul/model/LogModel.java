@@ -38,9 +38,10 @@ public class LogModel extends DBConfig{
             pst.setTimestamp(4, new SqlTime().getTimeStamp());
             
             
-            if(pst.execute()){
-                throw new SQLException("Terjadi kesalahan pada data aktifitas !");
-            }
+//            if(pst.execute()){
+//                throw new SQLException("Terjadi kesalahan pada data aktifitas !");
+//            }
+            System.out.println(Process +" , "+ Message +" , "+ Petugas);
             
        }catch(SQLException error){
            this.error = error.getMessage();

@@ -132,7 +132,9 @@ public class JurusanModel extends DBConfig{
                 throw new SQLException("Gagal menambahkan jurusan!");
             }
             
-            setMessage("Berhasil menambahkan jurusan!");
+            new LogModel().Action("TAMBAH JURUSAN", "Menambahkan jurusan "+ getNama(), Dashboard.nama_user);
+            
+            setMessage("Berhasil menambahkan jurusan " + getNama());
             return true;
             
         }catch(SQLException error){
@@ -165,7 +167,9 @@ public class JurusanModel extends DBConfig{
                 throw new SQLException("Gagal memperbarui jurusan!");
             }
             
-            setMessage("Berhasil memperbarui jurusan!");
+            new LogModel().Action("UPDATE JURUSAN", "Memperbarui jurusan "+ getNama(), Dashboard.nama_user);
+            
+            setMessage("Berhasil memperbarui jurusan "+ getNama());
             return true;
             
         }catch(SQLException error){
@@ -181,7 +185,7 @@ public class JurusanModel extends DBConfig{
     
     }
     
-    public boolean deleteData(){
+    public boolean deleteData(String nama){
     
         try{
         
@@ -192,7 +196,9 @@ public class JurusanModel extends DBConfig{
                 throw new SQLException("Gagal menghapus jurusan!");
             }
             
-            setMessage("Berhasil menghapus jurusan!");
+            new LogModel().Action("HAPUS JURUSAN", "menghapus jurusan "+ nama, Dashboard.nama_user);
+            
+            setMessage("Berhasil menghapus jurusan "+ nama);
             return true;
             
         }catch(SQLException error){

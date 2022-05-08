@@ -99,4 +99,22 @@ public class SettingModel extends DBConfig{
         
     }
     
+    public int getMaxPinjam(){
+        
+        try{
+        
+            String sql = "SELECT max_pinjam_buku_umum FROM ma_setting";
+            ResultSet res = conn.prepareStatement(sql).executeQuery();
+            if(!res.next()){
+                throw new SQLException("Gagal mengambil data setting !");
+            }
+            
+            return res.getInt("max_pinjam_buku_umum");
+            
+        }catch(SQLException error){
+            return 0;
+        }
+        
+    }
+    
 }

@@ -26,7 +26,7 @@ public class GenKode {
             num += Rand.nextInt(9);
         }
         
-        return prefix + "-" + num;
+        return prefix + " - " + num;
         
     }
     

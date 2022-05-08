@@ -353,16 +353,16 @@ public class PengurusUSER extends javax.swing.JFrame {
     
         try{
       
-            String Nip = INPUT_NIP.getText();
+            String Nip = INPUT_NIP.getText().replaceAll("[a-zA-Z]", "");
             String Username = INPUT_USERNAME.getText();
             String Password = INPUT_PASSWORD.getText();
-            String NamaLengkap = INPUT_NAMA.getText();
+            String NamaLengkap = INPUT_NAMA.getText().replaceAll("[0-9]", "");
             String HakAkses = COMBOBOX_HAK_AKSES.getSelectedItem().toString();
             String Status = COMBOBOX_STATUS.getSelectedItem().toString();
             
             // cek apakah semua tidak kosong
             if(Nip.equals("") || Username.equals("") || Password.equals("") || NamaLengkap.equals("")){
-                throw new Exception("Semua nilai input harus terisi!");
+                throw new Exception("Pastikan semua nilai input benar dan terisi!");
             }
             
             // cek apakah semua tidak kosong
@@ -415,7 +415,6 @@ public class PengurusUSER extends javax.swing.JFrame {
             PM.setStatus(COMBOBOX_STATUS.getSelectedItem().toString());
             if(PM.updateData()){
                     JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-//                    new LogModel().Action("TAMBAH KELAS", "Menambahkan kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
                     if(PM.getId().equals(Dashboard.id_user)){
                         JOptionPane.showMessageDialog(null, "Silakan login kembali untuk memuat informasi yang terbaru", "Informasi", JOptionPane.INFORMATION_MESSAGE);
                         System.exit(0);
@@ -437,14 +436,18 @@ public class PengurusUSER extends javax.swing.JFrame {
         COMBOBOX_HAK_AKSES.setSelectedItem(PM.getHakAkses());
         COMBOBOX_STATUS.setSelectedItem(PM.getStatus());
         if(cekValidasi("DELETE")){
-            if(PM.deleteData()){
+            if(PM.deleteData(PM.getNamaLengkap())){
                     JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-//                    new LogModel().Action("TAMBAH KELAS", "Menambahkan kelas "+INPUT_KODE_KELAS.getText(), Dashboard.nama_user);
-                    PM.getDataTable("");
-                    this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(null, PM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+                    if(PM.getId().equals(Dashboard.id_user)){
+                        JOptionPane.showMessageDialog(null, "Silakan login kembali untuk memuat informasi yang terbaru", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                        System.exit(0);
+                    }else{
+                        PM.getDataTable("");
+                        this.dispose();
+                    }
             }
+        }else{
+            JOptionPane.showMessageDialog(null, PM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
         }
     }
     
