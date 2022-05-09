@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2022 at 07:35 PM
+-- Generation Time: May 09, 2022 at 06:00 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -70,8 +70,8 @@ CREATE TABLE `ma_buku` (
   `judul` varchar(128) NOT NULL,
   `jenis` enum('PKT','UMM') DEFAULT 'UMM',
   `id_kategori` int(11) UNSIGNED NOT NULL,
-  `harga` int(11) NOT NULL,
-  `lebar_panjang` varchar(16) NOT NULL,
+  `harga` varchar(50) NOT NULL,
+  `lebar_panjang` varchar(16) NOT NULL DEFAULT '0,0',
   `jumlah_halaman` int(11) NOT NULL,
   `tahun_terbit` int(8) NOT NULL,
   `penulis` varchar(32) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE `ma_buku` (
 --
 
 INSERT INTO `ma_buku` (`id`, `isbn`, `judul`, `jenis`, `id_kategori`, `harga`, `lebar_panjang`, `jumlah_halaman`, `tahun_terbit`, `penulis`, `id_penerbit`, `stok`, `id_rak`, `deskripsi`, `jumlah_dipinjam`, `created_at`, `updated_at`) VALUES
-(1, '9786233311557', 'Hallo Koding', 'UMM', 2, 150000, '50,80', 168, 2021, 'Hilman Ramadhan', 1, 26, 1, 'Buku yang membahas masalah dan motivasi seorang programmer', 0, '2022-03-23 10:26:14', '2022-03-23 10:26:14');
+(1, '9786233311557', 'Hallo Koding', 'UMM', 2, '150000', '50,80', 168, 2021, 'Hilman Ramadhan', 1, 26, 1, 'Buku yang membahas masalah dan motivasi seorang programmer', 0, '2022-03-23 10:26:14', '2022-03-23 10:26:14');
 
 -- --------------------------------------------------------
 
@@ -170,7 +170,7 @@ CREATE TABLE `ma_kategori` (
 --
 
 INSERT INTO `ma_kategori` (`id`, `kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(1, 'MAT', 'MATEMATIKA', 'Buku Kategori Matematika', '2022-03-23 10:22:49', '2022-03-23 10:22:49'),
+(1, 'MAT', 'Matematika', 'Buku Kategori Matematika', '2022-03-23 10:22:49', '2022-05-09 21:46:52'),
 (2, 'PRGM', 'Program', 'Buku yang berkategori membahasa bahasa program', '2022-03-23 10:22:49', '2022-05-09 00:28:36');
 
 -- --------------------------------------------------------
@@ -203,7 +203,7 @@ INSERT INTO `ma_kelas` (`id`, `kode`, `created_at`, `updated_at`) VALUES
 --
 DELIMITER $$
 CREATE TRIGGER `ma_kelas_before_delete` BEFORE DELETE ON `ma_kelas` FOR EACH ROW BEGIN
-	UPDATE ma_anggota SET kelas = "" WHERE kelas = OLD.kode;
+	UPDATE ma_anggota SET kelas = "" WHERE kelas = OLD.id;
 END
 $$
 DELIMITER ;
@@ -560,7 +560,7 @@ ALTER TABLE `ma_jurusan`
 -- AUTO_INCREMENT for table `ma_kategori`
 --
 ALTER TABLE `ma_kategori`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ma_kelas`
