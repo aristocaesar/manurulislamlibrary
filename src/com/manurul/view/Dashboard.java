@@ -217,7 +217,15 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_ADD_BUKU = new javax.swing.JLabel();
         SEARCH_BUKU = new javax.swing.JTextField();
         TABLE_LIST_DB_BUKU = new javax.swing.JScrollPane();
-        TABLE_LIST_BUKU = new javax.swing.JTable();
+        TABLE_LIST_BUKU = new javax.swing.JTable(){
+
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+
+        };
         FILTER_TAMPIL_BUKU = new javax.swing.JLabel();
         TAMPILKAN_COMBOBOX_BUKU = new javax.swing.JComboBox<>();
         FILTER_KATEGORI_BUKU = new javax.swing.JLabel();
@@ -2636,7 +2644,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> SORT_LIST_LOG;
     private javax.swing.JScrollPane TABLE_KATEGORI;
     public static javax.swing.JTable TABLE_LIST_ANGGOTA;
-    private javax.swing.JTable TABLE_LIST_BUKU;
+    public static javax.swing.JTable TABLE_LIST_BUKU;
     private javax.swing.JScrollPane TABLE_LIST_DB_BUKU;
     public static javax.swing.JTable TABLE_LIST_ITEM_JURUSAN;
     public static javax.swing.JTable TABLE_LIST_ITEM_KELAS;
