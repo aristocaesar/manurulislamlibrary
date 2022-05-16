@@ -6,11 +6,14 @@
 package com.manurul.model;
 
 import com.manurul.lib.DBConfig;
+import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
+import com.manurul.view.modal.BukuDATABUKU;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class BukuModel extends DBConfig {
     
     // set state 
-    int id;
+    String old_isbn;
     String isbn;
     String judul;
     String jenis;
@@ -31,10 +34,10 @@ public class BukuModel extends DBConfig {
     String tahun_terbit;
     String penulis;
     String penerbit;
-    String stok;
+    int stok;
     String rak;
     String deskripsi;
-    String jumlah_dipinjam;
+    String max_dipinjam;
     String created_at;
     String updated_at;
     String message;
@@ -42,12 +45,12 @@ public class BukuModel extends DBConfig {
     Connection conn = (Connection)getConnection();
     DefaultTableModel table_model = new DefaultTableModel();
     
-    public void setId(int id){
-        this.id = id;
+    public void setOldISBN(String ISBN){
+        this.old_isbn = ISBN;
     }
     
-    public int getId(){
-        return this.id;
+    public String getOldISBN(){
+        return this.old_isbn;
     }
     
     public void setIsbn(String isbn){
@@ -130,11 +133,11 @@ public class BukuModel extends DBConfig {
         return this.penerbit;
     }
     
-    public void setStok(String stok) {
+    public void setStok(int stok) {
         this.stok = stok;
     }
     
-    public String getStok() {
+    public int getStok() {
         return this.stok;
     }
     
@@ -154,12 +157,12 @@ public class BukuModel extends DBConfig {
         return this.deskripsi;
     }
     
-    public void setJumlahPinjam(String jumlah) {
-        this.jumlah_dipinjam = jumlah;
+    public void setMaxDipinjam(String jumlah) {
+        this.max_dipinjam = jumlah;
     }
     
-    public String getJumlahPinjam() {
-        return this.jumlah_dipinjam;
+    public String getMaxDipinjam() {
+        return this.max_dipinjam;
     }
     
     public void setCreated(String tgl) {
@@ -187,18 +190,32 @@ public class BukuModel extends DBConfig {
     }
     
     // get kategori
-    private String getKategori(String id){
+    public String getKategoriModel(String Nama){
     
         try{
+        
+        String sql = "SELECT nama FROM ma_kategori";
+        if(!Nama.equals("")){
+        
+            sql = "SELECT kode FROM ma_kategori WHERE nama = '" + Nama.toLowerCase()  + "'"; 
             
-        String sql = "SELECT kode FROM ma_kategori WHERE id = ?";
+        }
         
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1, id);
         ResultSet res = pst.executeQuery();
         
-        if(res.next()){
-            return res.getString("kode");
+        if(Nama.equals("")){
+
+            while(res.next()){
+                BukuDATABUKU.INPUT_KATEGORI.addItem(res.getString("nama"));
+            }
+
+        }else{
+
+            if(res.next()){
+                return res.getString("kode");
+            }
+
         }
         
         return "";
@@ -212,22 +229,21 @@ public class BukuModel extends DBConfig {
     }
     
     // get penerbit
-    private String getPenerbit(String id){
+    public String getPenerbitModel(String Nama){
     
         try{
             
-        String sql = "SELECT nama FROM ma_penerbit WHERE id = ?";
-        
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1, id);
-        ResultSet res = pst.executeQuery();
-        
-        if(res.next()){
-            return res.getString("nama");
-        }
-        
-        return "";
-        
+            String sql = "SELECT nama FROM ma_penerbit";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet res = pst.executeQuery();
+
+            while(res.next()){
+                BukuDATABUKU.INPUT_PENERBIT.addItem(res.getString("nama"));
+            }
+
+            return "";
+            
         }catch(SQLException error){
         
             return error.getMessage();
@@ -237,21 +253,20 @@ public class BukuModel extends DBConfig {
     }
     
     // get rak
-    private String getRak(String id){
+    public String getRakModel(){
     
         try{
+
+            String sql = "SELECT kode FROM ma_rak";
             
-        String sql = "SELECT kode FROM ma_rak WHERE id = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet res = pst.executeQuery();
+
+            while(res.next()){
+                BukuDATABUKU.INPUT_RAK.addItem(res.getString("kode"));
+            }
         
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1, id);
-        ResultSet res = pst.executeQuery();
-        
-        if(res.next()){
-            return res.getString("kode");
-        }
-        
-        return "";
+            return "";
         
         }catch(SQLException error){
         
@@ -263,7 +278,7 @@ public class BukuModel extends DBConfig {
     
     
     // setDataTable
-    public void setDataTable(){
+    public void setDataTable(String Keyword, String Group, String Showing){
     
         table_model.setRowCount(0);
         table_model.addColumn("No");
@@ -274,13 +289,105 @@ public class BukuModel extends DBConfig {
         table_model.addColumn("Rak");
         
         Dashboard.TABLE_LIST_BUKU.setModel(table_model);
-        table_model.setColumnCount(0);
+        table_model.setRowCount(0);
         
-//        String sql = "SELECT ma_buku.isbn, ma_buku.judul, ma_kategori.nama, ma_buku.jenis FROM "
+        try{
+        
+            String GroupSelected;
+            if(Group.equals("Semua")){
+                GroupSelected = "isbn";
+            }else{
+                GroupSelected = Group;
+            }
+
+            String limited;
+            if(Showing.equals("Semua")){
+                limited = "";
+            }else{
+                limited = " LIMIT " + Showing;
+            }
+            
+            String sql = "SELECT isbn, judul, kategori, jenis, rak FROM ma_buku WHERE"
+                    + " isbn LIKE '%"+Keyword+"%' OR judul LIKE '%"+Keyword+"%'"
+                    + " ORDER BY " + GroupSelected + limited;
+            
+            PreparedStatement pst =  conn.prepareStatement(sql);
+            ResultSet res = pst.executeQuery();
+            
+            int i = 1;
+            while(res.next()){
+            
+                table_model.addRow(new Object[]{
+                    i++,
+                    res.getString("isbn"),
+                    res.getString("judul"),
+                    res.getString("kategori"),
+                    res.getString("jenis"),
+                    res.getString("rak"),
+                });
+                
+            }
+            
+            
+        }catch(SQLException error){
+        
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahaan!", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
         
     }
     
     // insert data
+    public boolean insertData(){
+    
+        try{
+            
+            String sql = "INSERT INTO ma_buku(isbn, judul, jenis, kategori, harga, tahun_terbit, penulis, penerbit, stok, rak, deskripsi, max_hari_pinjam, created_at, updated_at)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, getIsbn());
+            pst.setString(2, getJudul());
+            pst.setString(3, getJenis());
+            pst.setString(4, getKategoriModel(getKategori()));
+            pst.setString(5, getHarga());
+            pst.setString(6, getTahunTerbit());
+            pst.setString(7, getPenulis());
+            pst.setString(8, getPenerbit());
+            pst.setInt(9, getStok());
+            pst.setString(10, getRak());
+            pst.setString(11, getDeskripsi());
+            pst.setString(12, getMaxDipinjam());
+            pst.setTimestamp(13, new SqlTime().getTimeStamp());
+            pst.setTimestamp(14, new SqlTime().getTimeStamp());
+            
+            if(pst.execute()){
+                throw new SQLException("Gagal menambahkan buku !");
+            }
+            
+            // cetak log
+            new LogModel().Action("TAMBAH BUKU", "Menambahkan buku "+ getJudul(), Dashboard.nama_user);
+            
+            // refresh
+            new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
+            
+            setMessage("Berhasil menambahkan buku " + getJudul());
+            return true;
+        
+        }catch(SQLException error){
+        
+            if(error.getErrorCode() == 1062){
+                setMessage("Buku ini sudah tersedia !");
+            }else{
+                setMessage(error.getMessage());
+            }
+            
+            return false;
+            
+        }
+        
+    }
     
     // getSelectedData
     

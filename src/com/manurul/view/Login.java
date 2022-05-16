@@ -68,7 +68,7 @@ public class Login extends javax.swing.JFrame {
             }
             
         }catch(Exception error){
-            JOptionPane.showMessageDialog(this, error.getMessage(), "Terjadi Kesalahan !",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, error.getMessage(), "Terjadi Kesalahan !",JOptionPane.INFORMATION_MESSAGE);
         }
         
     }

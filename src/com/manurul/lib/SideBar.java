@@ -6,6 +6,7 @@
 package com.manurul.lib;
 
 import com.manurul.model.AnggotaModel;
+import com.manurul.model.BukuModel;
 import com.manurul.model.RakModel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
@@ -49,6 +50,8 @@ public class SideBar {
             Dashboard.BTN_DATABUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_DATABUKU.png")));   
      
             Dashboard.MAIN_FRAME.add(Dashboard.DATABUKU);
+            
+            new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
             
         }else if (Bar.equals("USER")){
             
@@ -134,6 +137,7 @@ public class SideBar {
                 
                 Dashboard.T_DB_BUKU.setForeground(new Color(78, 204, 121));
                 
+                new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
             
             }else if(selected.equals("KATEGORI")){
             

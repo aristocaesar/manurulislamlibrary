@@ -5,10 +5,15 @@
  */
 package com.manurul.view.modal;
 
+import com.manurul.lib.Characters;
 import com.manurul.lib.InputBorder;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.BukuModel;
 import java.awt.Color;
+import java.util.Calendar;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +25,10 @@ public class BukuDATABUKU extends javax.swing.JFrame {
      * Creates new form BukuDATABUKU
      */
     String title = "Edit";
+    ImageIcon successIcon;
+    
+    BukuModel BM = new BukuModel();
+    
     
     public BukuDATABUKU(String Action, int ID) {
         initComponents();
@@ -39,12 +48,22 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         // INIT INPUT BORDER PADDING
         InputBorder.set(INPUT_ISBN, 8);
         InputBorder.set(INPUT_JUDUL_BUKU, 8);
+        InputBorder.set(INPUT_TAHUN_TERBIT, 8);
         InputBorder.set(INPUT_PENULIS, 8);
         InputBorder.set(INPUT_DESKRIPSI, 8);
         InputBorder.set(INPUT_BERMASALAH, 8);
         InputBorder.set(INPUT_DIPINJAM, 8);
         InputBorder.set(INPUT_CREATED, 8);
         InputBorder.set(INPUT_UPDATED, 8);
+        
+        // set year now
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        INPUT_TAHUN_TERBIT.setText(String.valueOf(year));
+        
+        // set kategori
+        BM.getKategoriModel("");
+        BM.getPenerbitModel("");
+        BM.getRakModel();
         
         // SET VISIBLE COMPONENT BASE ON ACTION
         if(Action.equals("ADD")){
@@ -69,6 +88,10 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - "+this.title+" Buku");
+        
+        // SET SUCCESS ICON
+        ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
+        this.successIcon = successIcon;
         
     }
 
@@ -109,11 +132,13 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         LABEL_RAK = new javax.swing.JLabel();
         INPUT_MAX_BATAS_PINJAM = new javax.swing.JSpinner();
         INPUT_STOK = new javax.swing.JSpinner();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        INPUT_RAK = new javax.swing.JComboBox<>();
         INPUT_PENERBIT = new javax.swing.JComboBox<>();
         INPUT_HARGA_BUKU = new javax.swing.JSpinner();
         LABEL_HARGA_BUKU_RP = new javax.swing.JLabel();
-        INPUT_TAHUN_TERBIT = new javax.swing.JSpinner();
+        INPUT_JENIS = new javax.swing.JComboBox<>();
+        LABEL_JENIS = new javax.swing.JLabel();
+        INPUT_TAHUN_TERBIT = new javax.swing.JTextField();
         BTN_SIMPAN_BUKU = new javax.swing.JButton();
         BTN_HAPUS_BUKU = new javax.swing.JButton();
 
@@ -159,7 +184,6 @@ public class BukuDATABUKU extends javax.swing.JFrame {
 
         INPUT_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_KATEGORI.setForeground(new java.awt.Color(96, 96, 96));
-        INPUT_KATEGORI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UMUM", "PAKET" }));
         INPUT_KATEGORI.setBorder(null);
 
         INPUT_BERMASALAH.setEditable(false);
@@ -232,12 +256,10 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         INPUT_STOK.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_STOK.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jComboBox1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBorder(null);
+        INPUT_RAK.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        INPUT_RAK.setBorder(null);
 
         INPUT_PENERBIT.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        INPUT_PENERBIT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         INPUT_HARGA_BUKU.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_HARGA_BUKU.setModel(new javax.swing.SpinnerNumberModel(0.0f, null, null, 1.0f));
@@ -247,8 +269,14 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         LABEL_HARGA_BUKU_RP.setForeground(new java.awt.Color(96, 96, 96));
         LABEL_HARGA_BUKU_RP.setText("Rp");
 
-        INPUT_TAHUN_TERBIT.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        INPUT_TAHUN_TERBIT.setModel(new javax.swing.SpinnerNumberModel());
+        INPUT_JENIS.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        INPUT_JENIS.setForeground(new java.awt.Color(96, 96, 96));
+        INPUT_JENIS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UMUM", "PAKET" }));
+        INPUT_JENIS.setBorder(null);
+
+        LABEL_JENIS.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        LABEL_JENIS.setForeground(new java.awt.Color(96, 96, 96));
+        LABEL_JENIS.setText("Jenis");
 
         javax.swing.GroupLayout CONTAINER_ANGGOTALayout = new javax.swing.GroupLayout(CONTAINER_ANGGOTA);
         CONTAINER_ANGGOTA.setLayout(CONTAINER_ANGGOTALayout);
@@ -269,35 +297,34 @@ public class BukuDATABUKU extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONTAINER_ANGGOTALayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(LABEL_HARGA_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                            .addComponent(LABEL_TAHUN_TERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CONTAINER_ANGGOTALayout.createSequentialGroup()
-                                .addComponent(LABEL_HARGA_BUKU_RP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(INPUT_HARGA_BUKU))
-                            .addComponent(INPUT_TAHUN_TERBIT))
+                            .addComponent(INPUT_TAHUN_TERBIT)
+                            .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(LABEL_HARGA_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                                .addComponent(LABEL_TAHUN_TERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CONTAINER_ANGGOTALayout.createSequentialGroup()
+                                    .addComponent(LABEL_HARGA_BUKU_RP)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(INPUT_HARGA_BUKU))))
                         .addGap(36, 36, 36)))
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LABEL_PENULIS, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(INPUT_PENULIS, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LABEL_PENERBIT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(INPUT_PENERBIT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(INPUT_MAX_BATAS_PINJAM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LABEL_MAX_HARI_PINJAM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37))
-                    .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LABEL_RAK, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(INPUT_MAX_BATAS_PINJAM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LABEL_MAX_HARI_PINJAM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LABEL_PENULIS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPUT_PENULIS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONTAINER_ANGGOTALayout.createSequentialGroup()
+                            .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(INPUT_STOK, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LABEL_STOK, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(33, 33, 33)
                             .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(LABEL_STOK, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                                .addComponent(INPUT_STOK))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)))
+                                .addComponent(LABEL_RAK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(INPUT_RAK, 0, 130, Short.MAX_VALUE)))
+                        .addComponent(INPUT_PENERBIT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LABEL_PENERBIT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPUT_JENIS, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LABEL_JENIS, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(INPUT_DESKRIPSI, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(INPUT_BERMASALAH, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,7 +341,9 @@ public class BukuDATABUKU extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        CONTAINER_ANGGOTALayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {INPUT_BERMASALAH, INPUT_CREATED, INPUT_DESKRIPSI, INPUT_DIPINJAM, INPUT_ISBN, INPUT_JUDUL_BUKU, INPUT_KATEGORI, INPUT_MAX_BATAS_PINJAM, INPUT_PENERBIT, INPUT_PENULIS, INPUT_STOK, INPUT_UPDATED, LABEL_BERMASALAH, LABEL_CREATED, LABEL_DESKRIPSI, LABEL_DIPINJAM, LABEL_HARGA_BUKU, LABEL_ISBN, LABEL_JUDUL_BUKU, LABEL_KATEGORI, LABEL_MAX_HARI_PINJAM, LABEL_PENERBIT, LABEL_PENULIS, LABEL_RAK, LABEL_STOK, LABEL_TAHUN_TERBIT, LABEL_UPDATED, jComboBox1});
+        CONTAINER_ANGGOTALayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {INPUT_BERMASALAH, INPUT_CREATED, INPUT_DESKRIPSI, INPUT_DIPINJAM, INPUT_ISBN, INPUT_JENIS, INPUT_JUDUL_BUKU, INPUT_KATEGORI, INPUT_MAX_BATAS_PINJAM, INPUT_PENERBIT, INPUT_PENULIS, INPUT_UPDATED, LABEL_BERMASALAH, LABEL_CREATED, LABEL_DESKRIPSI, LABEL_DIPINJAM, LABEL_HARGA_BUKU, LABEL_ISBN, LABEL_JENIS, LABEL_JUDUL_BUKU, LABEL_KATEGORI, LABEL_MAX_HARI_PINJAM, LABEL_PENERBIT, LABEL_PENULIS, LABEL_TAHUN_TERBIT, LABEL_UPDATED});
+
+        CONTAINER_ANGGOTALayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {INPUT_RAK, INPUT_STOK});
 
         CONTAINER_ANGGOTALayout.setVerticalGroup(
             CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,84 +351,93 @@ public class BukuDATABUKU extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LABEL_ISBN)
-                            .addComponent(LABEL_MAX_HARI_PINJAM))
+                        .addComponent(LABEL_ISBN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(INPUT_ISBN)
-                            .addComponent(INPUT_MAX_BATAS_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)))
+                        .addComponent(INPUT_ISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
                         .addComponent(LABEL_DESKRIPSI)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(INPUT_DESKRIPSI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(INPUT_DESKRIPSI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
+                        .addComponent(LABEL_JENIS, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPUT_JENIS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                            .addComponent(LABEL_JUDUL_BUKU)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(INPUT_JUDUL_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                            .addComponent(LABEL_PENERBIT)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(INPUT_PENERBIT)))
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addComponent(LABEL_BERMASALAH)
+                        .addComponent(LABEL_JUDUL_BUKU)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(INPUT_JUDUL_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(INPUT_MAX_BATAS_PINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
+                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LABEL_BERMASALAH)
+                            .addComponent(LABEL_MAX_HARI_PINJAM))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(INPUT_BERMASALAH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addComponent(LABEL_KATEGORI)
+                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LABEL_KATEGORI)
+                            .addComponent(LABEL_PENERBIT, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(INPUT_KATEGORI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addComponent(LABEL_PENULIS)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(INPUT_PENULIS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(INPUT_KATEGORI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(INPUT_PENERBIT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
                         .addComponent(LABEL_DIPINJAM)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(INPUT_DIPINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
-                .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                                .addComponent(LABEL_STOK)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(INPUT_STOK, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                            .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                                .addComponent(LABEL_TAHUN_TERBIT)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(INPUT_TAHUN_TERBIT)))
-                        .addGap(31, 31, 31))
-                    .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
-                        .addComponent(LABEL_UPDATED)
+                        .addComponent(LABEL_TAHUN_TERBIT)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(INPUT_UPDATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(INPUT_TAHUN_TERBIT))
+                    .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
+                            .addComponent(LABEL_PENULIS)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(INPUT_PENULIS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(CONTAINER_ANGGOTALayout.createSequentialGroup()
+                            .addComponent(LABEL_UPDATED)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(INPUT_UPDATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(31, 31, 31)
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LABEL_RAK)
                     .addComponent(LABEL_CREATED)
-                    .addComponent(LABEL_HARGA_BUKU))
+                    .addComponent(LABEL_HARGA_BUKU)
+                    .addComponent(LABEL_STOK))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(INPUT_CREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(INPUT_HARGA_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LABEL_HARGA_BUKU_RP))
+                .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(INPUT_STOK)
+                    .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(INPUT_RAK, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPUT_CREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPUT_HARGA_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LABEL_HARGA_BUKU_RP)))
                 .addGap(25, 25, 25))
         );
 
-        CONTAINER_ANGGOTALayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {INPUT_HARGA_BUKU, jComboBox1});
+        CONTAINER_ANGGOTALayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {INPUT_HARGA_BUKU, INPUT_RAK});
+
+        CONTAINER_ANGGOTALayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {INPUT_KATEGORI, INPUT_PENERBIT});
+
+        CONTAINER_ANGGOTALayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {INPUT_JUDUL_BUKU, INPUT_MAX_BATAS_PINJAM});
 
         BTN_SIMPAN_BUKU.setBackground(new java.awt.Color(0, 171, 60));
         BTN_SIMPAN_BUKU.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         BTN_SIMPAN_BUKU.setForeground(new java.awt.Color(255, 255, 255));
         BTN_SIMPAN_BUKU.setText("Simpan");
         BTN_SIMPAN_BUKU.setBorder(null);
+        BTN_SIMPAN_BUKU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_SIMPAN_BUKUMouseClicked(evt);
+            }
+        });
 
         BTN_HAPUS_BUKU.setBackground(new java.awt.Color(153, 153, 153));
         BTN_HAPUS_BUKU.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -450,6 +488,97 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean cekValidasi(){
+    
+        try{
+        
+            String isbn = INPUT_ISBN.getText().replaceAll("[a-zA-Z]", "");
+            String judul = Characters.ucwords(INPUT_JUDUL_BUKU.getText());
+            String kategori = INPUT_KATEGORI.getSelectedItem().toString();
+            String tahun_terbit = INPUT_TAHUN_TERBIT.getText().replaceAll("[a-zA-Z]", "");
+            String harga_buku = INPUT_HARGA_BUKU.getValue().toString();
+            String jenis = INPUT_JENIS.getSelectedItem().toString();
+            int hari_max_pinjam = Integer.parseInt(INPUT_MAX_BATAS_PINJAM.getValue().toString());
+            String penerbit = INPUT_PENERBIT.getSelectedItem().toString();
+            String penulis = Characters.ucwords(INPUT_PENULIS.getText().replaceAll("[0-9]", ""));
+            int stok = Integer.parseInt(INPUT_STOK.getValue().toString());
+            String rak = INPUT_RAK.getSelectedItem().toString();
+            String deskripsi = INPUT_DESKRIPSI.getText();
+            
+            if(isbn.equals("")){
+                throw new Exception("Nilai ISBN harus terisi dan berisi angka !");
+            }
+            
+            if(judul.equals("")){
+                throw new Exception("Nilai judul harus terisi !");
+            }
+            
+            if(tahun_terbit.equals("")){
+                throw new Exception("Nilai tahun terbit harus terisi dan berisi tahun !");
+            }
+            
+            if(tahun_terbit.length() < 4 || tahun_terbit.length() > 4){
+                throw new Exception("Nilai tahun terbit tidak valid !");
+            }
+            
+            if(penerbit.equals("")){
+                throw new Exception("Nilai penerbit harus terisi !");
+            }
+            
+            if(penulis.equals("")){
+                throw new Exception("Nilai penulis harus terisi !");
+            }
+            
+            if(hari_max_pinjam <= 0){
+                throw new Exception("Nilai hari pinjam terlalu rendah !");
+            }
+            
+            if(stok < 0){
+                throw new Exception("Nilai stok terlalu rendah !");
+            }
+            
+            BM.setIsbn(isbn);
+            BM.setJudul(judul);
+            BM.setKategori(kategori);
+            BM.setTahunTerbit(tahun_terbit);
+            BM.setHarga(harga_buku);
+            BM.setJenis(jenis);
+            BM.setMaxDipinjam(String.valueOf(hari_max_pinjam));
+            BM.setPenerbit(penerbit);
+            BM.setPenulis(penulis);
+            BM.setStok(stok);
+            BM.setRak(rak);
+            BM.setDeskripsi(deskripsi);
+            
+            return true;
+            
+        }catch(Exception error){
+   
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        
+        }
+        
+    }
+    
+    private void BTN_SIMPAN_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_BUKUMouseClicked
+        if(cekValidasi()){
+        
+            if(BM.insertData()){
+            
+                JOptionPane.showMessageDialog(null, BM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                
+                this.dispose();
+                
+            }else{
+            
+                JOptionPane.showMessageDialog(null, BM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+                
+            }
+            
+        }
+    }//GEN-LAST:event_BTN_SIMPAN_BUKUMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -484,7 +613,7 @@ public class BukuDATABUKU extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_HAPUS_BUKU;
     private javax.swing.JButton BTN_SIMPAN_BUKU;
@@ -496,13 +625,15 @@ public class BukuDATABUKU extends javax.swing.JFrame {
     private javax.swing.JTextField INPUT_DIPINJAM;
     private javax.swing.JSpinner INPUT_HARGA_BUKU;
     private javax.swing.JTextField INPUT_ISBN;
+    public static javax.swing.JComboBox<String> INPUT_JENIS;
     private javax.swing.JTextField INPUT_JUDUL_BUKU;
-    private javax.swing.JComboBox<String> INPUT_KATEGORI;
+    public static javax.swing.JComboBox<String> INPUT_KATEGORI;
     private javax.swing.JSpinner INPUT_MAX_BATAS_PINJAM;
-    private javax.swing.JComboBox<String> INPUT_PENERBIT;
+    public static javax.swing.JComboBox<String> INPUT_PENERBIT;
     private javax.swing.JTextField INPUT_PENULIS;
+    public static javax.swing.JComboBox<String> INPUT_RAK;
     private javax.swing.JSpinner INPUT_STOK;
-    private javax.swing.JSpinner INPUT_TAHUN_TERBIT;
+    private javax.swing.JTextField INPUT_TAHUN_TERBIT;
     private javax.swing.JTextField INPUT_UPDATED;
     private javax.swing.JLabel LABEL_BERMASALAH;
     private javax.swing.JLabel LABEL_CREATED;
@@ -511,6 +642,7 @@ public class BukuDATABUKU extends javax.swing.JFrame {
     private javax.swing.JLabel LABEL_HARGA_BUKU;
     private javax.swing.JLabel LABEL_HARGA_BUKU_RP;
     private javax.swing.JLabel LABEL_ISBN;
+    private javax.swing.JLabel LABEL_JENIS;
     private javax.swing.JLabel LABEL_JUDUL_BUKU;
     private javax.swing.JLabel LABEL_KATEGORI;
     private javax.swing.JLabel LABEL_MAX_HARI_PINJAM;
@@ -520,6 +652,5 @@ public class BukuDATABUKU extends javax.swing.JFrame {
     private javax.swing.JLabel LABEL_STOK;
     private javax.swing.JLabel LABEL_TAHUN_TERBIT;
     private javax.swing.JLabel LABEL_UPDATED;
-    private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
 }
