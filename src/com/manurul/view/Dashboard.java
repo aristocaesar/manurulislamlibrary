@@ -14,14 +14,12 @@ import com.manurul.lib.SideBar;
 import com.manurul.model.AnggotaModel;
 import com.manurul.model.JurusanModel;
 import com.manurul.model.KategoriModel;
-import com.manurul.model.KelasModel;
 import com.manurul.model.PenerbitModel;
 import com.manurul.model.PengurusModel;
 import com.manurul.model.RakModel;
 import com.manurul.model.SettingModel;
 import com.manurul.view.modal.BukuDATABUKU;
 import com.manurul.view.modal.KategoriDATABUKU;
-import com.manurul.view.modal.KelasUSER;
 import com.manurul.view.modal.PenerbitDATABUKU;
 import com.manurul.view.modal.PengurusUSER;
 import com.manurul.view.modal.RakDATABUKU;
@@ -37,7 +35,7 @@ public class Dashboard extends javax.swing.JFrame {
     // INIT STATE || GLOBAL VARIABEL
     private String title = "Dahsboard";
     
-    public static String id_user;
+    public static String id_kode;
     public static String nama_user;
     private String hak_akses;
     private ImageIcon successIcon;
@@ -50,11 +48,11 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * INIT FORM DASHBOARD
      */
-    public Dashboard(String id_user, String nama, String hak_akses) {
+    public Dashboard(String kode, String nama, String hak_akses) {
         initComponents();
         
         // SET STATE
-        this.id_user = id_user;
+        this.id_kode = kode;
         nama_user = nama;
         this.hak_akses = hak_akses;
         
@@ -91,7 +89,6 @@ public class Dashboard extends javax.swing.JFrame {
             // USER
             InputBorder.set(SEARCH_USER, 8);
             InputBorder.set(SEARCH_JURUSAN, 8);
-            InputBorder.set(SEARCH_KELAS, 8);
             InputBorder.set(SEARCH_PENGURUS, 8);
         
             //SETTING
@@ -103,7 +100,11 @@ public class Dashboard extends javax.swing.JFrame {
         
         // SET ROLE PERMISSION
         if(this.hak_akses.equals("STAF")){
-            BTN_USER.setVisible(false);
+            
+            SIDEBAR.remove(BTN_USER);
+            SIDEBAR.repaint();
+            SIDEBAR.revalidate();
+            
         }
             
         // KONFIRMASI KELUAR APP ( WINDOWS CLOSING )
@@ -280,7 +281,6 @@ public class Dashboard extends javax.swing.JFrame {
         TOPBAR_USER = new RoundedPanel(15, Color.WHITE);
         T_U_ANGGOTA = new javax.swing.JLabel();
         T_U_JURUSAN = new javax.swing.JLabel();
-        T_U_KELAS = new javax.swing.JLabel();
         T_U_PENGURUS = new javax.swing.JLabel();
         USERNAME_USER = new javax.swing.JLabel();
         ICON_U_USER = new javax.swing.JLabel();
@@ -311,20 +311,6 @@ public class Dashboard extends javax.swing.JFrame {
         SEARCH_JURUSAN = new javax.swing.JTextField();
         TABLE_LIST_JURUSAN = new javax.swing.JScrollPane();
         TABLE_LIST_ITEM_JURUSAN = new javax.swing.JTable(){
-
-            private static final long serialVersionUID = 1L;
-
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            };
-
-        };
-        F_U_KELAS = new RoundedPanel(15, Color.WHITE);
-        TITLE_FRAME_KELAS = new javax.swing.JLabel();
-        ICON_ADD_KELAS = new javax.swing.JLabel();
-        SEARCH_KELAS = new javax.swing.JTextField();
-        TABLE_LIST_KELAS = new javax.swing.JScrollPane();
-        TABLE_LIST_ITEM_KELAS = new javax.swing.JTable(){
 
             private static final long serialVersionUID = 1L;
 
@@ -428,12 +414,13 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(SIDEBARLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(SIDEBARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BTN_TRANSAKSI)
-                            .addComponent(BTN_DASHBOARD)
-                            .addComponent(BTN_DATABUKU)
-                            .addComponent(BTN_USER)
-                            .addComponent(BTN_SETTING)
-                            .addComponent(BTN_EXIT))))
+                            .addComponent(BTN_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTN_DASHBOARD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTN_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTN_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTN_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTN_EXIT))
+                        .addGap(12, 12, 12)))
                 .addGap(19, 19, 19))
         );
         SIDEBARLayout.setVerticalGroup(
@@ -1577,16 +1564,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        T_U_KELAS.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        T_U_KELAS.setForeground(new java.awt.Color(96, 96, 96));
-        T_U_KELAS.setText("Kelas");
-        T_U_KELAS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        T_U_KELAS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                T_U_KELASMouseClicked(evt);
-            }
-        });
-
         T_U_PENGURUS.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         T_U_PENGURUS.setForeground(new java.awt.Color(96, 96, 96));
         T_U_PENGURUS.setText("Pengurus");
@@ -1613,8 +1590,6 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addComponent(T_U_JURUSAN)
                 .addGap(46, 46, 46)
-                .addComponent(T_U_KELAS)
-                .addGap(46, 46, 46)
                 .addComponent(T_U_PENGURUS)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(USERNAME_USER)
@@ -1632,7 +1607,6 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_U_ANGGOTA)
                             .addComponent(USERNAME_USER)
                             .addComponent(T_U_JURUSAN)
-                            .addComponent(T_U_KELAS)
                             .addComponent(T_U_PENGURUS)))
                     .addGroup(TOPBAR_USERLayout.createSequentialGroup()
                         .addContainerGap()
@@ -1724,7 +1698,7 @@ public class Dashboard extends javax.swing.JFrame {
         GROUP_KELAS_USER.setText("Group");
 
         GROUP_COMBOBOX_USER.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        GROUP_COMBOBOX_USER.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Kelas", "Jurusan" }));
+        GROUP_COMBOBOX_USER.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Jurusan" }));
         GROUP_COMBOBOX_USER.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 GROUP_COMBOBOX_USERItemStateChanged(evt);
@@ -1860,80 +1834,6 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         FRAME_USER.add(F_U_JURUSAN, "card2");
-
-        F_U_KELAS.setBackground(new java.awt.Color(239, 240, 245));
-
-        TITLE_FRAME_KELAS.setFont(new java.awt.Font("Trebuchet MS", 1, 26)); // NOI18N
-        TITLE_FRAME_KELAS.setForeground(new java.awt.Color(96, 96, 96));
-        TITLE_FRAME_KELAS.setText("Daftar Kelas");
-
-        ICON_ADD_KELAS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_ADD.png"))); // NOI18N
-        ICON_ADD_KELAS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ICON_ADD_KELAS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ICON_ADD_KELASMouseClicked(evt);
-            }
-        });
-
-        SEARCH_KELAS.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        SEARCH_KELAS.setForeground(new java.awt.Color(96, 96, 96));
-        SEARCH_KELAS.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        SEARCH_KELAS.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                SEARCH_KELASKeyTyped(evt);
-            }
-        });
-
-        TABLE_LIST_ITEM_KELAS.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        TABLE_LIST_ITEM_KELAS.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"dfsd", "fdsfsdf", "sdfsdfsd", "fsdfsd"},
-                {"fsdfds", "fsdfds", "fsdfds", "fsdfsd"},
-                {"ferf", "sdfsd", "fsf", "dsfsdfsd"},
-                {"dsff", "sdgfgf", "gfdg", "fdfgfdgg"}
-            },
-            new String [] {
-                "Title 1fdsfsd", "Title 2fdfdsf", "Title 3dfdsf", "Title 4"
-            }
-        ));
-        TABLE_LIST_ITEM_KELAS.setRowHeight(30);
-        TABLE_LIST_ITEM_KELAS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TABLE_LIST_ITEM_KELASMouseClicked(evt);
-            }
-        });
-        TABLE_LIST_KELAS.setViewportView(TABLE_LIST_ITEM_KELAS);
-
-        javax.swing.GroupLayout F_U_KELASLayout = new javax.swing.GroupLayout(F_U_KELAS);
-        F_U_KELAS.setLayout(F_U_KELASLayout);
-        F_U_KELASLayout.setHorizontalGroup(
-            F_U_KELASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_U_KELASLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(F_U_KELASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TABLE_LIST_KELAS)
-                    .addGroup(F_U_KELASLayout.createSequentialGroup()
-                        .addComponent(TITLE_FRAME_KELAS)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 728, Short.MAX_VALUE)
-                        .addComponent(SEARCH_KELAS, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ICON_ADD_KELAS, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27))
-        );
-        F_U_KELASLayout.setVerticalGroup(
-            F_U_KELASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(F_U_KELASLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(F_U_KELASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TITLE_FRAME_KELAS)
-                    .addComponent(ICON_ADD_KELAS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SEARCH_KELAS))
-                .addGap(29, 29, 29)
-                .addComponent(TABLE_LIST_KELAS, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
-                .addGap(27, 27, 27))
-        );
-
-        FRAME_USER.add(F_U_KELAS, "card2");
 
         F_U_PENGURUS.setBackground(new java.awt.Color(239, 240, 245));
 
@@ -2278,11 +2178,6 @@ public class Dashboard extends javax.swing.JFrame {
         new JurusanModel().getDataTable("");
     }//GEN-LAST:event_T_U_JURUSANMouseClicked
 
-    private void T_U_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_KELASMouseClicked
-        new SideBar().setUserPageSelected("KELAS");
-        new KelasModel().getDataTable("");
-    }//GEN-LAST:event_T_U_KELASMouseClicked
-
     private void T_U_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_U_PENGURUSMouseClicked
         new SideBar().setUserPageSelected("PENGURUS");
         new PengurusModel().getDataTable("");
@@ -2313,15 +2208,6 @@ public class Dashboard extends javax.swing.JFrame {
     private void SEARCH_JURUSANKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_JURUSANKeyTyped
         new JurusanModel().getDataTable(SEARCH_JURUSAN.getText());
     }//GEN-LAST:event_SEARCH_JURUSANKeyTyped
-
-    private void ICON_ADD_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_KELASMouseClicked
-        // OPEN MODAL KELAS
-        new KelasUSER("ADD", "").setVisible(true);
-    }//GEN-LAST:event_ICON_ADD_KELASMouseClicked
-
-    private void SEARCH_KELASKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_KELASKeyTyped
-        new KelasModel().getDataTable(SEARCH_KELAS.getText());
-    }//GEN-LAST:event_SEARCH_KELASKeyTyped
 
     private void ICON_ADD_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_PENGURUSMouseClicked
         // OPEN MODAL PENGURUS
@@ -2432,17 +2318,6 @@ public class Dashboard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_TABLE_LIST_ITEM_JURUSANMouseClicked
-
-    private void TABLE_LIST_ITEM_KELASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_ITEM_KELASMouseClicked
-        
-        if(evt.getClickCount() == 2){
-            int index = TABLE_LIST_ITEM_KELAS.getSelectedRow();
-
-            String kode = TABLE_LIST_ITEM_KELAS.getValueAt(index, 1).toString();
-            new KelasUSER("EDIT", kode).setVisible(true);
-        }
-        
-    }//GEN-LAST:event_TABLE_LIST_ITEM_KELASMouseClicked
 
     private void TABLE_LIST_ITEM_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_ITEM_PENGURUSMouseClicked
         if(evt.getClickCount() == 2){
@@ -2578,14 +2453,12 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel F_TR_PINJAM;
     public static javax.swing.JPanel F_U_ANGGOTA;
     public static javax.swing.JPanel F_U_JURUSAN;
-    public static javax.swing.JPanel F_U_KELAS;
     public static javax.swing.JPanel F_U_PENGURUS;
     public static javax.swing.JComboBox<String> GROUP_COMBOBOX_USER;
     private javax.swing.JLabel GROUP_KELAS_USER;
     private javax.swing.JLabel ICON_ADD_BUKU;
     private javax.swing.JLabel ICON_ADD_JURUSAN;
     private javax.swing.JLabel ICON_ADD_KATEGORI;
-    private javax.swing.JLabel ICON_ADD_KELAS;
     private javax.swing.JLabel ICON_ADD_PENERBIT;
     private javax.swing.JLabel ICON_ADD_PENGURUS;
     private javax.swing.JLabel ICON_ADD_RAK;
@@ -2634,7 +2507,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField SEARCH_BUKU;
     private javax.swing.JTextField SEARCH_JURUSAN;
     public static javax.swing.JTextField SEARCH_KATEGORI;
-    private javax.swing.JTextField SEARCH_KELAS;
     public static javax.swing.JTextField SEARCH_PENERBIT;
     private javax.swing.JTextField SEARCH_PENGURUS;
     public static javax.swing.JTextField SEARCH_RAK;
@@ -2647,11 +2519,9 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JTable TABLE_LIST_BUKU;
     private javax.swing.JScrollPane TABLE_LIST_DB_BUKU;
     public static javax.swing.JTable TABLE_LIST_ITEM_JURUSAN;
-    public static javax.swing.JTable TABLE_LIST_ITEM_KELAS;
     public static javax.swing.JTable TABLE_LIST_ITEM_PENGURUS;
     private javax.swing.JScrollPane TABLE_LIST_JURUSAN;
     public static javax.swing.JTable TABLE_LIST_KATEGORI;
-    private javax.swing.JScrollPane TABLE_LIST_KELAS;
     private javax.swing.JTable TABLE_LIST_LOG;
     public static javax.swing.JTable TABLE_LIST_PENERBIT;
     private javax.swing.JScrollPane TABLE_LIST_PENGURUS;
@@ -2674,7 +2544,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel TITLE_FRAME_BUKU;
     private javax.swing.JLabel TITLE_FRAME_JURUSAN;
     private javax.swing.JLabel TITLE_FRAME_KATEGORI;
-    private javax.swing.JLabel TITLE_FRAME_KELAS;
     private javax.swing.JLabel TITLE_FRAME_PENERBIT;
     private javax.swing.JLabel TITLE_FRAME_PENGURUS;
     private javax.swing.JLabel TITLE_FRAME_PINJAM;
@@ -2698,7 +2567,6 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JLabel T_TR_PINJAM;
     public static javax.swing.JLabel T_U_ANGGOTA;
     public static javax.swing.JLabel T_U_JURUSAN;
-    public static javax.swing.JLabel T_U_KELAS;
     public static javax.swing.JLabel T_U_PENGURUS;
     public static javax.swing.JPanel USER;
     private javax.swing.JLabel USERNAME;

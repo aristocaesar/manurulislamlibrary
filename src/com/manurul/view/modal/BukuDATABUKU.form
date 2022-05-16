@@ -26,15 +26,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="FRAME_MAIN_ANGGOTA" alignment="0" pref="1040" max="32767" attributes="0"/>
+          <Component id="FRAME_MAIN_ANGGOTA" alignment="0" pref="1045" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="FRAME_MAIN_ANGGOTA" pref="699" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-          </Group>
+          <Component id="FRAME_MAIN_ANGGOTA" min="-2" pref="614" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -59,7 +56,7 @@
                           <Component id="CONTAINER_ANGGOTA" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="71" max="32767" attributes="0"/>
                           <Component id="BTN_HAPUS_BUKU" min="-2" pref="270" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Component id="BTN_SIMPAN_BUKU" min="-2" pref="270" max="-2" attributes="0"/>
@@ -73,13 +70,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="CONTAINER_ANGGOTA" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="CONTAINER_ANGGOTA" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="BTN_SIMPAN_BUKU" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="BTN_HAPUS_BUKU" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -100,104 +97,79 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="LABEL_HARGA_BUKU" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="366" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="LABEL_CREATED" alignment="1" pref="292" max="32767" attributes="0"/>
-                                  <Component id="INPUT_UPDATED" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="INPUT_CREATED" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="INPUT_KATEGORI" linkSize="2" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                                  <Component id="INPUT_ISBN" linkSize="2" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                                  <Component id="LABEL_ISBN" linkSize="2" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                                  <Component id="INPUT_JUDUL_BUKU" linkSize="2" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                                  <Component id="LABEL_JUDUL_BUKU" linkSize="2" alignment="0" min="-2" pref="285" max="-2" attributes="0"/>
+                                  <Component id="LABEL_KATEGORI" linkSize="2" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="37" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="INPUT_KATEGORI" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="INPUT_ISBN" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="LABEL_ISBN" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="INPUT_JUDUL_BUKU" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="LABEL_JUDUL_BUKU" min="-2" pref="285" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Component id="LABEL_KATEGORI" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="LABEL_TAHUN_TERBIT" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
-                                          <Component id="INPUT_TAHUN_TERBIT" min="-2" pref="292" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                  </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="LABEL_HARGA_BUKU" linkSize="2" pref="293" max="32767" attributes="0"/>
+                                  <Component id="LABEL_TAHUN_TERBIT" linkSize="2" pref="292" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="INPUT_HARGA_BUKU" min="-2" pref="292" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="LABEL_HARGA_BUKU_RP" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="INPUT_HARGA_BUKU" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="INPUT_TAHUN_TERBIT" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="INPUT_MAX_BATAS_PINJAM" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="LABEL_MAX_HARI_PINJAM" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="INPUT_PANJANG_BUKU" max="32767" attributes="0"/>
-                                                  <Component id="LABEL_PANJANG_BUKU" pref="131" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="INPUT_LEBAR_BUKU" pref="131" max="32767" attributes="0"/>
-                                                  <Component id="LABEL_LEBAR_BUKU" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="INPUT_PENERBIT" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="INPUT_JUMLAH_HALAMAN" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="LABEL_PENULIS" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="LABEL_JUMLAH_HALAMAN" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="LABEL_PENERBIT" alignment="0" pref="293" max="32767" attributes="0"/>
-                                          <Component id="INPUT_PENULIS" alignment="1" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="INPUT_DESKRIPSI" max="32767" attributes="0"/>
-                                  <Component id="INPUT_BERMASALAH" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="LABEL_BERMASALAH" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="LABEL_DESKRIPSI" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="LABEL_STOK" pref="131" max="32767" attributes="0"/>
-                                          <Component id="INPUT_STOK" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="LABEL_RAK" pref="131" max="32767" attributes="0"/>
-                                          <Component id="jComboBox1" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="INPUT_DIPINJAM" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
-                                          <Component id="LABEL_DIPINJAM" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
-                                          <Component id="LABEL_UPDATED" alignment="1" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="LABEL_PENULIS" linkSize="2" alignment="1" min="-2" pref="293" max="-2" attributes="0"/>
+                                  <Component id="INPUT_PENULIS" linkSize="2" alignment="1" min="-2" pref="293" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="LABEL_PENERBIT" linkSize="2" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                                  <Component id="INPUT_PENERBIT" linkSize="2" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                                  <Component id="INPUT_MAX_BATAS_PINJAM" linkSize="2" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                                  <Component id="LABEL_MAX_HARI_PINJAM" linkSize="2" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="LABEL_RAK" linkSize="2" alignment="1" min="-2" pref="292" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="LABEL_STOK" linkSize="2" pref="292" max="32767" attributes="0"/>
+                                      <Component id="INPUT_STOK" linkSize="2" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jComboBox1" linkSize="2" alignment="1" min="-2" pref="292" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="INPUT_DESKRIPSI" linkSize="2" min="-2" pref="294" max="-2" attributes="0"/>
+                          <Component id="INPUT_BERMASALAH" linkSize="2" alignment="0" min="-2" pref="294" max="-2" attributes="0"/>
+                          <Component id="LABEL_BERMASALAH" linkSize="2" alignment="0" min="-2" pref="294" max="-2" attributes="0"/>
+                          <Component id="LABEL_DESKRIPSI" linkSize="2" min="-2" pref="294" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="INPUT_DIPINJAM" linkSize="2" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                              <Component id="LABEL_DIPINJAM" linkSize="2" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="INPUT_UPDATED" linkSize="2" alignment="1" min="-2" pref="292" max="-2" attributes="0"/>
+                                  <Component id="LABEL_UPDATED" linkSize="2" alignment="1" min="-2" pref="293" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="LABEL_CREATED" linkSize="2" alignment="0" min="-2" pref="294" max="-2" attributes="0"/>
+                          <Component id="INPUT_CREATED" linkSize="2" alignment="0" min="-2" pref="294" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -213,51 +185,28 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="INPUT_ISBN" pref="40" max="32767" attributes="0"/>
-                                  <Component id="INPUT_MAX_BATAS_PINJAM" max="32767" attributes="0"/>
+                                  <Component id="INPUT_ISBN" max="32767" attributes="0"/>
+                                  <Component id="INPUT_MAX_BATAS_PINJAM" pref="40" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LABEL_STOK" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LABEL_RAK" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="INPUT_STOK" pref="40" max="32767" attributes="0"/>
-                                  <Component id="jComboBox1" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="LABEL_JUDUL_BUKU" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="LABEL_PANJANG_BUKU" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="LABEL_DESKRIPSI" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="LABEL_LEBAR_BUKU" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="INPUT_JUDUL_BUKU" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="INPUT_PANJANG_BUKU" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="INPUT_LEBAR_BUKU" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="INPUT_DESKRIPSI" min="-2" pref="40" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="LABEL_KATEGORI" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LABEL_JUMLAH_HALAMAN" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="LABEL_DESKRIPSI" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="INPUT_KATEGORI" pref="40" max="32767" attributes="0"/>
-                                  <Component id="INPUT_JUMLAH_HALAMAN" max="32767" attributes="0"/>
+                              <Component id="INPUT_DESKRIPSI" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="LABEL_JUDUL_BUKU" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="INPUT_JUDUL_BUKU" min="-2" pref="40" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="LABEL_PENERBIT" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="INPUT_PENERBIT" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -266,19 +215,19 @@
                               <Component id="INPUT_BERMASALAH" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="LABEL_TAHUN_TERBIT" min="-2" max="-2" attributes="0"/>
+                              <Component id="LABEL_KATEGORI" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="INPUT_TAHUN_TERBIT" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="INPUT_KATEGORI" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="LABEL_PENULIS" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="INPUT_PENULIS" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="LABEL_PENERBIT" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="INPUT_PENERBIT" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
                               <Component id="LABEL_DIPINJAM" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="INPUT_DIPINJAM" min="-2" pref="40" max="-2" attributes="0"/>
@@ -286,27 +235,40 @@
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="LABEL_HARGA_BUKU" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="INPUT_HARGA_BUKU" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="LABEL_STOK" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="INPUT_STOK" pref="40" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="LABEL_TAHUN_TERBIT" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="INPUT_TAHUN_TERBIT" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="LABEL_UPDATED" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="LABEL_PENULIS" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="LABEL_UPDATED" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="INPUT_UPDATED" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Component id="INPUT_PENULIS" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="INPUT_UPDATED" min="-2" pref="40" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
-                      <Component id="LABEL_CREATED" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="LABEL_RAK" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_CREATED" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_HARGA_BUKU" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="INPUT_CREATED" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jComboBox1" linkSize="6" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="INPUT_CREATED" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="INPUT_HARGA_BUKU" linkSize="6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_HARGA_BUKU_RP" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -363,17 +325,6 @@
                 <Property name="text" type="java.lang.String" value="Judul Buku"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="LABEL_PANJANG_BUKU">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Panjang Buku"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="LABEL_DESKRIPSI">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -400,51 +351,6 @@
                     </LineBorder>
                   </Border>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_PANJANG_BUKU">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder>
-                      <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
-                    </LineBorder>
-                  </Border>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_LEBAR_BUKU">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder>
-                      <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
-                    </LineBorder>
-                  </Border>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="LABEL_LEBAR_BUKU">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Lebar Buku"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="INPUT_DESKRIPSI">
@@ -484,11 +390,9 @@
                   <Color blue="60" green="60" red="60" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="2">
+                    <StringItem index="0" value="UMUM"/>
+                    <StringItem index="1" value="PAKET"/>
                   </StringArray>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -498,17 +402,6 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="LABEL_JUMLAH_HALAMAN">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Jumlah Halaman"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="INPUT_BERMASALAH">
               <Properties>
@@ -539,23 +432,6 @@
                 <Property name="text" type="java.lang.String" value="Bermasalah"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_TAHUN_TERBIT">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder>
-                      <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
-                    </LineBorder>
-                  </Border>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="LABEL_TAHUN_TERBIT">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -576,23 +452,6 @@
                   <Color blue="60" green="60" red="60" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Penerbit"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="INPUT_HARGA_BUKU">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder>
-                      <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
-                    </LineBorder>
-                  </Border>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_HARGA_BUKU">
@@ -776,20 +635,13 @@
                     <StringItem index="3" value="Item 4"/>
                   </StringArray>
                 </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JSpinner" name="INPUT_JUMLAH_HALAMAN">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="INPUT_PENERBIT">
               <Properties>
@@ -808,6 +660,40 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="INPUT_HARGA_BUKU">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Trebuchet MS" size="14" style="0"/>
+                </Property>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0.0" numberType="java.lang.Float" stepSize="1.0" type="number"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LABEL_HARGA_BUKU_RP">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Trebuchet MS" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="60" green="60" red="60" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Rp"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="INPUT_TAHUN_TERBIT">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Trebuchet MS" size="14" style="0"/>
+                </Property>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

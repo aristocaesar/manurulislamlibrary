@@ -26,7 +26,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="FRAME_MAIN_ANGGOTA" alignment="0" max="32767" attributes="0"/>
+          <Component id="FRAME_MAIN_ANGGOTA" alignment="0" pref="1025" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -96,62 +96,51 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <EmptySpace min="25" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="LABEL_JURUSAN" min="-2" pref="285" max="-2" attributes="0"/>
-                                      <EmptySpace pref="39" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="COMBO_BOX_JURUSAN" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LABEL_KELAS" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
-                                  <Component id="COMBO_BOX_KELAS" alignment="1" min="-2" pref="286" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LABEL_SKOR" min="-2" pref="286" max="-2" attributes="0"/>
-                                  <Component id="SPINNER_SKOR" min="-2" pref="286" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LABEL_CREATED" alignment="0" pref="287" max="32767" attributes="0"/>
-                                  <Component id="INPUT_CREATED" alignment="0" pref="287" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LABEL_UPDATED" alignment="0" pref="287" max="32767" attributes="0"/>
-                                  <Component id="INPUT_UPDATED" alignment="0" pref="287" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="646" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LABEL_KESEMPATAN" alignment="0" pref="288" max="32767" attributes="0"/>
-                                  <Component id="INPUT_KESEMPATAN" alignment="0" pref="288" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="LABEL_NIS" pref="450" max="32767" attributes="0"/>
-                                  <Component id="INPUT_NIS" max="32767" attributes="0"/>
+                                  <Component id="LABEL_NIS" linkSize="1" pref="450" max="32767" attributes="0"/>
+                                  <Component id="INPUT_NIS" linkSize="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="LABEL_NAMA_LENGKAP" min="-2" pref="450" max="-2" attributes="0"/>
-                                  <Component id="INPUT_NAMA_LENGKAP" min="-2" pref="450" max="-2" attributes="0"/>
+                                  <Component id="LABEL_NAMA_LENGKAP" linkSize="1" min="-2" pref="450" max="-2" attributes="0"/>
+                                  <Component id="INPUT_NAMA_LENGKAP" linkSize="1" min="-2" pref="450" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="LABEL_CREATED" linkSize="8" pref="283" max="32767" attributes="0"/>
+                                          <Component id="INPUT_CREATED" linkSize="8" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="INPUT_UPDATED" linkSize="8" max="32767" attributes="0"/>
+                                          <Component id="LABEL_UPDATED" linkSize="8" pref="213" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="INPUT_KESEMPATAN" linkSize="8" min="-2" pref="219" max="-2" attributes="0"/>
+                                          <Component id="LABEL_KESEMPATAN" linkSize="8" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="COMBO_BOX_JURUSAN" linkSize="6" min="-2" pref="450" max="-2" attributes="0"/>
+                                          <Component id="LABEL_JURUSAN" linkSize="6" min="-2" pref="450" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="SPINNER_SKOR" linkSize="6" pref="451" max="32767" attributes="0"/>
+                                          <Component id="LABEL_SKOR" linkSize="6" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -167,21 +156,17 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="INPUT_NAMA_LENGKAP" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="INPUT_NIS" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="INPUT_NAMA_LENGKAP" linkSize="3" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="INPUT_NIS" linkSize="3" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="LABEL_JURUSAN" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="LABEL_KELAS" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="LABEL_SKOR" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="LABEL_JURUSAN" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_SKOR" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="COMBO_BOX_JURUSAN" pref="45" max="32767" attributes="0"/>
-                          <Component id="COMBO_BOX_KELAS" max="32767" attributes="0"/>
                           <Component id="SPINNER_SKOR" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -277,17 +262,6 @@
                 <Property name="text" type="java.lang.String" value="Jurusan"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="LABEL_KELAS">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Kelas"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="LABEL_SKOR">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -300,26 +274,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="COMBO_BOX_JURUSAN">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="14" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="60" green="60" red="60" type="rgb"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="COMBO_BOX_KELAS">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="0"/>
@@ -478,7 +432,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BTN_HAPUS_ANGGOTAKeyPressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_HAPUS_ANGGOTAMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

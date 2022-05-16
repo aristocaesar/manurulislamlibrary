@@ -415,7 +415,7 @@ public class PengurusUSER extends javax.swing.JFrame {
             PM.setStatus(COMBOBOX_STATUS.getSelectedItem().toString());
             if(PM.updateData()){
                     JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                    if(PM.getId().equals(Dashboard.id_user)){
+                    if(PM.getKode().equals(Dashboard.id_kode)){
                         JOptionPane.showMessageDialog(null, "Silakan login kembali untuk memuat informasi yang terbaru", "Informasi", JOptionPane.INFORMATION_MESSAGE);
                         System.exit(0);
                     }else{
@@ -438,7 +438,7 @@ public class PengurusUSER extends javax.swing.JFrame {
         if(cekValidasi("DELETE")){
             if(PM.deleteData(PM.getNamaLengkap())){
                     JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                    if(PM.getId().equals(Dashboard.id_user)){
+                    if(PM.getKode().equals(Dashboard.id_kode)){
                         JOptionPane.showMessageDialog(null, "Silakan login kembali untuk memuat informasi yang terbaru", "Informasi", JOptionPane.INFORMATION_MESSAGE);
                         System.exit(0);
                     }else{

@@ -1,350 +1,326 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
+-- MariaDB dump 10.19  Distrib 10.5.15-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: 127.0.0.1
--- Generation Time: May 09, 2022 at 06:00 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: manurulislam
+-- ------------------------------------------------------
+-- Server version	10.5.15-MariaDB-1:10.5.15+maria~bullseye
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `manurulislam`
---
-
--- --------------------------------------------------------
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `ma_anggota`
 --
 
+DROP TABLE IF EXISTS `ma_anggota`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_anggota` (
-  `id` int(11) NOT NULL,
   `nis` varchar(28) NOT NULL,
-  `nama_lengkap` varchar(128) NOT NULL,
-  `jurusan` int(11) NOT NULL,
-  `kelas` int(11) NOT NULL,
-  `jumlah_buku_dipinjam` int(11) NOT NULL DEFAULT '0',
-  `skor` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `nama_lengkap` varchar(128) DEFAULT '',
+  `jurusan` varchar(8) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `jumlah_buku_dipinjam` int(11) NOT NULL DEFAULT 0,
+  `skor` int(100) DEFAULT 100,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`nis`),
+  KEY `FK Jurusan` (`jurusan`),
+  CONSTRAINT `FK Jurusan` FOREIGN KEY (`jurusan`) REFERENCES `ma_jurusan` (`kode`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ma_anggota`
 --
 
-INSERT INTO `ma_anggota` (`id`, `nis`, `nama_lengkap`, `jurusan`, `kelas`, `jumlah_buku_dipinjam`, `skor`, `created_at`, `updated_at`) VALUES
-(1, '41211739', 'Hana Wulan Agusta', 1, 20, 0, 100, '2022-05-08 02:24:00', '2022-05-08 02:24:00'),
-(2, '41211740', 'Fifa Fajar Firdaus', 1, 20, 0, 100, '2022-05-08 02:24:26', '2022-05-08 02:24:26'),
-(3, '41211741', 'Fira Ariani', 1, 20, 0, 100, '2022-05-08 02:24:53', '2022-05-08 02:24:53'),
-(4, '41211742', 'Alun Sephia', 6, 23, 0, 100, '2022-05-08 02:25:19', '2022-05-08 03:10:05'),
-(5, '41211743', 'Andini Dwi Lestari', 6, 20, 0, 90, '2022-05-08 02:25:46', '2022-05-08 03:09:42'),
-(7, '41211744', 'Dinda Nugrogo Astusi', 5, 21, 0, 100, '2022-05-08 02:30:03', '2022-05-08 02:30:03'),
-(8, '41211755', 'Adhelia Mahira Putri', 6, 20, 0, 100, '2022-05-08 02:30:48', '2022-05-08 02:30:48'),
-(9, '41211756', 'Mega Kharisma', 5, 21, 0, 100, '2022-05-08 02:31:32', '2022-05-08 02:31:32'),
-(10, '41211757', 'Karen Novita', 5, 21, 0, 100, '2022-05-08 02:32:22', '2022-05-08 02:32:22'),
-(11, '41211758', 'Zulfianti', 4, 21, 0, 100, '2022-05-08 02:32:56', '2022-05-08 02:32:56'),
-(12, '41211759', 'Syarafina', 4, 21, 0, 100, '2022-05-08 02:33:17', '2022-05-08 02:33:17'),
-(15, '41211760', 'Citra Puspita Lestari', 2, 20, 0, 100, '2022-05-08 03:04:36', '2022-05-08 03:04:52');
-
--- --------------------------------------------------------
+LOCK TABLES `ma_anggota` WRITE;
+/*!40000 ALTER TABLE `ma_anggota` DISABLE KEYS */;
+INSERT INTO `ma_anggota` VALUES ('E41211739','Ahjl','TKJ',0,100,'2022-05-11 16:20:11','2022-05-11 16:20:11'),('E41211740','Hana Wulan Agusta','TKJ',0,100,'2022-05-11 16:18:58','2022-05-11 16:18:58'),('E41211741','Mega Kharisma','TKJ',0,100,'2022-05-11 23:01:06','2022-05-11 23:01:06');
+/*!40000 ALTER TABLE `ma_anggota` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `ADD_COUNT_ANGGOTA` BEFORE INSERT ON `ma_anggota` FOR EACH ROW UPDATE ma_dashboard SET total_anggota = (SELECT SUM(total_anggota) + 1 FROM ma_dashboard) WHERE id = 1 */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `LESS_COUNT_ANGGOTA` BEFORE DELETE ON `ma_anggota` FOR EACH ROW UPDATE ma_dashboard SET total_anggota = (SELECT SUM(total_anggota) - 1 FROM ma_dashboard) WHERE id = 1 */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `ma_buku`
 --
 
+DROP TABLE IF EXISTS `ma_buku`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_buku` (
-  `id` int(11) UNSIGNED NOT NULL,
   `isbn` varchar(28) NOT NULL,
   `judul` varchar(128) NOT NULL,
   `jenis` enum('PKT','UMM') DEFAULT 'UMM',
-  `id_kategori` int(11) UNSIGNED NOT NULL,
+  `kategori` varchar(16) DEFAULT NULL,
   `harga` varchar(50) NOT NULL,
-  `lebar_panjang` varchar(16) NOT NULL DEFAULT '0,0',
-  `jumlah_halaman` int(11) NOT NULL,
   `tahun_terbit` int(8) NOT NULL,
   `penulis` varchar(32) NOT NULL,
-  `id_penerbit` int(11) UNSIGNED NOT NULL,
+  `penerbit` varchar(32) DEFAULT NULL,
   `stok` int(11) NOT NULL,
-  `id_rak` int(11) UNSIGNED NOT NULL,
+  `rak` varchar(16) DEFAULT NULL,
   `deskripsi` text NOT NULL,
   `jumlah_dipinjam` int(11) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`isbn`),
+  KEY `FK_Kategori` (`kategori`),
+  KEY `FK_Penerbit` (`penerbit`),
+  KEY `FK_Rak` (`rak`),
+  CONSTRAINT `FK_Kategori` FOREIGN KEY (`kategori`) REFERENCES `ma_kategori` (`kode`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `FK_Penerbit` FOREIGN KEY (`penerbit`) REFERENCES `ma_penerbit` (`nama`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `FK_Rak` FOREIGN KEY (`rak`) REFERENCES `ma_rak` (`kode`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ma_buku`
 --
 
-INSERT INTO `ma_buku` (`id`, `isbn`, `judul`, `jenis`, `id_kategori`, `harga`, `lebar_panjang`, `jumlah_halaman`, `tahun_terbit`, `penulis`, `id_penerbit`, `stok`, `id_rak`, `deskripsi`, `jumlah_dipinjam`, `created_at`, `updated_at`) VALUES
-(1, '9786233311557', 'Hallo Koding', 'UMM', 2, '150000', '50,80', 168, 2021, 'Hilman Ramadhan', 1, 26, 1, 'Buku yang membahas masalah dan motivasi seorang programmer', 0, '2022-03-23 10:26:14', '2022-03-23 10:26:14');
-
--- --------------------------------------------------------
+LOCK TABLES `ma_buku` WRITE;
+/*!40000 ALTER TABLE `ma_buku` DISABLE KEYS */;
+INSERT INTO `ma_buku` VALUES ('3435345345','Cara Bersikap Bodo Amat','UMM','MAT','100000',2000,'Boger','Cahaya Pelita Andika, Pt',54,'TIK','Buku goer',0,'2022-05-11 23:05:27','2022-05-11 23:05:27'),('9786233311557','Hallo Koding','UMM','MAT','150000',2021,'Hilman Ramadhan','PT. Erlangga',26,'MTK','Buku yang membahas masalah dan motivasi seorang programmer',0,'2022-03-23 10:26:14','2022-03-23 10:26:14');
+/*!40000 ALTER TABLE `ma_buku` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `ADD_COUNT_BUKU` BEFORE INSERT ON `ma_buku` FOR EACH ROW UPDATE ma_dashboard SET total_buku = (SELECT SUM(total_buku) + 1 FROM ma_dashboard) WHERE id = 1 */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `LESS_COUNT_BUKU` BEFORE DELETE ON `ma_buku` FOR EACH ROW UPDATE ma_dashboard SET total_buku = (SELECT SUM(total_buku) - 1 FROM ma_dashboard) WHERE id = 1 */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `ma_dashboard`
 --
 
+DROP TABLE IF EXISTS `ma_dashboard`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_dashboard` (
-  `id` int(11) NOT NULL,
-  `total_buku` int(11) NOT NULL DEFAULT '0',
-  `buku_dipinjam` int(11) NOT NULL DEFAULT '0',
-  `buku_bermasalah` int(11) NOT NULL DEFAULT '0',
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `total_buku` int(11) NOT NULL DEFAULT 0,
+  `buku_dipinjam` int(11) NOT NULL DEFAULT 0,
+  `buku_bermasalah` int(11) NOT NULL DEFAULT 0,
+  `total_anggota` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `ma_dashboard`
+--
+
+LOCK TABLES `ma_dashboard` WRITE;
+/*!40000 ALTER TABLE `ma_dashboard` DISABLE KEYS */;
+INSERT INTO `ma_dashboard` VALUES (1,2,0,0,3,'2022-05-11 15:41:11');
+/*!40000 ALTER TABLE `ma_dashboard` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ma_detail_transaksi`
 --
 
+DROP TABLE IF EXISTS `ma_detail_transaksi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_detail_transaksi` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `id_transaksi` int(11) UNSIGNED NOT NULL,
+  `id_transaksi` int(11) unsigned NOT NULL,
   `isbn` varchar(28) NOT NULL,
   `judul_buku` varchar(128) NOT NULL,
   `batas_pinjam` int(28) NOT NULL,
   `status_buku` enum('Tepat','Perpanjang','Bermasalah','Terlambat') DEFAULT NULL,
   `kondisi_buku` enum('Baik','Rusak','Hilang') DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  KEY `FK_Transaksi` (`id_transaksi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `ma_detail_transaksi`
+--
+
+LOCK TABLES `ma_detail_transaksi` WRITE;
+/*!40000 ALTER TABLE `ma_detail_transaksi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ma_detail_transaksi` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ma_jurusan`
 --
 
+DROP TABLE IF EXISTS `ma_jurusan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_jurusan` (
-  `id` int(11) NOT NULL,
   `kode` varchar(8) NOT NULL,
   `nama` varchar(32) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ma_jurusan`
 --
 
-INSERT INTO `ma_jurusan` (`id`, `kode`, `nama`, `created_at`, `updated_at`) VALUES
-(1, 'AK', 'Akutansi', '2022-04-17 15:50:09', '2022-05-08 02:26:35'),
-(2, 'APK', 'Administrator Perkantoran', '2022-04-17 15:54:08', '2022-04-17 16:06:54'),
-(3, 'MIF', 'Manajemen Informatika', '2022-04-17 15:47:01', '2022-04-17 16:09:10'),
-(4, 'RPL', 'Rekayasa Perangkat Lunak', '2022-04-17 16:44:01', '2022-04-17 16:44:01'),
-(5, 'TGK', 'Teknik Geomatika dan Fisika', '2022-04-17 16:09:50', '2022-04-17 16:44:35'),
-(6, 'TKJ', 'Teknik Komputer Dan Jaringan', '2022-04-17 15:48:21', '2022-04-17 16:07:10'),
-(7, 'TPL', 'Teknik Perkapalan', '2022-04-17 16:10:32', '2022-04-17 16:10:32');
-
--- --------------------------------------------------------
+LOCK TABLES `ma_jurusan` WRITE;
+/*!40000 ALTER TABLE `ma_jurusan` DISABLE KEYS */;
+INSERT INTO `ma_jurusan` VALUES ('AK','Akutansi','2022-04-17 15:50:09','2022-05-08 02:26:35'),('MIF','Manajemen Informatika','2022-04-17 15:47:01','2022-04-17 16:09:10'),('RPL','Rekayasa Perangkat Lunak','2022-04-17 16:44:01','2022-04-17 16:44:01'),('TGK','Teknik Geomatika dan Fisika','2022-04-17 16:09:50','2022-04-17 16:44:35'),('TKJ','Teknik Komputer Dan Jaringan','2022-04-17 15:48:21','2022-04-17 16:07:10'),('TKR','Teknik Kendaraan Ringan','2022-05-11 12:16:16','2022-05-11 12:16:16'),('TPL','Teknik Perkapalan','2022-04-17 16:10:32','2022-04-17 16:10:32');
+/*!40000 ALTER TABLE `ma_jurusan` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ma_kategori`
 --
 
+DROP TABLE IF EXISTS `ma_kategori`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_kategori` (
-  `id` int(11) UNSIGNED NOT NULL,
   `kode` varchar(16) NOT NULL,
   `nama` varchar(64) NOT NULL,
   `deskripsi` text NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ma_kategori`
 --
 
-INSERT INTO `ma_kategori` (`id`, `kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(1, 'MAT', 'Matematika', 'Buku Kategori Matematika', '2022-03-23 10:22:49', '2022-05-09 21:46:52'),
-(2, 'PRGM', 'Program', 'Buku yang berkategori membahasa bahasa program', '2022-03-23 10:22:49', '2022-05-09 00:28:36');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ma_kelas`
---
-
-CREATE TABLE `ma_kelas` (
-  `id` int(11) NOT NULL,
-  `kode` varchar(8) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ma_kelas`
---
-
-INSERT INTO `ma_kelas` (`id`, `kode`, `created_at`, `updated_at`) VALUES
-(20, 'X', '2022-04-24 01:30:17', '2022-04-24 16:49:30'),
-(21, 'XI', '2022-04-24 01:30:22', '2022-05-08 02:27:48'),
-(22, 'XII', '2022-05-08 02:27:55', '2022-05-08 02:27:55'),
-(23, 'XIII', '2022-05-08 02:28:03', '2022-05-08 02:28:03'),
-(24, 'XIV', '2022-05-08 02:28:33', '2022-05-08 02:28:58'),
-(25, 'XV', '2022-05-08 02:28:37', '2022-05-08 02:28:37');
-
---
--- Triggers `ma_kelas`
---
-DELIMITER $$
-CREATE TRIGGER `ma_kelas_before_delete` BEFORE DELETE ON `ma_kelas` FOR EACH ROW BEGIN
-	UPDATE ma_anggota SET kelas = "" WHERE kelas = OLD.id;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
+LOCK TABLES `ma_kategori` WRITE;
+/*!40000 ALTER TABLE `ma_kategori` DISABLE KEYS */;
+INSERT INTO `ma_kategori` VALUES ('MAT','Matematika','Buku Kategori Matematika','2022-03-23 10:22:49','2022-05-09 21:46:52');
+/*!40000 ALTER TABLE `ma_kategori` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ma_log`
 --
 
+DROP TABLE IF EXISTS `ma_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_log` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `process` varchar(64) NOT NULL,
   `message` text NOT NULL,
-  `petugas` varchar(128) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `pengurus` varchar(16) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `FK_Pengurus` (`pengurus`),
+  CONSTRAINT `FK_Pengurus` FOREIGN KEY (`pengurus`) REFERENCES `ma_pengurus` (`kode`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ma_log`
 --
 
-INSERT INTO `ma_log` (`id`, `process`, `message`, `petugas`, `created_at`) VALUES
-(1, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:40:48'),
-(2, 'LOGIN', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:40:48'),
-(3, 'LOGIN', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:42:19'),
-(4, 'LOGIN', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:42:42'),
-(5, 'TAMBAH JURUSAN', 'Menambahkan jurusan Rekayasa Perangkat Lunak', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:44:03'),
-(6, 'UPDATE JURUSAN', 'Memperbarui jurusan Teknik Geomatika dan Fisika', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:44:36'),
-(7, 'LOGIN', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 17:07:24'),
-(8, 'Update Pengaturan', 'Memperbarui data pengaturan', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 17:07:29'),
-(9, 'Update Pengaturan', 'Memperbarui data pengaturan', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 17:07:36'),
-(10, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:01:48'),
-(11, 'HAPUS KELAS', 'Mengahapus kelas XI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:01:51'),
-(12, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:04:16'),
-(13, 'HAPUS KELAS', 'Mengahapus kelas XI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:07:41'),
-(14, 'TAMBAH KELAS', 'Menambahkan kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:07:57'),
-(15, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:17:29'),
-(16, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:17:48'),
-(17, 'UPDATE KELAS', 'Memperbarui kelas Xd', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:20:09'),
-(18, 'UPDATE KELAS', 'Memperbarui kelas Xd', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:21:38'),
-(19, 'UPDATE KELAS', 'Memperbarui kelas dsdsadas', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:24:36'),
-(20, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:25:16'),
-(21, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 16:05:31'),
-(22, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:43:39'),
-(23, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:43:41'),
-(24, 'TAMBAH KELAS', 'Menambahkan kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:43:59'),
-(25, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:45:46'),
-(26, 'HAPUS KELAS', 'Mengahapus kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:45:50'),
-(27, 'TAMBAH KELAS', 'Menambahkan kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:45:57'),
-(28, 'TAMBAH KELAS', 'Menambahkan kelas IX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:46:07'),
-(29, 'TAMBAH KELAS', 'Menambahkan kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:46:11'),
-(30, 'TAMBAH KELAS', 'Menambahkan kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:12:22'),
-(31, 'TAMBAH KELAS', 'Menambahkan kelas asa', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:12:28'),
-(32, 'TAMBAH KELAS', 'Menambahkan kelas ASu', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:12:48'),
-(33, 'TAMBAH KELAS', 'Menambahkan kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:13:00'),
-(34, 'TAMBAH KELAS', 'Menambahkan kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:13:04'),
-(35, 'UPDATE KELAS', 'Memperbarui kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:15:30'),
-(36, 'UPDATE KELAS', 'Memperbarui kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:15:33'),
-(37, 'HAPUS KELAS', 'Mengahapus kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:18:08'),
-(38, 'HAPUS KELAS', 'Mengahapus kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:18:10'),
-(39, 'HAPUS KELAS', 'Mengahapus kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:18:12'),
-(40, 'HAPUS KELAS', 'Mengahapus kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:20:55'),
-(41, 'HAPUS KELAS', 'Mengahapus kelas ASA', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:21:57'),
-(42, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:22:00'),
-(43, 'HAPUS KELAS', 'Mengahapus kelas IX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:22:03'),
-(44, 'TAMBAH KELAS', 'Menambahkan kelas xi', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:22:08'),
-(45, 'UPDATE KELAS', 'Memperbarui kelas XI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:22:38'),
-(46, 'HAPUS KELAS', 'Mengahapus kelas XI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:25:20'),
-(47, 'HAPUS KELAS', 'Mengahapus kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:28:40'),
-(48, 'TAMBAH KELAS', 'Menambahkan kelas x', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:29:05'),
-(49, 'HAPUS KELAS', 'Mengahapus kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:29:16'),
-(50, 'TAMBAH KELAS', 'Menambahkan kelas x', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:30:12'),
-(51, 'TAMBAH KELAS', 'Menambahkan kelas xi', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:30:17'),
-(52, 'TAMBAH KELAS', 'Menambahkan kelas XXI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:30:22'),
-(53, 'UPDATE KELAS', 'Memperbarui kelas XX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:32:48'),
-(54, 'UPDATE KELAS', 'Memperbarui kelas Xdsadasd', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:39:08'),
-(55, 'UPDATE KELAS', 'Memperbarui kelas XC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:40:28'),
-(56, 'UPDATE KELAS', 'Memperbarui kelas XCC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:40:35'),
-(57, 'TAMBAH KELAS', 'Menambahkan kelas XC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:40:45'),
-(58, 'TAMBAH KELAS', 'Menambahkan kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:40:57'),
-(59, 'TAMBAH KELAS', 'Menambahkan kelas XXX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:41:40'),
-(60, 'HAPUS KELAS', 'Mengahapus kelas XXX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:43:53'),
-(61, 'HAPUS KELAS', 'Mengahapus kelas XCC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:43:59'),
-(62, 'TAMBAH KELAS', 'Menambahkan kelas XCX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:52:55'),
-(63, 'TAMBAH KELAS', 'Menambahkan kelas XCXC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:53:04'),
-(64, 'UPDATE KELAS', 'Memperbarui kelas Xa', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:56:04'),
-(65, 'TAMBAH KELAS', 'Menambahkan kelas XXsddsad', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:56:46'),
-(66, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:57:20'),
-(67, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:14'),
-(68, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:16'),
-(69, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:19'),
-(70, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:23'),
-(71, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:27'),
-(72, 'TAMBAH KELAS', 'Menambahkan kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:34'),
-(73, 'UPDATE KELAS', 'Memperbarui kelas XIIu', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:47'),
-(74, 'UPDATE KELAS', 'Memperbarui kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:52'),
-(75, 'UPDATE KELAS', 'Memperbarui kelas XXI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:59:03'),
-(76, 'TAMBAH KELAS', 'Menambahkan kelas IIX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 02:08:11'),
-(77, 'UPDATE KELAS', 'Memperbarui kelas V', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 02:08:17'),
-(78, 'UPDATE KELAS', 'Memperbarui kelas X', 'Hana Wulan Agusta', '2022-04-24 16:49:31');
-
--- --------------------------------------------------------
+LOCK TABLES `ma_log` WRITE;
+/*!40000 ALTER TABLE `ma_log` DISABLE KEYS */;
+INSERT INTO `ma_log` VALUES (1,'LOGIN','Berhasil Login','PGS-69696','2022-05-12 00:05:52');
+/*!40000 ALTER TABLE `ma_log` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ma_penerbit`
 --
 
+DROP TABLE IF EXISTS `ma_penerbit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_penerbit` (
-  `id` int(11) UNSIGNED NOT NULL,
   `nama` varchar(32) NOT NULL,
   `kontak` varchar(13) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`nama`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ma_penerbit`
 --
 
-INSERT INTO `ma_penerbit` (`id`, `nama`, `kontak`, `created_at`, `updated_at`) VALUES
-(1, 'PT. Erlangga', '085235119101', '2022-03-23 10:17:59', '2022-03-23 10:17:59'),
-(2, 'PT. Maju Mundur Cantik', '543534534545', '2022-05-08 13:24:59', '2022-05-08 13:24:59'),
-(3, 'PT. Mencari Cinta Sejati', '654657654345', '2022-05-08 13:25:35', '2022-05-08 13:25:35'),
-(4, 'Cv Casear Cell', '47408934932', '2022-05-08 15:32:53', '2022-05-08 15:43:04'),
-(5, 'Pt Player Cell', '085655990781', '2022-05-08 15:35:10', '2022-05-08 15:38:31'),
-(7, 'Cahaya Pelita Andika, Pt', '234324234', '2022-05-08 15:51:57', '2022-05-08 15:54:55'),
-(8, 'Cakradenta Agung Pertiwi, Pt', '55234234', '2022-05-08 15:56:02', '2022-05-08 15:56:02'),
-(9, 'Cakung Permata Nusa, Pt', '43523455', '2022-05-08 15:56:36', '2022-05-08 15:56:36'),
-(10, 'Calista Alam, Pt', '6965523445', '2022-05-08 15:56:47', '2022-05-08 15:56:47'),
-(11, 'Cibaliung Tunggal Plantation, Pt', '55234234', '2022-05-08 15:57:00', '2022-05-08 15:57:00'),
-(12, 'Cipta Narada Sejati', '55243', '2022-05-08 15:57:08', '2022-05-08 15:57:08');
-
--- --------------------------------------------------------
+LOCK TABLES `ma_penerbit` WRITE;
+/*!40000 ALTER TABLE `ma_penerbit` DISABLE KEYS */;
+INSERT INTO `ma_penerbit` VALUES ('Cahaya Pelita Andika, Pt','234324234','2022-05-08 15:51:57','2022-05-08 15:54:55'),('Cakradenta Agung Pertiwi, Pt','55234234','2022-05-08 15:56:02','2022-05-08 15:56:02'),('Cakung Permata Nusa, Pt','43523455','2022-05-08 15:56:36','2022-05-08 15:56:36'),('Calista Alam, Pt','6965523445','2022-05-08 15:56:47','2022-05-08 15:56:47'),('Cibaliung Tunggal Plantation, Pt','55234234','2022-05-08 15:57:00','2022-05-08 15:57:00'),('Cipta Narada Sejati','55243','2022-05-08 15:57:08','2022-05-08 15:57:08'),('Cv Casear Cell','47408934932','2022-05-08 15:32:53','2022-05-08 15:43:04'),('Pt Player Cell','085655990781','2022-05-08 15:35:10','2022-05-08 15:38:31'),('PT. Erlangga','085235119101','2022-03-23 10:17:59','2022-03-23 10:17:59'),('PT. Maju Mundur Cantik','543534534545','2022-05-08 13:24:59','2022-05-08 13:24:59'),('PT. Mencari Cinta Sejati','654657654345','2022-05-08 13:25:35','2022-05-08 13:25:35');
+/*!40000 ALTER TABLE `ma_penerbit` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ma_pengurus`
 --
 
+DROP TABLE IF EXISTS `ma_pengurus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_pengurus` (
-  `id` int(11) NOT NULL,
   `kode` varchar(16) NOT NULL,
   `nip` varchar(32) NOT NULL,
   `username` varchar(16) NOT NULL,
@@ -352,283 +328,115 @@ CREATE TABLE `ma_pengurus` (
   `nama_lengkap` varchar(64) NOT NULL,
   `hak_akses` enum('ADMINISTRATOR','STAF') DEFAULT 'STAF',
   `status` enum('AKTIF','BLOKIR') DEFAULT 'AKTIF',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`kode`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ma_pengurus`
 --
 
-INSERT INTO `ma_pengurus` (`id`, `kode`, `nip`, `username`, `password`, `nama_lengkap`, `hak_akses`, `status`, `created_at`, `updated_at`) VALUES
-(10, 'PGS-69696', '5345435', 'a', 'a', 'Aristo Caesar Pratama', 'ADMINISTRATOR', 'AKTIF', '2022-04-29 21:59:11', '2022-04-29 22:06:34');
-
--- --------------------------------------------------------
+LOCK TABLES `ma_pengurus` WRITE;
+/*!40000 ALTER TABLE `ma_pengurus` DISABLE KEYS */;
+INSERT INTO `ma_pengurus` VALUES ('PGS-69696','5345435','a','a','Aristo Caesar Pratama','ADMINISTRATOR','AKTIF','2022-04-29 21:59:11','2022-04-29 22:06:34');
+/*!40000 ALTER TABLE `ma_pengurus` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ma_rak`
 --
 
+DROP TABLE IF EXISTS `ma_rak`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_rak` (
-  `id` int(11) UNSIGNED NOT NULL,
   `kode` varchar(16) NOT NULL,
   `nama` varchar(64) NOT NULL,
   `deskripsi` text NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ma_rak`
 --
 
-INSERT INTO `ma_rak` (`id`, `kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(1, 'TIK', 'Teknik Informatika', 'rak buku teknik informatika', '2022-03-23 10:15:02', '2022-03-23 10:15:02'),
-(2, 'MTK', 'Matematika', 'rak buku matematika', '2022-05-07 23:59:30', '2022-05-07 23:59:30'),
-(3, 'IPS', 'Ilmu Pengetahuan Sosials', 'rak buku ilmu pengetahuan sosial', '2022-05-08 00:01:33', '2022-05-08 02:18:54');
-
--- --------------------------------------------------------
+LOCK TABLES `ma_rak` WRITE;
+/*!40000 ALTER TABLE `ma_rak` DISABLE KEYS */;
+INSERT INTO `ma_rak` VALUES ('IPS','Ilmu Pengetahuan Sosials','rak buku ilmu pengetahuan sosial','2022-05-08 00:01:33','2022-05-08 02:18:54'),('MTK','Matematika','rak buku matematika','2022-05-07 23:59:30','2022-05-07 23:59:30'),('TIK','Teknik Informatika','rak buku teknik informatika','2022-03-23 10:15:02','2022-03-23 10:15:02');
+/*!40000 ALTER TABLE `ma_rak` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ma_setting`
 --
 
+DROP TABLE IF EXISTS `ma_setting`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_setting` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `denda_terlambat` int(11) NOT NULL,
   `max_pinjam_buku_umum` int(11) NOT NULL,
   `time_backup_database` int(28) NOT NULL,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ma_setting`
 --
 
-INSERT INTO `ma_setting` (`id`, `denda_terlambat`, `max_pinjam_buku_umum`, `time_backup_database`, `updated_at`) VALUES
-(1, 2000, 5, 0, '2022-05-08 03:09:54');
-
--- --------------------------------------------------------
+LOCK TABLES `ma_setting` WRITE;
+/*!40000 ALTER TABLE `ma_setting` DISABLE KEYS */;
+INSERT INTO `ma_setting` VALUES (1,2000,5,0,'2022-05-08 03:09:54');
+/*!40000 ALTER TABLE `ma_setting` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ma_transaksi`
 --
 
+DROP TABLE IF EXISTS `ma_transaksi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ma_transaksi` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_transaksi` varchar(16) NOT NULL,
-  `id_anggota` int(11) UNSIGNED NOT NULL,
+  `id_anggota` int(11) unsigned NOT NULL,
   `nama_anggota` varchar(64) NOT NULL,
   `kelas` varchar(8) NOT NULL,
-  `id_pengelola` int(11) UNSIGNED NOT NULL,
+  `id_pengelola` int(11) unsigned NOT NULL,
   `jenis_buku` enum('PKT','UMM') DEFAULT NULL,
   `status_transaksi` enum('DIPINJAM','BERMASALAH','SELESAI') DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Indexes for dumped tables
+-- Dumping data for table `ma_transaksi`
 --
 
---
--- Indexes for table `ma_anggota`
---
-ALTER TABLE `ma_anggota`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nis` (`nis`),
-  ADD KEY `FK_Jurusan` (`jurusan`),
-  ADD KEY `FK_Kelas` (`kelas`);
+LOCK TABLES `ma_transaksi` WRITE;
+/*!40000 ALTER TABLE `ma_transaksi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ma_transaksi` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Indexes for table `ma_buku`
---
-ALTER TABLE `ma_buku`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Kategori` (`id_kategori`),
-  ADD KEY `FK_Penerbit` (`id_penerbit`);
-
---
--- Indexes for table `ma_dashboard`
---
-ALTER TABLE `ma_dashboard`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ma_detail_transaksi`
---
-ALTER TABLE `ma_detail_transaksi`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Transaksi` (`id_transaksi`);
-
---
--- Indexes for table `ma_jurusan`
---
-ALTER TABLE `ma_jurusan`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `KODE_uniq` (`kode`),
-  ADD UNIQUE KEY `NAMA_uniq` (`nama`);
-
---
--- Indexes for table `ma_kategori`
---
-ALTER TABLE `ma_kategori`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ma_kelas`
---
-ALTER TABLE `ma_kelas`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Kode_Uniq` (`kode`);
-
---
--- Indexes for table `ma_log`
---
-ALTER TABLE `ma_log`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ma_penerbit`
---
-ALTER TABLE `ma_penerbit`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nama` (`nama`);
-
---
--- Indexes for table `ma_pengurus`
---
-ALTER TABLE `ma_pengurus`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- Indexes for table `ma_rak`
---
-ALTER TABLE `ma_rak`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `kode` (`kode`),
-  ADD UNIQUE KEY `nama` (`nama`);
-
---
--- Indexes for table `ma_setting`
---
-ALTER TABLE `ma_setting`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ma_transaksi`
---
-ALTER TABLE `ma_transaksi`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `ma_anggota`
---
-ALTER TABLE `ma_anggota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `ma_buku`
---
-ALTER TABLE `ma_buku`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ma_dashboard`
---
-ALTER TABLE `ma_dashboard`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ma_detail_transaksi`
---
-ALTER TABLE `ma_detail_transaksi`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ma_jurusan`
---
-ALTER TABLE `ma_jurusan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `ma_kategori`
---
-ALTER TABLE `ma_kategori`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `ma_kelas`
---
-ALTER TABLE `ma_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT for table `ma_log`
---
-ALTER TABLE `ma_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
-
---
--- AUTO_INCREMENT for table `ma_penerbit`
---
-ALTER TABLE `ma_penerbit`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `ma_pengurus`
---
-ALTER TABLE `ma_pengurus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `ma_rak`
---
-ALTER TABLE `ma_rak`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `ma_setting`
---
-ALTER TABLE `ma_setting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ma_transaksi`
---
-ALTER TABLE `ma_transaksi`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `ma_anggota`
---
-ALTER TABLE `ma_anggota`
-  ADD CONSTRAINT `FK_Jurusan` FOREIGN KEY (`jurusan`) REFERENCES `ma_jurusan` (`id`),
-  ADD CONSTRAINT `FK_Kelas` FOREIGN KEY (`kelas`) REFERENCES `ma_kelas` (`id`) ON DELETE NO ACTION;
-
---
--- Constraints for table `ma_buku`
---
-ALTER TABLE `ma_buku`
-  ADD CONSTRAINT `FK_Kategori` FOREIGN KEY (`id_kategori`) REFERENCES `ma_kategori` (`id`),
-  ADD CONSTRAINT `FK_Penerbit` FOREIGN KEY (`id_penerbit`) REFERENCES `ma_penerbit` (`id`);
-
---
--- Constraints for table `ma_detail_transaksi`
---
-ALTER TABLE `ma_detail_transaksi`
-  ADD CONSTRAINT `FK_Transaksi` FOREIGN KEY (`id_transaksi`) REFERENCES `ma_transaksi` (`id`);
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-05-14 23:26:18

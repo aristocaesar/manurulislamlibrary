@@ -26,7 +26,7 @@ public class PenerbitModel extends DBConfig {
     
     // SET STATE && MODIFYIER
     
-    int id;
+    String old_nama;
     String nama;
     String kontak;
     String created_at;
@@ -34,12 +34,12 @@ public class PenerbitModel extends DBConfig {
     
     String message;
     
-    private void setId(int ID){
-        this.id = ID;
+    private void setOldNama(String Nama){
+        this.old_nama = Nama;
     }
     
-    private int getId(){
-        return this.id;
+    private String getOldNama(){
+        return this.old_nama;
     }
     
     public void setNama(String nama){
@@ -169,7 +169,7 @@ public class PenerbitModel extends DBConfig {
             ResultSet res = pst.executeQuery();
             
             if(res.next()){
-                setId(res.getInt("id"));
+                setOldNama(res.getString("nama"));
                 setNama(res.getString("nama"));
                 setKontak(res.getString("kontak"));
                 setCreated(res.getString("created_at"));
@@ -189,12 +189,12 @@ public class PenerbitModel extends DBConfig {
     
         try{
         
-            String sql = "UPDATE ma_penerbit SET nama = ?, kontak = ?, updated_at = ? WHERE id = ?";
+            String sql = "UPDATE ma_penerbit SET nama = ?, kontak = ?, updated_at = ? WHERE nama = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, getNama());
             pst.setString(2, getKontak());
             pst.setTimestamp(3, new SqlTime().getTimeStamp());
-            pst.setInt(4, getId());
+            pst.setString(4, getOldNama());
             
             int update = pst.executeUpdate();
             
@@ -227,9 +227,9 @@ public class PenerbitModel extends DBConfig {
     
         try{
         
-            String sql = "DELETE FROM ma_penerbit WHERE id = ?";
+            String sql = "DELETE FROM ma_penerbit WHERE nama = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, getId());
+            pst.setString(1, getOldNama());
             
             if(pst.execute()){
                 throw new SQLException("Gagal menghapus penerbit !");

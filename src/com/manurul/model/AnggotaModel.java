@@ -5,6 +5,7 @@
  */
 package com.manurul.model;
 
+import com.manurul.lib.Characters;
 import com.manurul.lib.DBConfig;
 import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
@@ -24,11 +25,10 @@ public class AnggotaModel extends DBConfig{
     
     //init state
     
-    private int id;
+    private String oldNis;
     private String nis;
     private String nama_lengkap;
     private String jurusan;
-    private String kelas;
     private String jumlah_buku_dipinjam;
     private String skor;
     private String created_at;
@@ -41,20 +41,20 @@ public class AnggotaModel extends DBConfig{
     
     //init modifier
     
-    public void setId(int id){
-        this.id = id;
-    }
-    
-    public int getId(){
-        return this.id;
-    }
-    
     public void setNis(String nis){
         this.nis = nis;
     }
     
     public String getNis(){
         return this.nis;
+    }
+    
+    public void setOldNis(String nis){
+        this.oldNis = nis;
+    }
+    
+    public String getOldNis() {
+        return this.oldNis;
     }
     
     public void setNama(String nama){
@@ -71,14 +71,6 @@ public class AnggotaModel extends DBConfig{
     
     public String getJurusan(){
         return this.jurusan;
-    }
-    
-    public void setKelas(String kelas){
-        this.kelas = kelas;
-    }
-    
-    public String getKelas(){
-        return this.kelas;
     }
     
     public String getJumlahBukuDipinjam(){
@@ -130,7 +122,6 @@ public class AnggotaModel extends DBConfig{
         table_model.addColumn("NIS");
         table_model.addColumn("Nama Lengkap");
         table_model.addColumn("Jurusan");
-        table_model.addColumn("Kelas");
         
         Dashboard.TABLE_LIST_ANGGOTA.setModel(table_model);
         table_model.setRowCount(0);
@@ -139,7 +130,7 @@ public class AnggotaModel extends DBConfig{
             
             String GroupSelected;
             if(Group.equals("Semua")){
-                GroupSelected = "ma_anggota.id";
+                GroupSelected = "ma_anggota.nis";
             }else{
                 GroupSelected = Group;
             }
@@ -151,9 +142,8 @@ public class AnggotaModel extends DBConfig{
                 limited = " LIMIT " + Showing;
             }
             
-            String sql = "SELECT ma_anggota.nis, ma_anggota.nama_lengkap, ma_jurusan.nama AS jurusan, ma_kelas.kode AS kode_kelas "
-                    + "FROM ma_anggota JOIN ma_jurusan ON ma_anggota.jurusan = ma_jurusan.id "
-                    + "JOIN ma_kelas ON ma_anggota.kelas = ma_kelas.id WHERE ma_anggota.nis LIKE '%"+Key+"%' OR ma_anggota.nama_lengkap LIKE '%"+Key+"%' ORDER BY "+GroupSelected+limited;
+            String sql = "SELECT ma_anggota.nis, ma_anggota.nama_lengkap, ma_jurusan.nama AS jurusan "
+                    + "FROM ma_anggota JOIN ma_jurusan ON ma_anggota.jurusan = ma_jurusan.kode WHERE ma_anggota.nis LIKE '%"+Key+"%' OR ma_anggota.nama_lengkap LIKE '%"+Key+"%' ORDER BY "+GroupSelected+limited;
             
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet res = pst.executeQuery();
@@ -164,8 +154,7 @@ public class AnggotaModel extends DBConfig{
                     i++,
                     res.getString("nis"),
                     res.getString("nama_lengkap"),
-                    res.getString("jurusan"),
-                    res.getString("kode_kelas")
+                    res.getString("jurusan")
                 });
             }
             
@@ -175,7 +164,7 @@ public class AnggotaModel extends DBConfig{
         
     }
     
-    public void setJurusanKelas(String Jurusan, String Kelas){
+    public void setJurusanKelas(String Jurusan){
     
         try{
             
@@ -191,18 +180,6 @@ public class AnggotaModel extends DBConfig{
                     AnggotaUSER.COMBO_BOX_JURUSAN.setSelectedItem(Jurusan);
                 }
             
-            //set kelas
-            PreparedStatement pst_kelas = conn.prepareStatement("SELECT kode FROM ma_kelas");
-            ResultSet res_kelas = pst_kelas.executeQuery();
-            
-            while(res_kelas.next()){
-                AnggotaUSER.COMBO_BOX_KELAS.addItem(res_kelas.getString("kode"));
-            }
-                
-                if(!Kelas.equals("")){
-                    AnggotaUSER.COMBO_BOX_KELAS.setSelectedItem(Kelas);
-                }
-            
             
         }catch(SQLException error){
             JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahaan!", JOptionPane.ERROR_MESSAGE);
@@ -215,29 +192,22 @@ public class AnggotaModel extends DBConfig{
     
         try{
             
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_anggota ( nis, nama_lengkap, jurusan, kelas, "
-                    + " skor, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ? )");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_anggota ( nis, nama_lengkap, jurusan, "
+                    + " skor, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ? )");
             
             pst.setString(1, getNis());
             pst.setString(2, getNama());
             
             // get id jurusan
-            PreparedStatement getJurId = conn.prepareStatement("SELECT id FROM ma_jurusan WHERE nama = '"+ getJurusan() + "'");
+            PreparedStatement getJurId = conn.prepareStatement("SELECT kode FROM ma_jurusan WHERE nama = '"+ getJurusan() + "'");
             ResultSet ResJur = getJurId.executeQuery();
             if(ResJur.next()){
-                pst.setString(3, ResJur.getString("id"));
+                pst.setString(3, ResJur.getString("kode"));
             }
             
-            // get id kelas
-            PreparedStatement getKelasId = conn.prepareStatement("SELECT id FROM ma_kelas WHERE kode = '" + getKelas() + "'");
-            ResultSet ResKel = getKelasId.executeQuery();
-            if(ResKel.next()){
-                pst.setString(4, ResKel.getString("id"));
-            }
-            
-            pst.setInt(5, Integer.parseInt(getSkor()));
+            pst.setInt(4, Integer.parseInt(getSkor()));
+            pst.setTimestamp(5, new SqlTime().getTimeStamp());
             pst.setTimestamp(6, new SqlTime().getTimeStamp());
-            pst.setTimestamp(7, new SqlTime().getTimeStamp());
             
             if(pst.execute()){
                 throw new SQLException("Gagal menambahkan anggota!");
@@ -279,24 +249,16 @@ public class AnggotaModel extends DBConfig{
             
             if(res.next()){
             
-                setId(res.getInt("id"));
                 setNis(res.getString("nis"));
+                setOldNis(res.getString("nis"));
                 setNama(res.getString("nama_lengkap"));
                 
-                PreparedStatement pst_jur = conn.prepareStatement("SELECT nama FROM ma_jurusan WHERE id = ?");
+                PreparedStatement pst_jur = conn.prepareStatement("SELECT nama FROM ma_jurusan WHERE kode = ?");
                 pst_jur.setString(1, res.getString("jurusan"));
                 
                 ResultSet res_jur = pst_jur.executeQuery();
                 if(res_jur.next()){
                     setJurusan(res_jur.getString("nama"));
-                }
-               
-                PreparedStatement pst_kelas = conn.prepareStatement("SELECT kode FROM ma_kelas WHERE id = ?");
-                pst_kelas.setString(1, res.getString("kelas"));
-                
-                ResultSet res_kelas = pst_kelas.executeQuery();
-                if(res_kelas.next()){
-                    setKelas(res_kelas.getString("kode"));
                 }
                 
                 setJumlahBukuDipinjam(res.getString("jumlah_buku_dipinjam"));
@@ -321,34 +283,25 @@ public class AnggotaModel extends DBConfig{
                     + "nis = ?,"
                     + "nama_lengkap = ?,"
                     + "jurusan = ?,"
-                    + "kelas = ?,"
                     + "skor = ?,"
                     + "updated_at = ?"
-                    + " WHERE id = ?";
+                    + " WHERE nis = ?";
             
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, getNis());
-            pst.setString(2, getNama());
+            pst.setString(2, Characters.ucwords(getNama().replaceAll("[0-9]", "")));
             
-            PreparedStatement pst_jur = conn.prepareStatement("SELECT id FROM ma_jurusan WHERE nama = ?");
-            pst_jur.setString(1, getJurusan());
+                PreparedStatement pst_jur = conn.prepareStatement("SELECT kode FROM ma_jurusan WHERE nama = ?");
+                pst_jur.setString(1, getJurusan()); 
 
-            ResultSet res_jur = pst_jur.executeQuery();
-            if(res_jur.next()){
-                pst.setString(3, res_jur.getString("id"));
-            }
-
-            PreparedStatement pst_kelas = conn.prepareStatement("SELECT id FROM ma_kelas WHERE kode = ?");
-            pst_kelas.setString(1, getKelas());
-
-            ResultSet res_kelas = pst_kelas.executeQuery();
-            if(res_kelas.next()){
-                pst.setString(4, res_kelas.getString("id"));
-            }
+                ResultSet res_jur = pst_jur.executeQuery();
+                if(res_jur.next()){
+                    pst.setString(3, res_jur.getString("kode"));
+                }
             
-            pst.setInt(5, Integer.parseInt(getSkor()));
-            pst.setTimestamp(6, new SqlTime().getTimeStamp());
-            pst.setInt(7, getId());
+            pst.setInt(4, Integer.parseInt(getSkor()));
+            pst.setTimestamp(5, new SqlTime().getTimeStamp());
+            pst.setString(6, getOldNis());
             
             int updated = pst.executeUpdate();
             
@@ -382,10 +335,10 @@ public class AnggotaModel extends DBConfig{
     
         try{
             
-            String sql = "DELETE FROM ma_anggota WHERE id = ?";
+            String sql = "DELETE FROM ma_anggota WHERE nis = ?";
             
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, getId());
+            pst.setString(1, getNis());
             
             if(pst.execute()){
                 throw new SQLException("Gagal menghapus anggota " + getNama());

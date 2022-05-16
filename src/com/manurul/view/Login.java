@@ -57,7 +57,7 @@ public class Login extends javax.swing.JFrame {
                 PM.setUsername(INPUT_USERNAME.getText());
                 PM.setPassword(INPUT_PASSWORD.getText());
                 if(PM.loginCek()){
-                     new Dashboard(PM.getId(), PM.getNamaLengkap(), PM.getHakAkses()).setVisible(true);
+                     new Dashboard(PM.getKode(), PM.getNamaLengkap(), PM.getHakAkses()).setVisible(true);
                      this.dispose();
                 }else{
                     throw new Exception(PM.getMessage());

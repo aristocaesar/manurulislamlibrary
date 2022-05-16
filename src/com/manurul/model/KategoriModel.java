@@ -28,7 +28,7 @@ public class KategoriModel extends DBConfig{
     
     
     // SET INIT INPUT && MODIFYER
-    int id;
+    String old_kode;
     String kode;
     String nama;
     String deskripsi;
@@ -36,12 +36,12 @@ public class KategoriModel extends DBConfig{
     String updated_at;
     String message;
 
-    private void setId(int ID){
-        this.id = ID;
+    private void setOldKode(String Kode){
+        this.old_kode = Kode;
     }
     
-    private int getId(){
-        return this.id;
+    private String getOldKode(){
+        return this.old_kode;
     }
     
     public void setKode(String kode){
@@ -181,7 +181,7 @@ public class KategoriModel extends DBConfig{
             ResultSet res = pst.executeQuery();
             
             if(res.next()){
-                setId(res.getInt("id"));
+                setOldKode(res.getString("kode"));
                 setKode(res.getString("kode"));
                 setNama(res.getString("nama"));
                 setDeskripsi(res.getString("deskripsi"));
@@ -202,13 +202,13 @@ public class KategoriModel extends DBConfig{
     
         try{
         
-            String sql = "UPDATE ma_kategori SET kode = ?, nama = ?, deskripsi = ?, updated_at = ? WHERE id = ?";
+            String sql = "UPDATE ma_kategori SET kode = ?, nama = ?, deskripsi = ?, updated_at = ? WHERE kode = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, getKode());
             pst.setString(2, getNama());
             pst.setString(3, getDeskripsi());
             pst.setTimestamp(4, new SqlTime().getTimeStamp());
-            pst.setInt(5, getId());
+            pst.setString(5, getOldKode());
             
             int update = pst.executeUpdate();
             
@@ -241,9 +241,9 @@ public class KategoriModel extends DBConfig{
     
         try{
         
-            String sql = "DELETE FROM ma_kategori WHERE id = ?";
+            String sql = "DELETE FROM ma_kategori WHERE kode= ?";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, getId());
+            pst.setString(1, getOldKode());
             
             if(pst.execute()){
                 throw new SQLException("Gagal menghapus kategori !");

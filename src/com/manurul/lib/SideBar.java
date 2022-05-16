@@ -169,7 +169,6 @@ public class SideBar {
             
             Dashboard.T_U_ANGGOTA.setForeground(new Color(96, 96, 96));
             Dashboard.T_U_JURUSAN.setForeground(new Color(96, 96, 96));
-            Dashboard.T_U_KELAS.setForeground(new Color(96, 96, 96));
             Dashboard.T_U_PENGURUS.setForeground(new Color(96, 96, 96));
             
             if(selected.equals("ANGGOTA")){
@@ -186,13 +185,7 @@ public class SideBar {
                 
                 Dashboard.T_U_JURUSAN.setForeground(new Color(78, 204, 121));
             
-            }else if(selected.equals("KELAS")) {
-                
-                Dashboard.FRAME_USER.add(Dashboard.F_U_KELAS);
-            
-                Dashboard.T_U_KELAS.setForeground(new Color(78, 204, 121));
-                
-            } else {
+            }else {
                 
                 Dashboard.FRAME_USER.add(Dashboard.F_U_PENGURUS);
                 
