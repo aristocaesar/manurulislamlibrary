@@ -390,10 +390,130 @@ public class BukuModel extends DBConfig {
     }
     
     // getSelectedData
+    public void getSelectedData(String Kode){
+    
+        try{
+        
+            String sql =  "SELECT * FROM ma_buku WHERE isbn = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, Kode);
+            ResultSet res = pst.executeQuery();
+            
+            if(!res.next()){
+                throw new SQLException("Gagal memuat data buku !");                        
+            }
+            
+            setOldISBN(res.getString("isbn"));
+            setIsbn(res.getString("isbn"));
+            setJudul(res.getString("judul"));
+            
+                String sql_kategori = "SELECT nama FROM ma_kategori WHERE kode = ?";
+                PreparedStatement pst_kategori = conn.prepareStatement(sql_kategori);
+                pst_kategori.setString(1, res.getString("kategori"));
+                ResultSet res_kategori = pst_kategori.executeQuery();
+
+                if(!res_kategori.next()){
+                    throw new SQLException("Gagal memuat kategori buku !");
+                }
+            
+                setKategori(res_kategori.getString("nama"));
+                
+            setTahunTerbit(res.getString("tahun_terbit"));
+            setHarga(res.getString("harga"));
+            setJenis(res.getString("jenis"));
+            setMaxDipinjam(res.getString("max_hari_pinjam"));
+            setPenerbit(res.getString("penerbit"));
+            setPenulis(res.getString("penulis"));
+            setStok(res.getInt("stok"));
+            setRak(res.getString("rak"));
+            setDeskripsi(res.getString("deskripsi"));
+            
+            setCreated(res.getString("created_at"));
+            setUpdated(res.getString("updated_at"));
+            
+        }catch(SQLException error){
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahaan!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
     
     // update data
+    public boolean updateData(){
+    
+        try{
+        
+            String sql = "UPDATE ma_buku SET isbn = ?, judul = ?, kategori = ?, harga = ?, tahun_terbit = ?, penulis = ?, "
+                    + " penerbit = ?, stok = ?, rak = ?, deskripsi = ?, max_hari_pinjam = ?, updated_at = ?, jenis = ? WHERE isbn = ?";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, getIsbn());
+            pst.setString(2, getJudul());
+            pst.setString(3, getKategoriModel(getKategori()));
+            pst.setString(4, getHarga());
+            pst.setString(5, getTahunTerbit());
+            pst.setString(6, getPenulis());
+            pst.setString(7, getPenerbit());
+            pst.setInt(8, getStok());
+            pst.setString(9, getRak());
+            pst.setString(10, getDeskripsi());
+            pst.setString(11, getMaxDipinjam());
+            pst.setTimestamp(12, new SqlTime().getTimeStamp());
+            pst.setString(13, getJenis());
+            pst.setString(14, getOldISBN());
+            
+            int updated = pst.executeUpdate();
+            
+            if(updated == 0){
+                throw new SQLException("Gagal memperbarui buku " + getJudul());
+            }
+            
+            // cetak log
+            new LogModel().Action("UPDATE BUKU", "Memperbarui buku "+ getJudul(), Dashboard.nama_user);
+            
+            setMessage("Berhasil memperbarui buku " + getJudul());
+            return true;
+            
+        }catch(SQLException error){
+            System.out.println(error.getMessage());
+            if(error.getErrorCode() == 1062){
+                setMessage("Buku ini sudah tersedia !");
+            }else{
+                setMessage(error.getMessage());
+            }
+            
+            return false;
+        }
+        
+    }
     
     // delete data
+    public boolean deleteData(){
+        
+        try{
+            
+            String sql = "DELETE FROM ma_buku WHERE isbn = ?";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, getOldISBN());
+            
+            if(pst.execute()){
+                throw new SQLException("Gagal menghapus buku " + getJudul());
+            }
+            
+            // cetak log
+            new LogModel().Action("DELETE BUKU", "Menghapus buku "+ getJudul(), Dashboard.nama_user);
+            
+            setMessage("Berhasil menghapus buku " + getJudul());
+            return true;
+        
+        }catch(SQLException error){
+            
+            setMessage(error.getMessage());
+            
+            return false;
+        }
+        
+    }
     
     
 }

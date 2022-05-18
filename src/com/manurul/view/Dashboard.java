@@ -500,7 +500,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBARLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -837,7 +837,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_TR_LAPORAN)))
                     .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1230,7 +1230,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_DB_RAK)))
                     .addGroup(TOPBAR_DATABUKULayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1289,6 +1289,11 @@ public class Dashboard extends javax.swing.JFrame {
             }
         ));
         TABLE_LIST_BUKU.setRowHeight(30);
+        TABLE_LIST_BUKU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_BUKUMouseClicked(evt);
+            }
+        });
         TABLE_LIST_DB_BUKU.setViewportView(TABLE_LIST_BUKU);
 
         FILTER_TAMPIL_BUKU.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -1755,7 +1760,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_U_PENGURUS)))
                     .addGroup(TOPBAR_USERLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -2114,7 +2119,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBAR_SETTINGLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2391,7 +2396,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_ICON_IMPORT_BUKUMouseClicked
 
     private void ICON_ADD_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_BUKUMouseClicked
-        new BukuDATABUKU("ADD", 0).setVisible(true);
+        new BukuDATABUKU("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_BUKUMouseClicked
 
     private void SEARCH_BUKUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_BUKUKeyTyped
@@ -2540,6 +2545,15 @@ public class Dashboard extends javax.swing.JFrame {
     private void TAMPILKAN_COMBOBOX_BUKUItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TAMPILKAN_COMBOBOX_BUKUItemStateChanged
         new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
     }//GEN-LAST:event_TAMPILKAN_COMBOBOX_BUKUItemStateChanged
+
+    private void TABLE_LIST_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_BUKUMouseClicked
+        if(evt.getClickCount() == 2){
+            int index = TABLE_LIST_BUKU.getSelectedRow();
+
+            String isbn = TABLE_LIST_BUKU.getValueAt(index, 1).toString();
+            new BukuDATABUKU("EDIT", isbn).setVisible(true);
+        }
+    }//GEN-LAST:event_TABLE_LIST_BUKUMouseClicked
 
     /**
      * @param args the command line arguments

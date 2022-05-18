@@ -312,9 +312,6 @@ public class AnggotaModel extends DBConfig{
             // cetak log
             new LogModel().Action("UPDATE ANGGOTA", "Memperbarui anggota "+ getNama(), Dashboard.nama_user);
             
-            // refresh
-            new AnggotaModel().getDataTable(Dashboard.SEARCH_USER.getText(), Dashboard.GROUP_COMBOBOX_USER.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
-            
             setMessage("Berhasil memperbarui anggota " + getNama());
             return true;
         
