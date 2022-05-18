@@ -10,6 +10,7 @@ import com.manurul.lib.InputBorder;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.model.BukuModel;
+import com.manurul.view.Dashboard;
 import java.awt.Color;
 import java.util.Calendar;
 import javax.swing.ImageIcon;
@@ -25,13 +26,32 @@ public class BukuDATABUKU extends javax.swing.JFrame {
      * Creates new form BukuDATABUKU
      */
     String title = "Edit";
+    String Action;
     ImageIcon successIcon;
+    
+    String isbn;
+    String judul;
+    String jenis;
+    String kategori;
+    String harga;
+    String lebar_panjang;
+    String jumlah_halaman;
+    String tahun_terbit;
+    String penulis;
+    String penerbit;
+    int stok;
+    String rak;
+    String deskripsi;
+    String max_dipinjam;
     
     BukuModel BM = new BukuModel();
     
     
-    public BukuDATABUKU(String Action, int ID) {
+    public BukuDATABUKU(String Action, String Kode) {
         initComponents();
+        
+        // SET ACTION
+        this.Action = Action;
         
         // SET SIZE
         this.setSize(1040, 640);
@@ -84,6 +104,49 @@ public class BukuDATABUKU extends javax.swing.JFrame {
             INPUT_UPDATED.setVisible(false);
             
             BTN_HAPUS_BUKU.setVisible(false);
+        }else{
+        
+            BM.getSelectedData(Kode);
+            
+            INPUT_ISBN.setText(BM.getIsbn());
+            this.isbn = BM.getIsbn();
+            
+            INPUT_JUDUL_BUKU.setText(BM.getJudul());
+            this.judul = BM.getJudul();
+            
+            INPUT_KATEGORI.setSelectedItem(BM.getKategori());
+            this.kategori = BM.getKategori();
+            
+            INPUT_TAHUN_TERBIT.setText(BM.getTahunTerbit());
+            this.tahun_terbit = BM.getTahunTerbit();
+            
+            INPUT_HARGA_BUKU.setValue(Float.parseFloat(BM.getHarga()));
+            this.harga = BM.getHarga();
+            
+            INPUT_JENIS.setSelectedItem(BM.getJenis());
+            this.jenis = BM.getJenis();
+            
+            INPUT_MAX_BATAS_PINJAM.setValue(Integer.parseInt(BM.getMaxDipinjam()));
+            this.max_dipinjam = BM.getMaxDipinjam();
+            
+            INPUT_PENERBIT.setSelectedItem(BM.getPenerbit());
+            this.penerbit = BM.getPenerbit();
+            
+            INPUT_PENULIS.setText(BM.getPenulis());
+            this.penulis = BM.getPenulis();
+            
+            INPUT_STOK.setValue(BM.getStok());
+            this.stok = BM.getStok();
+            
+            INPUT_RAK.setSelectedItem(BM.getRak());
+            this.rak = BM.getRak();
+            
+            INPUT_DESKRIPSI.setText(BM.getDeskripsi());
+            this.deskripsi = BM.getDeskripsi();
+            
+            INPUT_CREATED.setText(BM.getCreated());
+            INPUT_UPDATED.setText(BM.getUpdated());
+            
         }
         
         // SET TITLE
@@ -298,13 +361,12 @@ public class BukuDATABUKU extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(INPUT_TAHUN_TERBIT)
-                            .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(LABEL_HARGA_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                                .addComponent(LABEL_TAHUN_TERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CONTAINER_ANGGOTALayout.createSequentialGroup()
-                                    .addComponent(LABEL_HARGA_BUKU_RP)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(INPUT_HARGA_BUKU))))
+                            .addComponent(LABEL_HARGA_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                            .addComponent(LABEL_TAHUN_TERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CONTAINER_ANGGOTALayout.createSequentialGroup()
+                                .addComponent(LABEL_HARGA_BUKU_RP)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(INPUT_HARGA_BUKU)))
                         .addGap(36, 36, 36)))
                 .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CONTAINER_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,6 +506,11 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         BTN_HAPUS_BUKU.setForeground(new java.awt.Color(255, 255, 255));
         BTN_HAPUS_BUKU.setText("Hapus");
         BTN_HAPUS_BUKU.setBorder(null);
+        BTN_HAPUS_BUKU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_HAPUS_BUKUMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout FRAME_MAIN_ANGGOTALayout = new javax.swing.GroupLayout(FRAME_MAIN_ANGGOTA);
         FRAME_MAIN_ANGGOTA.setLayout(FRAME_MAIN_ANGGOTALayout);
@@ -498,12 +565,39 @@ public class BukuDATABUKU extends javax.swing.JFrame {
             String tahun_terbit = INPUT_TAHUN_TERBIT.getText().replaceAll("[a-zA-Z]", "");
             String harga_buku = INPUT_HARGA_BUKU.getValue().toString();
             String jenis = INPUT_JENIS.getSelectedItem().toString();
+            
             int hari_max_pinjam = Integer.parseInt(INPUT_MAX_BATAS_PINJAM.getValue().toString());
+            String hari_max_pinjam_str = INPUT_MAX_BATAS_PINJAM.getValue().toString();
+            
             String penerbit = INPUT_PENERBIT.getSelectedItem().toString();
             String penulis = Characters.ucwords(INPUT_PENULIS.getText().replaceAll("[0-9]", ""));
             int stok = Integer.parseInt(INPUT_STOK.getValue().toString());
             String rak = INPUT_RAK.getSelectedItem().toString();
             String deskripsi = INPUT_DESKRIPSI.getText();
+            
+            if(!this.Action.equals("ADD")){
+                
+                if  (
+                        
+                        isbn.equals(this.isbn) &&
+                        judul.equals(this.judul) &&
+                        kategori.equals(this.kategori) &&
+                        tahun_terbit.equals(this.tahun_terbit) &&
+                        jenis.equals(this.jenis) &&
+                        hari_max_pinjam_str.equals(this.max_dipinjam) &&
+                        penerbit.equals(this.penerbit) &&
+                        penulis.equals(this.penulis) &&
+                        stok == this.stok &&
+                        rak.equals(this.rak) &&
+                        deskripsi.equals(deskripsi)
+                        
+                    ){
+                
+                    throw new Exception("Tidak ada perubahan data !");
+                
+                }
+                
+            }
             
             if(isbn.equals("")){
                 throw new Exception("Nilai ISBN harus terisi dan berisi angka !");
@@ -561,23 +655,91 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         
     }
     
-    private void BTN_SIMPAN_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_BUKUMouseClicked
-        if(cekValidasi()){
+    private void inputRevalidate(){
+    
+        INPUT_ISBN.setText(this.isbn);
+        INPUT_JUDUL_BUKU.setText(this.judul);
+        INPUT_KATEGORI.setSelectedItem(this.kategori);
+        INPUT_TAHUN_TERBIT.setText(this.tahun_terbit);
+        INPUT_HARGA_BUKU.setValue(Float.valueOf(this.harga));
+        INPUT_JENIS.setSelectedItem(this.jenis);
+        INPUT_MAX_BATAS_PINJAM.setValue(Integer.parseInt(this.max_dipinjam));
+        INPUT_PENERBIT.setSelectedItem(this.penerbit);
+        INPUT_PENULIS.setText(this.penulis);
+        INPUT_STOK.setValue(this.stok);
+        INPUT_RAK.setSelectedItem(this.rak);
+        INPUT_DESKRIPSI.setText(this.deskripsi);
         
-            if(BM.insertData()){
+    }
+    
+    private void insert(){
+        if(BM.insertData()){
+
+            JOptionPane.showMessageDialog(null, BM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+            new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
+
+            this.dispose();
+
+        }else{
+
+            JOptionPane.showMessageDialog(null, BM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }
+    
+    private void update(){
+        if(BM.updateData()){
+        
+            JOptionPane.showMessageDialog(null, BM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+            new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
+
+            this.dispose();
             
+        }else{
+            JOptionPane.showMessageDialog(null, BM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    private void delete(){
+        
+        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin mengapus buku "+BM.getJudul()+" ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if(hapus == 0){
+            
+            inputRevalidate();
+
+            if(BM.deleteData()){
+
                 JOptionPane.showMessageDialog(null, BM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                
+
+                new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
+
                 this.dispose();
-                
+
             }else{
-            
+                
                 JOptionPane.showMessageDialog(null, BM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
                 
             }
-            
+                
+        }
+        
+    }
+    
+    private void BTN_SIMPAN_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_BUKUMouseClicked
+        if(cekValidasi()){
+            if(this.Action.equals("ADD")){
+                insert();
+            }else{
+                update();
+            }
         }
     }//GEN-LAST:event_BTN_SIMPAN_BUKUMouseClicked
+
+    private void BTN_HAPUS_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_BUKUMouseClicked
+        delete();
+    }//GEN-LAST:event_BTN_HAPUS_BUKUMouseClicked
 
     /**
      * @param args the command line arguments
@@ -609,7 +771,7 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BukuDATABUKU("", 0).setVisible(true);
+                new BukuDATABUKU("", "").setVisible(true);
             }
         });
     }
