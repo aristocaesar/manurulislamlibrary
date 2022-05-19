@@ -5,6 +5,8 @@
  */
 package com.manurul.lib;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -30,8 +32,26 @@ public class GenKode {
         
     }
     
-    public static void main(String[] args) {
-        System.out.println(RandomInt("PGS", 10));
+    private static String getTimeMiliSecond(){
+    
+        String miliSecond = Long.toString(System.currentTimeMillis());
+        return miliSecond;
+        
+    }
+    
+    public static String Transaksi(){
+        
+        //get milisdecond
+        return "TR-" + getTimeMiliSecond();
+        
+    }
+    
+    public static String TransaksiGetDate(){
+    
+        Date date = new Date(Long.parseLong(getTimeMiliSecond()));
+        SimpleDateFormat dateFormater = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
+        return dateFormater.format(date);
+    
     }
     
 }

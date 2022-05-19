@@ -5,9 +5,7 @@
  */
 package com.manurul.lib;
 
-import com.manurul.model.AnggotaModel;
 import com.manurul.model.BukuModel;
-import com.manurul.model.RakModel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
 
@@ -100,7 +98,6 @@ public class SideBar {
                 
                 Dashboard.T_TR_PINJAM.setForeground(new Color(78, 204, 121));
                 
-            
             }else if(selected.equals("KEMBALI")){
             
                 Dashboard.FRAME_TRANSAKSI.add(Dashboard.F_TR_KEMBALI);

@@ -230,9 +230,9 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="P_TABLE_LOG" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="P_TOTAL_BUKU" pref="289" max="32767" attributes="0"/>
+                              <Component id="P_TOTAL_BUKU" pref="291" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="P_DIPINJAM" pref="291" max="32767" attributes="0"/>
+                              <Component id="P_DIPINJAM" pref="289" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="P_BERMASALAH" pref="291" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -368,7 +368,7 @@
                               <Component id="TITLE_TOTAL_BUKU" min="-2" max="-2" attributes="0"/>
                               <Component id="VALUE_TOTAL_BUKU" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="77" max="32767" attributes="0"/>
+                          <EmptySpace pref="89" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -449,7 +449,7 @@
                               <Component id="TITLE_DIPINJAM" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="VALUE_DIPINJAM" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="93" max="32767" attributes="0"/>
+                          <EmptySpace pref="103" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -533,7 +533,7 @@
                               <Component id="TITLE_BERMASALAH" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="VALUE_BERMASALAH" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="74" max="32767" attributes="0"/>
+                          <EmptySpace pref="84" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -690,7 +690,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="TABLE_LOG" pref="1168" max="32767" attributes="0"/>
+                              <Component id="TABLE_LOG" pref="1210" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -1000,7 +1000,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1238" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1280" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -1035,7 +1035,7 @@
                                   <Component id="T_KMBLI_BUKU" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="TITLE_FRAME_KEMBALI" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="TABLE_KEMBALI" pref="800" max="32767" attributes="0"/>
+                                      <Component id="TABLE_KEMBALI" pref="842" max="32767" attributes="0"/>
                                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="BTN_CETAK_KEMBALI" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
@@ -1315,7 +1315,7 @@
                                   <Component id="T_PJ_BUKU" min="-2" max="-2" attributes="0"/>
                                   <Component id="TITLE_FRAME_PINJAM" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="TABLE_PINJAM" pref="800" max="32767" attributes="0"/>
+                                      <Component id="TABLE_PINJAM" pref="842" max="32767" attributes="0"/>
                                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="BTN_CETAK_PINJAMAN" min="-2" pref="368" max="-2" attributes="0"/>
@@ -1415,7 +1415,15 @@
                                 <Column editable="true" title="Title 4" type="java.lang.Object"/>
                               </Table>
                             </Property>
+                            <Property name="rowHeight" type="int" value="30"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TABLE_LIST_PINJAMKeyPressed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;&#xa;    private static final long serialVersionUID = 1L;&#xa;&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        return false;&#xa;    };&#xa;&#xa;}"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1432,6 +1440,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Cetak Pinjaman"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_CETAK_PINJAMANMouseClicked"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="PJ_INPUT_ID_TRANSAKSI">
                       <Properties>
@@ -1450,6 +1461,9 @@
                           </Border>
                         </Property>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="PJ_ID_TRANSAKSI">
                       <Properties>
@@ -1478,6 +1492,12 @@
                           </Border>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PJ_INPUT_PEMINJAMKeyPressed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="PJ_LABEL_PEMINJAM">
                       <Properties>
@@ -1541,8 +1561,8 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="2">
-                            <StringItem index="0" value="UMM - Buku Umum"/>
-                            <StringItem index="1" value="PKT - Buku Paket"/>
+                            <StringItem index="0" value="UMUM - Buku Umum"/>
+                            <StringItem index="1" value="PAKET - Buku Paket"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -1567,6 +1587,9 @@
                           </Border>
                         </Property>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1826,7 +1849,7 @@
                                           <Component id="TABLE_LIST_DB_BUKU" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_BUKU" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="629" max="32767" attributes="0"/>
+                                              <EmptySpace pref="671" max="32767" attributes="0"/>
                                               <Component id="SEARCH_BUKU" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_BUKU" min="-2" pref="34" max="-2" attributes="0"/>
@@ -2096,7 +2119,7 @@
                                           <Component id="TABLE_KATEGORI" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_KATEGORI" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="690" max="32767" attributes="0"/>
+                                              <EmptySpace pref="732" max="32767" attributes="0"/>
                                               <Component id="SEARCH_KATEGORI" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_KATEGORI" min="-2" pref="34" max="-2" attributes="0"/>
@@ -2298,7 +2321,7 @@
                                           <Component id="TABLE_PENERBIT" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_PENERBIT" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="688" max="32767" attributes="0"/>
+                                              <EmptySpace pref="730" max="32767" attributes="0"/>
                                               <Component id="SEARCH_PENERBIT" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_PENERBIT" min="-2" pref="34" max="-2" attributes="0"/>
@@ -2500,7 +2523,7 @@
                                           <Component id="TABLE_RAK" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_RAK" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="748" max="32767" attributes="0"/>
+                                              <EmptySpace pref="790" max="32767" attributes="0"/>
                                               <Component id="SEARCH_RAK" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_RAK" min="-2" pref="34" max="-2" attributes="0"/>
@@ -2901,7 +2924,7 @@
                                           <Component id="TABLE_LIST_U_ANGGOTA" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="TITLE_FRAME_USER" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="592" max="32767" attributes="0"/>
+                                              <EmptySpace pref="634" max="32767" attributes="0"/>
                                               <Component id="SEARCH_USER" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_USER" min="-2" pref="34" max="-2" attributes="0"/>
@@ -3163,7 +3186,7 @@
                                   <Component id="TABLE_LIST_JURUSAN" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="TITLE_FRAME_JURUSAN" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="697" max="32767" attributes="0"/>
+                                      <EmptySpace pref="739" max="32767" attributes="0"/>
                                       <Component id="SEARCH_JURUSAN" min="-2" pref="256" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="ICON_ADD_JURUSAN" min="-2" pref="34" max="-2" attributes="0"/>
@@ -3316,7 +3339,7 @@
                                   <Component id="TABLE_LIST_PENGURUS" alignment="1" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="TITLE_FRAME_PENGURUS" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="682" max="32767" attributes="0"/>
+                                      <EmptySpace pref="724" max="32767" attributes="0"/>
                                       <Component id="SEARCH_PENGURUS" min="-2" pref="256" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="ICON_ADD_PENGURUS" min="-2" pref="34" max="-2" attributes="0"/>
