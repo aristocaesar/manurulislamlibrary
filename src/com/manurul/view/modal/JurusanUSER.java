@@ -33,6 +33,8 @@ public class JurusanUSER extends javax.swing.JFrame {
     
     private ImageIcon successIcon;
     
+    JurusanModel JM = new JurusanModel();
+    
     public JurusanUSER(String Action, String Kode) {
         initComponents();
         
@@ -264,7 +266,7 @@ public class JurusanUSER extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private boolean cekValidasi(String Action){
         
         try{
@@ -293,7 +295,6 @@ public class JurusanUSER extends javax.swing.JFrame {
     private void simpan(){
         
         if(cekValidasi("INSERT")){
-            JurusanModel JM = new JurusanModel();
 
             JM.setKode(INPUT_KODE_JUR.getText());
             JM.setNama(INPUT_NAMA_JUR.getText());
@@ -312,7 +313,6 @@ public class JurusanUSER extends javax.swing.JFrame {
     private void update(){
         
         if(cekValidasi("UPDATE")){
-            JurusanModel JM = new JurusanModel();
         
             JM.setKode(INPUT_KODE_JUR.getText());
             JM.setNama(INPUT_NAMA_JUR.getText());

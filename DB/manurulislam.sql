@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2022 at 04:44 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Waktu pembuatan: 18 Bulan Mei 2022 pada 11.09
+-- Versi server: 10.4.21-MariaDB
+-- Versi PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,300 +24,231 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_anggota`
+-- Struktur dari tabel `ma_anggota`
 --
 
 CREATE TABLE `ma_anggota` (
-  `id` int(11) NOT NULL,
-  `kode` varchar(18) NOT NULL,
-  `nis` varchar(28) NOT NULL,
-  `nama_lengkap` varchar(128) NOT NULL,
-  `jurusan` int(11) NOT NULL,
-  `kelas` int(11) NOT NULL,
-  `jumlah_buku_dipinjam` int(11) NOT NULL DEFAULT '0',
-  `skor` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `nis` varchar(28) CHARACTER SET utf8mb4 NOT NULL,
+  `nama_lengkap` varchar(128) CHARACTER SET utf8mb4 DEFAULT '',
+  `jurusan` varchar(8) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `jumlah_buku_dipinjam` int(11) NOT NULL DEFAULT 0,
+  `skor` int(100) DEFAULT 100,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ma_anggota`
+-- Dumping data untuk tabel `ma_anggota`
 --
 
-INSERT INTO `ma_anggota` (`id`, `kode`, `nis`, `nama_lengkap`, `jurusan`, `kelas`, `jumlah_buku_dipinjam`, `skor`, `created_at`, `updated_at`) VALUES
-(1, 'MRD - 57428631', '3545345435', 'Sads', 2, 20, 0, 100, '2022-04-30 02:44:48', '2022-04-30 02:44:48'),
-(3, 'MRD - 21251616', '545', 'Hana Wulan', 3, 21, 0, 100, '2022-05-06 00:56:27', '2022-05-06 00:56:27'),
-(4, 'MRD - 45281281', '45454', 'Fifa Fajar', 2, 20, 0, 100, '2022-05-06 00:58:03', '2022-05-06 00:58:03'),
-(5, 'MRD - 61253578', '33243', 'Mega Kharisma', 2, 20, 0, 100, '2022-05-06 00:58:18', '2022-05-06 00:58:18'),
-(6, 'MRD - 52157052', '34343', 'Fira Ariani', 3, 20, 0, 100, '2022-05-06 00:58:41', '2022-05-06 00:58:41'),
-(7, 'MRD - 84722260', '1411739', 'Sadsadsadsad', 2, 20, 0, 100, '2022-05-06 01:07:40', '2022-05-06 01:07:40'),
-(8, 'MRD - 75415520', '5656', 'Sdsadsd', 2, 20, 0, 100, '2022-05-06 01:10:46', '2022-05-06 01:10:46'),
-(9, 'MRD - 71716155', '66546433`123', 'Wulan Agusta', 5, 21, 0, 100, '2022-05-06 01:11:10', '2022-05-06 01:11:10');
+INSERT INTO `ma_anggota` (`nis`, `nama_lengkap`, `jurusan`, `jumlah_buku_dipinjam`, `skor`, `created_at`, `updated_at`) VALUES
+('E41211739', 'Fifa Fajr Firdaus', 'TKJ', 0, 100, '2022-05-11 16:20:11', '2022-05-15 19:41:44'),
+('E41211741', 'Aristo Caesar Pratama', 'TKJ', 0, 100, '2022-05-11 23:01:06', '2022-05-15 19:41:28'),
+('E41211742', 'Hana Wulan Agustaa', 'TKJ', 0, 96, '2022-05-11 16:18:58', '2022-05-15 19:40:50');
+
+--
+-- Trigger `ma_anggota`
+--
+DELIMITER $$
+CREATE TRIGGER `ADD_COUNT_ANGGOTA` AFTER INSERT ON `ma_anggota` FOR EACH ROW BEGIN
+
+UPDATE ma_dashboard SET total_anggota = total_anggota + 1 WHERE id = 1;
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `LESS_COUNT_ANGGOTA` AFTER DELETE ON `ma_anggota` FOR EACH ROW BEGIN
+
+UPDATE ma_dashboard SET total_anggota = total_anggota - 1 WHERE id = 1;
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_buku`
+-- Struktur dari tabel `ma_buku`
 --
 
 CREATE TABLE `ma_buku` (
-  `id` int(11) UNSIGNED NOT NULL,
   `isbn` varchar(28) NOT NULL,
-  `judul` varchar(128) NOT NULL,
-  `jenis` enum('PKT','UMM') DEFAULT 'UMM',
-  `id_kategori` int(11) UNSIGNED NOT NULL,
-  `harga` int(11) NOT NULL,
-  `lebar_panjang` varchar(16) NOT NULL,
-  `jumlah_halaman` int(11) NOT NULL,
-  `tahun_terbit` int(8) NOT NULL,
+  `judul` varchar(255) NOT NULL,
+  `jenis` enum('PAKET','UMUM') DEFAULT NULL,
+  `kategori` varchar(16) DEFAULT NULL,
+  `harga` varchar(50) NOT NULL,
+  `tahun_terbit` varchar(8) NOT NULL,
   `penulis` varchar(32) NOT NULL,
-  `id_penerbit` int(11) UNSIGNED NOT NULL,
-  `stok` int(11) NOT NULL,
-  `id_rak` int(11) UNSIGNED NOT NULL,
-  `deskripsi` text NOT NULL,
-  `jumlah_dipinjam` int(11) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `penerbit` varchar(32) DEFAULT NULL,
+  `stok` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `rak` varchar(16) DEFAULT NULL,
+  `deskripsi` text DEFAULT NULL,
+  `max_hari_pinjam` int(11) NOT NULL,
+  `jumlah_dipinjam` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ma_buku`
+-- Dumping data untuk tabel `ma_buku`
 --
 
-INSERT INTO `ma_buku` (`id`, `isbn`, `judul`, `jenis`, `id_kategori`, `harga`, `lebar_panjang`, `jumlah_halaman`, `tahun_terbit`, `penulis`, `id_penerbit`, `stok`, `id_rak`, `deskripsi`, `jumlah_dipinjam`, `created_at`, `updated_at`) VALUES
-(1, '9786233311557', 'Hallo Koding', 'UMM', 2, 150000, '50,80', 168, 2021, 'Hilman Ramadhan', 1, 26, 1, 'Buku yang membahas masalah dan motivasi seorang programmer', 0, '2022-03-23 10:26:14', '2022-03-23 10:26:14');
+INSERT INTO `ma_buku` (`isbn`, `judul`, `jenis`, `kategori`, `harga`, `tahun_terbit`, `penulis`, `penerbit`, `stok`, `rak`, `deskripsi`, `max_hari_pinjam`, `jumlah_dipinjam`, `created_at`, `updated_at`) VALUES
+('978-602-244-314-8', 'Buku Panduan Guru Pendidikan Pancasila Dan Kewarganegaraan Untuk Smp Kelas 7', 'PAKET', 'IS', '50000.0', '2022', 'Badan Penelitian', 'Pt. Gramedia Asri Media', 28, 'TIK', '', 1, NULL, '2022-05-18 16:01:52', '2022-05-18 16:01:52'),
+('978-602-464-053-8', 'Buku Halo Koding - Buku Untuk Programmer', 'UMUM', 'TGNI', '125000.0', '2022', 'Hilman', 'Pt. Gramedia Asri Media', 8, 'TIK', '', 7, NULL, '2022-05-18 15:56:32', '2022-05-18 16:02:12'),
+('978-602-6948-93-9 ', 'Manajemen Sistem Informasi Perpustakaan', 'UMUM', 'TGNI', '124000.0', '2022', 'Drs. Hartono, S.s., M.hum.', 'Pt. Gramedia Asri Media', 3, 'KMK', '', 7, NULL, '2022-05-18 16:00:07', '2022-05-18 16:00:07'),
+('978-602-7869-75-2', 'Manajemen Kearsipan Modern Dari Konvensional Ke Basis Komputer Edisi Baru', 'UMUM', 'TGNI', '59000.0', '2022', 'Agus Sugiarto, S.pd,m.m.', 'Pt. Gramedia Asri Media', 0, 'TIK', '', 5, NULL, '2022-05-18 15:58:46', '2022-05-18 16:02:43'),
+('978-602-8545-46-4 ', 'Manajemen Kearsipan Elektronik Panduan Pengembangan Aplikasi Kearsipan Elektronik', 'UMUM', 'TGNI', '56000.0', '2022', 'Agus Sugiarto', 'Pt. Gramedia Asri Media', 5, 'TIK', '', 7, NULL, '2022-05-18 15:57:55', '2022-05-18 16:02:50');
+
+--
+-- Trigger `ma_buku`
+--
+DELIMITER $$
+CREATE TRIGGER `ADD_COUNT_BUKU` AFTER INSERT ON `ma_buku` FOR EACH ROW BEGIN
+
+UPDATE ma_dashboard SET total_buku = total_buku + 1 WHERE id = 1;
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `LESS_COUNT_BUKU` AFTER DELETE ON `ma_buku` FOR EACH ROW BEGIN
+
+UPDATE ma_dashboard SET total_buku = total_buku - 1 WHERE id = 1;
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_dashboard`
+-- Struktur dari tabel `ma_dashboard`
 --
 
 CREATE TABLE `ma_dashboard` (
   `id` int(11) NOT NULL,
-  `total_buku` int(11) NOT NULL DEFAULT '0',
-  `buku_dipinjam` int(11) NOT NULL DEFAULT '0',
-  `buku_bermasalah` int(11) NOT NULL DEFAULT '0',
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `total_buku` int(11) NOT NULL DEFAULT 0,
+  `buku_dipinjam` int(11) NOT NULL DEFAULT 0,
+  `buku_bermasalah` int(11) NOT NULL DEFAULT 0,
+  `total_anggota` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `ma_dashboard`
+--
+
+INSERT INTO `ma_dashboard` (`id`, `total_buku`, `buku_dipinjam`, `buku_bermasalah`, `total_anggota`, `updated_at`) VALUES
+(1, 5, 0, 0, 3, '2022-05-11 15:41:11');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_detail_transaksi`
+-- Struktur dari tabel `ma_detail_transaksi`
 --
 
 CREATE TABLE `ma_detail_transaksi` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `id_transaksi` int(11) UNSIGNED NOT NULL,
+  `id_transaksi` varchar(16) DEFAULT NULL,
   `isbn` varchar(28) NOT NULL,
-  `judul_buku` varchar(128) NOT NULL,
-  `batas_pinjam` int(28) NOT NULL,
   `status_buku` enum('Tepat','Perpanjang','Bermasalah','Terlambat') DEFAULT NULL,
   `kondisi_buku` enum('Baik','Rusak','Hilang') DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_jurusan`
+-- Struktur dari tabel `ma_jurusan`
 --
 
 CREATE TABLE `ma_jurusan` (
-  `id` int(11) NOT NULL,
   `kode` varchar(8) NOT NULL,
   `nama` varchar(32) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ma_jurusan`
+-- Dumping data untuk tabel `ma_jurusan`
 --
 
-INSERT INTO `ma_jurusan` (`id`, `kode`, `nama`, `created_at`, `updated_at`) VALUES
-(1, 'AK', 'Akustansi', '2022-04-17 15:50:09', '2022-04-17 16:08:43'),
-(2, 'APK', 'Administrator Perkantoran', '2022-04-17 15:54:08', '2022-04-17 16:06:54'),
-(3, 'MIF', 'Manajemen Informatika', '2022-04-17 15:47:01', '2022-04-17 16:09:10'),
-(4, 'RPL', 'Rekayasa Perangkat Lunak', '2022-04-17 16:44:01', '2022-04-17 16:44:01'),
-(5, 'TGK', 'Teknik Geomatika dan Fisika', '2022-04-17 16:09:50', '2022-04-17 16:44:35'),
-(6, 'TKJ', 'Teknik Komputer Dan Jaringan', '2022-04-17 15:48:21', '2022-04-17 16:07:10'),
-(7, 'TPL', 'Teknik Perkapalan', '2022-04-17 16:10:32', '2022-04-17 16:10:32');
+INSERT INTO `ma_jurusan` (`kode`, `nama`, `created_at`, `updated_at`) VALUES
+('AK', 'Akutansi', '2022-04-17 15:50:09', '2022-05-08 02:26:35'),
+('MIF', 'Manajemen Informatika', '2022-04-17 15:47:01', '2022-04-17 16:09:10'),
+('RPL', 'Rekayasa Perangkat Lunak', '2022-04-17 16:44:01', '2022-04-17 16:44:01'),
+('TGK', 'Teknik Geomatika dan Fisika', '2022-04-17 16:09:50', '2022-04-17 16:44:35'),
+('TKJ', 'Teknik Komputer Dan Jaringan', '2022-04-17 15:48:21', '2022-04-17 16:07:10'),
+('TKR', 'Teknik Kendaraan Ringan', '2022-05-11 12:16:16', '2022-05-11 12:16:16'),
+('TPL', 'Teknik Perkapalan', '2022-04-17 16:10:32', '2022-04-17 16:10:32');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_kategori`
+-- Struktur dari tabel `ma_kategori`
 --
 
 CREATE TABLE `ma_kategori` (
-  `id` int(11) UNSIGNED NOT NULL,
   `kode` varchar(16) NOT NULL,
-  `nama` varchar(32) NOT NULL,
+  `nama` varchar(64) NOT NULL,
   `deskripsi` text NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ma_kategori`
+-- Dumping data untuk tabel `ma_kategori`
 --
 
-INSERT INTO `ma_kategori` (`id`, `kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(1, 'MAT', 'MATEMATIKA', 'Buku Kategori Matematika', '2022-03-23 10:22:49', '2022-03-23 10:22:49'),
-(2, 'PRGM', 'PROGRAM', 'Buku yang berkategori membahasa bahasa program', '2022-03-23 10:22:49', '2022-03-23 10:22:49');
+INSERT INTO `ma_kategori` (`kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
+('IS', 'Ilmu Sosial', 'buku ilmu sosial', '2022-05-18 15:49:58', '2022-05-18 15:49:58'),
+('MAT', 'Matematika', 'Buku Kategori Matematika', '2022-03-23 10:22:49', '2022-05-09 21:46:52'),
+('MJLH', 'Majalah', 'buku kategori majalah', '2022-05-18 15:48:40', '2022-05-18 15:48:40'),
+('TGNI', 'Teknologi', 'buku kategori teknologi', '2022-05-16 22:31:45', '2022-05-18 15:50:29');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_kelas`
---
-
-CREATE TABLE `ma_kelas` (
-  `id` int(11) NOT NULL,
-  `kode` varchar(8) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ma_kelas`
---
-
-INSERT INTO `ma_kelas` (`id`, `kode`, `created_at`, `updated_at`) VALUES
-(20, 'X', '2022-04-24 01:30:17', '2022-04-24 16:49:30'),
-(21, 'XXI', '2022-04-24 01:30:22', '2022-04-24 01:59:02');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ma_log`
+-- Struktur dari tabel `ma_log`
 --
 
 CREATE TABLE `ma_log` (
   `id` int(11) NOT NULL,
   `process` varchar(64) NOT NULL,
   `message` text NOT NULL,
-  `petugas` varchar(128) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `pengurus` varchar(16) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ma_log`
---
-
-INSERT INTO `ma_log` (`id`, `process`, `message`, `petugas`, `created_at`) VALUES
-(1, 'Login', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:40:48'),
-(2, 'LOGIN', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:40:48'),
-(3, 'LOGIN', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:42:19'),
-(4, 'LOGIN', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:42:42'),
-(5, 'TAMBAH JURUSAN', 'Menambahkan jurusan Rekayasa Perangkat Lunak', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:44:03'),
-(6, 'UPDATE JURUSAN', 'Memperbarui jurusan Teknik Geomatika dan Fisika', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 16:44:36'),
-(7, 'LOGIN', 'Akses login berhasil', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 17:07:24'),
-(8, 'Update Pengaturan', 'Memperbarui data pengaturan', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 17:07:29'),
-(9, 'Update Pengaturan', 'Memperbarui data pengaturan', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-17 17:07:36'),
-(10, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:01:48'),
-(11, 'HAPUS KELAS', 'Mengahapus kelas XI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:01:51'),
-(12, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:04:16'),
-(13, 'HAPUS KELAS', 'Mengahapus kelas XI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:07:41'),
-(14, 'TAMBAH KELAS', 'Menambahkan kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:07:57'),
-(15, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:17:29'),
-(16, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:17:48'),
-(17, 'UPDATE KELAS', 'Memperbarui kelas Xd', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:20:09'),
-(18, 'UPDATE KELAS', 'Memperbarui kelas Xd', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:21:38'),
-(19, 'UPDATE KELAS', 'Memperbarui kelas dsdsadas', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:24:36'),
-(20, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 15:25:16'),
-(21, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 16:05:31'),
-(22, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:43:39'),
-(23, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:43:41'),
-(24, 'TAMBAH KELAS', 'Menambahkan kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:43:59'),
-(25, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:45:46'),
-(26, 'HAPUS KELAS', 'Mengahapus kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:45:50'),
-(27, 'TAMBAH KELAS', 'Menambahkan kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:45:57'),
-(28, 'TAMBAH KELAS', 'Menambahkan kelas IX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:46:07'),
-(29, 'TAMBAH KELAS', 'Menambahkan kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-23 21:46:11'),
-(30, 'TAMBAH KELAS', 'Menambahkan kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:12:22'),
-(31, 'TAMBAH KELAS', 'Menambahkan kelas asa', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:12:28'),
-(32, 'TAMBAH KELAS', 'Menambahkan kelas ASu', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:12:48'),
-(33, 'TAMBAH KELAS', 'Menambahkan kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:13:00'),
-(34, 'TAMBAH KELAS', 'Menambahkan kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:13:04'),
-(35, 'UPDATE KELAS', 'Memperbarui kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:15:30'),
-(36, 'UPDATE KELAS', 'Memperbarui kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:15:33'),
-(37, 'HAPUS KELAS', 'Mengahapus kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:18:08'),
-(38, 'HAPUS KELAS', 'Mengahapus kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:18:10'),
-(39, 'HAPUS KELAS', 'Mengahapus kelas ASU', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:18:12'),
-(40, 'HAPUS KELAS', 'Mengahapus kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:20:55'),
-(41, 'HAPUS KELAS', 'Mengahapus kelas ASA', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:21:57'),
-(42, 'HAPUS KELAS', 'Mengahapus kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:22:00'),
-(43, 'HAPUS KELAS', 'Mengahapus kelas IX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:22:03'),
-(44, 'TAMBAH KELAS', 'Menambahkan kelas xi', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:22:08'),
-(45, 'UPDATE KELAS', 'Memperbarui kelas XI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:22:38'),
-(46, 'HAPUS KELAS', 'Mengahapus kelas XI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:25:20'),
-(47, 'HAPUS KELAS', 'Mengahapus kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:28:40'),
-(48, 'TAMBAH KELAS', 'Menambahkan kelas x', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:29:05'),
-(49, 'HAPUS KELAS', 'Mengahapus kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:29:16'),
-(50, 'TAMBAH KELAS', 'Menambahkan kelas x', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:30:12'),
-(51, 'TAMBAH KELAS', 'Menambahkan kelas xi', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:30:17'),
-(52, 'TAMBAH KELAS', 'Menambahkan kelas XXI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:30:22'),
-(53, 'UPDATE KELAS', 'Memperbarui kelas XX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:32:48'),
-(54, 'UPDATE KELAS', 'Memperbarui kelas Xdsadasd', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:39:08'),
-(55, 'UPDATE KELAS', 'Memperbarui kelas XC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:40:28'),
-(56, 'UPDATE KELAS', 'Memperbarui kelas XCC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:40:35'),
-(57, 'TAMBAH KELAS', 'Menambahkan kelas XC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:40:45'),
-(58, 'TAMBAH KELAS', 'Menambahkan kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:40:57'),
-(59, 'TAMBAH KELAS', 'Menambahkan kelas XXX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:41:40'),
-(60, 'HAPUS KELAS', 'Mengahapus kelas XXX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:43:53'),
-(61, 'HAPUS KELAS', 'Mengahapus kelas XCC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:43:59'),
-(62, 'TAMBAH KELAS', 'Menambahkan kelas XCX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:52:55'),
-(63, 'TAMBAH KELAS', 'Menambahkan kelas XCXC', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:53:04'),
-(64, 'UPDATE KELAS', 'Memperbarui kelas Xa', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:56:04'),
-(65, 'TAMBAH KELAS', 'Menambahkan kelas XXsddsad', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:56:46'),
-(66, 'UPDATE KELAS', 'Memperbarui kelas X', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:57:20'),
-(67, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:14'),
-(68, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:16'),
-(69, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:19'),
-(70, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:23'),
-(71, 'HAPUS KELAS', 'Mengahapus kelas ', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:27'),
-(72, 'TAMBAH KELAS', 'Menambahkan kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:34'),
-(73, 'UPDATE KELAS', 'Memperbarui kelas XIIu', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:47'),
-(74, 'UPDATE KELAS', 'Memperbarui kelas XII', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:58:52'),
-(75, 'UPDATE KELAS', 'Memperbarui kelas XXI', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 01:59:03'),
-(76, 'TAMBAH KELAS', 'Menambahkan kelas IIX', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 02:08:11'),
-(77, 'UPDATE KELAS', 'Memperbarui kelas V', 'Aji Seto Arifianto, S.ST., M.T.', '2022-04-24 02:08:17'),
-(78, 'UPDATE KELAS', 'Memperbarui kelas X', 'Hana Wulan Agusta', '2022-04-24 16:49:31');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_penerbit`
+-- Struktur dari tabel `ma_penerbit`
 --
 
 CREATE TABLE `ma_penerbit` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `kode` varchar(16) NOT NULL,
   `nama` varchar(32) NOT NULL,
   `kontak` varchar(13) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ma_penerbit`
+-- Dumping data untuk tabel `ma_penerbit`
 --
 
-INSERT INTO `ma_penerbit` (`id`, `kode`, `nama`, `kontak`, `created_at`, `updated_at`) VALUES
-(1, 'PNT-00001', 'PT. Erlangga', '085235119101', '2022-03-23 10:17:59', '2022-03-23 10:17:59');
+INSERT INTO `ma_penerbit` (`nama`, `kontak`, `created_at`, `updated_at`) VALUES
+('Pt. Gramedia Asri Media', '081370708828', '2022-05-18 15:51:27', '2022-05-18 15:51:27');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_pengurus`
+-- Struktur dari tabel `ma_pengurus`
 --
 
 CREATE TABLE `ma_pengurus` (
-  `id` int(11) NOT NULL,
   `kode` varchar(16) NOT NULL,
   `nip` varchar(32) NOT NULL,
   `username` varchar(16) NOT NULL,
@@ -326,43 +256,45 @@ CREATE TABLE `ma_pengurus` (
   `nama_lengkap` varchar(64) NOT NULL,
   `hak_akses` enum('ADMINISTRATOR','STAF') DEFAULT 'STAF',
   `status` enum('AKTIF','BLOKIR') DEFAULT 'AKTIF',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ma_pengurus`
+-- Dumping data untuk tabel `ma_pengurus`
 --
 
-INSERT INTO `ma_pengurus` (`id`, `kode`, `nip`, `username`, `password`, `nama_lengkap`, `hak_akses`, `status`, `created_at`, `updated_at`) VALUES
-(10, 'PGS-69696', '5345435', 'a', 'a', 'Aristo Caesar Pratama', 'ADMINISTRATOR', 'AKTIF', '2022-04-29 21:59:11', '2022-04-29 22:06:34'),
-(16, 'PGS-42681', '35435', 'hana', 'hana', 'Aristo Caesar Ptratamna', 'ADMINISTRATOR', 'AKTIF', '2022-04-29 22:24:24', '2022-04-29 22:24:24');
+INSERT INTO `ma_pengurus` (`kode`, `nip`, `username`, `password`, `nama_lengkap`, `hak_akses`, `status`, `created_at`, `updated_at`) VALUES
+('PGS - 23125', '2342343434', 'av', 'as', 'Hana Wulan Agusta', 'STAF', 'AKTIF', '2022-05-16 13:46:53', '2022-05-16 13:47:43'),
+('PGS-69696', '5345435', 'a', 'a', 'Aristo Caesar Pratama', 'ADMINISTRATOR', 'AKTIF', '2022-04-29 21:59:11', '2022-05-15 02:42:27');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_rak`
+-- Struktur dari tabel `ma_rak`
 --
 
 CREATE TABLE `ma_rak` (
-  `id` int(11) UNSIGNED NOT NULL,
   `kode` varchar(16) NOT NULL,
+  `nama` varchar(64) NOT NULL,
   `deskripsi` text NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ma_rak`
+-- Dumping data untuk tabel `ma_rak`
 --
 
-INSERT INTO `ma_rak` (`id`, `kode`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(1, 'RAK-00004', 'Rak ini menampung buku berkategori ilmu sosial', '2022-03-23 10:15:02', '2022-03-23 10:15:02');
+INSERT INTO `ma_rak` (`kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
+('KMK', 'Komik', 'rak komik', '2022-05-18 15:52:12', '2022-05-18 15:52:12'),
+('MJLH', 'Majalah', 'rak majalah', '2022-05-18 15:52:35', '2022-05-18 15:52:35'),
+('TIK', 'Teknologi', 'rak teknologi', '2022-05-18 15:51:49', '2022-05-18 15:51:49');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_setting`
+-- Struktur dari tabel `ma_setting`
 --
 
 CREATE TABLE `ma_setting` (
@@ -370,33 +302,30 @@ CREATE TABLE `ma_setting` (
   `denda_terlambat` int(11) NOT NULL,
   `max_pinjam_buku_umum` int(11) NOT NULL,
   `time_backup_database` int(28) NOT NULL,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ma_setting`
+-- Dumping data untuk tabel `ma_setting`
 --
 
 INSERT INTO `ma_setting` (`id`, `denda_terlambat`, `max_pinjam_buku_umum`, `time_backup_database`, `updated_at`) VALUES
-(1, 2000, 3, 0, '2022-04-17 17:07:36');
+(1, 2000, 5, 0, '2022-05-08 03:09:54');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ma_transaksi`
+-- Struktur dari tabel `ma_transaksi`
 --
 
 CREATE TABLE `ma_transaksi` (
-  `id` int(11) UNSIGNED NOT NULL,
   `id_transaksi` varchar(16) NOT NULL,
-  `id_anggota` int(11) UNSIGNED NOT NULL,
-  `nama_anggota` varchar(64) NOT NULL,
-  `kelas` varchar(8) NOT NULL,
-  `id_pengelola` int(11) UNSIGNED NOT NULL,
+  `nis_anggota` varchar(28) NOT NULL,
+  `kode_pengurus` varchar(16) NOT NULL,
   `jenis_buku` enum('PKT','UMM') DEFAULT NULL,
   `status_transaksi` enum('DIPINJAM','BERMASALAH','SELESAI') DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -404,199 +333,147 @@ CREATE TABLE `ma_transaksi` (
 --
 
 --
--- Indexes for table `ma_anggota`
+-- Indeks untuk tabel `ma_anggota`
 --
 ALTER TABLE `ma_anggota`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `kode` (`kode`),
-  ADD UNIQUE KEY `nis` (`nis`),
-  ADD KEY `FK_Jurusan` (`jurusan`),
-  ADD KEY `FK_Kelas` (`kelas`);
+  ADD PRIMARY KEY (`nis`),
+  ADD KEY `FK Jurusan` (`jurusan`);
 
 --
--- Indexes for table `ma_buku`
+-- Indeks untuk tabel `ma_buku`
 --
 ALTER TABLE `ma_buku`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Kategori` (`id_kategori`),
-  ADD KEY `FK_Penerbit` (`id_penerbit`);
+  ADD PRIMARY KEY (`isbn`),
+  ADD UNIQUE KEY `judul` (`judul`),
+  ADD KEY `FK_Kategori` (`kategori`),
+  ADD KEY `FK_Penerbit` (`penerbit`),
+  ADD KEY `FK_Rak` (`rak`);
 
 --
--- Indexes for table `ma_dashboard`
+-- Indeks untuk tabel `ma_dashboard`
 --
 ALTER TABLE `ma_dashboard`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ma_detail_transaksi`
+-- Indeks untuk tabel `ma_detail_transaksi`
 --
 ALTER TABLE `ma_detail_transaksi`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Transaksi` (`id_transaksi`);
+  ADD KEY `FK_ma_detail_transaksi_ma_transaksi` (`id_transaksi`),
+  ADD KEY `FK_ma_detail_transaksi_ma_buku` (`isbn`);
 
 --
--- Indexes for table `ma_jurusan`
+-- Indeks untuk tabel `ma_jurusan`
 --
 ALTER TABLE `ma_jurusan`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `KODE_uniq` (`kode`),
-  ADD UNIQUE KEY `NAMA_uniq` (`nama`);
+  ADD PRIMARY KEY (`kode`);
 
 --
--- Indexes for table `ma_kategori`
+-- Indeks untuk tabel `ma_kategori`
 --
 ALTER TABLE `ma_kategori`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`kode`);
 
 --
--- Indexes for table `ma_kelas`
---
-ALTER TABLE `ma_kelas`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Kode_Uniq` (`kode`);
-
---
--- Indexes for table `ma_log`
+-- Indeks untuk tabel `ma_log`
 --
 ALTER TABLE `ma_log`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Pengurus` (`pengurus`);
 
 --
--- Indexes for table `ma_penerbit`
+-- Indeks untuk tabel `ma_penerbit`
 --
 ALTER TABLE `ma_penerbit`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`nama`);
 
 --
--- Indexes for table `ma_pengurus`
+-- Indeks untuk tabel `ma_pengurus`
 --
 ALTER TABLE `ma_pengurus`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD PRIMARY KEY (`kode`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `nip` (`nip`);
 
 --
--- Indexes for table `ma_rak`
+-- Indeks untuk tabel `ma_rak`
 --
 ALTER TABLE `ma_rak`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`kode`);
 
 --
--- Indexes for table `ma_setting`
+-- Indeks untuk tabel `ma_setting`
 --
 ALTER TABLE `ma_setting`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ma_transaksi`
+-- Indeks untuk tabel `ma_transaksi`
 --
 ALTER TABLE `ma_transaksi`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `id_transaksi` (`id_transaksi`),
+  ADD KEY `FK_ma_transaksi_ma_anggota` (`nis_anggota`),
+  ADD KEY `FK_ma_transaksi_ma_pengurus` (`kode_pengurus`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `ma_anggota`
---
-ALTER TABLE `ma_anggota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `ma_buku`
---
-ALTER TABLE `ma_buku`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ma_dashboard`
+-- AUTO_INCREMENT untuk tabel `ma_dashboard`
 --
 ALTER TABLE `ma_dashboard`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `ma_detail_transaksi`
---
-ALTER TABLE `ma_detail_transaksi`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ma_jurusan`
---
-ALTER TABLE `ma_jurusan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `ma_kategori`
---
-ALTER TABLE `ma_kategori`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `ma_kelas`
---
-ALTER TABLE `ma_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `ma_log`
+-- AUTO_INCREMENT untuk tabel `ma_log`
 --
 ALTER TABLE `ma_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `ma_penerbit`
---
-ALTER TABLE `ma_penerbit`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ma_pengurus`
---
-ALTER TABLE `ma_pengurus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT for table `ma_rak`
---
-ALTER TABLE `ma_rak`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `ma_setting`
+-- AUTO_INCREMENT untuk tabel `ma_setting`
 --
 ALTER TABLE `ma_setting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `ma_transaksi`
---
-ALTER TABLE `ma_transaksi`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `ma_anggota`
+-- Ketidakleluasaan untuk tabel `ma_anggota`
 --
 ALTER TABLE `ma_anggota`
-  ADD CONSTRAINT `FK_Jurusan` FOREIGN KEY (`jurusan`) REFERENCES `ma_jurusan` (`id`),
-  ADD CONSTRAINT `FK_Kelas` FOREIGN KEY (`kelas`) REFERENCES `ma_kelas` (`id`);
+  ADD CONSTRAINT `FK Jurusan` FOREIGN KEY (`jurusan`) REFERENCES `ma_jurusan` (`kode`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `ma_buku`
+-- Ketidakleluasaan untuk tabel `ma_buku`
 --
 ALTER TABLE `ma_buku`
-  ADD CONSTRAINT `FK_Kategori` FOREIGN KEY (`id_kategori`) REFERENCES `ma_kategori` (`id`),
-  ADD CONSTRAINT `FK_Penerbit` FOREIGN KEY (`id_penerbit`) REFERENCES `ma_penerbit` (`id`);
+  ADD CONSTRAINT `FK_Kategori` FOREIGN KEY (`kategori`) REFERENCES `ma_kategori` (`kode`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Penerbit` FOREIGN KEY (`penerbit`) REFERENCES `ma_penerbit` (`nama`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Rak` FOREIGN KEY (`rak`) REFERENCES `ma_rak` (`kode`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `ma_detail_transaksi`
+-- Ketidakleluasaan untuk tabel `ma_detail_transaksi`
 --
 ALTER TABLE `ma_detail_transaksi`
-  ADD CONSTRAINT `FK_Transaksi` FOREIGN KEY (`id_transaksi`) REFERENCES `ma_transaksi` (`id`);
+  ADD CONSTRAINT `FK_ma_detail_transaksi_ma_buku` FOREIGN KEY (`isbn`) REFERENCES `ma_buku` (`isbn`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ma_detail_transaksi_ma_transaksi` FOREIGN KEY (`id_transaksi`) REFERENCES `ma_transaksi` (`id_transaksi`) ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `ma_log`
+--
+ALTER TABLE `ma_log`
+  ADD CONSTRAINT `FK_Pengurus` FOREIGN KEY (`pengurus`) REFERENCES `ma_pengurus` (`kode`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `ma_transaksi`
+--
+ALTER TABLE `ma_transaksi`
+  ADD CONSTRAINT `FK_ma_transaksi_ma_anggota` FOREIGN KEY (`nis_anggota`) REFERENCES `ma_anggota` (`nis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_ma_transaksi_ma_pengurus` FOREIGN KEY (`kode_pengurus`) REFERENCES `ma_pengurus` (`kode`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

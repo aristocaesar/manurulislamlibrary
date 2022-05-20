@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RakModel extends DBConfig {
     
-    private int id;
+    private String old_kode;
     private String kode;
     private String nama;
     private String deskripsi;
@@ -34,12 +34,12 @@ public class RakModel extends DBConfig {
     private Connection conn = (Connection)getConnection();
     DefaultTableModel table_model = new DefaultTableModel();
     
-    public void setId(int ID){
-        this.id = ID;
+    public void setOldKode(String Kode){
+        this.old_kode = Kode;
     }
     
-    public int getId(){
-        return this.id;
+    public String getOldKode(){
+        return this.old_kode;
     }
     
     public void setKode(String Kode){
@@ -186,7 +186,7 @@ public class RakModel extends DBConfig {
             
             if(res.next()){
             
-                setId(Integer.parseInt(res.getString("id")));
+                setOldKode(res.getString("kode"));
                 setKode(res.getString("kode"));
                 setNama(res.getString("nama"));
                 setDeskripsi(res.getString("deskripsi"));
@@ -205,13 +205,13 @@ public class RakModel extends DBConfig {
     
         try{
             
-            String sql = "UPDATE ma_rak SET kode = ?, nama = ?, deskripsi = ?, updated_at = ? WHERE id = ?";
+            String sql = "UPDATE ma_rak SET kode = ?, nama = ?, deskripsi = ?, updated_at = ? WHERE kode = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, getKode());
             pst.setString(2, getNama());
             pst.setString(3, getDeskripsi());
             pst.setTimestamp(4, new SqlTime().getTimeStamp());
-            pst.setInt(5, getId());
+            pst.setString(5, getOldKode());
             
             int updated = pst.executeUpdate();
             
@@ -244,9 +244,9 @@ public class RakModel extends DBConfig {
     
         try{
             
-            String sql = "DELETE FROM ma_rak WHERE id = ?";
+            String sql = "DELETE FROM ma_rak WHERE kode = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, getId());
+            pst.setString(1, getOldKode());
             
             boolean deleted = pst.execute();
             

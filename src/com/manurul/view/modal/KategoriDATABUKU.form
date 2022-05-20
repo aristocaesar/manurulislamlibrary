@@ -156,7 +156,6 @@
           <SubComponents>
             <Component class="javax.swing.JTextField" name="INPUT_KODE_KATEGORI">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="0"/>
                 </Property>
@@ -199,9 +198,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPUT_NAMA_KATEGORIActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="LABEL_NAMA_KATEGORI">
               <Properties>
@@ -318,6 +314,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_HAPUS_KATEGORIMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BTN_SIMPAN_KATEGORI">
           <Properties>
@@ -335,6 +334,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SIMPAN_KATEGORIMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

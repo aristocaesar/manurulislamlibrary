@@ -5,10 +5,15 @@
  */
 package com.manurul.view.modal;
 
+import com.manurul.lib.Characters;
 import com.manurul.lib.InputBorder;
 import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.PenerbitModel;
+import com.manurul.view.Dashboard;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,8 +26,19 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
      */
     String title = "Edit";
     
-    public PenerbitDATABUKU(String Action, int ID) {
+    String action;
+    String nama;
+    String kontak;
+    
+    PenerbitModel PM = new PenerbitModel();
+    ImageIcon successIcon;
+    
+    public PenerbitDATABUKU(String Action, String Nama) {
         initComponents();
+        
+        // SET VALUE STATE
+        this.action = Action;
+        this.nama = Nama;
         
         // SET SIZE
         this.setSize(1024, 345);
@@ -36,8 +52,11 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
         // SET ICON
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
         
+        // SET SUCCESS ICON
+        ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
+        this.successIcon = successIcon;
+        
         // INIT INPUT BORDER PADDING
-        InputBorder.set(INPUT_KODE_PENERBIT, 8);
         InputBorder.set(INPUT_NAMA_PENERBIT, 8);
         InputBorder.set(INPUT_KONTAK, 8);
         InputBorder.set(INPUT_UPDATE, 8);
@@ -58,6 +77,18 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
             
             BTN_HAPUS_PENERBIT.setVisible(false);
         
+        }else{
+            
+            PM.getSelectedData(Nama);
+            
+            this.nama = PM.getNama();
+            this.kontak = PM.getKontak();
+            
+            INPUT_NAMA_PENERBIT.setText(PM.getNama());
+            INPUT_KONTAK.setText(PM.getKontak());
+            INPUT_CREATED.setText(PM.getCreated());
+            INPUT_UPDATE.setText(PM.getUpdated());
+            
         }
         
         // SET TITLE
@@ -76,8 +107,6 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
 
         MAIN_FRAME = new javax.swing.JPanel();
         CONTAINER = new RoundedPanel(15, Color.WHITE);
-        INPUT_KODE_PENERBIT = new javax.swing.JTextField();
-        LABEL_KODE_PENERBIT = new javax.swing.JLabel();
         INPUT_NAMA_PENERBIT = new javax.swing.JTextField();
         LABEL_NAMA_PENERBIT = new javax.swing.JLabel();
         LABEL_UPDATE = new javax.swing.JLabel();
@@ -96,23 +125,9 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
 
         CONTAINER.setBackground(new java.awt.Color(239, 240, 245));
 
-        INPUT_KODE_PENERBIT.setEditable(false);
-        INPUT_KODE_PENERBIT.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        INPUT_KODE_PENERBIT.setForeground(new java.awt.Color(96, 96, 96));
-        INPUT_KODE_PENERBIT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-
-        LABEL_KODE_PENERBIT.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        LABEL_KODE_PENERBIT.setForeground(new java.awt.Color(96, 96, 96));
-        LABEL_KODE_PENERBIT.setText("Kode Penerbit");
-
         INPUT_NAMA_PENERBIT.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_NAMA_PENERBIT.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_NAMA_PENERBIT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        INPUT_NAMA_PENERBIT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                INPUT_NAMA_PENERBITActionPerformed(evt);
-            }
-        });
 
         LABEL_NAMA_PENERBIT.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_NAMA_PENERBIT.setForeground(new java.awt.Color(96, 96, 96));
@@ -142,29 +157,27 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
 
         LABEL_KONTAK.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_KONTAK.setForeground(new java.awt.Color(96, 96, 96));
-        LABEL_KONTAK.setText("Deskripsi");
+        LABEL_KONTAK.setText("Kontak");
 
         javax.swing.GroupLayout CONTAINERLayout = new javax.swing.GroupLayout(CONTAINER);
         CONTAINER.setLayout(CONTAINERLayout);
         CONTAINERLayout.setHorizontalGroup(
             CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CONTAINERLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(INPUT_KODE_PENERBIT, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LABEL_KODE_PENERBIT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(INPUT_CREATED, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LABEL_NAMA_PENERBIT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                    .addComponent(INPUT_NAMA_PENERBIT, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LABEL_CREATED, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(37, 37, 37)
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(INPUT_CREATED)
-                    .addComponent(LABEL_CREATED, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(INPUT_NAMA_PENERBIT)
-                    .addComponent(LABEL_NAMA_PENERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
-                .addGap(37, 37, 37)
-                .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(INPUT_UPDATE)
-                    .addComponent(LABEL_UPDATE, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-                    .addComponent(INPUT_KONTAK)
-                    .addComponent(LABEL_KONTAK, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                    .addComponent(INPUT_KONTAK, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONTAINERLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(LABEL_KONTAK, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LABEL_UPDATE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(INPUT_UPDATE))
                 .addGap(23, 23, 23))
         );
         CONTAINERLayout.setVerticalGroup(
@@ -172,27 +185,24 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
             .addGroup(CONTAINERLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CONTAINERLayout.createSequentialGroup()
-                        .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LABEL_KODE_PENERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(LABEL_NAMA_PENERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(INPUT_KODE_PENERBIT)
-                            .addComponent(INPUT_NAMA_PENERBIT)))
-                    .addGroup(CONTAINERLayout.createSequentialGroup()
-                        .addComponent(LABEL_KONTAK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(INPUT_KONTAK, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LABEL_CREATED)
-                    .addComponent(LABEL_UPDATE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LABEL_NAMA_PENERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LABEL_KONTAK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(INPUT_CREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(INPUT_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(INPUT_NAMA_PENERBIT)
+                    .addComponent(INPUT_KONTAK, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CONTAINERLayout.createSequentialGroup()
+                        .addComponent(LABEL_UPDATE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPUT_UPDATE, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addGroup(CONTAINERLayout.createSequentialGroup()
+                        .addComponent(LABEL_CREATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPUT_CREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         BTN_HAPUS_PENERBIT.setBackground(new java.awt.Color(153, 153, 153));
@@ -200,12 +210,22 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
         BTN_HAPUS_PENERBIT.setForeground(new java.awt.Color(255, 255, 255));
         BTN_HAPUS_PENERBIT.setText("Hapus");
         BTN_HAPUS_PENERBIT.setBorder(null);
+        BTN_HAPUS_PENERBIT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_HAPUS_PENERBITMouseClicked(evt);
+            }
+        });
 
         BTN_SIMPAN_PENERBIT.setBackground(new java.awt.Color(0, 171, 60));
         BTN_SIMPAN_PENERBIT.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         BTN_SIMPAN_PENERBIT.setForeground(new java.awt.Color(255, 255, 255));
         BTN_SIMPAN_PENERBIT.setText("Simpan");
         BTN_SIMPAN_PENERBIT.setBorder(null);
+        BTN_SIMPAN_PENERBIT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_SIMPAN_PENERBITMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout MAIN_FRAMELayout = new javax.swing.GroupLayout(MAIN_FRAME);
         MAIN_FRAME.setLayout(MAIN_FRAMELayout);
@@ -249,9 +269,121 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void INPUT_NAMA_PENERBITActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_NAMA_PENERBITActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_INPUT_NAMA_PENERBITActionPerformed
+    private boolean cekValidasi(){
+        
+        try{
+            
+            String nama = Characters.ucwords(INPUT_NAMA_PENERBIT.getText().replaceAll("[0-9]", "").trim());
+            String kontak = INPUT_KONTAK.getText().replaceAll("[a-zA-Z]", "").trim();
+            
+            if(nama.equals("")){
+                throw new Exception("Nilai nama harus terisi dan tidak berisi angka !");
+            }
+            
+            if(kontak.equals("")){
+                throw new Exception("Nilai kontak harus terisi dan berupa angka !");
+            }
+            
+            System.out.println(kontak.length());
+            if(kontak.length() >= 13){
+                throw new Exception("Nilai kontak hanya memuat 13 angka !");
+            }
+            
+            PM.setNama(nama);
+            PM.setKontak(kontak);
+        
+            return true;
+            
+        }catch(Exception error){
+        
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+            
+        }
+    
+    }
+    
+    private void inputRevalidate(){
+        
+        INPUT_NAMA_PENERBIT.setText(this.nama);
+        INPUT_KONTAK.setText(this.kontak);
+    
+    }
+    
+    private void simpan(){
+    
+        if(cekValidasi()){
+            if(PM.insertData()){
+                JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+                
+                // refersh
+                new PenerbitModel().getDataTable(Dashboard.SEARCH_PENERBIT.getText(), Dashboard.TAMPILKAN_PENERBIT.getSelectedItem().toString());
+                
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, PM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        
+    }
+    
+    private void update(){
+    
+        if(cekValidasi()){
+            
+            // cek perubahan
+            if(!INPUT_NAMA_PENERBIT.getText().equals(this.nama) || !INPUT_KONTAK.getText().equals(this.kontak)){
+                if(PM.updatedData()){
+                    JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+                    // refersh
+                    new PenerbitModel().getDataTable(Dashboard.SEARCH_PENERBIT.getText(), Dashboard.TAMPILKAN_PENERBIT.getSelectedItem().toString());
+
+                    this.dispose();
+                }else{
+                    inputRevalidate();
+                    JOptionPane.showMessageDialog(null, PM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Tidak ada perubahan", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        }
+        
+    }
+    
+    private void delete(){
+    
+        inputRevalidate();
+        
+        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin mengapus penerbit "+PM.getNama()+" ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+        if(hapus == 0){
+            if(PM.deleteData()){
+                JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+
+                // refersh
+                new PenerbitModel().getDataTable(Dashboard.SEARCH_PENERBIT.getText(), Dashboard.TAMPILKAN_PENERBIT.getSelectedItem().toString());
+
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, PM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    }
+    
+    private void BTN_SIMPAN_PENERBITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_PENERBITMouseClicked
+        if(this.action.equals("ADD")){
+            simpan();
+        }else{
+            update();
+        }
+    }//GEN-LAST:event_BTN_SIMPAN_PENERBITMouseClicked
+
+    private void BTN_HAPUS_PENERBITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_PENERBITMouseClicked
+        delete();
+    }//GEN-LAST:event_BTN_HAPUS_PENERBITMouseClicked
 
     /**
      * @param args the command line arguments
@@ -286,7 +418,7 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PenerbitDATABUKU("", 0).setVisible(true);
+                new PenerbitDATABUKU("", "").setVisible(true);
             }
         });
     }
@@ -296,12 +428,10 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
     private javax.swing.JButton BTN_SIMPAN_PENERBIT;
     private javax.swing.JPanel CONTAINER;
     private javax.swing.JTextField INPUT_CREATED;
-    private javax.swing.JTextField INPUT_KODE_PENERBIT;
     private javax.swing.JTextField INPUT_KONTAK;
     private javax.swing.JTextField INPUT_NAMA_PENERBIT;
     private javax.swing.JTextField INPUT_UPDATE;
     private javax.swing.JLabel LABEL_CREATED;
-    private javax.swing.JLabel LABEL_KODE_PENERBIT;
     private javax.swing.JLabel LABEL_KONTAK;
     private javax.swing.JLabel LABEL_NAMA_PENERBIT;
     private javax.swing.JLabel LABEL_UPDATE;

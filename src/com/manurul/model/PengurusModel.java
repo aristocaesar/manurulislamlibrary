@@ -26,7 +26,6 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     private DefaultTableModel tabel_model = new DefaultTableModel();
     
     private  String table = "ma_pengurus";
-    private  String id;
     private  String kode;
     private  String nip;
     private  String nama_lengkap;
@@ -36,14 +35,6 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     private  String status;
     
     private String message;
-    
-    public void setId(String id){
-        this.id = id;
-    }
-    
-    public String getId(){
-        return this.id;
-    }
     
     public void setKode(String Kode){
         this.kode = Kode;
@@ -112,7 +103,7 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     public boolean loginCek(){
     
         try{
-            String sql = "SELECT id,nama_lengkap,hak_akses,status FROM " + this.table + " WHERE username = ? && password = ?";
+            String sql = "SELECT kode,nama_lengkap,hak_akses,status FROM " + this.table + " WHERE username = ? && password = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, this.username);
             pst.setString(2, this.password);
@@ -124,7 +115,7 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
                 throw new SQLException("Akses anda sedang dinonaktifkan !");
             }
             
-            setId(res.getString("id"));
+            setKode(res.getString("kode"));
             setNamaLengkap(res.getString("nama_lengkap"));
             setHakAkses(res.getString("hak_akses"));
             setStatus(res.getString("status"));
@@ -238,7 +229,6 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
                throw new SQLException("Gagal memuat data pengurus !");
            }
            
-           setId(res.getString("id"));
            PengurusUSER.INPUT_ID_PENGURUS.setText(res.getString("kode"));
            
            setUsername(res.getString("username"));
@@ -274,18 +264,19 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     
         try{
             
-            PreparedStatement pst = conn.prepareStatement("UPDATE "+this.table+" SET nip = ?, username = ?, password = ?, nama_lengkap = ?, hak_akses = ?, status = ?, updated_at = ? WHERE id = ?");
-            pst.setString(1, getNip().replaceAll("[a-zA-Z]", ""));
-            pst.setString(2, getUsername().replaceAll("[0-9]", "").replaceAll(" ", ""));
-            pst.setString(3, getPassword());
+            PreparedStatement pst = conn.prepareStatement("UPDATE "+this.table+" SET kode = ?, nip = ?, username = ?, password = ?, nama_lengkap = ?, hak_akses = ?, status = ?, updated_at = ? WHERE kode = ?");
+            pst.setString(1, getKode());
+            pst.setString(2, getNip().replaceAll("[a-zA-Z]", ""));
+            pst.setString(3, getUsername().replaceAll("[0-9]", "").replaceAll(" ", ""));
+            pst.setString(4, getPassword());
             
             String NamaLengkap = Characters.ucwords(getNamaLengkap());
-            pst.setString(4, NamaLengkap);
+            pst.setString(5, NamaLengkap);
             
-            pst.setString(5, getHakAkses());
-            pst.setString(6, getStatus());
-            pst.setTimestamp(7, new SqlTime().getTimeStamp());
-            pst.setInt(8, Integer.parseInt(getId()));
+            pst.setString(6, getHakAkses());
+            pst.setString(7, getStatus());
+            pst.setTimestamp(8, new SqlTime().getTimeStamp());
+            pst.setString(9, getKode());
             
             int updated = pst.executeUpdate();
             
@@ -318,8 +309,8 @@ public class PengurusModel extends com.manurul.lib.DBConfig{
     
         try{
         
-            PreparedStatement pst = conn.prepareStatement("DELETE FROM "+this.table+" WHERE id = ?");
-            pst.setString(1, getId());
+            PreparedStatement pst = conn.prepareStatement("DELETE FROM "+this.table+" WHERE kode = ?");
+            pst.setString(1, getKode());
             
             boolean deleted = pst.execute();
             

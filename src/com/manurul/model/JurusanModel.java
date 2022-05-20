@@ -5,6 +5,7 @@
  */
 package com.manurul.model;
 
+import com.manurul.lib.Characters;
 import com.manurul.lib.DBConfig;
 import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
@@ -126,7 +127,7 @@ public class JurusanModel extends DBConfig{
             
             PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_jurusan (kode, nama) VALUES (?, ?)");
             pst.setString(1, getKode().toUpperCase());
-            pst.setString(2, getNama());
+            pst.setString(2, Characters.ucwords(getNama()));
             
             if(pst.execute()){
                 throw new SQLException("Gagal menambahkan jurusan!");
@@ -179,6 +180,7 @@ public class JurusanModel extends DBConfig{
             }else{
                 setMessage(error.getMessage());
             }
+            
             return false;
         
         }

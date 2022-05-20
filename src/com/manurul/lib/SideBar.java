@@ -5,8 +5,7 @@
  */
 package com.manurul.lib;
 
-import com.manurul.model.AnggotaModel;
-import com.manurul.model.RakModel;
+import com.manurul.model.BukuModel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
 
@@ -41,6 +40,7 @@ public class SideBar {
             Dashboard.MAIN_FRAME.add(Dashboard.TRANSAKSI);
             
             setTransaksiPageSelected(Bar);
+            Dashboard.PJ_INPUT_PEMINJAM.requestFocus(true);
             
         }else if (Bar.equals("DATABUKU")) {
             
@@ -49,6 +49,8 @@ public class SideBar {
             Dashboard.BTN_DATABUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_DATABUKU.png")));   
      
             Dashboard.MAIN_FRAME.add(Dashboard.DATABUKU);
+            
+            new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
             
         }else if (Bar.equals("USER")){
             
@@ -97,7 +99,6 @@ public class SideBar {
                 
                 Dashboard.T_TR_PINJAM.setForeground(new Color(78, 204, 121));
                 
-            
             }else if(selected.equals("KEMBALI")){
             
                 Dashboard.FRAME_TRANSAKSI.add(Dashboard.F_TR_KEMBALI);
@@ -134,6 +135,7 @@ public class SideBar {
                 
                 Dashboard.T_DB_BUKU.setForeground(new Color(78, 204, 121));
                 
+                new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
             
             }else if(selected.equals("KATEGORI")){
             
@@ -169,7 +171,6 @@ public class SideBar {
             
             Dashboard.T_U_ANGGOTA.setForeground(new Color(96, 96, 96));
             Dashboard.T_U_JURUSAN.setForeground(new Color(96, 96, 96));
-            Dashboard.T_U_KELAS.setForeground(new Color(96, 96, 96));
             Dashboard.T_U_PENGURUS.setForeground(new Color(96, 96, 96));
             
             if(selected.equals("ANGGOTA")){
@@ -186,13 +187,7 @@ public class SideBar {
                 
                 Dashboard.T_U_JURUSAN.setForeground(new Color(78, 204, 121));
             
-            }else if(selected.equals("KELAS")) {
-                
-                Dashboard.FRAME_USER.add(Dashboard.F_U_KELAS);
-            
-                Dashboard.T_U_KELAS.setForeground(new Color(78, 204, 121));
-                
-            } else {
+            }else {
                 
                 Dashboard.FRAME_USER.add(Dashboard.F_U_PENGURUS);
                 
