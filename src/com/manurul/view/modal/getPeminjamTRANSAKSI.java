@@ -184,7 +184,7 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame {
     }//GEN-LAST:event_TABLE_LIST_PEMINJAMKeyPressed
 
     private void INPUT_SEARCHKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_INPUT_SEARCHKeyTyped
-        
+        new TransaksiModel().setDataAnggota(INPUT_SEARCH.getText());
     }//GEN-LAST:event_INPUT_SEARCHKeyTyped
 
     /**

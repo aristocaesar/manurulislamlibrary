@@ -90,11 +90,25 @@ public class TransaksiModel extends DBConfig{
             }
             
             getPeminjamTRANSAKSI.TABLE_LIST_PEMINJAM.setModel(table_model);
-//            getPeminjamTRANSAKSI.TABLE_LIST_PEMINJAM.setColumnSelectionInterval(0, 0);
+            
+            int rowCount = getPeminjamTRANSAKSI.TABLE_LIST_PEMINJAM.getRowCount();
+            
+            if(rowCount > 0){
+                getPeminjamTRANSAKSI.TABLE_LIST_PEMINJAM.setRowSelectionInterval(0, 0);
+            }else{
+                table_model.addRow(new Object[]{
+                    "",
+                    "Tidak Ditemukan",
+                    "",
+                    ""
+                });
+                getPeminjamTRANSAKSI.TABLE_LIST_PEMINJAM.setModel(table_model);
+            }
             
         }catch(SQLException error){
-            System.out.println(error.getMessage());
+            
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+            
         }
-        
     }
 }

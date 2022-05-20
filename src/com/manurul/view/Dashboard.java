@@ -2622,7 +2622,9 @@ public class Dashboard extends javax.swing.JFrame {
                 new getPeminjamTRANSAKSI(peminjam).setVisible(true);
                 
             }else{
+                
                 JOptionPane.showMessageDialog(null, "Nilai peminjam harus terisi !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+            
             }
         }
         

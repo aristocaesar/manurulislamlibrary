@@ -40,6 +40,7 @@ public class SideBar {
             Dashboard.MAIN_FRAME.add(Dashboard.TRANSAKSI);
             
             setTransaksiPageSelected(Bar);
+            Dashboard.PJ_INPUT_PEMINJAM.requestFocus(true);
             
         }else if (Bar.equals("DATABUKU")) {
             
