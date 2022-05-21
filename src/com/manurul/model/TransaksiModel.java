@@ -8,6 +8,7 @@ package com.manurul.model;
 import com.manurul.lib.DBConfig;
 import com.manurul.lib.GenKode;
 import com.manurul.view.Dashboard;
+import com.manurul.view.modal.getDaftarBukuTRANSAKSI;
 import com.manurul.view.modal.getPeminjamTRANSAKSI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +38,7 @@ public class TransaksiModel extends DBConfig{
     private String kode_pengurus;
     private String jenis_buku;
     private String status_transaksi;
+    private int jumlah_buku_dipinjam;
     private String createdAt;
     private String updatedAt;
     private String message;
@@ -87,6 +89,14 @@ public class TransaksiModel extends DBConfig{
     
     public String getStatusTransksi(){
         return this.status_transaksi;
+    }
+    
+    public void setJumlahBukuDipinjam(int jumlah){
+        this.jumlah_buku_dipinjam = jumlah;
+    }
+    
+    public int getJumlahBukuDipinjam(){
+        return this.jumlah_buku_dipinjam;
     }
     
     public void setCreated(String created){
@@ -156,14 +166,20 @@ public class TransaksiModel extends DBConfig{
         table_model.addColumn("Nama");
         table_model.addColumn("Jurusan");
         table_model.addColumn("Skor");
+        table_model.addColumn("Ksmptn Pinjam");
         
         table_model.setRowCount(0);
         
         try{
         
-            String sql = "SELECT nis, nama_lengkap, jurusan, skor FROM ma_anggota WHERE nis LIKE '%"+Keyword+"%' OR nama_lengkap LIKE '%"+Keyword+"%'";
+            String sql = "SELECT ma_anggota.nis, ma_anggota.nama_lengkap, ma_anggota.jurusan, ma_anggota.skor, "
+                    + "ma_setting.max_pinjam_buku_umum - ma_anggota.jumlah_buku_dipinjam as kesempatan_pinjam FROM ma_anggota JOIN"
+                    + " ma_setting"
+                    + " WHERE ma_anggota.nis LIKE '%"+Keyword+"%' OR ma_anggota.nama_lengkap LIKE '%"+Keyword+"%'";
             if(Keyword.equals("")){
-                sql = "SELECT nis, nama_lengkap, jurusan, skor FROM ma_anggota ";
+                sql = "SELECT ma_anggota.nis, ma_anggota.nama_lengkap, ma_anggota.jurusan, ma_anggota.skor,"
+                        + " ma_setting.max_pinjam_buku_umum - ma_anggota.jumlah_buku_dipinjam as kesempatan_pinjam"
+                        + " FROM ma_anggota JOIN ma_setting";
             }
             
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -174,7 +190,8 @@ public class TransaksiModel extends DBConfig{
                     res.getString("nis"),
                     res.getString("nama_lengkap"),
                     res.getString("jurusan"),
-                    res.getString("skor")
+                    res.getString("skor"), 
+                    res.getString("kesempatan_pinjam"), 
                 });
             }
             
@@ -189,6 +206,7 @@ public class TransaksiModel extends DBConfig{
                     "",
                     "Tidak Ditemukan",
                     "",
+                    "",
                     ""
                 });
                 getPeminjamTRANSAKSI.TABLE_LIST_PEMINJAM.setModel(table_model);
@@ -199,7 +217,69 @@ public class TransaksiModel extends DBConfig{
             JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
             
         }
+        
     }
     
     //
+    public void setDataBuku(String Keyword, String Jenis){
+    
+        // SET COLUMN TABLE
+        table_model.setColumnCount(0);
+        table_model.addColumn("ISBN");
+        table_model.addColumn("Judul");
+        table_model.addColumn("Kategori");
+        table_model.addColumn("Maksimal Pinjam");
+        
+        table_model.setRowCount(0);
+        
+        try{
+        
+            String jenis = "'UMUM'";
+            if(Jenis.contains("PAKET")){
+                jenis = "'PAKET'";
+            }
+            
+            String sql = "SELECT ma_buku.isbn, ma_buku.judul, ma_kategori.nama as kategori, ma_buku.max_hari_pinjam FROM ma_buku"
+                    + " JOIN ma_kategori ON ma_buku.kategori = ma_kategori.kode"
+                    + " WHERE isbn LIKE '%"+Keyword+"%' OR judul LIKE '%"+Keyword+"%' AND jenis = " + jenis;
+            if(Keyword.equals("")){
+                sql = "SELECT ma_buku.isbn, ma_buku.judul, ma_kategori.nama as kategori, ma_buku.max_hari_pinjam"
+                        + " FROM ma_buku JOIN ma_kategori ON ma_buku.kategori = ma_kategori.kode AND jenis = " + jenis;
+            }
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet res = pst.executeQuery();
+            
+            while(res.next()){
+                table_model.addRow(new Object[]{
+                    res.getString("isbn"),
+                    res.getString("judul"),
+                    res.getString("kategori"),
+                    res.getString("max_hari_pinjam") + " Hari"
+                });
+            }
+            
+            getDaftarBukuTRANSAKSI.TABLE_LIST_BUKU.setModel(table_model);
+            
+            int rowCount = getDaftarBukuTRANSAKSI.TABLE_LIST_BUKU.getRowCount();
+            
+            if(rowCount > 0){
+                getDaftarBukuTRANSAKSI.TABLE_LIST_BUKU.setRowSelectionInterval(0, 0);
+            }else{
+                table_model.addRow(new Object[]{
+                    "",
+                    "Tidak Ditemukan",
+                    "",
+                    ""
+                });
+                getDaftarBukuTRANSAKSI.TABLE_LIST_BUKU.setModel(table_model);
+            }
+            
+        }catch(SQLException error){
+            
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+        
+    }
 }
