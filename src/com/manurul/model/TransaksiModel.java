@@ -28,9 +28,82 @@ public class TransaksiModel extends DBConfig{
     
     private Connection conn = (Connection)DBConfig.getConnection();
    
+    DefaultTableModel table_pinjam_model = new DefaultTableModel();
     DefaultTableModel table_model = new DefaultTableModel();
     
+    private String id_transaksi;
+    private String nis;
+    private String nama;
+    private String kode_pengurus;
+    private String jenis_buku;
+    private String status_transaksi;
+    private String createdAt;
+    private String updatedAt;
     private String message;
+    
+    public void setId(String id){
+        this.id_transaksi = id;
+    }
+    
+    public String getId(){
+        return this.id_transaksi;
+    }
+    
+    public void setNis(String nis){
+        this.nis = nis;
+    }
+    
+    public String getNis(){
+        return this.nis;
+    }
+    
+    public void setNama(String nama){
+        this.nama = nama;
+    }
+    
+    public String getNama(){
+        return this.nama;
+    }
+    
+    public void setKodePengurus(String id){
+        this.kode_pengurus = id;
+    }
+    
+    public String getKodePengurus(){
+        return this.kode_pengurus;
+    }
+    
+    public void setJenisBuku(String jenis){
+        this.jenis_buku = jenis;
+    }
+    
+    public String getJenisBuku(){
+        return this.jenis_buku;
+    }
+    
+    public void setStatusTransaksi(String status){
+        this.status_transaksi = status;
+    }
+    
+    public String getStatusTransksi(){
+        return this.status_transaksi;
+    }
+    
+    public void setCreated(String created){
+        this.createdAt = created;
+    }
+    
+    public String getCreated(){
+        return this.createdAt;
+    }
+    
+    public void setUpdated(String updated){
+        this.updatedAt = updated;
+    }
+    
+    public String getUpdated(){
+        return this.updatedAt;
+    } 
     
     public void setMessage(String msg){
         this.message = msg;
@@ -46,6 +119,7 @@ public class TransaksiModel extends DBConfig{
         
     }
     
+    // get realtime
     public void getDateRealTime(){
     
         Timer timer;
@@ -60,7 +134,22 @@ public class TransaksiModel extends DBConfig{
         timer.start();
     }
     
+    // set datatable dashboad - pinjam
+    public void setHeadTableDashboardPinjam(){
+        table_pinjam_model.setColumnCount(0);
+        table_pinjam_model.addColumn("No");
+        table_pinjam_model.addColumn("ISBN");
+        table_pinjam_model.addColumn("Judul Buku");
+        table_pinjam_model.addColumn("Masa Pinjam");
+        
+        table_pinjam_model.setRowCount(1);
+        
+        Dashboard.TABLE_LIST_PINJAM.setModel(table_pinjam_model);
+    }
+    
+    // set datatable from request
     public void setDataAnggota(String Keyword){
+        
         // SET COLUMN TABLE
         table_model.setColumnCount(0);
         table_model.addColumn("NIS");
@@ -111,4 +200,6 @@ public class TransaksiModel extends DBConfig{
             
         }
     }
+    
+    //
 }
