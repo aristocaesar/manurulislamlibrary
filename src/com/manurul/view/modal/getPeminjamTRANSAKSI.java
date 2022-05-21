@@ -7,6 +7,7 @@ package com.manurul.view.modal;
 
 import com.manurul.lib.InputBorder;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.SettingModel;
 import com.manurul.model.TransaksiModel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
@@ -185,20 +186,28 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame{
          int rowIndex = TABLE_LIST_PEMINJAM.getSelectedRow();
         
         try{
+            
+            String nis = TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 0).toString();
+            String nama = TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 1).toString();
+            int buku_dipinjam = Integer.parseInt(TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 4).toString());
+            
+            // get data max pinjam from setting
+            if(buku_dipinjam == 0){
+                throw new Exception("Kesempatan pinjam "+ nama +" habis !");
+            }
+            
             int skor = Integer.parseInt(TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 3).toString());
             
             if(skor <= 50){
                 throw new Exception("Skor peminjam/anggota terlalu rendah !");
             }
             
-            String nis = TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 0).toString();
-            String nama = TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 1).toString();
-
             if(!nis.equals("")){
                 Dashboard.TM.setNis(nis);
                 Dashboard.TM.setNama(nama);
                 Dashboard.PJ_INPUT_PEMINJAM.setText(nis + " - " + nama);
                 this.dispose();
+                Dashboard.TABLE_LIST_PINJAM.requestFocus();
             }
             
         }catch(Exception error){
