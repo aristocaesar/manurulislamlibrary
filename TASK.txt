@@ -1,27 +1,7 @@
 MANURUL ISLAM LIBRARY MANAGEMENT
 
-# - KELAS
-tampil ditable +
-menambahkan data +
-memperbarui data +
-menghapus data & konfirmasi hapus +
-melakukan validasi data +
-uppercase input +
+# TRANSAKSI Task
 
-# - PENGURUS
-tampil ditable +
-menambahkan data +
-memperbarui data +
-menghapus data & konfirmasi hapus + 
-melakukan validasi data +
-relasi dengan transaksi -
-
-
-# - ANGGOTA
-tampil ditable -
-menambahkan data -
-memperbarui data -
-export data import data dengan exel -
-menghapus data & konfirmasi hapus - 
-melakukan validasi data -
-relasi dengan transaksi -
+- insert data ke transaksi dan detail transaksi
+- trigger pada stok buku
+- cetak struk pinjam

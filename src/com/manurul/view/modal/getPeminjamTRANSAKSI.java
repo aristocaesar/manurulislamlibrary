@@ -205,6 +205,7 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame{
             if(!nis.equals("")){
                 Dashboard.TM.setNis(nis);
                 Dashboard.TM.setNama(nama);
+                Dashboard.TM.setJumlahBukuDipinjam(buku_dipinjam);
                 Dashboard.PJ_INPUT_PEMINJAM.setText(nis + " - " + nama);
                 this.dispose();
                 Dashboard.TABLE_LIST_PINJAM.requestFocus();

@@ -29,9 +29,15 @@ public class TransaksiModel extends DBConfig{
     
     private Connection conn = (Connection)DBConfig.getConnection();
    
+    // dashboard
     DefaultTableModel table_pinjam_model = new DefaultTableModel();
+    
+    // getPeminjamTransaksi
     DefaultTableModel table_model = new DefaultTableModel();
     
+    // getDaftarBukuTransaksi
+    
+    // var global for data transaksi
     private String id_transaksi;
     private String nis;
     private String nama;
@@ -41,6 +47,7 @@ public class TransaksiModel extends DBConfig{
     private int jumlah_buku_dipinjam;
     private String createdAt;
     private String updatedAt;
+    
     private String message;
     
     public void setId(String id){
@@ -147,14 +154,29 @@ public class TransaksiModel extends DBConfig{
     // set datatable dashboad - pinjam
     public void setHeadTableDashboardPinjam(){
         table_pinjam_model.setColumnCount(0);
-        table_pinjam_model.addColumn("No");
         table_pinjam_model.addColumn("ISBN");
         table_pinjam_model.addColumn("Judul Buku");
         table_pinjam_model.addColumn("Masa Pinjam");
         
-        table_pinjam_model.setRowCount(1);
+        table_pinjam_model.setRowCount(0);
+        table_pinjam_model.addRow(new String[]{
+            "",
+            "",
+            ""
+        });
         
         Dashboard.TABLE_LIST_PINJAM.setModel(table_pinjam_model);
+    }
+    
+    // set datatable dashboard - pinjam - addrow
+    public void setRowTableDashboardPinjam(String[] rowData, boolean started){
+        
+        DefaultTableModel addModel = (DefaultTableModel)table_pinjam_model;
+        if(started){
+            addModel.setRowCount(0);
+        }
+        addModel.addRow(rowData);
+        
     }
     
     // set datatable from request
@@ -241,10 +263,10 @@ public class TransaksiModel extends DBConfig{
             
             String sql = "SELECT ma_buku.isbn, ma_buku.judul, ma_kategori.nama as kategori, ma_buku.max_hari_pinjam FROM ma_buku"
                     + " JOIN ma_kategori ON ma_buku.kategori = ma_kategori.kode"
-                    + " WHERE isbn LIKE '%"+Keyword+"%' OR judul LIKE '%"+Keyword+"%' AND jenis = " + jenis;
+                    + " WHERE isbn LIKE '%"+Keyword+"%' OR judul LIKE '%"+Keyword+"%' AND jenis = " + jenis + " AND stok != 0";
             if(Keyword.equals("")){
                 sql = "SELECT ma_buku.isbn, ma_buku.judul, ma_kategori.nama as kategori, ma_buku.max_hari_pinjam"
-                        + " FROM ma_buku JOIN ma_kategori ON ma_buku.kategori = ma_kategori.kode AND jenis = " + jenis;
+                        + " FROM ma_buku JOIN ma_kategori ON ma_buku.kategori = ma_kategori.kode AND jenis = " + jenis + " AND stok != 0";
             }
             
             PreparedStatement pst = conn.prepareStatement(sql);

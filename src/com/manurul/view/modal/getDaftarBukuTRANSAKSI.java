@@ -11,6 +11,7 @@ import com.manurul.model.TransaksiModel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +22,8 @@ public class getDaftarBukuTRANSAKSI extends javax.swing.JFrame {
     /**
      * Creates new form getDaftatBukuTRANSAKSI
      */
+    
+    
     public getDaftarBukuTRANSAKSI(String Keyword) {
         initComponents();
     
@@ -169,6 +172,50 @@ public class getDaftarBukuTRANSAKSI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void getSelectedItem(){
+    
+        try{
+        
+            // get row
+            int rowIndex = TABLE_LIST_BUKU.getSelectedRow();
+
+            Object isbn = TABLE_LIST_BUKU.getValueAt(rowIndex, 0);
+            String judul = TABLE_LIST_BUKU.getValueAt(rowIndex, 1).toString();
+
+            // cek jumlah rows
+            int countRow = Dashboard.TABLE_LIST_PINJAM.getRowCount();
+            
+            // cek duplicate
+            if(Dashboard.TABLE_LIST_PINJAM.getValueAt(0, 0) != null){
+                    for(int i = 0; i < countRow; i++){
+                        String dataTableMain = Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 0).toString();
+                        if(dataTableMain.equals(isbn)){
+                            throw new Exception("Buku " + judul + " sudah ditambahkan !");
+                        }
+                    }   
+            }
+            
+            String max_pinjam_hari = TABLE_LIST_BUKU.getValueAt(rowIndex, 3).toString();
+
+            boolean started = false;
+            if(Dashboard.TABLE_LIST_PINJAM.getValueAt(0, 0) == "" && Dashboard.TABLE_LIST_PINJAM.getRowCount() == 1){
+                started = true;
+            }
+
+            Dashboard.TM.setRowTableDashboardPinjam(new String[]{
+                isbn.toString(),
+                judul,
+                max_pinjam_hari
+            }, started);
+
+            this.dispose();
+            
+        }catch(Exception error){
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Informasi !", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }
+    
     private void INPUT_SEARCHKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_INPUT_SEARCHKeyTyped
         new TransaksiModel().setDataAnggota(INPUT_SEARCH.getText());
     }//GEN-LAST:event_INPUT_SEARCHKeyTyped
@@ -176,7 +223,7 @@ public class getDaftarBukuTRANSAKSI extends javax.swing.JFrame {
     private void TABLE_LIST_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_BUKUMouseClicked
 
         if(evt.getClickCount() == 2){
-//            getSelectedItem();
+            getSelectedItem();
         }
 
     }//GEN-LAST:event_TABLE_LIST_BUKUMouseClicked
@@ -184,7 +231,7 @@ public class getDaftarBukuTRANSAKSI extends javax.swing.JFrame {
     private void TABLE_LIST_BUKUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TABLE_LIST_BUKUKeyPressed
 
         if(evt.getKeyCode() == evt.VK_ENTER){
-//            getSelectedItem();
+            getSelectedItem();
         }
 
     }//GEN-LAST:event_TABLE_LIST_BUKUKeyPressed
