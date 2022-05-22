@@ -7,9 +7,12 @@ package com.manurul.model;
 
 import com.manurul.lib.DBConfig;
 import com.manurul.lib.GenKode;
+import static com.manurul.lib.GenKode.getTimeMiliSecond;
+import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
 import com.manurul.view.modal.getDaftarBukuTRANSAKSI;
 import com.manurul.view.modal.getPeminjamTRANSAKSI;
+import com.manurul.view.modal.konfirmasiTransaksiPinjam;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -17,6 +20,8 @@ import javax.swing.Timer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -144,7 +149,8 @@ public class TransaksiModel extends DBConfig{
         timer = new Timer(0, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-              Dashboard.PJ_INPUT_TGL_PINJAM.setText(GenKode.TransaksiGetDate());
+              String date = GenKode.TransaksiGetDate();
+              Dashboard.PJ_INPUT_TGL_PINJAM.setText(date);
             }
         });
         
@@ -304,4 +310,101 @@ public class TransaksiModel extends DBConfig{
         }
         
     }
+    
+    // cetak transaksi pinjam
+    public void konfirmasiTransaksiPinjam(){
+     
+        String id_transaksi = Dashboard.PJ_INPUT_ID_TRANSAKSI.getText();
+        String nis_peminjam = Dashboard.TM.getNis();
+        String nama_peminjam = Dashboard.TM.getNama();
+        String jenis_buku = Dashboard.PJ_INPUT_JENIS_BUKU.getSelectedItem().toString();
+        String nama_pengurus = Dashboard.nama_user;
+                
+        konfirmasiTransaksiPinjam formKonfirmasi = new konfirmasiTransaksiPinjam();
+        formKonfirmasi.LABEL_ID_TRANSAKSI.setText("#" + id_transaksi);
+        formKonfirmasi.INPUT_NAMA_PEMINJAM.setText(nis_peminjam + " - " + nama_peminjam);
+        formKonfirmasi.INPUT_JENIS_BUKU.setText(jenis_buku);
+        formKonfirmasi.LABEL_PENGURUS.setText(nama_pengurus);
+        
+        // get model table konfirmasi
+        DefaultTableModel konfirmasi_model_pinjam = (DefaultTableModel)formKonfirmasi.TABLE_LIST_BUKU_PINJAM.getModel();
+        
+        // set row to null
+        konfirmasi_model_pinjam.setRowCount(0);
+        
+        // set rows with max hari pinjam
+        int countRowsMainPinjam = Dashboard.TABLE_LIST_PINJAM.getRowCount();
+        for(int i = 0; i < countRowsMainPinjam; i++){
+            konfirmasi_model_pinjam.addRow(new String[]{
+                Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 0).toString() + " -  " + Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 1).toString(),
+                Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 2).toString(),
+                getDateTglPengembalian(Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 2).toString().replaceAll("[a-zA-Z]", "").trim())
+            });
+        }
+        
+        formKonfirmasi.setVisible(true);
+        
+    }
+    
+    public String getDateTglPengembalian(String date){
+    
+        SimpleDateFormat dateFormater = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
+    
+        // get epoc now
+        Long epoch = Long.parseLong(GenKode.getTimeMiliSecond());
+        
+        // merge epoc now with length pinjam
+        Long hari = Long.parseLong(date);
+        hari = (86400000 * hari) + epoch;
+        
+        Date max_hari_pinjam = new Date(hari);
+        return dateFormater.format(max_hari_pinjam);
+        
+    }
+    
+    public boolean cetakPinjam(){
+    
+        try{
+        
+            // insert transaksi
+            
+            String id_transaksi = Dashboard.PJ_INPUT_ID_TRANSAKSI.getText();
+            String nis_peminjam = getNis();
+            String jenis_buku = Dashboard.PJ_INPUT_JENIS_BUKU.getSelectedItem().toString();
+            String kode_pengurus = Dashboard.id_kode;
+            
+            String sql_transaksi = "INSERT INTO ma_transaksi VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pst_transaksi = conn.prepareStatement(sql_transaksi);
+            pst_transaksi.setString(1, id_transaksi);
+            pst_transaksi.setString(2, nis_peminjam);
+            pst_transaksi.setString(3, kode_pengurus);
+            
+            if(jenis_buku.contains("UMUM")){
+                jenis_buku = "UMUM";
+            }else{
+                jenis_buku = "PAKET";
+            }
+            
+            pst_transaksi.setString(4, jenis_buku);
+            pst_transaksi.setString(5, "DIPINJAM");
+            pst_transaksi.setTimestamp(6, new SqlTime().getTimeStamp());
+            pst_transaksi.setTimestamp(7, new SqlTime().getTimeStamp());
+           
+            if(pst_transaksi.execute()){
+                
+                throw new SQLException("Gagal menambahkan transaksi !");
+                
+            }else{
+            
+                // insert detail_transaksi
+                
+            }            
+            return true;
+        }catch(SQLException error){
+        
+            System.out.println(error.getMessage());
+            return false;
+        }
+    }
+    
 }

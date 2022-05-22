@@ -1052,9 +1052,9 @@ public class Dashboard extends javax.swing.JFrame {
         TABLE_PINJAM.setViewportView(TABLE_LIST_PINJAM);
 
         BTN_CETAK_PINJAMAN.setBackground(new java.awt.Color(0, 171, 60));
-        BTN_CETAK_PINJAMAN.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        BTN_CETAK_PINJAMAN.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
         BTN_CETAK_PINJAMAN.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_CETAK_PINJAMAN.setText("Cetak Pinjaman [F10]");
+        BTN_CETAK_PINJAMAN.setText("Konfirmasi Pinjaman [ENTER]");
         BTN_CETAK_PINJAMAN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BTN_CETAK_PINJAMANMouseClicked(evt);
@@ -2381,7 +2381,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void BTN_EXITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_EXITMouseClicked
         // CLOSE APLIKASI
-        int close = JOptionPane.showConfirmDialog(this, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        int close = JOptionPane.showConfirmDialog(this, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(close == 0){
             System.exit(0);
         }
@@ -2626,7 +2626,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void ActionResetFormTransaksi(){
     
-        int resetFormPinjam = JOptionPane.showConfirmDialog(null, "Kosongkan daftar Transaksi ?", "Konfirmasi !", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        int resetFormPinjam = JOptionPane.showConfirmDialog(null, "Kosongkan form Transaksi ?", "Konfirmasi !", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(resetFormPinjam  == 0){
             
             if(TM.getNama() != null){
@@ -2650,6 +2650,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void TABLE_LIST_PINJAMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TABLE_LIST_PINJAMKeyPressed
         
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            
             if(TM.getNis() != null){
                 PJ_INPUT_PEMINJAM.setText(TM.getNis() + " - " + TM.getNama());
                 if(TM.getJumlahBukuDipinjam() != TABLE_LIST_PINJAM.getRowCount()){
@@ -2661,8 +2662,11 @@ public class Dashboard extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Nama peminjam belum terisi !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
                 PJ_INPUT_PEMINJAM.requestFocus();
             }
+            
         }else if(evt.getKeyCode() == evt.VK_F5){
+            
             ActionResetFormTransaksi();
+            
         }else if(evt.getKeyCode() == evt.VK_F2){
             
             DefaultTableModel table_transaksi = (DefaultTableModel)TABLE_LIST_PINJAM.getModel();
@@ -2682,12 +2686,25 @@ public class Dashboard extends javax.swing.JFrame {
                 table_transaksi.removeRow(TABLE_LIST_PINJAM.getSelectedRow());
             }
             
+        }else if(evt.getKeyCode() == evt.VK_F10){
+            
+            if(Dashboard.TM.getNis() != null){
+                if(TABLE_LIST_PINJAM.getValueAt(0, 0) != ""){
+                    TM.konfirmasiTransaksiPinjam();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Harap masukkan daftar buku !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Nama peminjam belum terisi !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+                PJ_INPUT_PEMINJAM.requestFocus();
+            }
+            
         }
         
     }//GEN-LAST:event_TABLE_LIST_PINJAMKeyPressed
 
     private void BTN_CETAK_PINJAMANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_CETAK_PINJAMANMouseClicked
-        
+        TM.konfirmasiTransaksiPinjam();        
     }//GEN-LAST:event_BTN_CETAK_PINJAMANMouseClicked
 
     private void PJ_INPUT_PEMINJAMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PJ_INPUT_PEMINJAMKeyPressed
@@ -2723,14 +2740,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_RESET_DAFTAR_BUKUMouseClicked
 
     private void PJ_INPUT_JENIS_BUKUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PJ_INPUT_JENIS_BUKUActionPerformed
-        if(TM.getNis() != null && TABLE_LIST_PINJAM.getValueAt(0, 0) != null){
+        if(TABLE_LIST_PINJAM.getValueAt(0, 0) != ""){
             
             int reset = JOptionPane.showConfirmDialog(null, "Melakukan perubahan jenis, daftar buku akan dimuat ulang ?", "Konfirmasi !", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             
             if(reset == 0){
-                
-                TM.setNis(null);
-                TM.setNama(null);
                 
                 TM.setHeadTableDashboardPinjam();
                 TransaksiModel.setDateNowTransaksi();
