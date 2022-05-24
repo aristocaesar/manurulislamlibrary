@@ -20,6 +20,7 @@ import javax.swing.Timer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -362,6 +363,16 @@ public class TransaksiModel extends DBConfig{
         
     }
     
+    public Long getEpochTglPengembalian(String hari){
+    
+        // get epoc now
+        Long epoch = Long.parseLong(GenKode.getTimeMiliSecond());
+        
+        Long jml_hari = Long.parseLong(hari);
+        return (86400000 * jml_hari) + epoch;
+        
+    }
+    
     public boolean cetakPinjam(){
     
         try{
@@ -372,6 +383,8 @@ public class TransaksiModel extends DBConfig{
             String nis_peminjam = getNis();
             String jenis_buku = Dashboard.PJ_INPUT_JENIS_BUKU.getSelectedItem().toString();
             String kode_pengurus = Dashboard.id_kode;
+            
+            Timestamp dateNow =  new SqlTime().getTimeStamp();
             
             String sql_transaksi = "INSERT INTO ma_transaksi VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst_transaksi = conn.prepareStatement(sql_transaksi);
@@ -387,8 +400,8 @@ public class TransaksiModel extends DBConfig{
             
             pst_transaksi.setString(4, jenis_buku);
             pst_transaksi.setString(5, "DIPINJAM");
-            pst_transaksi.setTimestamp(6, new SqlTime().getTimeStamp());
-            pst_transaksi.setTimestamp(7, new SqlTime().getTimeStamp());
+            pst_transaksi.setTimestamp(6, dateNow);
+            pst_transaksi.setTimestamp(7, dateNow);
            
             if(pst_transaksi.execute()){
                 
@@ -397,6 +410,27 @@ public class TransaksiModel extends DBConfig{
             }else{
             
                 // insert detail_transaksi
+                
+                int getCountDaftarBuku = Dashboard.TABLE_LIST_PINJAM.getRowCount();
+                
+                String sql_detail_transaksi = "INSERT INTO ma_detail_transaksi VALUES (?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pst_detail_transaksi = conn.prepareStatement(sql_detail_transaksi);
+                
+                for(int i = 0; i < getCountDaftarBuku; i++){
+                    
+                    pst_detail_transaksi.setString(1, id_transaksi);
+                    pst_detail_transaksi.setString(2, Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 0).toString());
+                    pst_detail_transaksi.setLong(3, getEpochTglPengembalian(Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 2).toString().replaceAll("[a-zA-Z]", "").trim()));
+                    pst_detail_transaksi.setString(4, "Dipinjam");
+                    pst_detail_transaksi.setString(5, "Baik");
+                    pst_detail_transaksi.setTimestamp(6, dateNow);
+                    pst_detail_transaksi.setTimestamp(7, dateNow);
+                    
+                    if(pst_detail_transaksi.execute()){
+                        throw new SQLException("Gagal membuat transaksi !");
+                    }
+                    
+                }
                 
             }            
             return true;
