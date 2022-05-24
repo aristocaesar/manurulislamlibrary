@@ -32,7 +32,7 @@ public class GenKode {
         
     }
     
-    private static String getTimeMiliSecond(){
+    public static String getTimeMiliSecond(){
     
         String miliSecond = Long.toString(System.currentTimeMillis());
         return miliSecond;

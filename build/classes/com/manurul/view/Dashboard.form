@@ -303,7 +303,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_USER" max="32767" attributes="0"/>
+                          <Component id="ICON_USER" pref="48" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -877,7 +877,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_TR_TRANSAKSI" max="32767" attributes="0"/>
+                                  <Component id="ICON_TR_TRANSAKSI" pref="48" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1312,11 +1312,17 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="T_PJ_BUKU" min="-2" max="-2" attributes="0"/>
                                   <Component id="TITLE_FRAME_PINJAM" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="TABLE_PINJAM" pref="842" max="32767" attributes="0"/>
-                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="T_PJ_BUKU" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="BTN_RESET_DAFTAR_BUKU" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="TABLE_PINJAM" pref="800" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="BTN_CETAK_PINJAMAN" min="-2" pref="368" max="-2" attributes="0"/>
                                           <Component id="PJ_INPUT_ID_TRANSAKSI" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
@@ -1327,7 +1333,7 @@
                                           <Component id="PJ_LABEL_TGL_PINJAM" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
                                           <Component id="PJ_LABEL_INFO_1" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
                                           <Component id="PJ_LABEL_INFO_2" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_INPUT_KAT_BUKU" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_INPUT_JENIS_BUKU" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
                                           <Component id="PJ_INPUT_TGL_PINJAM" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -1342,21 +1348,27 @@
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="TITLE_FRAME_PINJAM" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="T_PJ_BUKU" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="BTN_RESET_DAFTAR_BUKU" pref="0" max="32767" attributes="0"/>
+                                          <Component id="T_PJ_BUKU" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="TABLE_PINJAM" pref="499" max="32767" attributes="0"/>
+                                  </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="PJ_ID_TRANSAKSI" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="PJ_INPUT_ID_TRANSAKSI" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="PJ_LABEL_PEMINJAM" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="PJ_INPUT_PEMINJAM" min="-2" pref="40" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="PJ_LABEL_KAT_BUKU" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="PJ_INPUT_KAT_BUKU" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="PJ_INPUT_JENIS_BUKU" min="-2" pref="40" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="PJ_LABEL_TGL_PINJAM" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -1368,7 +1380,6 @@
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="BTN_CETAK_PINJAMAN" min="-2" pref="49" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="TABLE_PINJAM" pref="496" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
@@ -1433,12 +1444,12 @@
                           <Color blue="3c" green="ab" red="0" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="1"/>
+                          <Font name="Trebuchet MS" size="16" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Cetak Pinjaman"/>
+                        <Property name="text" type="java.lang.String" value="Konfirmasi Pinjaman [ENTER]"/>
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_CETAK_PINJAMANMouseClicked"/>
@@ -1554,7 +1565,7 @@
                         <Property name="text" type="java.lang.String" value="memahi peraturan dan tata tertib perpustakaan."/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="PJ_INPUT_KAT_BUKU">
+                    <Component class="javax.swing.JComboBox" name="PJ_INPUT_JENIS_BUKU">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="14" style="1"/>
@@ -1566,8 +1577,12 @@
                           </StringArray>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PJ_INPUT_JENIS_BUKUActionPerformed"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="PJ_INPUT_TGL_PINJAM">
@@ -1590,6 +1605,19 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="BTN_RESET_DAFTAR_BUKU">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/manurul/src/ICON_RESET.png"/>
+                        </Property>
+                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                          <Color id="Hand Cursor"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_RESET_DAFTAR_BUKUMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1687,7 +1715,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_DB_DATABUKU" max="32767" attributes="0"/>
+                                  <Component id="ICON_DB_DATABUKU" pref="48" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -2177,29 +2205,6 @@
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ICON_ADD_KATEGORIMouseClicked"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="SEARCH_KATEGORI">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                            <LineBorder>
-                              <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
-                            </LineBorder>
-                          </Border>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SEARCH_KATEGORIKeyTyped"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-                      </AuxValues>
-                    </Component>
                     <Container class="javax.swing.JScrollPane" name="TABLE_KATEGORI">
                       <AuxValues>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -2252,6 +2257,29 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JTextField" name="SEARCH_KATEGORI">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SEARCH_KATEGORIKeyTyped"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </Component>
                     <Component class="javax.swing.JLabel" name="FILTER_TAMPIL_KATEGORI">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -2783,7 +2811,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_U_USER" max="32767" attributes="0"/>
+                                  <Component id="ICON_U_USER" pref="48" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -3555,7 +3583,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_SETTING" max="32767" attributes="0"/>
+                          <Component id="ICON_SETTING" pref="48" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>

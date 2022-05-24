@@ -3,7 +3,6 @@
  */
 package com.manurul.view;
 
-import com.manurul.lib.GenKode;
 import com.manurul.lib.InputBorder;
 import com.manurul.view.modal.AnggotaUSER;
 import com.manurul.view.modal.JurusanUSER;
@@ -26,12 +25,13 @@ import com.manurul.view.modal.KategoriDATABUKU;
 import com.manurul.view.modal.PenerbitDATABUKU;
 import com.manurul.view.modal.PengurusUSER;
 import com.manurul.view.modal.RakDATABUKU;
+import com.manurul.view.modal.getDaftarBukuTRANSAKSI;
 import com.manurul.view.modal.getPeminjamTRANSAKSI;
 import java.awt.event.KeyEvent;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -42,10 +42,14 @@ public class Dashboard extends javax.swing.JFrame {
     // INIT STATE || GLOBAL VARIABEL
     private String title = "Dahsboard";
     
+    // GLOBAL INIT
     public static String id_kode;
     public static String nama_user;
     private String hak_akses;
     private ImageIcon successIcon;
+    
+        // TRANSAKSI
+        public static TransaksiModel TM = new TransaksiModel();
     
         // SETTING
         public static int Denda;
@@ -122,11 +126,10 @@ public class Dashboard extends javax.swing.JFrame {
             
         }
         
-        
         // start realtime for trancaction
         new TransaksiModel().getDateRealTime();
         
-            
+                
         // KONFIRMASI KELUAR APP ( WINDOWS CLOSING )
 //         this.addWindowListener(new java.awt.event.WindowAdapter() {
 //            @Override
@@ -243,8 +246,9 @@ public class Dashboard extends javax.swing.JFrame {
         PJ_LABEL_TGL_PINJAM = new javax.swing.JLabel();
         PJ_LABEL_INFO_1 = new javax.swing.JLabel();
         PJ_LABEL_INFO_2 = new javax.swing.JLabel();
-        PJ_INPUT_KAT_BUKU = new javax.swing.JComboBox<>();
+        PJ_INPUT_JENIS_BUKU = new javax.swing.JComboBox<>();
         PJ_INPUT_TGL_PINJAM = new javax.swing.JTextField();
+        BTN_RESET_DAFTAR_BUKU = new javax.swing.JLabel();
         DATABUKU = new javax.swing.JPanel();
         TOPBAR_DATABUKU = new RoundedPanel(15, Color.WHITE);
         T_DB_BUKU = new javax.swing.JLabel();
@@ -277,7 +281,6 @@ public class Dashboard extends javax.swing.JFrame {
         F_DB_KATEGORI = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_KATEGORI = new javax.swing.JLabel();
         ICON_ADD_KATEGORI = new javax.swing.JLabel();
-        SEARCH_KATEGORI = new javax.swing.JTextField();
         TABLE_KATEGORI = new javax.swing.JScrollPane();
         TABLE_LIST_KATEGORI = new javax.swing.JTable(){
             private static final long serialVersionUID = 1L;
@@ -286,6 +289,7 @@ public class Dashboard extends javax.swing.JFrame {
                 return false;
             };
         };
+        SEARCH_KATEGORI = new javax.swing.JTextField();
         FILTER_TAMPIL_KATEGORI = new javax.swing.JLabel();
         TAMPILKAN_KATEGORI = new javax.swing.JComboBox<>();
         F_DB_PENERBIT = new RoundedPanel(15, Color.WHITE);
@@ -527,7 +531,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBARLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -864,7 +868,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_TR_LAPORAN)))
                     .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1048,9 +1052,9 @@ public class Dashboard extends javax.swing.JFrame {
         TABLE_PINJAM.setViewportView(TABLE_LIST_PINJAM);
 
         BTN_CETAK_PINJAMAN.setBackground(new java.awt.Color(0, 171, 60));
-        BTN_CETAK_PINJAMAN.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        BTN_CETAK_PINJAMAN.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
         BTN_CETAK_PINJAMAN.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_CETAK_PINJAMAN.setText("Cetak Pinjaman");
+        BTN_CETAK_PINJAMAN.setText("Konfirmasi Pinjaman [ENTER]");
         BTN_CETAK_PINJAMAN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BTN_CETAK_PINJAMANMouseClicked(evt);
@@ -1095,13 +1099,26 @@ public class Dashboard extends javax.swing.JFrame {
         PJ_LABEL_INFO_2.setForeground(new java.awt.Color(96, 96, 96));
         PJ_LABEL_INFO_2.setText("memahi peraturan dan tata tertib perpustakaan.");
 
-        PJ_INPUT_KAT_BUKU.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        PJ_INPUT_KAT_BUKU.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UMUM - Buku Umum", "PAKET - Buku Paket" }));
+        PJ_INPUT_JENIS_BUKU.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        PJ_INPUT_JENIS_BUKU.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UMUM - Buku Umum", "PAKET - Buku Paket" }));
+        PJ_INPUT_JENIS_BUKU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PJ_INPUT_JENIS_BUKUActionPerformed(evt);
+            }
+        });
 
         PJ_INPUT_TGL_PINJAM.setEditable(false);
         PJ_INPUT_TGL_PINJAM.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         PJ_INPUT_TGL_PINJAM.setForeground(new java.awt.Color(96, 96, 96));
         PJ_INPUT_TGL_PINJAM.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+
+        BTN_RESET_DAFTAR_BUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_RESET.png"))); // NOI18N
+        BTN_RESET_DAFTAR_BUKU.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BTN_RESET_DAFTAR_BUKU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_RESET_DAFTAR_BUKUMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout F_TR_PINJAMLayout = new javax.swing.GroupLayout(F_TR_PINJAM);
         F_TR_PINJAM.setLayout(F_TR_PINJAMLayout);
@@ -1110,10 +1127,14 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(T_PJ_BUKU)
                     .addComponent(TITLE_FRAME_PINJAM)
-                    .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
-                        .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_TR_PINJAMLayout.createSequentialGroup()
+                        .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
+                                .addComponent(T_PJ_BUKU)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BTN_RESET_DAFTAR_BUKU))
+                            .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BTN_CETAK_PINJAMAN, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1125,7 +1146,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(PJ_LABEL_TGL_PINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PJ_LABEL_INFO_1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PJ_LABEL_INFO_2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PJ_INPUT_KAT_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PJ_INPUT_JENIS_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PJ_INPUT_TGL_PINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(25, 25, 25))
         );
@@ -1135,9 +1156,13 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(TITLE_FRAME_PINJAM)
                 .addGap(18, 18, 18)
-                .addComponent(T_PJ_BUKU)
-                .addGap(18, 18, 18)
-                .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
+                        .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BTN_RESET_DAFTAR_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(T_PJ_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
                     .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
                         .addComponent(PJ_ID_TRANSAKSI)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1149,7 +1174,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(PJ_LABEL_KAT_BUKU)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PJ_INPUT_KAT_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PJ_INPUT_JENIS_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(PJ_LABEL_TGL_PINJAM)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1159,8 +1184,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PJ_LABEL_INFO_2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTN_CETAK_PINJAMAN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                        .addComponent(BTN_CETAK_PINJAMAN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27))
         );
 
@@ -1273,7 +1297,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_DB_RAK)))
                     .addGroup(TOPBAR_DATABUKULayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1432,15 +1456,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        SEARCH_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        SEARCH_KATEGORI.setForeground(new java.awt.Color(96, 96, 96));
-        SEARCH_KATEGORI.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
-        SEARCH_KATEGORI.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                SEARCH_KATEGORIKeyTyped(evt);
-            }
-        });
-
         TABLE_LIST_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         TABLE_LIST_KATEGORI.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1460,6 +1475,15 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         TABLE_KATEGORI.setViewportView(TABLE_LIST_KATEGORI);
+
+        SEARCH_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        SEARCH_KATEGORI.setForeground(new java.awt.Color(96, 96, 96));
+        SEARCH_KATEGORI.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
+        SEARCH_KATEGORI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SEARCH_KATEGORIKeyTyped(evt);
+            }
+        });
 
         FILTER_TAMPIL_KATEGORI.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         FILTER_TAMPIL_KATEGORI.setForeground(new java.awt.Color(96, 96, 96));
@@ -1803,7 +1827,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_U_PENGURUS)))
                     .addGroup(TOPBAR_USERLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -2162,7 +2186,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBAR_SETTINGLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2357,7 +2381,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void BTN_EXITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_EXITMouseClicked
         // CLOSE APLIKASI
-        int close = JOptionPane.showConfirmDialog(this, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        int close = JOptionPane.showConfirmDialog(this, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(close == 0){
             System.exit(0);
         }
@@ -2600,24 +2624,103 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TABLE_LIST_BUKUMouseClicked
 
+    private void ActionResetFormTransaksi(){
+    
+        int resetFormPinjam = JOptionPane.showConfirmDialog(null, "Kosongkan form Transaksi ?", "Konfirmasi !", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(resetFormPinjam  == 0){
+            
+            if(TM.getNama() != null){
+                
+                TM.setNis(null);
+                TM.setNama(null);
+                
+                TM.setHeadTableDashboardPinjam();
+                TransaksiModel.setDateNowTransaksi();
+                
+                PJ_INPUT_PEMINJAM.setText("");
+                PJ_INPUT_JENIS_BUKU.setSelectedIndex(0);
+            }else{
+                JOptionPane.showMessageDialog(null, "Form masih kosong !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);   
+            }
+            
+        }
+        
+    }
+    
     private void TABLE_LIST_PINJAMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TABLE_LIST_PINJAMKeyPressed
         
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            
+            if(TM.getNis() != null){
+                PJ_INPUT_PEMINJAM.setText(TM.getNis() + " - " + TM.getNama());
+                if(TM.getJumlahBukuDipinjam() != TABLE_LIST_PINJAM.getRowCount()){
+                    new getDaftarBukuTRANSAKSI("").setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Kesempatan banyak pinjam sudah mencapai maksimal !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Nama peminjam belum terisi !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+                PJ_INPUT_PEMINJAM.requestFocus();
+            }
+            
+        }else if(evt.getKeyCode() == evt.VK_F5){
+            
+            ActionResetFormTransaksi();
+            
+        }else if(evt.getKeyCode() == evt.VK_F2){
+            
+            DefaultTableModel table_transaksi = (DefaultTableModel)TABLE_LIST_PINJAM.getModel();
+            
+            Object tableFirstRow = TABLE_LIST_PINJAM.getValueAt(0, 0);
+            
+            if(TABLE_LIST_PINJAM.getRowCount() == 1){
+                if(tableFirstRow != null){
+                    table_transaksi.removeRow(0);
+                    table_transaksi.addRow(new String[]{
+                        "",
+                        "",
+                        ""
+                    });
+                }
+            }else{
+                table_transaksi.removeRow(TABLE_LIST_PINJAM.getSelectedRow());
+            }
+            
+        }else if(evt.getKeyCode() == evt.VK_F10){
+            
+            if(Dashboard.TM.getNis() != null){
+                if(TABLE_LIST_PINJAM.getValueAt(0, 0) != ""){
+                    TM.konfirmasiTransaksiPinjam();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Harap masukkan daftar buku !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Nama peminjam belum terisi !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+                PJ_INPUT_PEMINJAM.requestFocus();
+            }
             
         }
         
     }//GEN-LAST:event_TABLE_LIST_PINJAMKeyPressed
 
     private void BTN_CETAK_PINJAMANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_CETAK_PINJAMANMouseClicked
-        
+        TM.konfirmasiTransaksiPinjam();        
     }//GEN-LAST:event_BTN_CETAK_PINJAMANMouseClicked
 
     private void PJ_INPUT_PEMINJAMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PJ_INPUT_PEMINJAMKeyPressed
-        
-        String peminjam = PJ_INPUT_PEMINJAM.getText();
-        
+       
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if(!peminjam.equals("")){
+            
+            if(TM.getNis() != null && TM.getNama() != null){
+                PJ_INPUT_PEMINJAM.setText(TM.getNis() + " - " + TM.getNama());
+            }
+            
+            if(!PJ_INPUT_PEMINJAM.getText().equals("")){
+                
+                String peminjam = PJ_INPUT_PEMINJAM.getText();
+                if(TM.getNama() != null){
+                    peminjam = TM.getNama();
+                }
                 
                 new getPeminjamTRANSAKSI(peminjam).setVisible(true);
                 
@@ -2629,6 +2732,33 @@ public class Dashboard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_PJ_INPUT_PEMINJAMKeyPressed
+
+    private void BTN_RESET_DAFTAR_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_RESET_DAFTAR_BUKUMouseClicked
+        
+        ActionResetFormTransaksi();
+        
+    }//GEN-LAST:event_BTN_RESET_DAFTAR_BUKUMouseClicked
+
+    private void PJ_INPUT_JENIS_BUKUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PJ_INPUT_JENIS_BUKUActionPerformed
+        if(TABLE_LIST_PINJAM.getValueAt(0, 0) != ""){
+            
+            int reset = JOptionPane.showConfirmDialog(null, "Melakukan perubahan jenis, daftar buku akan dimuat ulang ?", "Konfirmasi !", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            
+            if(reset == 0){
+                
+                TM.setHeadTableDashboardPinjam();
+                TransaksiModel.setDateNowTransaksi();
+                
+            }else{
+                int index = 0;
+                if(PJ_INPUT_JENIS_BUKU.getSelectedIndex() == 0){
+                    index = 1;
+                }
+                PJ_INPUT_JENIS_BUKU.setSelectedIndex(index);
+            }
+            
+        }
+    }//GEN-LAST:event_PJ_INPUT_JENIS_BUKUActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2671,6 +2801,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JLabel BTN_DASHBOARD;
     public static javax.swing.JLabel BTN_DATABUKU;
     private javax.swing.JLabel BTN_EXIT;
+    private javax.swing.JLabel BTN_RESET_DAFTAR_BUKU;
     public static javax.swing.JLabel BTN_SETTING;
     private javax.swing.JButton BTN_SET_SIMPAN;
     public static javax.swing.JLabel BTN_TRANSAKSI;
@@ -2736,7 +2867,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel PJ_ID_TRANSAKSI1;
     public static javax.swing.JTextField PJ_INPUT_ID_TRANSAKSI;
     private javax.swing.JTextField PJ_INPUT_ID_TRANSAKSI_KEMBALI;
-    private javax.swing.JComboBox<String> PJ_INPUT_KAT_BUKU;
+    public static javax.swing.JComboBox<String> PJ_INPUT_JENIS_BUKU;
     private javax.swing.JComboBox<String> PJ_INPUT_KAT_BUKU1;
     public static javax.swing.JTextField PJ_INPUT_PEMINJAM;
     private javax.swing.JTextField PJ_INPUT_PEMINJAM1;

@@ -7,11 +7,12 @@ package com.manurul.view.modal;
 
 import com.manurul.lib.InputBorder;
 import com.manurul.lib.RoundedPanel;
+import com.manurul.model.SettingModel;
 import com.manurul.model.TransaksiModel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
 import java.awt.Toolkit;
-import java.sql.ResultSet;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,19 +20,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author HP
  */
-public class getPeminjamTRANSAKSI extends javax.swing.JFrame {
+public class getPeminjamTRANSAKSI extends javax.swing.JFrame{
 
     /**
      * Creates new form getPeminjamTRANSAKSI
      */
-    TransaksiModel TM = new TransaksiModel();
     DefaultTableModel table_model = new DefaultTableModel();
     
     public getPeminjamTRANSAKSI(String peminjam) {
         initComponents();
         
-        // SET INIT VALUE
-        INPUT_SEARCH.setText(Dashboard.PJ_INPUT_PEMINJAM.getText());
+        INPUT_SEARCH.setText(peminjam);
         
         // SET CENTER LOCATION
         this.setLocationRelativeTo(null);
@@ -50,11 +49,10 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame {
         this.setTitle("MA Nurul Islam Library Management - Tambah Peminjam");
         
         // GET DATA FROM DATABASE
-        TM.setDataAnggota(peminjam);
+        Dashboard.TM.setDataAnggota(peminjam);
         
         // SET DEFAUlT SELECTED
         TABLE_LIST_PEMINJAM.requestFocus();
-        
     }
 
     /**
@@ -97,6 +95,11 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame {
             }
         ));
         TABLE_LIST_PEMINJAM.setRowHeight(30);
+        TABLE_LIST_PEMINJAM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_PEMINJAMMouseClicked(evt);
+            }
+        });
         TABLE_LIST_PEMINJAM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TABLE_LIST_PEMINJAMKeyPressed(evt);
@@ -178,14 +181,62 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void getSelectedItem(){
+    
+         int rowIndex = TABLE_LIST_PEMINJAM.getSelectedRow();
+        
+        try{
+            
+            String nis = TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 0).toString();
+            String nama = TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 1).toString();
+            int buku_dipinjam = Integer.parseInt(TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 4).toString());
+            
+            // get data max pinjam from setting
+            if(buku_dipinjam == 0){
+                throw new Exception("Kesempatan pinjam "+ nama +" habis !");
+            }
+            
+            int skor = Integer.parseInt(TABLE_LIST_PEMINJAM.getValueAt(rowIndex, 3).toString());
+            
+            if(skor <= 50){
+                throw new Exception("Skor peminjam/anggota terlalu rendah !");
+            }
+            
+            if(!nis.equals("")){
+                Dashboard.TM.setNis(nis);
+                Dashboard.TM.setNama(nama);
+                Dashboard.TM.setJumlahBukuDipinjam(buku_dipinjam);
+                Dashboard.PJ_INPUT_PEMINJAM.setText(nis + " - " + nama);
+                this.dispose();
+                Dashboard.TABLE_LIST_PINJAM.requestFocus();
+            }
+            
+        }catch(Exception error){
+                JOptionPane.showMessageDialog(null, error.getMessage(), "Informasi !", JOptionPane.INFORMATION_MESSAGE);
+                TABLE_LIST_PEMINJAM.setRowSelectionInterval(rowIndex, rowIndex);
+        }
+        
+    }
     
     private void TABLE_LIST_PEMINJAMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TABLE_LIST_PEMINJAMKeyPressed
-        // TODO add your handling code here:
+        
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            getSelectedItem();
+        }
+        
     }//GEN-LAST:event_TABLE_LIST_PEMINJAMKeyPressed
 
     private void INPUT_SEARCHKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_INPUT_SEARCHKeyTyped
         new TransaksiModel().setDataAnggota(INPUT_SEARCH.getText());
     }//GEN-LAST:event_INPUT_SEARCHKeyTyped
+
+    private void TABLE_LIST_PEMINJAMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_PEMINJAMMouseClicked
+        
+        if(evt.getClickCount() == 2){
+            getSelectedItem();
+        }
+        
+    }//GEN-LAST:event_TABLE_LIST_PEMINJAMMouseClicked
 
     /**
      * @param args the command line arguments
@@ -230,4 +281,5 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame {
     public static javax.swing.JTable TABLE_LIST_PEMINJAM;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
 }
