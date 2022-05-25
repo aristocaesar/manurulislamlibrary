@@ -175,12 +175,20 @@ public class getDaftarBukuTRANSAKSI extends javax.swing.JFrame {
     private void getSelectedItem(){
     
         try{
-        
+            
             // get row
             int rowIndex = TABLE_LIST_BUKU.getSelectedRow();
 
             Object isbn = TABLE_LIST_BUKU.getValueAt(rowIndex, 0);
             String judul = TABLE_LIST_BUKU.getValueAt(rowIndex, 1).toString();
+            
+            // get value data peminjam
+            String valueBukuByPeminjam = Dashboard.TM.getExistBukuInPeminjam(isbn.toString());
+            if(valueBukuByPeminjam.equals("Dipinjam")){
+                throw new Exception("Buku " + judul + " sudah / sedang dipinjam !");
+            }else if(valueBukuByPeminjam.equals("Bermasalah")){
+                throw new Exception("Peminjaman buku " + judul + " mengalami masalah !");
+            }
 
             // cek jumlah rows
             int countRow = Dashboard.TABLE_LIST_PINJAM.getRowCount();

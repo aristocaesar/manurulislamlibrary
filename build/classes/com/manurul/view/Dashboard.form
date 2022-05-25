@@ -303,7 +303,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_USER" pref="48" max="32767" attributes="0"/>
+                          <Component id="ICON_USER" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -877,7 +877,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_TR_TRANSAKSI" pref="48" max="32767" attributes="0"/>
+                                  <Component id="ICON_TR_TRANSAKSI" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1715,7 +1715,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_DB_DATABUKU" pref="48" max="32767" attributes="0"/>
+                                  <Component id="ICON_DB_DATABUKU" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -2811,7 +2811,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_U_USER" pref="48" max="32767" attributes="0"/>
+                                  <Component id="ICON_U_USER" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -3583,7 +3583,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_SETTING" pref="48" max="32767" attributes="0"/>
+                          <Component id="ICON_SETTING" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>

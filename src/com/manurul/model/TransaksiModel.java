@@ -7,7 +7,6 @@ package com.manurul.model;
 
 import com.manurul.lib.DBConfig;
 import com.manurul.lib.GenKode;
-import static com.manurul.lib.GenKode.getTimeMiliSecond;
 import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
 import com.manurul.view.modal.getDaftarBukuTRANSAKSI;
@@ -23,6 +22,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,12 +36,11 @@ public class TransaksiModel extends DBConfig{
     private Connection conn = (Connection)DBConfig.getConnection();
    
     // dashboard
-    DefaultTableModel table_pinjam_model = new DefaultTableModel();
+//    DefaultTableModel table_pinjam_model = new DefaultTableModel();
     
     // getPeminjamTransaksi
     DefaultTableModel table_model = new DefaultTableModel();
     
-    // getDaftarBukuTransaksi
     
     // var global for data transaksi
     private String id_transaksi;
@@ -53,6 +52,9 @@ public class TransaksiModel extends DBConfig{
     private int jumlah_buku_dipinjam;
     private String createdAt;
     private String updatedAt;
+    
+    // SET SUCCESS ICON
+    private ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
     
     private String message;
     
@@ -160,6 +162,9 @@ public class TransaksiModel extends DBConfig{
     
     // set datatable dashboad - pinjam
     public void setHeadTableDashboardPinjam(){
+        
+        DefaultTableModel table_pinjam_model = (DefaultTableModel)Dashboard.TABLE_LIST_PINJAM.getModel();
+        
         table_pinjam_model.setColumnCount(0);
         table_pinjam_model.addColumn("ISBN");
         table_pinjam_model.addColumn("Judul Buku");
@@ -178,7 +183,7 @@ public class TransaksiModel extends DBConfig{
     // set datatable dashboard - pinjam - addrow
     public void setRowTableDashboardPinjam(String[] rowData, boolean started){
         
-        DefaultTableModel addModel = (DefaultTableModel)table_pinjam_model;
+        DefaultTableModel addModel = (DefaultTableModel)Dashboard.TABLE_LIST_PINJAM.getModel();
         if(started){
             addModel.setRowCount(0);
         }
@@ -373,6 +378,31 @@ public class TransaksiModel extends DBConfig{
         
     }
     
+    public String getExistBukuInPeminjam(String isbn){
+    
+        try{
+        
+            String sql = "SELECT ma_detail_transaksi.status_buku AS status_buku FROM ma_detail_transaksi JOIN ma_transaksi " +
+                         " ON ma_detail_transaksi.id_transaksi = ma_transaksi.id_transaksi WHERE ma_transaksi.nis_anggota = ? AND ma_detail_transaksi.isbn = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, getNis());
+            pst.setString(2, isbn);
+            ResultSet res = pst.executeQuery();
+            
+            if(!res.next()){
+                throw new SQLException("NOTFOUND");
+            }
+            
+            return res.getString("status_buku");
+            
+        }catch(SQLException error){
+            
+            return error.getMessage();
+        
+        }
+        
+    }
+    
     public boolean cetakPinjam(){
     
         try{
@@ -413,7 +443,7 @@ public class TransaksiModel extends DBConfig{
                 
                 int getCountDaftarBuku = Dashboard.TABLE_LIST_PINJAM.getRowCount();
                 
-                String sql_detail_transaksi = "INSERT INTO ma_detail_transaksi VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String sql_detail_transaksi = "INSERT INTO ma_detail_transaksi(id_transaksi, isbn, masa_pinjam ) VALUES (?, ?, ?)";
                 PreparedStatement pst_detail_transaksi = conn.prepareStatement(sql_detail_transaksi);
                 
                 for(int i = 0; i < getCountDaftarBuku; i++){
@@ -421,10 +451,6 @@ public class TransaksiModel extends DBConfig{
                     pst_detail_transaksi.setString(1, id_transaksi);
                     pst_detail_transaksi.setString(2, Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 0).toString());
                     pst_detail_transaksi.setLong(3, getEpochTglPengembalian(Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 2).toString().replaceAll("[a-zA-Z]", "").trim()));
-                    pst_detail_transaksi.setString(4, "Dipinjam");
-                    pst_detail_transaksi.setString(5, "Baik");
-                    pst_detail_transaksi.setTimestamp(6, dateNow);
-                    pst_detail_transaksi.setTimestamp(7, dateNow);
                     
                     if(pst_detail_transaksi.execute()){
                         throw new SQLException("Gagal membuat transaksi !");
@@ -432,13 +458,50 @@ public class TransaksiModel extends DBConfig{
                     
                 }
                 
-            }            
+            }
+            
+            // print transaksi pinjam
+            System.out.println("cetak pinjam !");
+            
+            // cetak log
+            new LogModel().Action("MEMBUAT TRANSAKSI", "Berhasil membuat Transaksi " + id_transaksi, Dashboard.nama_user);
+            
+            
+            resetForm("PINJAM");
+            JOptionPane.showMessageDialog(null, "Transaksi #" + id_transaksi + " sukses !", "Sukses !", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+            
             return true;
         }catch(SQLException error){
         
-            System.out.println(error.getMessage());
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+    }
+    
+    
+    public void resetForm(String mode){
+    
+        if(mode.equals("PINJAM")){
+        
+            // reset form pinjam
+            
+            setNis(null);
+            setNama(null);
+            
+            setDateNowTransaksi();
+            Dashboard.PJ_INPUT_PEMINJAM.setText("");
+            Dashboard.PJ_INPUT_PEMINJAM.requestFocus();
+            DefaultTableModel form_model = (DefaultTableModel)Dashboard.TABLE_LIST_PINJAM.getModel();
+            
+            form_model.setRowCount(0);
+            form_model.setRowCount(1);
+            
+        }else{
+            
+            // reset form pengembalian
+        
+        }
+        
     }
     
 }

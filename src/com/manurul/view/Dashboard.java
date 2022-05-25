@@ -2653,11 +2653,26 @@ public class Dashboard extends javax.swing.JFrame {
             
             if(TM.getNis() != null){
                 PJ_INPUT_PEMINJAM.setText(TM.getNis() + " - " + TM.getNama());
-                if(TM.getJumlahBukuDipinjam() != TABLE_LIST_PINJAM.getRowCount()){
-                    new getDaftarBukuTRANSAKSI("").setVisible(true);
+                
+                // cek nilai table tidak lebih dari nilai pinjam anggota
+                
+                if(!TABLE_LIST_PINJAM.getValueAt(0, 0).toString().equals("")){
+                    
+                    
+                    if(TM.getJumlahBukuDipinjam() > TABLE_LIST_PINJAM.getRowCount()){
+                        new getDaftarBukuTRANSAKSI("").setVisible(true);
+
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Kesempatan banyak pinjam sudah mencapai maksimal !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+
+                     }
+                    
                 }else{
-                    JOptionPane.showMessageDialog(null, "Kesempatan banyak pinjam sudah mencapai maksimal !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    new getDaftarBukuTRANSAKSI("").setVisible(true);
+                    
                 }
+                
             }else{
                 JOptionPane.showMessageDialog(null, "Nama peminjam belum terisi !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
                 PJ_INPUT_PEMINJAM.requestFocus();
