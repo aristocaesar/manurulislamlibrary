@@ -102,8 +102,6 @@ public class BukuDATABUKU extends javax.swing.JFrame {
             
             LABEL_UPDATED.setVisible(false);
             INPUT_UPDATED.setVisible(false);
-            
-            BTN_HAPUS_BUKU.setVisible(false);
         }else{
         
             BM.getSelectedData(Kode);
@@ -203,7 +201,6 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         LABEL_JENIS = new javax.swing.JLabel();
         INPUT_TAHUN_TERBIT = new javax.swing.JTextField();
         BTN_SIMPAN_BUKU = new javax.swing.JButton();
-        BTN_HAPUS_BUKU = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.POPUP);
@@ -336,6 +333,11 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         INPUT_JENIS.setForeground(new java.awt.Color(96, 96, 96));
         INPUT_JENIS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UMUM", "PAKET" }));
         INPUT_JENIS.setBorder(null);
+        INPUT_JENIS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPUT_JENISActionPerformed(evt);
+            }
+        });
 
         LABEL_JENIS.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_JENIS.setForeground(new java.awt.Color(96, 96, 96));
@@ -501,17 +503,6 @@ public class BukuDATABUKU extends javax.swing.JFrame {
             }
         });
 
-        BTN_HAPUS_BUKU.setBackground(new java.awt.Color(153, 153, 153));
-        BTN_HAPUS_BUKU.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        BTN_HAPUS_BUKU.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_HAPUS_BUKU.setText("Hapus");
-        BTN_HAPUS_BUKU.setBorder(null);
-        BTN_HAPUS_BUKU.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BTN_HAPUS_BUKUMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout FRAME_MAIN_ANGGOTALayout = new javax.swing.GroupLayout(FRAME_MAIN_ANGGOTA);
         FRAME_MAIN_ANGGOTA.setLayout(FRAME_MAIN_ANGGOTALayout);
         FRAME_MAIN_ANGGOTALayout.setHorizontalGroup(
@@ -523,8 +514,6 @@ public class BukuDATABUKU extends javax.swing.JFrame {
                         .addComponent(CONTAINER_ANGGOTA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(FRAME_MAIN_ANGGOTALayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTN_HAPUS_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(BTN_SIMPAN_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
@@ -534,9 +523,7 @@ public class BukuDATABUKU extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(CONTAINER_ANGGOTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addGroup(FRAME_MAIN_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BTN_SIMPAN_BUKU, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTN_HAPUS_BUKU, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(BTN_SIMPAN_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
 
@@ -623,8 +610,10 @@ public class BukuDATABUKU extends javax.swing.JFrame {
                 throw new Exception("Nilai penulis harus terisi !");
             }
             
-            if(hari_max_pinjam <= 0){
-                throw new Exception("Nilai hari pinjam terlalu rendah !");
+            if(max_dipinjam.equals("UMUM")){
+                if(hari_max_pinjam <= 0){
+                    throw new Exception("Nilai hari pinjam terlalu rendah !");
+                }
             }
             
             if(stok < 0){
@@ -702,31 +691,6 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         }
     }
     
-    private void delete(){
-        
-        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin mengapus buku "+BM.getJudul()+" ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-        if(hapus == 0){
-            
-            inputRevalidate();
-
-            if(BM.deleteData()){
-
-                JOptionPane.showMessageDialog(null, BM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-
-                new BukuModel().setDataTable(Dashboard.SEARCH_BUKU.getText(), Dashboard.KATEGORI_COMBOBOX_BUKU.getSelectedItem().toString(), Dashboard.TAMPILKAN_COMBOBOX_BUKU.getSelectedItem().toString());
-
-                this.dispose();
-
-            }else{
-                
-                JOptionPane.showMessageDialog(null, BM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
-                
-            }
-                
-        }
-        
-    }
-    
     private void BTN_SIMPAN_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_BUKUMouseClicked
         if(cekValidasi()){
             if(this.Action.equals("ADD")){
@@ -737,9 +701,14 @@ public class BukuDATABUKU extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTN_SIMPAN_BUKUMouseClicked
 
-    private void BTN_HAPUS_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_BUKUMouseClicked
-        delete();
-    }//GEN-LAST:event_BTN_HAPUS_BUKUMouseClicked
+    private void INPUT_JENISActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_JENISActionPerformed
+        
+        String jenis = INPUT_JENIS.getSelectedItem().toString();
+        if(jenis != "UMUM"){
+            INPUT_MAX_BATAS_PINJAM.disable();
+        }
+        
+    }//GEN-LAST:event_INPUT_JENISActionPerformed
 
     /**
      * @param args the command line arguments
@@ -777,7 +746,6 @@ public class BukuDATABUKU extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_HAPUS_BUKU;
     private javax.swing.JButton BTN_SIMPAN_BUKU;
     private javax.swing.JPanel CONTAINER_ANGGOTA;
     private javax.swing.JPanel FRAME_MAIN_ANGGOTA;

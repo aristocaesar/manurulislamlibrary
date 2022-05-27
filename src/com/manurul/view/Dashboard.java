@@ -27,11 +27,12 @@ import com.manurul.view.modal.PengurusUSER;
 import com.manurul.view.modal.RakDATABUKU;
 import com.manurul.view.modal.getDaftarBukuTRANSAKSI;
 import com.manurul.view.modal.getPeminjamTRANSAKSI;
+import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -220,14 +221,37 @@ public class Dashboard extends javax.swing.JFrame {
         F_TR_KEMBALI = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PENGEMBALIAN = new javax.swing.JLabel();
         T_PJ_BUKU_PENGEMBALIAN = new javax.swing.JLabel();
-        TABLE_PINJAM1 = new javax.swing.JScrollPane();
+        TABLE_PENGEMBALIAN = new javax.swing.JScrollPane();
         TABLE_LIST_PENGEMBALIAN = new javax.swing.JTable(){
 
             private static final long serialVersionUID = 1L;
 
             public boolean isCellEditable(int row, int column) {
-                return false;
+                if(column != 0){
+                    return false;
+                }
+                return true;
             };
+
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column)
+            {
+                Component c = super.prepareRenderer(renderer, row, column);
+
+                //  Color row based on a cell value
+
+                if (!isRowSelected(row))
+                {
+                    c.setBackground(getBackground());
+                    c.setForeground(getForeground());
+                    int modelRow = convertRowIndexToModel(row);
+                    String type = (String)getModel().getValueAt(modelRow, 3);
+                    if ("Bermasalah".equals(type)) {
+                        c.setBackground(new Color(244, 113, 116));
+                        c.setForeground(Color.WHITE);
+                    };
+                }
+                return c;
+            }
 
         };
         BTN_CETAK_PENGEMBALIAN = new javax.swing.JButton();
@@ -550,7 +574,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBARLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -887,7 +911,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_TR_LAPORAN)))
                     .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -921,22 +945,37 @@ public class Dashboard extends javax.swing.JFrame {
 
         TABLE_LIST_PENGEMBALIAN.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Kembalikan", "ISBN", "Judul Buku", "Status", "Masalah", "Denda"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TABLE_LIST_PENGEMBALIAN.setRowHeight(30);
         TABLE_LIST_PENGEMBALIAN.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TABLE_LIST_PENGEMBALIANKeyPressed(evt);
             }
         });
-        TABLE_PINJAM1.setViewportView(TABLE_LIST_PENGEMBALIAN);
+        TABLE_PENGEMBALIAN.setViewportView(TABLE_LIST_PENGEMBALIAN);
 
         BTN_CETAK_PENGEMBALIAN.setBackground(new java.awt.Color(0, 171, 60));
         BTN_CETAK_PENGEMBALIAN.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
@@ -1031,7 +1070,7 @@ public class Dashboard extends javax.swing.JFrame {
                                 .addComponent(T_PJ_BUKU_PENGEMBALIAN)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN))
-                            .addComponent(TABLE_PINJAM1, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE))
+                            .addComponent(TABLE_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(F_TR_KEMBALILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(F_TR_KEMBALILayout.createSequentialGroup()
@@ -1062,7 +1101,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(T_PJ_BUKU_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(TABLE_PINJAM1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
+                        .addComponent(TABLE_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
                     .addGroup(F_TR_KEMBALILayout.createSequentialGroup()
                         .addComponent(PJ_ID_TRANSAKSI_PENGEMBALIAN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1159,7 +1198,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         PJ_LABEL_TGL_PINJAM.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         PJ_LABEL_TGL_PINJAM.setForeground(new java.awt.Color(96, 96, 96));
-        PJ_LABEL_TGL_PINJAM.setText("Tanggal Meminjam");
+        PJ_LABEL_TGL_PINJAM.setText("Tanggal");
 
         PJ_LABEL_INFO_1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         PJ_LABEL_INFO_1.setForeground(new java.awt.Color(96, 96, 96));
@@ -1367,7 +1406,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_DB_RAK)))
                     .addGroup(TOPBAR_DATABUKULayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1897,7 +1936,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_U_PENGURUS)))
                     .addGroup(TOPBAR_USERLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -2256,7 +2295,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBAR_SETTINGLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3053,8 +3092,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane TABLE_LIST_U_ANGGOTA;
     private javax.swing.JScrollPane TABLE_LOG;
     private javax.swing.JScrollPane TABLE_PENERBIT;
+    public static javax.swing.JScrollPane TABLE_PENGEMBALIAN;
     private javax.swing.JScrollPane TABLE_PINJAM;
-    private javax.swing.JScrollPane TABLE_PINJAM1;
     private javax.swing.JScrollPane TABLE_RAK;
     public static javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_BUKU;
     public static javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_USER;

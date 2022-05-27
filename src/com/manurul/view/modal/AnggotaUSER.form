@@ -57,8 +57,6 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="BTN_HAPUS_ANGGOTA" min="-2" pref="270" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Component id="BTN_SIMPAN_ANGGOTA" min="-2" pref="270" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -72,10 +70,7 @@
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="CONTAINER_ANGGOTA" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BTN_SIMPAN_ANGGOTA" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="BTN_HAPUS_ANGGOTA" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="BTN_SIMPAN_ANGGOTA" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -413,26 +408,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_SIMPAN_ANGGOTAMouseClicked"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="BTN_HAPUS_ANGGOTA">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="99" green="99" red="99" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Trebuchet MS" size="18" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Hapus"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_HAPUS_ANGGOTAMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

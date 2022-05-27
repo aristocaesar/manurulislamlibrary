@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Bulan Mei 2022 pada 05.41
--- Versi server: 10.4.21-MariaDB
--- Versi PHP: 8.0.11
+-- Generation Time: May 27, 2022 at 08:52 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,38 +25,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_anggota`
+-- Table structure for table `ma_anggota`
 --
 
 CREATE TABLE `ma_anggota` (
   `nis` varchar(28) CHARACTER SET utf8mb4 NOT NULL,
   `nama_lengkap` varchar(128) CHARACTER SET utf8mb4 DEFAULT '',
   `jurusan` varchar(8) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `jumlah_buku_dipinjam` int(11) NOT NULL DEFAULT 0,
-  `skor` int(100) DEFAULT 100,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `jumlah_buku_dipinjam` int(11) NOT NULL DEFAULT '0',
+  `skor` int(100) DEFAULT '100',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `ma_anggota`
+-- Dumping data for table `ma_anggota`
 --
 
 INSERT INTO `ma_anggota` (`nis`, `nama_lengkap`, `jurusan`, `jumlah_buku_dipinjam`, `skor`, `created_at`, `updated_at`) VALUES
 ('41211601', 'M Lutfi Zein A', 'TKJ', 1, 100, '2022-05-25 10:50:48', '2022-05-25 10:50:48'),
 ('41211674', 'Slamet Daeroni', 'TKJ', 2, 100, '2022-05-26 00:43:22', '2022-05-26 00:43:22'),
 ('41211696', 'Bachtiar Arya Habibi', 'TPL', 1, 100, '2022-05-25 10:48:10', '2022-05-25 10:48:48'),
-('41211739', 'Fifa Fajr Firdaus', 'TKJ', 0, 100, '2022-05-11 16:20:11', '2022-05-25 10:54:34'),
+('41211739', 'Fifa Fajar Firdaus', 'TKJ', 0, 100, '2022-05-11 16:20:11', '2022-05-28 01:00:11'),
 ('41211741', 'Karren Novita', 'TKJ', 1, 100, '2022-05-11 23:01:06', '2022-05-25 10:54:43'),
-('41211742', 'Hana Wulan Agustaa', 'TKJ', 0, 55, '2022-05-11 16:18:58', '2022-05-25 10:53:38'),
-('41212221', 'Naufal A', 'AK', 0, 100, '2022-05-25 10:49:30', '2022-05-25 10:49:30'),
+('41211742', 'Hana Wulan Agusta', 'TKJ', 1, 55, '2022-05-11 16:18:58', '2022-05-28 01:26:01'),
+('41212221', 'Naufal A', 'MIF', 0, 100, '2022-05-25 10:49:30', '2022-05-28 01:02:23'),
 ('41212278', 'Diaz Bagus Maulana', 'TGK', 0, 100, '2022-05-25 10:50:16', '2022-05-25 10:50:16'),
 ('41212285', 'Elisa Christian Alfrido Mantolas', 'TGK', 0, 100, '2022-05-25 09:54:28', '2022-05-25 10:53:28'),
 ('41212335', 'Mohammad Tajut Zam Zami', 'MIF', 0, 100, '2022-05-25 10:46:51', '2022-05-25 10:46:51'),
 ('41212382', 'Dwi Nafis Mahardika', 'TKJ', 0, 100, '2022-05-25 10:51:40', '2022-05-25 10:54:22');
 
 --
--- Trigger `ma_anggota`
+-- Triggers `ma_anggota`
 --
 DELIMITER $$
 CREATE TRIGGER `ADD_COUNT_ANGGOTA` AFTER INSERT ON `ma_anggota` FOR EACH ROW BEGIN
@@ -77,7 +78,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_buku`
+-- Table structure for table `ma_buku`
 --
 
 CREATE TABLE `ma_buku` (
@@ -91,15 +92,15 @@ CREATE TABLE `ma_buku` (
   `penerbit` varchar(32) DEFAULT NULL,
   `stok` int(11) NOT NULL,
   `rak` varchar(16) DEFAULT NULL,
-  `deskripsi` text DEFAULT NULL,
+  `deskripsi` text,
   `max_hari_pinjam` int(11) NOT NULL,
   `jumlah_dipinjam` int(11) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_buku`
+-- Dumping data for table `ma_buku`
 --
 
 INSERT INTO `ma_buku` (`isbn`, `judul`, `jenis`, `kategori`, `harga`, `tahun_terbit`, `penulis`, `penerbit`, `stok`, `rak`, `deskripsi`, `max_hari_pinjam`, `jumlah_dipinjam`, `created_at`, `updated_at`) VALUES
@@ -112,10 +113,10 @@ INSERT INTO `ma_buku` (`isbn`, `judul`, `jenis`, `kategori`, `harga`, `tahun_ter
 ('978-602-6232-75-5', 'Buku Pemrograman Javascript Untuk Aplikasi Web | Belajar Javascript Untuk Pemula', 'UMUM', 'TGNI', '130000.0', '2018', 'Betha Sidik', 'Calista Alam, Pt', 10, 'TIK', ' Salah satu bahasa Pemrograman yang harus dikuasai oleh pengembang aplikasi berbasis web adalah Javascript. Secara de fakto, Javascript adalah satu-satunya bahasa pemrograman yang ada dalam lingkungan browser web, yang didukung oleh semua browser web modern. Menguasai dasar pemrograman javascript menjadi keharusan, karena kita akan dapat mengetahui bagaimana suatu halaman web bisa ditampilkan untuk menjadi aplikasi berbasis web atau untuk menampilkan informasi dengan banyak cara.?', 7, 0, '2022-05-22 14:36:14', '2022-05-22 14:36:21'),
 ('978-602-8759-42-7', 'Buku Logika Algoritma Dan Pemrograman Dasar Bahasa Pascal C C++', 'UMUM', 'TGNI', '170000.0', '2018', 'Rosa A.s.?', 'Cipta Narada Sejati', 6, 'TIK', ' Algoritma berarti solusi. Ketika orang berbicara mengenai algoritma di bidang pemrograman, maka yang dimaksud adalah solusi dari suatu masalah yang harus dipecahkan dengan menggunakan komputer. Algoritma harus dibuat secara runut agar komputer mengerti dan mampu mengeksekusinya. Analisis kasus sangat dibutuhkan dalam membuat sebuah algoritma, misalnya proses apa saja yang sekiranya dibutuhkan untuk menyelesaikan masalah yang harus diselesaikan.??', 7, 0, '2022-05-22 14:35:16', '2022-05-22 14:36:26'),
 ('978-623-7131-03-8', 'Buku Network Security Dan Cyber Security | Cisco Ccna | Linux | Windows | Amazon Aws | Android', 'UMUM', 'TGNI', '130000.0', '2019', 'Iwan Sofana, Rifkie Primartha', 'Cahaya Pelita Andika, Pt', 7, 'TIK', 'Buku ini berisi tentang seluk-beluk computer security dan network security, mulai dari teori hingga praktik. Beberapa materi inti yang dibahas dalam buku ini antara lain: Ciscosecurity, Windows security, Linux security, Android security, AWS cloud computing security, Security Audit ISO 27001 dan NIST 800-53. ?', 7, 0, '2022-05-22 14:34:08', '2022-05-22 14:34:08'),
-('978-860-2556-84-04', 'Buku Fundamental Of Python For Machine Learning Untuk Pemula', 'UMUM', 'TGNI', '60000.0', '2018', 'Teguh Wahyono', 'Cibaliung Tunggal Plantation, Pt', 5, 'TIK', 'Artificial intelligence  (AI) dan machine learning saat ini kembali memasuki fase booming setelah beberapa dekade mengalami pasang surut. Kecerdasan Buatan kembali digandrungi, di mana penerapannya dilakukan secara masive pada aplikasi-aplikasi bisnis dan social media jaman sekarang.', 7, 0, '2022-05-22 14:42:43', '2022-05-22 14:42:43');
+('978-860-2556-84-04', 'Buku Fundamental Of Python For Machine Learning Untuk Pemula', 'UMUM', 'TGNI', '60000.0', '2018', 'Teguh Wahyono', 'Cibaliung Tunggal Plantation, Pt', 4, 'TIK', 'Artificial intelligence  (AI) dan machine learning saat ini kembali memasuki fase booming setelah beberapa dekade mengalami pasang surut. Kecerdasan Buatan kembali digandrungi, di mana penerapannya dilakukan secara masive pada aplikasi-aplikasi bisnis dan social media jaman sekarang.', 1, 1, '2022-05-22 14:42:43', '2022-05-28 00:33:53');
 
 --
--- Trigger `ma_buku`
+-- Triggers `ma_buku`
 --
 DELIMITER $$
 CREATE TRIGGER `ADD_COUNT_BUKU` AFTER INSERT ON `ma_buku` FOR EACH ROW BEGIN
@@ -137,20 +138,20 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_dashboard`
+-- Table structure for table `ma_dashboard`
 --
 
 CREATE TABLE `ma_dashboard` (
   `id` int(11) NOT NULL,
-  `total_buku` int(11) NOT NULL DEFAULT 0,
-  `buku_dipinjam` int(11) NOT NULL DEFAULT 0,
-  `buku_bermasalah` int(11) NOT NULL DEFAULT 0,
+  `total_buku` int(11) NOT NULL DEFAULT '0',
+  `buku_dipinjam` int(11) NOT NULL DEFAULT '0',
+  `buku_bermasalah` int(11) NOT NULL DEFAULT '0',
   `total_anggota` int(11) DEFAULT NULL,
-  `updated_at` datetime DEFAULT current_timestamp()
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_dashboard`
+-- Dumping data for table `ma_dashboard`
 --
 
 INSERT INTO `ma_dashboard` (`id`, `total_buku`, `buku_dipinjam`, `buku_bermasalah`, `total_anggota`, `updated_at`) VALUES
@@ -159,7 +160,7 @@ INSERT INTO `ma_dashboard` (`id`, `total_buku`, `buku_dipinjam`, `buku_bermasala
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_detail_transaksi`
+-- Table structure for table `ma_detail_transaksi`
 --
 
 CREATE TABLE `ma_detail_transaksi` (
@@ -169,12 +170,12 @@ CREATE TABLE `ma_detail_transaksi` (
   `status_buku` enum('Dipinjam','Dikembalikan','Bermasalah') DEFAULT 'Dipinjam',
   `status_masalah` enum('Tidak Bermasalah','Terlambat','Hilang','Rusak') DEFAULT 'Tidak Bermasalah',
   `jumlah_denda` varchar(128) DEFAULT '0',
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_detail_transaksi`
+-- Dumping data for table `ma_detail_transaksi`
 --
 
 INSERT INTO `ma_detail_transaksi` (`id_transaksi`, `isbn`, `masa_pinjam`, `status_buku`, `status_masalah`, `jumlah_denda`, `created_at`, `updated_at`) VALUES
@@ -182,10 +183,11 @@ INSERT INTO `ma_detail_transaksi` (`id_transaksi`, `isbn`, `masa_pinjam`, `statu
 ('TR-1653500851494', '602-6232-57-1', '1654105688859', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-26 00:48:08', '2022-05-26 00:48:08'),
 ('TR-1653500851494', '978-602-0823-06-5', '1654105688863', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-26 00:48:08', '2022-05-26 00:48:08'),
 ('TR-1653501269899', '978-602-1514-71-9', '1654106089088', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-26 00:54:49', '2022-05-26 00:54:49'),
-('TR-1653502454219', '602-6232-57-1', '1654107279578', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-26 01:14:39', '2022-05-26 01:14:39');
+('TR-1653502454219', '602-6232-57-1', '1654107279578', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-26 01:14:39', '2022-05-26 01:14:39'),
+('TR-1653672839227', '978-860-2556-84-04', '1653673195220', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-28 00:34:37', '2022-05-28 00:34:37');
 
 --
--- Trigger `ma_detail_transaksi`
+-- Triggers `ma_detail_transaksi`
 --
 DELIMITER $$
 CREATE TRIGGER `CHANGE_STOKBUKU_USRPINJAM_AFTER_PINJAM` AFTER INSERT ON `ma_detail_transaksi` FOR EACH ROW BEGIN
@@ -201,18 +203,18 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_jurusan`
+-- Table structure for table `ma_jurusan`
 --
 
 CREATE TABLE `ma_jurusan` (
   `kode` varchar(8) NOT NULL,
   `nama` varchar(32) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_jurusan`
+-- Dumping data for table `ma_jurusan`
 --
 
 INSERT INTO `ma_jurusan` (`kode`, `nama`, `created_at`, `updated_at`) VALUES
@@ -227,19 +229,19 @@ INSERT INTO `ma_jurusan` (`kode`, `nama`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_kategori`
+-- Table structure for table `ma_kategori`
 --
 
 CREATE TABLE `ma_kategori` (
   `kode` varchar(16) NOT NULL,
   `nama` varchar(64) NOT NULL,
   `deskripsi` text NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_kategori`
+-- Dumping data for table `ma_kategori`
 --
 
 INSERT INTO `ma_kategori` (`kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
@@ -251,7 +253,7 @@ INSERT INTO `ma_kategori` (`kode`, `nama`, `deskripsi`, `created_at`, `updated_a
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_log`
+-- Table structure for table `ma_log`
 --
 
 CREATE TABLE `ma_log` (
@@ -259,11 +261,11 @@ CREATE TABLE `ma_log` (
   `process` varchar(64) NOT NULL,
   `message` text NOT NULL,
   `pengurus` varchar(16) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `ma_log`
+-- Dumping data for table `ma_log`
 --
 
 INSERT INTO `ma_log` (`id`, `process`, `message`, `pengurus`, `created_at`) VALUES
@@ -272,18 +274,18 @@ INSERT INTO `ma_log` (`id`, `process`, `message`, `pengurus`, `created_at`) VALU
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_penerbit`
+-- Table structure for table `ma_penerbit`
 --
 
 CREATE TABLE `ma_penerbit` (
   `nama` varchar(32) NOT NULL,
   `kontak` varchar(13) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_penerbit`
+-- Dumping data for table `ma_penerbit`
 --
 
 INSERT INTO `ma_penerbit` (`nama`, `kontak`, `created_at`, `updated_at`) VALUES
@@ -302,7 +304,7 @@ INSERT INTO `ma_penerbit` (`nama`, `kontak`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_pengurus`
+-- Table structure for table `ma_pengurus`
 --
 
 CREATE TABLE `ma_pengurus` (
@@ -313,34 +315,34 @@ CREATE TABLE `ma_pengurus` (
   `nama_lengkap` varchar(64) NOT NULL,
   `hak_akses` enum('ADMINISTRATOR','STAF') DEFAULT 'STAF',
   `status` enum('AKTIF','BLOKIR') DEFAULT 'AKTIF',
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_pengurus`
+-- Dumping data for table `ma_pengurus`
 --
 
 INSERT INTO `ma_pengurus` (`kode`, `nip`, `username`, `password`, `nama_lengkap`, `hak_akses`, `status`, `created_at`, `updated_at`) VALUES
-('PGS - 23125', '2342343434', 'as', 'as', 'Hana Wulan Agusta', 'STAF', 'BLOKIR', '2022-05-16 13:46:53', '2022-05-25 10:11:00'),
+('PGS - 23125', '2342343434', 'as', 'as', 'Hana Wulan Agusta', 'STAF', 'BLOKIR', '2022-05-16 13:46:53', '2022-05-28 01:00:44'),
 ('PGS-69696', '5345435', 'a', 'a', 'Aristo Caesar Pratama', 'ADMINISTRATOR', 'AKTIF', '2022-04-29 21:59:11', '2022-05-15 02:42:27');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_rak`
+-- Table structure for table `ma_rak`
 --
 
 CREATE TABLE `ma_rak` (
   `kode` varchar(16) NOT NULL,
   `nama` varchar(64) NOT NULL,
   `deskripsi` text NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_rak`
+-- Dumping data for table `ma_rak`
 --
 
 INSERT INTO `ma_rak` (`kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
@@ -351,7 +353,7 @@ INSERT INTO `ma_rak` (`kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_setting`
+-- Table structure for table `ma_setting`
 --
 
 CREATE TABLE `ma_setting` (
@@ -359,11 +361,11 @@ CREATE TABLE `ma_setting` (
   `denda_terlambat` int(11) NOT NULL,
   `max_pinjam_buku_umum` int(11) NOT NULL,
   `time_backup_database` int(28) NOT NULL,
-  `updated_at` datetime DEFAULT current_timestamp()
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_setting`
+-- Dumping data for table `ma_setting`
 --
 
 INSERT INTO `ma_setting` (`id`, `denda_terlambat`, `max_pinjam_buku_umum`, `time_backup_database`, `updated_at`) VALUES
@@ -372,7 +374,7 @@ INSERT INTO `ma_setting` (`id`, `denda_terlambat`, `max_pinjam_buku_umum`, `time
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_transaksi`
+-- Table structure for table `ma_transaksi`
 --
 
 CREATE TABLE `ma_transaksi` (
@@ -381,33 +383,34 @@ CREATE TABLE `ma_transaksi` (
   `kode_pengurus` varchar(16) NOT NULL,
   `jenis_buku` enum('UMUM','PAKET') DEFAULT NULL,
   `status_transaksi` enum('DIPINJAM','BERMASALAH','SELESAI') DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_transaksi`
+-- Dumping data for table `ma_transaksi`
 --
 
 INSERT INTO `ma_transaksi` (`id_transaksi`, `nis_anggota`, `kode_pengurus`, `jenis_buku`, `status_transaksi`, `created_at`, `updated_at`) VALUES
 ('TR-1653494061052', '41211741', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-25 22:54:37', '2022-05-25 22:54:37'),
 ('TR-1653500851494', '41211674', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-26 00:48:08', '2022-05-26 00:48:08'),
 ('TR-1653501269899', '41211696', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-26 00:54:49', '2022-05-26 00:54:49'),
-('TR-1653502454219', '41211601', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-26 01:14:39', '2022-05-26 01:14:39');
+('TR-1653502454219', '41211601', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-26 01:14:39', '2022-05-26 01:14:39'),
+('TR-1653672839227', '41211742', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-28 00:34:37', '2022-05-28 00:34:37');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `ma_anggota`
+-- Indexes for table `ma_anggota`
 --
 ALTER TABLE `ma_anggota`
   ADD PRIMARY KEY (`nis`),
   ADD KEY `FK Jurusan` (`jurusan`);
 
 --
--- Indeks untuk tabel `ma_buku`
+-- Indexes for table `ma_buku`
 --
 ALTER TABLE `ma_buku`
   ADD PRIMARY KEY (`isbn`),
@@ -416,45 +419,45 @@ ALTER TABLE `ma_buku`
   ADD KEY `FK_Rak` (`rak`);
 
 --
--- Indeks untuk tabel `ma_dashboard`
+-- Indexes for table `ma_dashboard`
 --
 ALTER TABLE `ma_dashboard`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `ma_detail_transaksi`
+-- Indexes for table `ma_detail_transaksi`
 --
 ALTER TABLE `ma_detail_transaksi`
   ADD KEY `FK_ma_detail_transaksi_ma_buku` (`isbn`),
   ADD KEY `FK_ma_detail_transaksi_ma_transaksi` (`id_transaksi`);
 
 --
--- Indeks untuk tabel `ma_jurusan`
+-- Indexes for table `ma_jurusan`
 --
 ALTER TABLE `ma_jurusan`
   ADD PRIMARY KEY (`kode`);
 
 --
--- Indeks untuk tabel `ma_kategori`
+-- Indexes for table `ma_kategori`
 --
 ALTER TABLE `ma_kategori`
   ADD PRIMARY KEY (`kode`);
 
 --
--- Indeks untuk tabel `ma_log`
+-- Indexes for table `ma_log`
 --
 ALTER TABLE `ma_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_Pengurus` (`pengurus`);
 
 --
--- Indeks untuk tabel `ma_penerbit`
+-- Indexes for table `ma_penerbit`
 --
 ALTER TABLE `ma_penerbit`
   ADD PRIMARY KEY (`nama`);
 
 --
--- Indeks untuk tabel `ma_pengurus`
+-- Indexes for table `ma_pengurus`
 --
 ALTER TABLE `ma_pengurus`
   ADD PRIMARY KEY (`kode`),
@@ -462,19 +465,19 @@ ALTER TABLE `ma_pengurus`
   ADD UNIQUE KEY `nip` (`nip`);
 
 --
--- Indeks untuk tabel `ma_rak`
+-- Indexes for table `ma_rak`
 --
 ALTER TABLE `ma_rak`
   ADD PRIMARY KEY (`kode`);
 
 --
--- Indeks untuk tabel `ma_setting`
+-- Indexes for table `ma_setting`
 --
 ALTER TABLE `ma_setting`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `ma_transaksi`
+-- Indexes for table `ma_transaksi`
 --
 ALTER TABLE `ma_transaksi`
   ADD UNIQUE KEY `id_transaksi` (`id_transaksi`),
@@ -482,23 +485,23 @@ ALTER TABLE `ma_transaksi`
   ADD KEY `FK_ma_transaksi_ma_pengurus` (`kode_pengurus`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `ma_dashboard`
+-- AUTO_INCREMENT for table `ma_dashboard`
 --
 ALTER TABLE `ma_dashboard`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `ma_log`
+-- AUTO_INCREMENT for table `ma_log`
 --
 ALTER TABLE `ma_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `ma_setting`
+-- AUTO_INCREMENT for table `ma_setting`
 --
 ALTER TABLE `ma_setting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;

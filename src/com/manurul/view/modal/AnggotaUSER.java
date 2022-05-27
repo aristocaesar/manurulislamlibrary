@@ -77,7 +77,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
             SPINNER_SKOR.setValue(100);
             SPINNER_SKOR.setEnabled(false);
             
-            BTN_HAPUS_ANGGOTA.setVisible(false);
             LABEL_CREATED.setVisible(false);
             INPUT_CREATED.setVisible(false);
             LABEL_UPDATED.setVisible(false);
@@ -243,7 +242,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
         INPUT_KESEMPATAN = new javax.swing.JTextField();
         LABEL_KESEMPATAN = new javax.swing.JLabel();
         BTN_SIMPAN_ANGGOTA = new javax.swing.JButton();
-        BTN_HAPUS_ANGGOTA = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.POPUP);
@@ -409,17 +407,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
             }
         });
 
-        BTN_HAPUS_ANGGOTA.setBackground(new java.awt.Color(153, 153, 153));
-        BTN_HAPUS_ANGGOTA.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        BTN_HAPUS_ANGGOTA.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_HAPUS_ANGGOTA.setText("Hapus");
-        BTN_HAPUS_ANGGOTA.setBorder(null);
-        BTN_HAPUS_ANGGOTA.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BTN_HAPUS_ANGGOTAMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout FRAME_MAIN_ANGGOTALayout = new javax.swing.GroupLayout(FRAME_MAIN_ANGGOTA);
         FRAME_MAIN_ANGGOTA.setLayout(FRAME_MAIN_ANGGOTALayout);
         FRAME_MAIN_ANGGOTALayout.setHorizontalGroup(
@@ -431,8 +418,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
                         .addComponent(CONTAINER_ANGGOTA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(FRAME_MAIN_ANGGOTALayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTN_HAPUS_ANGGOTA, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(BTN_SIMPAN_ANGGOTA, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
@@ -442,9 +427,7 @@ public class AnggotaUSER extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(CONTAINER_ANGGOTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addGroup(FRAME_MAIN_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BTN_SIMPAN_ANGGOTA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTN_HAPUS_ANGGOTA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(BTN_SIMPAN_ANGGOTA, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
 
@@ -472,21 +455,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_BTN_SIMPAN_ANGGOTAMouseClicked
-
-    private void BTN_HAPUS_ANGGOTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_ANGGOTAMouseClicked
-        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin mengapus "+AM.getNama()+" ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-        if(hapus == 0){
-            if(AM.deleteData()){
-                JOptionPane.showMessageDialog(null, AM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-
-                new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
-                
-                this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(null, AM.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_BTN_HAPUS_ANGGOTAMouseClicked
 
     /**
      * @param args the command line arguments
@@ -525,7 +493,6 @@ public class AnggotaUSER extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_HAPUS_ANGGOTA;
     private javax.swing.JButton BTN_SIMPAN_ANGGOTA;
     public static javax.swing.JComboBox<String> COMBO_BOX_JURUSAN;
     private javax.swing.JPanel CONTAINER_ANGGOTA;

@@ -303,7 +303,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_USER" max="32767" attributes="0"/>
+                          <Component id="ICON_USER" pref="48" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -877,7 +877,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_TR_TRANSAKSI" max="32767" attributes="0"/>
+                                  <Component id="ICON_TR_TRANSAKSI" pref="48" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1040,7 +1040,7 @@
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="TABLE_PINJAM1" alignment="1" pref="842" max="32767" attributes="0"/>
+                                          <Component id="TABLE_PENGEMBALIAN" alignment="1" pref="842" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1079,7 +1079,7 @@
                                           <Component id="T_PJ_BUKU_PENGEMBALIAN" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="TABLE_PINJAM1" pref="499" max="32767" attributes="0"/>
+                                      <Component id="TABLE_PENGEMBALIAN" pref="499" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="PJ_ID_TRANSAKSI_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
@@ -1136,8 +1136,9 @@
                         <Property name="text" type="java.lang.String" value="Buku"/>
                       </Properties>
                     </Component>
-                    <Container class="javax.swing.JScrollPane" name="TABLE_PINJAM1">
+                    <Container class="javax.swing.JScrollPane" name="TABLE_PENGEMBALIAN">
                       <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
 
@@ -1146,20 +1147,59 @@
                         <Component class="javax.swing.JTable" name="TABLE_LIST_PENGEMBALIAN">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="4" rowCount="4">
-                                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                                <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                              <Table columnCount="6" rowCount="4">
+                                <Column editable="true" title="Kembalikan" type="java.lang.Boolean"/>
+                                <Column editable="false" title="ISBN" type="java.lang.String"/>
+                                <Column editable="false" title="Judul Buku" type="java.lang.String"/>
+                                <Column editable="true" title="Status" type="java.lang.Object"/>
+                                <Column editable="true" title="Masalah" type="java.lang.String"/>
+                                <Column editable="false" title="Denda" type="java.lang.String"/>
                               </Table>
                             </Property>
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                              <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                              </TableColumnModel>
+                            </Property>
                             <Property name="rowHeight" type="int" value="30"/>
+                            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                            </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TABLE_LIST_PENGEMBALIANKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;&#xa;    private static final long serialVersionUID = 1L;&#xa;&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        return false;&#xa;    };&#xa;&#xa;}"/>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;&#xa;    private static final long serialVersionUID = 1L;&#xa;&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        if(column != 0){&#xa;            return false;&#xa;        }&#xa;        return true;&#xa;    };&#xa;&#xa;    public Component prepareRenderer(TableCellRenderer renderer, int row, int column)&#xa;    {&#xa;        Component c = super.prepareRenderer(renderer, row, column);&#xa;&#xa;        //  Color row based on a cell value&#xa;&#xa;        if (!isRowSelected(row))&#xa;        {&#xa;            c.setBackground(getBackground());&#xa;            c.setForeground(getForeground());&#xa;            int modelRow = convertRowIndexToModel(row);&#xa;            String type = (String)getModel().getValueAt(modelRow, 3);&#xa;            if (&quot;Bermasalah&quot;.equals(type)) {&#xa;                c.setBackground(new Color(244, 113, 116));&#xa;                c.setForeground(Color.WHITE);&#xa;            };&#xa;        }&#xa;        return c;&#xa;    }&#xa;&#xa;}"/>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                           </AuxValues>
                         </Component>
@@ -1622,7 +1662,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="60" green="60" red="60" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Tanggal Meminjam"/>
+                        <Property name="text" type="java.lang.String" value="Tanggal"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="PJ_LABEL_INFO_1">
@@ -1797,7 +1837,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_DB_DATABUKU" max="32767" attributes="0"/>
+                                  <Component id="ICON_DB_DATABUKU" pref="48" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -2893,7 +2933,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_U_USER" max="32767" attributes="0"/>
+                                  <Component id="ICON_U_USER" pref="48" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -3665,7 +3705,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_SETTING" max="32767" attributes="0"/>
+                          <Component id="ICON_SETTING" pref="48" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>

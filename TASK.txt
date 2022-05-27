@@ -1,7 +1,14 @@
-MANURUL ISLAM LIBRARY MANAGEMENT
++ delete fitur hapus buku, anggota, pengurus
 
-# TRANSAKSI Task
+fix penambahan buku dan peminjaman buku paket
 
-- insert data ke transaksi dan detail transaksi
-- trigger pada stok buku
-- cetak struk pinjam
++ get data transaksi
++	tampikan list buku yang dipinjam
++		cek apakah epoch lebih besar dengan masa pinjam
+		besar = "terlambat"
+		kecil = "tidak terlambat"
+
+		jika terlambat, hitung nilai hari terlambat
+
+		tidak bisa dikembalikan
+			klik 2x untuk memperbarui status dan denda

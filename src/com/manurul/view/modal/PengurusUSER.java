@@ -77,7 +77,6 @@ public class PengurusUSER extends javax.swing.JFrame {
             INPUT_CREATED.setVisible(false);
             LABEL_UPDATED.setVisible(false);
             INPUT_UPDATED.setVisible(false);
-            BTN_HAPUS_PENGURUS.setVisible(false);
             
             // DEFAULT SET VALUE
             INPUT_ID_PENGURUS.setText(GenKode.RandomInt("PGS", 5));
@@ -129,7 +128,6 @@ public class PengurusUSER extends javax.swing.JFrame {
         INPUT_CREATED = new javax.swing.JTextField();
         COMBOBOX_STATUS = new javax.swing.JComboBox<>();
         COMBOBOX_HAK_AKSES = new javax.swing.JComboBox<>();
-        BTN_HAPUS_PENGURUS = new javax.swing.JButton();
         BTN_SIMPAN_PENGURUS = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -285,17 +283,6 @@ public class PengurusUSER extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
         );
 
-        BTN_HAPUS_PENGURUS.setBackground(new java.awt.Color(153, 153, 153));
-        BTN_HAPUS_PENGURUS.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        BTN_HAPUS_PENGURUS.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_HAPUS_PENGURUS.setText("Hapus");
-        BTN_HAPUS_PENGURUS.setBorder(null);
-        BTN_HAPUS_PENGURUS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BTN_HAPUS_PENGURUSMouseClicked(evt);
-            }
-        });
-
         BTN_SIMPAN_PENGURUS.setBackground(new java.awt.Color(0, 171, 60));
         BTN_SIMPAN_PENGURUS.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         BTN_SIMPAN_PENGURUS.setForeground(new java.awt.Color(255, 255, 255));
@@ -317,9 +304,7 @@ public class PengurusUSER extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(CONTAINER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(MAIN_FRAMELayout.createSequentialGroup()
-                        .addGap(420, 420, 420)
-                        .addComponent(BTN_HAPUS_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addGap(420, 717, Short.MAX_VALUE)
                         .addComponent(BTN_SIMPAN_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
@@ -329,9 +314,7 @@ public class PengurusUSER extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(CONTAINER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addGroup(MAIN_FRAMELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BTN_SIMPAN_PENGURUS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTN_HAPUS_PENGURUS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(BTN_SIMPAN_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -428,29 +411,6 @@ public class PengurusUSER extends javax.swing.JFrame {
         }
     }
     
-    private void delete(){
-        INPUT_NIP.setText(PM.getNip());
-        INPUT_USERNAME.setText(PM.getUsername());
-        INPUT_PASSWORD.setText(PM.getPassword());
-        INPUT_NAMA.setText(PM.getNamaLengkap());
-        COMBOBOX_HAK_AKSES.setSelectedItem(PM.getHakAkses());
-        COMBOBOX_STATUS.setSelectedItem(PM.getStatus());
-        if(cekValidasi("DELETE")){
-            if(PM.deleteData(PM.getNamaLengkap())){
-                    JOptionPane.showMessageDialog(null, PM.getMessage(), "Sukses!", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
-                    if(PM.getKode().equals(Dashboard.id_kode)){
-                        JOptionPane.showMessageDialog(null, "Silakan login kembali untuk memuat informasi yang terbaru", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-                        System.exit(0);
-                    }else{
-                        PM.getDataTable("");
-                        this.dispose();
-                    }
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, PM.getMessage(), "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
     private void BTN_SIMPAN_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_SIMPAN_PENGURUSMouseClicked
        
         if(this.Action.equals("ADD")){
@@ -460,13 +420,6 @@ public class PengurusUSER extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_BTN_SIMPAN_PENGURUSMouseClicked
-
-    private void BTN_HAPUS_PENGURUSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_HAPUS_PENGURUSMouseClicked
-        int hapus = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus pengurus ini ?", "Konfirmasi!", JOptionPane.OK_CANCEL_OPTION);
-        if(hapus == 0){
-            delete();
-        }
-    }//GEN-LAST:event_BTN_HAPUS_PENGURUSMouseClicked
 
     /**
      * @param args the command line arguments
@@ -505,7 +458,6 @@ public class PengurusUSER extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_HAPUS_PENGURUS;
     private javax.swing.JButton BTN_SIMPAN_PENGURUS;
     public static javax.swing.JComboBox<String> COMBOBOX_HAK_AKSES;
     public static javax.swing.JComboBox<String> COMBOBOX_STATUS;
