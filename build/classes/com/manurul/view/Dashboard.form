@@ -1032,23 +1032,33 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="T_KMBLI_BUKU" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TITLE_FRAME_KEMBALI" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="TABLE_KEMBALI" pref="842" max="32767" attributes="0"/>
-                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TITLE_FRAME_PENGEMBALIAN" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="T_PJ_BUKU_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="TABLE_PINJAM1" alignment="1" pref="842" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="BTN_CETAK_KEMBALI" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_INPUT_ID_TRANSAKSI_KEMBALI" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_ID_TRANSAKSI1" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_INPUT_PEMINJAM1" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_LABEL_PEMINJAM1" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_LABEL_KAT_BUKU1" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_LABEL_TGL_PINJAM1" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_LABEL_INFO_3" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_LABEL_INFO_4" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_INPUT_KAT_BUKU1" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <Component id="PJ_INPUT_TGL_PINJAM1" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="PJ_ID_TRANSAKSI_PENGEMBALIAN1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN" min="-2" pref="331" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="BTN_CETAK_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_ID_TRANSAKSI_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_INPUT_PEMINJAM_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_LABEL_PEMINJAM_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_LABEL_KAT_BUKU_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_LABEL_TGL_PINJAM_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_INPUT_JENIS_BUKU_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_INPUT_TGL_PINJAM_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_LABEL_PENGURUS_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
+                                          <Component id="PJ_INPUT_PENGURUS_PENGEMBALIAN" alignment="0" min="-2" pref="368" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1060,35 +1070,43 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="TITLE_FRAME_KEMBALI" min="-2" max="-2" attributes="0"/>
+                              <Component id="TITLE_FRAME_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="T_KMBLI_BUKU" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="PJ_ID_TRANSAKSI1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="PJ_INPUT_ID_TRANSAKSI_KEMBALI" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN" alignment="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="T_PJ_BUKU_PENGEMBALIAN" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="PJ_LABEL_PEMINJAM1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="PJ_INPUT_PEMINJAM1" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="PJ_LABEL_KAT_BUKU1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="PJ_INPUT_KAT_BUKU1" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="PJ_LABEL_TGL_PINJAM1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="PJ_INPUT_TGL_PINJAM1" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="PJ_LABEL_INFO_3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="PJ_LABEL_INFO_4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="BTN_CETAK_KEMBALI" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="TABLE_PINJAM1" pref="499" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="TABLE_KEMBALI" alignment="1" pref="499" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="PJ_ID_TRANSAKSI_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Component id="PJ_ID_TRANSAKSI_PENGEMBALIAN1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="PJ_LABEL_PEMINJAM_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="PJ_INPUT_PEMINJAM_PENGEMBALIAN" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="PJ_LABEL_KAT_BUKU_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="PJ_INPUT_JENIS_BUKU_PENGEMBALIAN" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="PJ_LABEL_TGL_PINJAM_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="PJ_INPUT_TGL_PINJAM_PENGEMBALIAN" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="PJ_LABEL_PENGURUS_PENGEMBALIAN" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="PJ_INPUT_PENGURUS_PENGEMBALIAN" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="BTN_CETAK_PENGEMBALIAN" min="-2" pref="49" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
@@ -1096,7 +1114,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="TITLE_FRAME_KEMBALI">
+                    <Component class="javax.swing.JLabel" name="TITLE_FRAME_PENGEMBALIAN">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="26" style="1"/>
@@ -1107,7 +1125,7 @@
                         <Property name="text" type="java.lang.String" value="Form Pengembalian"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="T_KMBLI_BUKU">
+                    <Component class="javax.swing.JLabel" name="T_PJ_BUKU_PENGEMBALIAN">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="18" style="1"/>
@@ -1118,14 +1136,14 @@
                         <Property name="text" type="java.lang.String" value="Buku"/>
                       </Properties>
                     </Component>
-                    <Container class="javax.swing.JScrollPane" name="TABLE_KEMBALI">
+                    <Container class="javax.swing.JScrollPane" name="TABLE_PINJAM1">
                       <AuxValues>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="TABLE_LIST_KEMBALI">
+                        <Component class="javax.swing.JTable" name="TABLE_LIST_PENGEMBALIAN">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="4" rowCount="4">
@@ -1135,27 +1153,37 @@
                                 <Column editable="true" title="Title 4" type="java.lang.Object"/>
                               </Table>
                             </Property>
+                            <Property name="rowHeight" type="int" value="30"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TABLE_LIST_PENGEMBALIANKeyPressed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;&#xa;    private static final long serialVersionUID = 1L;&#xa;&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        return false;&#xa;    };&#xa;&#xa;}"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="BTN_CETAK_KEMBALI">
+                    <Component class="javax.swing.JButton" name="BTN_CETAK_PENGEMBALIAN">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="3c" green="ab" red="0" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="1"/>
+                          <Font name="Trebuchet MS" size="16" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Cetak Pinjaman"/>
+                        <Property name="text" type="java.lang.String" value="Konfirmasi Pengembalian [ENTER]"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_CETAK_PENGEMBALIANMouseClicked"/>
+                      </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="PJ_INPUT_ID_TRANSAKSI_KEMBALI">
+                    <Component class="javax.swing.JTextField" name="PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="14" style="0"/>
                         </Property>
@@ -1170,8 +1198,14 @@
                           </Border>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PJ_INPUT_ID_TRANSAKSI_PENGEMBALIANKeyPressed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="PJ_ID_TRANSAKSI1">
+                    <Component class="javax.swing.JLabel" name="PJ_ID_TRANSAKSI_PENGEMBALIAN">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Trebuchet MS" size="14" style="1"/>
@@ -1182,95 +1216,7 @@
                         <Property name="text" type="java.lang.String" value="ID Transkasi"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="PJ_INPUT_PEMINJAM1">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                            <LineBorder>
-                              <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
-                            </LineBorder>
-                          </Border>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="PJ_LABEL_PEMINJAM1">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Peminjam"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="PJ_LABEL_KAT_BUKU1">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Jenis Buku"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="PJ_LABEL_TGL_PINJAM1">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Tanggal Meminjam"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="PJ_LABEL_INFO_3">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Dengan meminjam buku, berarti peminjam sudah "/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="PJ_LABEL_INFO_4">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="60" green="60" red="60" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="memahi peraturan dan tata tertib perpustakaan."/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="PJ_INPUT_KAT_BUKU1">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Trebuchet MS" size="14" style="1"/>
-                        </Property>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="2">
-                            <StringItem index="0" value="UMM - Buku Umum"/>
-                            <StringItem index="1" value="PKT - Buku Paket"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="PJ_INPUT_TGL_PINJAM1">
+                    <Component class="javax.swing.JTextField" name="PJ_INPUT_PEMINJAM_PENGEMBALIAN">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1287,6 +1233,142 @@
                           </Border>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PJ_INPUT_PEMINJAM_PENGEMBALIANKeyPressed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="PJ_LABEL_PEMINJAM_PENGEMBALIAN">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Peminjam"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="PJ_LABEL_KAT_BUKU_PENGEMBALIAN">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Jenis Buku"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="PJ_LABEL_TGL_PINJAM_PENGEMBALIAN">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Tanggal Meminjam"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="PJ_INPUT_JENIS_BUKU_PENGEMBALIAN">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="1"/>
+                        </Property>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="2">
+                            <StringItem index="0" value="UMUM - Buku Umum"/>
+                            <StringItem index="1" value="PAKET - Buku Paket"/>
+                          </StringArray>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PJ_INPUT_JENIS_BUKU_PENGEMBALIANActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="PJ_INPUT_TGL_PINJAM_PENGEMBALIAN">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="0"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/com/manurul/src/ICON_RESET.png"/>
+                        </Property>
+                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                          <Color id="Hand Cursor"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_RESET_DAFTAR_BUKU_PENGEMBALIANMouseClicked"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="PJ_ID_TRANSAKSI_PENGEMBALIAN1">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="TR - "/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="PJ_LABEL_PENGURUS_PENGEMBALIAN">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Pengurus"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="PJ_INPUT_PENGURUS_PENGEMBALIAN">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="14" style="0"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="60" green="60" red="60" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="60" green="60" red="60" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1320,7 +1402,7 @@
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="BTN_RESET_DAFTAR_BUKU" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="TABLE_PINJAM" pref="800" max="32767" attributes="0"/>
+                                          <Component id="TABLE_PINJAM" pref="842" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">

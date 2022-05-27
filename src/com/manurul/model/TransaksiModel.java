@@ -479,6 +479,111 @@ public class TransaksiModel extends DBConfig{
     }
     
     
+    // PENGEMBALIAN
+    
+    public void initTablePengembalian(){
+    
+        DefaultTableModel table_peminjaman = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+        
+        table_peminjaman.setColumnCount(0);
+        table_peminjaman.addColumn("Kembalikan");
+        table_peminjaman.addColumn("Judul Buku");
+        table_peminjaman.addColumn("Status");
+        table_peminjaman.addColumn("Masalah");
+        table_peminjaman.addColumn("Denda");
+        
+        table_peminjaman.setRowCount(0);
+        table_peminjaman.setRowCount(1);
+    
+    }
+    
+    public void getDataPinjam(String id_transaksi){
+        
+        DefaultTableModel table_detail_buku = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+        
+        try{
+        
+            // SET DATA PENGEMBALIAN
+            String sql = "SELECT "
+                    + "ma_transaksi.id_transaksi AS id_transaksi"
+                    + ",ma_anggota.nis AS nis"
+                    + ",ma_anggota.nama_lengkap AS nama_lengkap"
+                    + ",ma_transaksi.jenis_buku AS jenis_buku"
+                    + ",DATE_FORMAT(ma_transaksi.created_at, '%d/%M/%Y %H:%i:%S') AS tgl_pinjam"
+                    + ",CONCAT(ma_pengurus.kode, ' - ' ,ma_pengurus.nama_lengkap) AS pengurus"
+                    + " FROM ma_transaksi "
+                    + "JOIN ma_anggota ON ma_transaksi.nis_anggota = ma_anggota.nis "
+                    + "JOIN ma_pengurus ON ma_transaksi.kode_pengurus = ma_pengurus.kode "
+                    + "WHERE ma_transaksi.id_transaksi = ?";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, "TR-" + id_transaksi);
+            ResultSet res = pst.executeQuery();
+            
+            if(res.next()){
+                
+                Dashboard.PJ_INPUT_PEMINJAM_PENGEMBALIAN.setText(res.getString("nis") + " - " + res.getString("nama_lengkap"));
+                int jenisIndex = 0;
+                if(res.getString("jenis_buku").contains("PAKET")){
+                    jenisIndex = 1;
+                }
+                Dashboard.PJ_INPUT_JENIS_BUKU_PENGEMBALIAN.setSelectedIndex(jenisIndex);
+                Dashboard.PJ_INPUT_TGL_PINJAM_PENGEMBALIAN.setText(res.getString("tgl_pinjam"));
+                Dashboard.PJ_INPUT_PENGURUS_PENGEMBALIAN.setText(res.getString("pengurus"));
+                
+                // DATA LIST BUKU PENGEMBALIAN
+                
+                String sql_detail_transaksi = "SELECT "
+                        + "ma_buku.isbn AS isbn,"
+                        + "ma_buku.judul AS judul,"
+                        + "ma_detail_transaksi.status_buku AS status_buku,"
+                        + "ma_detail_transaksi.status_masalah AS status_masalah,"
+                        + "ma_detail_transaksi.jumlah_denda AS denda"
+                        + " FROM"
+                        + " ma_buku JOIN ma_detail_transaksi"
+                        + " ON"
+                        + " ma_buku.isbn = ma_detail_transaksi.isbn"
+                        + " WHERE"
+                        + " ma_detail_transaksi.id_transaksi = ?";
+                PreparedStatement pst_detail = conn.prepareStatement(sql_detail_transaksi);
+                pst_detail.setString(1, res.getString("id_transaksi"));
+                ResultSet res_detail = pst_detail.executeQuery();
+                
+                table_detail_buku.setRowCount(0);
+                
+                while(res_detail.next()){
+                    
+                    table_detail_buku.addRow(new Object[]{
+                        true,
+                        res_detail.getString("isbn"),
+                        res_detail.getString("judul"),
+                        res_detail.getString("status_buku"),
+                        res_detail.getString("status_masalah"),
+                        res_detail.getString("denda")
+                    });
+                    
+                }
+                
+            }else{
+                throw new SQLException("ID Transaksi tersebut tidak terdaftar !");
+            }
+            
+        }catch(SQLException error){
+            
+                Dashboard.PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.setText("");
+                Dashboard.PJ_INPUT_PEMINJAM_PENGEMBALIAN.setText("");
+                Dashboard.PJ_INPUT_JENIS_BUKU_PENGEMBALIAN.setSelectedIndex(0);
+                Dashboard.PJ_INPUT_TGL_PINJAM_PENGEMBALIAN.setText("");
+                Dashboard.PJ_INPUT_PENGURUS_PENGEMBALIAN.setText("");
+                
+                table_detail_buku.setRowCount(0);
+                table_detail_buku.setRowCount(1);
+                
+                JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }
+    
     public void resetForm(String mode){
     
         if(mode.equals("PINJAM")){
