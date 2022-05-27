@@ -35,6 +35,7 @@ public class konfirmasiTransaksiPinjam extends javax.swing.JFrame {
         
         // REQ FOCUS
         TABLE_LIST_BUKU_PINJAM.requestFocus();
+        TABLE_LIST_BUKU_PINJAM.setRowSelectionInterval(0, 0);
         
         // SET INPUT BORDE
         InputBorder.set(INPUT_NAMA_PEMINJAM, 8);

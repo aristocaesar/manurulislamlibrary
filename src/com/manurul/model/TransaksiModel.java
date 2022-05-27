@@ -7,7 +7,6 @@ package com.manurul.model;
 
 import com.manurul.lib.DBConfig;
 import com.manurul.lib.GenKode;
-import static com.manurul.lib.GenKode.getTimeMiliSecond;
 import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
 import com.manurul.view.modal.getDaftarBukuTRANSAKSI;
@@ -23,6 +22,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,12 +36,11 @@ public class TransaksiModel extends DBConfig{
     private Connection conn = (Connection)DBConfig.getConnection();
    
     // dashboard
-    DefaultTableModel table_pinjam_model = new DefaultTableModel();
+//    DefaultTableModel table_pinjam_model = new DefaultTableModel();
     
     // getPeminjamTransaksi
     DefaultTableModel table_model = new DefaultTableModel();
     
-    // getDaftarBukuTransaksi
     
     // var global for data transaksi
     private String id_transaksi;
@@ -53,6 +52,9 @@ public class TransaksiModel extends DBConfig{
     private int jumlah_buku_dipinjam;
     private String createdAt;
     private String updatedAt;
+    
+    // SET SUCCESS ICON
+    private ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
     
     private String message;
     
@@ -160,6 +162,9 @@ public class TransaksiModel extends DBConfig{
     
     // set datatable dashboad - pinjam
     public void setHeadTableDashboardPinjam(){
+        
+        DefaultTableModel table_pinjam_model = (DefaultTableModel)Dashboard.TABLE_LIST_PINJAM.getModel();
+        
         table_pinjam_model.setColumnCount(0);
         table_pinjam_model.addColumn("ISBN");
         table_pinjam_model.addColumn("Judul Buku");
@@ -178,7 +183,7 @@ public class TransaksiModel extends DBConfig{
     // set datatable dashboard - pinjam - addrow
     public void setRowTableDashboardPinjam(String[] rowData, boolean started){
         
-        DefaultTableModel addModel = (DefaultTableModel)table_pinjam_model;
+        DefaultTableModel addModel = (DefaultTableModel)Dashboard.TABLE_LIST_PINJAM.getModel();
         if(started){
             addModel.setRowCount(0);
         }
@@ -373,6 +378,31 @@ public class TransaksiModel extends DBConfig{
         
     }
     
+    public String getExistBukuInPeminjam(String isbn){
+    
+        try{
+        
+            String sql = "SELECT ma_detail_transaksi.status_buku AS status_buku FROM ma_detail_transaksi JOIN ma_transaksi " +
+                         " ON ma_detail_transaksi.id_transaksi = ma_transaksi.id_transaksi WHERE ma_transaksi.nis_anggota = ? AND ma_detail_transaksi.isbn = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, getNis());
+            pst.setString(2, isbn);
+            ResultSet res = pst.executeQuery();
+            
+            if(!res.next()){
+                throw new SQLException("NOTFOUND");
+            }
+            
+            return res.getString("status_buku");
+            
+        }catch(SQLException error){
+            
+            return error.getMessage();
+        
+        }
+        
+    }
+    
     public boolean cetakPinjam(){
     
         try{
@@ -413,7 +443,7 @@ public class TransaksiModel extends DBConfig{
                 
                 int getCountDaftarBuku = Dashboard.TABLE_LIST_PINJAM.getRowCount();
                 
-                String sql_detail_transaksi = "INSERT INTO ma_detail_transaksi VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String sql_detail_transaksi = "INSERT INTO ma_detail_transaksi(id_transaksi, isbn, masa_pinjam ) VALUES (?, ?, ?)";
                 PreparedStatement pst_detail_transaksi = conn.prepareStatement(sql_detail_transaksi);
                 
                 for(int i = 0; i < getCountDaftarBuku; i++){
@@ -421,10 +451,6 @@ public class TransaksiModel extends DBConfig{
                     pst_detail_transaksi.setString(1, id_transaksi);
                     pst_detail_transaksi.setString(2, Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 0).toString());
                     pst_detail_transaksi.setLong(3, getEpochTglPengembalian(Dashboard.TABLE_LIST_PINJAM.getValueAt(i, 2).toString().replaceAll("[a-zA-Z]", "").trim()));
-                    pst_detail_transaksi.setString(4, "Dipinjam");
-                    pst_detail_transaksi.setString(5, "Baik");
-                    pst_detail_transaksi.setTimestamp(6, dateNow);
-                    pst_detail_transaksi.setTimestamp(7, dateNow);
                     
                     if(pst_detail_transaksi.execute()){
                         throw new SQLException("Gagal membuat transaksi !");
@@ -432,13 +458,155 @@ public class TransaksiModel extends DBConfig{
                     
                 }
                 
-            }            
+            }
+            
+            // print transaksi pinjam
+            System.out.println("cetak pinjam !");
+            
+            // cetak log
+            new LogModel().Action("MEMBUAT TRANSAKSI", "Berhasil membuat Transaksi " + id_transaksi, Dashboard.nama_user);
+            
+            
+            resetForm("PINJAM");
+            JOptionPane.showMessageDialog(null, "Transaksi #" + id_transaksi + " sukses !", "Sukses !", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
+            
             return true;
         }catch(SQLException error){
         
-            System.out.println(error.getMessage());
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+    }
+    
+    
+    // PENGEMBALIAN
+    
+    public void initTablePengembalian(){
+    
+        DefaultTableModel table_peminjaman = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+        
+        table_peminjaman.setColumnCount(0);
+        table_peminjaman.addColumn("Kembalikan");
+        table_peminjaman.addColumn("Judul Buku");
+        table_peminjaman.addColumn("Status");
+        table_peminjaman.addColumn("Masalah");
+        table_peminjaman.addColumn("Denda");
+        
+        table_peminjaman.setRowCount(0);
+        table_peminjaman.setRowCount(1);
+    
+    }
+    
+    public void getDataPinjam(String id_transaksi){
+        
+        DefaultTableModel table_detail_buku = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+        
+        try{
+        
+            // SET DATA PENGEMBALIAN
+            String sql = "SELECT "
+                    + "ma_transaksi.id_transaksi AS id_transaksi"
+                    + ",ma_anggota.nis AS nis"
+                    + ",ma_anggota.nama_lengkap AS nama_lengkap"
+                    + ",ma_transaksi.jenis_buku AS jenis_buku"
+                    + ",DATE_FORMAT(ma_transaksi.created_at, '%d/%M/%Y %H:%i:%S') AS tgl_pinjam"
+                    + ",CONCAT(ma_pengurus.kode, ' - ' ,ma_pengurus.nama_lengkap) AS pengurus"
+                    + " FROM ma_transaksi "
+                    + "JOIN ma_anggota ON ma_transaksi.nis_anggota = ma_anggota.nis "
+                    + "JOIN ma_pengurus ON ma_transaksi.kode_pengurus = ma_pengurus.kode "
+                    + "WHERE ma_transaksi.id_transaksi = ?";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, "TR-" + id_transaksi);
+            ResultSet res = pst.executeQuery();
+            
+            if(res.next()){
+                
+                Dashboard.PJ_INPUT_PEMINJAM_PENGEMBALIAN.setText(res.getString("nis") + " - " + res.getString("nama_lengkap"));
+                int jenisIndex = 0;
+                if(res.getString("jenis_buku").contains("PAKET")){
+                    jenisIndex = 1;
+                }
+                Dashboard.PJ_INPUT_JENIS_BUKU_PENGEMBALIAN.setSelectedIndex(jenisIndex);
+                Dashboard.PJ_INPUT_TGL_PINJAM_PENGEMBALIAN.setText(res.getString("tgl_pinjam"));
+                Dashboard.PJ_INPUT_PENGURUS_PENGEMBALIAN.setText(res.getString("pengurus"));
+                
+                // DATA LIST BUKU PENGEMBALIAN
+                
+                String sql_detail_transaksi = "SELECT "
+                        + "ma_buku.isbn AS isbn,"
+                        + "ma_buku.judul AS judul,"
+                        + "ma_detail_transaksi.status_buku AS status_buku,"
+                        + "ma_detail_transaksi.status_masalah AS status_masalah,"
+                        + "ma_detail_transaksi.jumlah_denda AS denda"
+                        + " FROM"
+                        + " ma_buku JOIN ma_detail_transaksi"
+                        + " ON"
+                        + " ma_buku.isbn = ma_detail_transaksi.isbn"
+                        + " WHERE"
+                        + " ma_detail_transaksi.id_transaksi = ?";
+                PreparedStatement pst_detail = conn.prepareStatement(sql_detail_transaksi);
+                pst_detail.setString(1, res.getString("id_transaksi"));
+                ResultSet res_detail = pst_detail.executeQuery();
+                
+                table_detail_buku.setRowCount(0);
+                
+                while(res_detail.next()){
+                    
+                    table_detail_buku.addRow(new Object[]{
+                        true,
+                        res_detail.getString("isbn"),
+                        res_detail.getString("judul"),
+                        res_detail.getString("status_buku"),
+                        res_detail.getString("status_masalah"),
+                        res_detail.getString("denda")
+                    });
+                    
+                }
+                
+            }else{
+                throw new SQLException("ID Transaksi tersebut tidak terdaftar !");
+            }
+            
+        }catch(SQLException error){
+            
+                Dashboard.PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.setText("");
+                Dashboard.PJ_INPUT_PEMINJAM_PENGEMBALIAN.setText("");
+                Dashboard.PJ_INPUT_JENIS_BUKU_PENGEMBALIAN.setSelectedIndex(0);
+                Dashboard.PJ_INPUT_TGL_PINJAM_PENGEMBALIAN.setText("");
+                Dashboard.PJ_INPUT_PENGURUS_PENGEMBALIAN.setText("");
+                
+                table_detail_buku.setRowCount(0);
+                table_detail_buku.setRowCount(1);
+                
+                JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }
+    
+    public void resetForm(String mode){
+    
+        if(mode.equals("PINJAM")){
+        
+            // reset form pinjam
+            
+            setNis(null);
+            setNama(null);
+            
+            setDateNowTransaksi();
+            Dashboard.PJ_INPUT_PEMINJAM.setText("");
+            Dashboard.PJ_INPUT_PEMINJAM.requestFocus();
+            DefaultTableModel form_model = (DefaultTableModel)Dashboard.TABLE_LIST_PINJAM.getModel();
+            
+            form_model.setRowCount(0);
+            form_model.setRowCount(1);
+            
+        }else{
+            
+            // reset form pengembalian
+        
+        }
+        
     }
     
 }

@@ -203,6 +203,12 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame{
             }
             
             if(!nis.equals("")){
+                
+                DefaultTableModel list_buku = (DefaultTableModel)Dashboard.TABLE_LIST_PINJAM.getModel();
+                
+                list_buku.setRowCount(0);
+                list_buku.addRow(new String[]{"", "", ""});
+                
                 Dashboard.TM.setNis(nis);
                 Dashboard.TM.setNama(nama);
                 Dashboard.TM.setJumlahBukuDipinjam(buku_dipinjam);
