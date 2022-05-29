@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2022 at 08:52 PM
+-- Generation Time: May 29, 2022 at 06:12 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -43,17 +43,18 @@ CREATE TABLE `ma_anggota` (
 --
 
 INSERT INTO `ma_anggota` (`nis`, `nama_lengkap`, `jurusan`, `jumlah_buku_dipinjam`, `skor`, `created_at`, `updated_at`) VALUES
-('41211601', 'M Lutfi Zein A', 'TKJ', 1, 100, '2022-05-25 10:50:48', '2022-05-25 10:50:48'),
-('41211674', 'Slamet Daeroni', 'TKJ', 2, 100, '2022-05-26 00:43:22', '2022-05-26 00:43:22'),
-('41211696', 'Bachtiar Arya Habibi', 'TPL', 1, 100, '2022-05-25 10:48:10', '2022-05-25 10:48:48'),
+('41211601', 'M Lutfi Zein A', 'TKJ', 0, 100, '2022-05-25 10:50:48', '2022-05-25 10:50:48'),
+('41211674', 'Slamet Daeroni', 'TKJ', 0, 100, '2022-05-26 00:43:22', '2022-05-26 00:43:22'),
+('41211696', 'Bachtiar Arya Habibi', 'TPL', 0, 100, '2022-05-25 10:48:10', '2022-05-25 10:48:48'),
 ('41211739', 'Fifa Fajar Firdaus', 'TKJ', 0, 100, '2022-05-11 16:20:11', '2022-05-28 01:00:11'),
-('41211741', 'Karren Novita', 'TKJ', 1, 100, '2022-05-11 23:01:06', '2022-05-25 10:54:43'),
-('41211742', 'Hana Wulan Agusta', 'TKJ', 1, 55, '2022-05-11 16:18:58', '2022-05-28 01:26:01'),
+('41211741', 'Karren Novita', 'TKJ', 0, 100, '2022-05-11 23:01:06', '2022-05-25 10:54:43'),
+('41211742', 'Hana Wulan Agusta', 'TKJ', 2, 100, '2022-05-11 16:18:58', '2022-05-28 01:26:01'),
 ('41212221', 'Naufal A', 'MIF', 0, 100, '2022-05-25 10:49:30', '2022-05-28 01:02:23'),
 ('41212278', 'Diaz Bagus Maulana', 'TGK', 0, 100, '2022-05-25 10:50:16', '2022-05-25 10:50:16'),
 ('41212285', 'Elisa Christian Alfrido Mantolas', 'TGK', 0, 100, '2022-05-25 09:54:28', '2022-05-25 10:53:28'),
 ('41212335', 'Mohammad Tajut Zam Zami', 'MIF', 0, 100, '2022-05-25 10:46:51', '2022-05-25 10:46:51'),
-('41212382', 'Dwi Nafis Mahardika', 'TKJ', 0, 100, '2022-05-25 10:51:40', '2022-05-25 10:54:22');
+('41212382', 'Dwi Nafis Mahardika', 'TKJ', 0, 100, '2022-05-25 10:51:40', '2022-05-25 10:54:22'),
+('41212739', 'Willian Tanuwijaya', 'TKJ', 1, 100, '2022-05-29 00:51:00', '2022-05-29 00:51:00');
 
 --
 -- Triggers `ma_anggota`
@@ -104,16 +105,16 @@ CREATE TABLE `ma_buku` (
 --
 
 INSERT INTO `ma_buku` (`isbn`, `judul`, `jenis`, `kategori`, `harga`, `tahun_terbit`, `penulis`, `penerbit`, `stok`, `rak`, `deskripsi`, `max_hari_pinjam`, `jumlah_dipinjam`, `created_at`, `updated_at`) VALUES
-('602-6232-57-1', 'Buku Security Jaringan Komputer Berbasis Ceh | Belajar Menjadi White Hacker', 'UMUM', 'TGNI', '89000.0', '2018', 'Rifkie Primartha?', 'Cakradenta Agung Pertiwi, Pt', 2, 'TIK', 'Penulis mendapati bahwa permasalahan riil yang terkait security jaringan komputer, khususnya yang terkait dengan aktifitas hacking, sudah mencapai batas ambang gawat darurat. Sehingga diperlukan obat penawar dengan dosis tinggi untuk mengatasi penyakit akut tersebut.?? ??', 7, 3, '2022-05-22 14:39:42', '2022-05-22 14:39:42'),
-('978-602-0823-06-5', 'Buku Hacking Aplikasi Web Uncensored Untuk Pemula', 'UMUM', 'TGNI', '70000.0', '2015', 'Efvy Zam', 'Cakradenta Agung Pertiwi, Pt', 3, 'TIK', 'Buku ini akan menunjukkan kepada kamu, bahwa dengan logika yang sederhana saja maka seseorang sudah bisa melakukan aksi website hacking. Dimulai dari proses menggali informasi sebuah website hingga melakukan eksekusi untuk menerobos website. Tentu saja, ada banyak jalan menuju Roma dan banyak pula cara atau teknik yang dapat ditempuh. Teknik itulah yang akan diulas dan dibahas dalam buku ini', 7, 1, '2022-05-22 14:38:31', '2022-05-22 14:38:31'),
-('978-602-1514-71-9', 'Buku Belajar Otodidak Mysql Teknik Pembuatan Dan Pengelolaan Database', 'UMUM', 'TGNI', '85000.0', '2022', 'Budi Raharjo', 'Calista Alam, Pt', 5, 'TIK', ' MySQL adalah software yang berfungsi untuk membuat, mengatur, dan mengelola database. Dengan MySQL, Anda dapat membuat sendiri database untuk menyimpan dan mengelola data perusahaan (misal: data pegawai, keuangan dan akuntansi, aset, dll), data pribadi Anda, koleksi foto keluarga Anda dan sebagainya secara mudah dan aman.?', 7, 1, '2022-05-22 14:44:17', '2022-05-22 14:46:47'),
+('602-6232-57-1', 'Buku Security Jaringan Komputer Berbasis Ceh | Belajar Menjadi White Hacker', 'UMUM', 'TGNI', '89000.0', '2018', 'Rifkie Primartha?', 'Cakradenta Agung Pertiwi, Pt', 1, 'TIK', 'Penulis mendapati bahwa permasalahan riil yang terkait security jaringan komputer, khususnya yang terkait dengan aktifitas hacking, sudah mencapai batas ambang gawat darurat. Sehingga diperlukan obat penawar dengan dosis tinggi untuk mengatasi penyakit akut tersebut.?? ??', 7, 1, '2022-05-22 14:39:42', '2022-05-22 14:39:42'),
+('978-602-0823-06-5', 'Buku Hacking Aplikasi Web Uncensored Untuk Pemula', 'UMUM', 'TGNI', '70000.0', '2015', 'Efvy Zam', 'Cakradenta Agung Pertiwi, Pt', 2, 'TIK', 'Buku ini akan menunjukkan kepada kamu, bahwa dengan logika yang sederhana saja maka seseorang sudah bisa melakukan aksi website hacking. Dimulai dari proses menggali informasi sebuah website hingga melakukan eksekusi untuk menerobos website. Tentu saja, ada banyak jalan menuju Roma dan banyak pula cara atau teknik yang dapat ditempuh. Teknik itulah yang akan diulas dan dibahas dalam buku ini', 7, 1, '2022-05-22 14:38:31', '2022-05-22 14:38:31'),
+('978-602-1514-71-9', 'Buku Belajar Otodidak Mysql Teknik Pembuatan Dan Pengelolaan Database', 'UMUM', 'TGNI', '85000.0', '2022', 'Budi Raharjo', 'Calista Alam, Pt', 5, 'TIK', ' MySQL adalah software yang berfungsi untuk membuat, mengatur, dan mengelola database. Dengan MySQL, Anda dapat membuat sendiri database untuk menyimpan dan mengelola data perusahaan (misal: data pegawai, keuangan dan akuntansi, aset, dll), data pribadi Anda, koleksi foto keluarga Anda dan sebagainya secara mudah dan aman.?', 7, 0, '2022-05-22 14:44:17', '2022-05-22 14:46:47'),
 ('978-602-6231-28-4', 'Buku 5 Langkah Mudah Menguasai React Native | Lukmanul Hakim', 'UMUM', 'TGNI', '75000.0', '2021', 'Lukmanul Hakim', 'Calista Alam, Pt', 10, 'TIK', 'React Native merupakan salah satu tool terbaik untuk membuat aplikasi mobile (mobile apps). Karena sesuai tagline-nya Learn Once, Write Anywhere, App dapat dijalankan di dua platform sekaligus, yaitu Android dan iOS (Apple). Selain itu, App yang dibuat dengan React Native berkinerja bagus, cepat dan stabil.', 7, 0, '2022-05-22 14:40:46', '2022-05-22 14:40:46'),
 ('978-602-62311-8-5', 'Buku Analisa Dan Perancangan Sistem Informasi Dengan Codeigniter Dan Laravel', 'UMUM', 'TGNI', '65000.0', '2018', 'Meilan Anastasia Maharani', 'Cibaliung Tunggal Plantation, Pt', 8, 'TIK', 'Sistem Informasi dibuat tidak harus mewah, yang paling penting adalah sesuai dengan kebutuhan user. Buku ini membahas tentang cara merancang sebuah sistem informasi sesuai dengan kebutuhan user. Step by step merancang sebuah sistem sampai menjadi sistem informasi yang handal. Buku ini menjelaskan bagaimana sebuah sistem informasi dibuat, dimulai dari mengumpulkan informasi suatu instansi, memahami proses bisnis berjalan, menganalisa masalah yang dihadapi pada proses bisnis berjalan, membuat Fishbone untuk menganalisa permasalahan, membuat usulan dan menganalisa untuk memecahakan tiap masalah yang dihadapi.', 7, 0, '2022-05-22 14:45:52', '2022-05-23 01:54:53'),
 ('978-602-6232-24-3', 'Buku Belajar Pemrograman Web Dari Dasar Edisi Revisi', 'UMUM', 'TGNI', '95000.0', '2017', 'Priyanto Hidayatullah', 'Cahaya Pelita Andika, Pt', 9, 'TIK', 'Buku Pemrograman Web: Studi Kasus Web Sistem Informasi Akademik ini cocok untuk Mahasiswa/ Siswa SMK dalam menyelesaikan tugas mata kuliah pemrograman web dan tugas akhir dengan topik web atau sistem informasi. Buku ini juga cocok untuk freelance programmer maupun programmer profesional yang bekerja di perusahaan serta orang awam terhadap dunia pemrograman web karena dijelaskan dari nol secara runtut dan terperinci dengan bahasa yang sederhana dan mudah dimengerti.', 7, 0, '2022-05-22 14:32:41', '2022-05-22 14:34:29'),
 ('978-602-6232-75-5', 'Buku Pemrograman Javascript Untuk Aplikasi Web | Belajar Javascript Untuk Pemula', 'UMUM', 'TGNI', '130000.0', '2018', 'Betha Sidik', 'Calista Alam, Pt', 10, 'TIK', ' Salah satu bahasa Pemrograman yang harus dikuasai oleh pengembang aplikasi berbasis web adalah Javascript. Secara de fakto, Javascript adalah satu-satunya bahasa pemrograman yang ada dalam lingkungan browser web, yang didukung oleh semua browser web modern. Menguasai dasar pemrograman javascript menjadi keharusan, karena kita akan dapat mengetahui bagaimana suatu halaman web bisa ditampilkan untuk menjadi aplikasi berbasis web atau untuk menampilkan informasi dengan banyak cara.?', 7, 0, '2022-05-22 14:36:14', '2022-05-22 14:36:21'),
 ('978-602-8759-42-7', 'Buku Logika Algoritma Dan Pemrograman Dasar Bahasa Pascal C C++', 'UMUM', 'TGNI', '170000.0', '2018', 'Rosa A.s.?', 'Cipta Narada Sejati', 6, 'TIK', ' Algoritma berarti solusi. Ketika orang berbicara mengenai algoritma di bidang pemrograman, maka yang dimaksud adalah solusi dari suatu masalah yang harus dipecahkan dengan menggunakan komputer. Algoritma harus dibuat secara runut agar komputer mengerti dan mampu mengeksekusinya. Analisis kasus sangat dibutuhkan dalam membuat sebuah algoritma, misalnya proses apa saja yang sekiranya dibutuhkan untuk menyelesaikan masalah yang harus diselesaikan.??', 7, 0, '2022-05-22 14:35:16', '2022-05-22 14:36:26'),
 ('978-623-7131-03-8', 'Buku Network Security Dan Cyber Security | Cisco Ccna | Linux | Windows | Amazon Aws | Android', 'UMUM', 'TGNI', '130000.0', '2019', 'Iwan Sofana, Rifkie Primartha', 'Cahaya Pelita Andika, Pt', 7, 'TIK', 'Buku ini berisi tentang seluk-beluk computer security dan network security, mulai dari teori hingga praktik. Beberapa materi inti yang dibahas dalam buku ini antara lain: Ciscosecurity, Windows security, Linux security, Android security, AWS cloud computing security, Security Audit ISO 27001 dan NIST 800-53. ?', 7, 0, '2022-05-22 14:34:08', '2022-05-22 14:34:08'),
-('978-860-2556-84-04', 'Buku Fundamental Of Python For Machine Learning Untuk Pemula', 'UMUM', 'TGNI', '60000.0', '2018', 'Teguh Wahyono', 'Cibaliung Tunggal Plantation, Pt', 4, 'TIK', 'Artificial intelligence  (AI) dan machine learning saat ini kembali memasuki fase booming setelah beberapa dekade mengalami pasang surut. Kecerdasan Buatan kembali digandrungi, di mana penerapannya dilakukan secara masive pada aplikasi-aplikasi bisnis dan social media jaman sekarang.', 1, 1, '2022-05-22 14:42:43', '2022-05-28 00:33:53');
+('978-860-2556-84-04', 'Buku Fundamental Of Python For Machine Learning Untuk Pemula', 'UMUM', 'TGNI', '60000.0', '2018', 'Teguh Wahyono', 'Cibaliung Tunggal Plantation, Pt', 3, 'TIK', 'Artificial intelligence  (AI) dan machine learning saat ini kembali memasuki fase booming setelah beberapa dekade mengalami pasang surut. Kecerdasan Buatan kembali digandrungi, di mana penerapannya dilakukan secara masive pada aplikasi-aplikasi bisnis dan social media jaman sekarang.', 1, 1, '2022-05-22 14:42:43', '2022-05-28 00:33:53');
 
 --
 -- Triggers `ma_buku`
@@ -155,7 +156,7 @@ CREATE TABLE `ma_dashboard` (
 --
 
 INSERT INTO `ma_dashboard` (`id`, `total_buku`, `buku_dipinjam`, `buku_bermasalah`, `total_anggota`, `updated_at`) VALUES
-(1, 10, 0, 0, 11, '2022-05-11 15:41:11');
+(1, 10, 0, 0, 12, '2022-05-11 15:41:11');
 
 -- --------------------------------------------------------
 
@@ -179,12 +180,9 @@ CREATE TABLE `ma_detail_transaksi` (
 --
 
 INSERT INTO `ma_detail_transaksi` (`id_transaksi`, `isbn`, `masa_pinjam`, `status_buku`, `status_masalah`, `jumlah_denda`, `created_at`, `updated_at`) VALUES
-('TR-1653494061052', '602-6232-57-1', '1654098877442', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-25 22:54:37', '2022-05-25 22:54:37'),
-('TR-1653500851494', '602-6232-57-1', '1654105688859', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-26 00:48:08', '2022-05-26 00:48:08'),
-('TR-1653500851494', '978-602-0823-06-5', '1654105688863', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-26 00:48:08', '2022-05-26 00:48:08'),
-('TR-1653501269899', '978-602-1514-71-9', '1654106089088', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-26 00:54:49', '2022-05-26 00:54:49'),
-('TR-1653502454219', '602-6232-57-1', '1654107279578', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-26 01:14:39', '2022-05-26 01:14:39'),
-('TR-1653672839227', '978-860-2556-84-04', '1653673195220', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-28 00:34:37', '2022-05-28 00:34:37');
+('TR-1653760303948', '978-860-2556-84-04', '1953946748476', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-29 00:52:28', '2022-05-29 00:52:28'),
+('TR-1653767453687', '602-6232-57-1', '1654372307454', 'Bermasalah', 'Tidak Bermasalah', '0', '2022-05-29 02:51:47', '2022-05-29 02:51:47'),
+('TR-1653767453687', '978-602-0823-06-5', '1652072307470', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-29 02:51:47', '2022-05-29 02:51:47');
 
 --
 -- Triggers `ma_detail_transaksi`
@@ -392,11 +390,8 @@ CREATE TABLE `ma_transaksi` (
 --
 
 INSERT INTO `ma_transaksi` (`id_transaksi`, `nis_anggota`, `kode_pengurus`, `jenis_buku`, `status_transaksi`, `created_at`, `updated_at`) VALUES
-('TR-1653494061052', '41211741', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-25 22:54:37', '2022-05-25 22:54:37'),
-('TR-1653500851494', '41211674', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-26 00:48:08', '2022-05-26 00:48:08'),
-('TR-1653501269899', '41211696', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-26 00:54:49', '2022-05-26 00:54:49'),
-('TR-1653502454219', '41211601', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-26 01:14:39', '2022-05-26 01:14:39'),
-('TR-1653672839227', '41211742', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-28 00:34:37', '2022-05-28 00:34:37');
+('TR-1653760303948', '41212739', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-29 00:52:28', '2022-05-29 00:52:28'),
+('TR-1653767453687', '41211742', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-29 02:51:47', '2022-05-29 02:51:47');
 
 --
 -- Indexes for dumped tables

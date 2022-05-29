@@ -27,10 +27,12 @@ import com.manurul.view.modal.PengurusUSER;
 import com.manurul.view.modal.RakDATABUKU;
 import com.manurul.view.modal.getDaftarBukuTRANSAKSI;
 import com.manurul.view.modal.getPeminjamTRANSAKSI;
+import com.manurul.view.modal.konfirmasiBukuPengembalian;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -220,18 +222,24 @@ public class Dashboard extends javax.swing.JFrame {
         F_TR_LAPORAN = new javax.swing.JPanel();
         F_TR_KEMBALI = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PENGEMBALIAN = new javax.swing.JLabel();
+        BTN_CETAK_PENGEMBALIAN = new javax.swing.JButton();
+        PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN = new javax.swing.JTextField();
+        PJ_ID_TRANSAKSI_PENGEMBALIAN = new javax.swing.JLabel();
+        PJ_INPUT_PEMINJAM_PENGEMBALIAN = new javax.swing.JTextField();
+        PJ_LABEL_PEMINJAM_PENGEMBALIAN = new javax.swing.JLabel();
+        PJ_LABEL_KAT_BUKU_PENGEMBALIAN = new javax.swing.JLabel();
+        PJ_LABEL_TGL_PINJAM_PENGEMBALIAN = new javax.swing.JLabel();
+        PJ_INPUT_JENIS_BUKU_PENGEMBALIAN = new javax.swing.JComboBox<>();
+        PJ_INPUT_TGL_PINJAM_PENGEMBALIAN = new javax.swing.JTextField();
+        PJ_ID_TRANSAKSI_PENGEMBALIAN1 = new javax.swing.JLabel();
+        PJ_LABEL_PENGURUS_PENGEMBALIAN = new javax.swing.JLabel();
+        PJ_INPUT_PENGURUS_PENGEMBALIAN = new javax.swing.JTextField();
+        CONTAINER_FORM = new javax.swing.JPanel();
         T_PJ_BUKU_PENGEMBALIAN = new javax.swing.JLabel();
         TABLE_PENGEMBALIAN = new javax.swing.JScrollPane();
         TABLE_LIST_PENGEMBALIAN = new javax.swing.JTable(){
 
             private static final long serialVersionUID = 1L;
-
-            public boolean isCellEditable(int row, int column) {
-                if(column != 0){
-                    return false;
-                }
-                return true;
-            };
 
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column)
             {
@@ -244,7 +252,7 @@ public class Dashboard extends javax.swing.JFrame {
                     c.setBackground(getBackground());
                     c.setForeground(getForeground());
                     int modelRow = convertRowIndexToModel(row);
-                    String type = (String)getModel().getValueAt(modelRow, 3);
+                    String type = (String)getModel().getValueAt(modelRow, 2);
                     if ("Bermasalah".equals(type)) {
                         c.setBackground(new Color(244, 113, 116));
                         c.setForeground(Color.WHITE);
@@ -254,19 +262,11 @@ public class Dashboard extends javax.swing.JFrame {
             }
 
         };
-        BTN_CETAK_PENGEMBALIAN = new javax.swing.JButton();
-        PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN = new javax.swing.JTextField();
-        PJ_ID_TRANSAKSI_PENGEMBALIAN = new javax.swing.JLabel();
-        PJ_INPUT_PEMINJAM_PENGEMBALIAN = new javax.swing.JTextField();
-        PJ_LABEL_PEMINJAM_PENGEMBALIAN = new javax.swing.JLabel();
-        PJ_LABEL_KAT_BUKU_PENGEMBALIAN = new javax.swing.JLabel();
-        PJ_LABEL_TGL_PINJAM_PENGEMBALIAN = new javax.swing.JLabel();
-        PJ_INPUT_JENIS_BUKU_PENGEMBALIAN = new javax.swing.JComboBox<>();
-        PJ_INPUT_TGL_PINJAM_PENGEMBALIAN = new javax.swing.JTextField();
-        BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN = new javax.swing.JLabel();
-        PJ_ID_TRANSAKSI_PENGEMBALIAN1 = new javax.swing.JLabel();
-        PJ_LABEL_PENGURUS_PENGEMBALIAN = new javax.swing.JLabel();
-        PJ_INPUT_PENGURUS_PENGEMBALIAN = new javax.swing.JTextField();
+        T_PJ_ALERT_PENGEMBALIAN = new javax.swing.JLabel();
+        T_PJ_BUKU_PENGEMBALIAN1 = new javax.swing.JLabel();
+        TABLE_PENGEMBALIAN1 = new javax.swing.JScrollPane();
+        TABLE_LIST_PENGEMBALIAN1 = new javax.swing.JTable();
+        T_PJ_ALERT_PENGEMBALIAN1 = new javax.swing.JLabel();
         F_TR_PINJAM = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PINJAM = new javax.swing.JLabel();
         T_PJ_BUKU = new javax.swing.JLabel();
@@ -939,44 +939,6 @@ public class Dashboard extends javax.swing.JFrame {
         TITLE_FRAME_PENGEMBALIAN.setForeground(new java.awt.Color(96, 96, 96));
         TITLE_FRAME_PENGEMBALIAN.setText("Form Pengembalian");
 
-        T_PJ_BUKU_PENGEMBALIAN.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        T_PJ_BUKU_PENGEMBALIAN.setForeground(new java.awt.Color(96, 96, 96));
-        T_PJ_BUKU_PENGEMBALIAN.setText("Buku");
-
-        TABLE_LIST_PENGEMBALIAN.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Kembalikan", "ISBN", "Judul Buku", "Status", "Masalah", "Denda"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, false, false, true, true, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TABLE_LIST_PENGEMBALIAN.setRowHeight(30);
-        TABLE_LIST_PENGEMBALIAN.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TABLE_LIST_PENGEMBALIANKeyPressed(evt);
-            }
-        });
-        TABLE_PENGEMBALIAN.setViewportView(TABLE_LIST_PENGEMBALIAN);
-
         BTN_CETAK_PENGEMBALIAN.setBackground(new java.awt.Color(0, 171, 60));
         BTN_CETAK_PENGEMBALIAN.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
         BTN_CETAK_PENGEMBALIAN.setForeground(new java.awt.Color(255, 255, 255));
@@ -1035,14 +997,6 @@ public class Dashboard extends javax.swing.JFrame {
         PJ_INPUT_TGL_PINJAM_PENGEMBALIAN.setForeground(new java.awt.Color(96, 96, 96));
         PJ_INPUT_TGL_PINJAM_PENGEMBALIAN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
 
-        BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_RESET.png"))); // NOI18N
-        BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BTN_RESET_DAFTAR_BUKU_PENGEMBALIANMouseClicked(evt);
-            }
-        });
-
         PJ_ID_TRANSAKSI_PENGEMBALIAN1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         PJ_ID_TRANSAKSI_PENGEMBALIAN1.setForeground(new java.awt.Color(96, 96, 96));
         PJ_ID_TRANSAKSI_PENGEMBALIAN1.setText("TR - ");
@@ -1056,6 +1010,140 @@ public class Dashboard extends javax.swing.JFrame {
         PJ_INPUT_PENGURUS_PENGEMBALIAN.setForeground(new java.awt.Color(96, 96, 96));
         PJ_INPUT_PENGURUS_PENGEMBALIAN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 96, 96)));
 
+        CONTAINER_FORM.setBackground(new java.awt.Color(255, 255, 255));
+
+        T_PJ_BUKU_PENGEMBALIAN.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        T_PJ_BUKU_PENGEMBALIAN.setForeground(new java.awt.Color(96, 96, 96));
+        T_PJ_BUKU_PENGEMBALIAN.setText("Daftar Buku yang dipinjam");
+
+        TABLE_LIST_PENGEMBALIAN.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ISBN", "Judul Buku", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TABLE_LIST_PENGEMBALIAN.setRowHeight(30);
+        TABLE_LIST_PENGEMBALIAN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LIST_PENGEMBALIANMouseClicked(evt);
+            }
+        });
+        TABLE_LIST_PENGEMBALIAN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TABLE_LIST_PENGEMBALIANKeyPressed(evt);
+            }
+        });
+        TABLE_PENGEMBALIAN.setViewportView(TABLE_LIST_PENGEMBALIAN);
+        if (TABLE_LIST_PENGEMBALIAN.getColumnModel().getColumnCount() > 0) {
+            TABLE_LIST_PENGEMBALIAN.getColumnModel().getColumn(0).setPreferredWidth(200);
+            TABLE_LIST_PENGEMBALIAN.getColumnModel().getColumn(0).setMaxWidth(200);
+            TABLE_LIST_PENGEMBALIAN.getColumnModel().getColumn(2).setPreferredWidth(150);
+            TABLE_LIST_PENGEMBALIAN.getColumnModel().getColumn(2).setMaxWidth(150);
+        }
+
+        T_PJ_ALERT_PENGEMBALIAN.setFont(new java.awt.Font("Trebuchet MS", 2, 12)); // NOI18N
+        T_PJ_ALERT_PENGEMBALIAN.setForeground(new java.awt.Color(255, 102, 102));
+        T_PJ_ALERT_PENGEMBALIAN.setText("*) Klik 2 kali untuk mengkonfirmasi buku yang akan dikembalikan    *) Klik F2 untuk mengubah status buku yang akan dikembalikan");
+
+        T_PJ_BUKU_PENGEMBALIAN1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        T_PJ_BUKU_PENGEMBALIAN1.setForeground(new java.awt.Color(96, 96, 96));
+        T_PJ_BUKU_PENGEMBALIAN1.setText("Daftar Buku yang dikembalikan");
+
+        TABLE_LIST_PENGEMBALIAN1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ISBN", "Judul Buku", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TABLE_LIST_PENGEMBALIAN1.setRowHeight(30);
+        TABLE_LIST_PENGEMBALIAN1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TABLE_LIST_PENGEMBALIAN1KeyPressed(evt);
+            }
+        });
+        TABLE_PENGEMBALIAN1.setViewportView(TABLE_LIST_PENGEMBALIAN1);
+        if (TABLE_LIST_PENGEMBALIAN1.getColumnModel().getColumnCount() > 0) {
+            TABLE_LIST_PENGEMBALIAN1.getColumnModel().getColumn(0).setPreferredWidth(200);
+            TABLE_LIST_PENGEMBALIAN1.getColumnModel().getColumn(0).setMaxWidth(200);
+            TABLE_LIST_PENGEMBALIAN1.getColumnModel().getColumn(2).setPreferredWidth(150);
+            TABLE_LIST_PENGEMBALIAN1.getColumnModel().getColumn(2).setMaxWidth(150);
+        }
+
+        T_PJ_ALERT_PENGEMBALIAN1.setFont(new java.awt.Font("Trebuchet MS", 2, 12)); // NOI18N
+        T_PJ_ALERT_PENGEMBALIAN1.setForeground(new java.awt.Color(255, 102, 102));
+        T_PJ_ALERT_PENGEMBALIAN1.setText("*) Klik F7 untuk mengembalikan buku ke daftar pinjam");
+
+        javax.swing.GroupLayout CONTAINER_FORMLayout = new javax.swing.GroupLayout(CONTAINER_FORM);
+        CONTAINER_FORM.setLayout(CONTAINER_FORMLayout);
+        CONTAINER_FORMLayout.setHorizontalGroup(
+            CONTAINER_FORMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TABLE_PENGEMBALIAN, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(TABLE_PENGEMBALIAN1, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+            .addComponent(T_PJ_ALERT_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addGroup(CONTAINER_FORMLayout.createSequentialGroup()
+                .addComponent(T_PJ_BUKU_PENGEMBALIAN1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(310, 310, 310))
+            .addComponent(T_PJ_BUKU_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(CONTAINER_FORMLayout.createSequentialGroup()
+                .addComponent(T_PJ_ALERT_PENGEMBALIAN1)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        CONTAINER_FORMLayout.setVerticalGroup(
+            CONTAINER_FORMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CONTAINER_FORMLayout.createSequentialGroup()
+                .addComponent(T_PJ_BUKU_PENGEMBALIAN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TABLE_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(T_PJ_ALERT_PENGEMBALIAN, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(T_PJ_BUKU_PENGEMBALIAN1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TABLE_PENGEMBALIAN1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addComponent(T_PJ_ALERT_PENGEMBALIAN1))
+        );
+
         javax.swing.GroupLayout F_TR_KEMBALILayout = new javax.swing.GroupLayout(F_TR_KEMBALI);
         F_TR_KEMBALI.setLayout(F_TR_KEMBALILayout);
         F_TR_KEMBALILayout.setHorizontalGroup(
@@ -1065,12 +1153,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(F_TR_KEMBALILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TITLE_FRAME_PENGEMBALIAN)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_TR_KEMBALILayout.createSequentialGroup()
-                        .addGroup(F_TR_KEMBALILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(F_TR_KEMBALILayout.createSequentialGroup()
-                                .addComponent(T_PJ_BUKU_PENGEMBALIAN)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN))
-                            .addComponent(TABLE_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE))
+                        .addComponent(CONTAINER_FORM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(F_TR_KEMBALILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(F_TR_KEMBALILayout.createSequentialGroup()
@@ -1097,12 +1180,6 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(F_TR_KEMBALILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(F_TR_KEMBALILayout.createSequentialGroup()
-                        .addGroup(F_TR_KEMBALILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(T_PJ_BUKU_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(TABLE_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
-                    .addGroup(F_TR_KEMBALILayout.createSequentialGroup()
                         .addComponent(PJ_ID_TRANSAKSI_PENGEMBALIAN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(F_TR_KEMBALILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1124,8 +1201,9 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(PJ_LABEL_PENGURUS_PENGEMBALIAN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PJ_INPUT_PENGURUS_PENGEMBALIAN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTN_CETAK_PENGEMBALIAN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                        .addComponent(BTN_CETAK_PENGEMBALIAN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CONTAINER_FORM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
 
@@ -2884,10 +2962,6 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_PJ_INPUT_JENIS_BUKUActionPerformed
 
-    private void TABLE_LIST_PENGEMBALIANKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TABLE_LIST_PENGEMBALIANKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TABLE_LIST_PENGEMBALIANKeyPressed
-
     private void BTN_CETAK_PENGEMBALIANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_CETAK_PENGEMBALIANMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_BTN_CETAK_PENGEMBALIANMouseClicked
@@ -2900,10 +2974,6 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PJ_INPUT_JENIS_BUKU_PENGEMBALIANActionPerformed
 
-    private void BTN_RESET_DAFTAR_BUKU_PENGEMBALIANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_RESET_DAFTAR_BUKU_PENGEMBALIANMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTN_RESET_DAFTAR_BUKU_PENGEMBALIANMouseClicked
-
     private void PJ_INPUT_ID_TRANSAKSI_PENGEMBALIANKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PJ_INPUT_ID_TRANSAKSI_PENGEMBALIANKeyPressed
         
         if(evt.getKeyCode() == evt.VK_ENTER){
@@ -2913,6 +2983,7 @@ public class Dashboard extends javax.swing.JFrame {
             if(!id_transaksi.equals("")){
             
                 PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.setText(id_transaksi);
+                
                 TM.getDataPinjam(id_transaksi);
                 
             }else{
@@ -2923,9 +2994,7 @@ public class Dashboard extends javax.swing.JFrame {
                 PJ_INPUT_TGL_PINJAM_PENGEMBALIAN.setText("");
                 PJ_INPUT_PENGURUS_PENGEMBALIAN.setText("");
                 
-                DefaultTableModel list_peminjaman = (DefaultTableModel)TABLE_LIST_PENGEMBALIAN.getModel();
-                list_peminjaman.setRowCount(0);
-                list_peminjaman.setRowCount(1);
+                TM.initTablePengembalian();
                 
                 JOptionPane.showMessageDialog(null, "Nilai id transaksi harus terisi dan hanya berisi angka !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
             
@@ -2934,6 +3003,86 @@ public class Dashboard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_PJ_INPUT_ID_TRANSAKSI_PENGEMBALIANKeyPressed
+
+    private void TABLE_LIST_PENGEMBALIANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_PENGEMBALIANMouseClicked
+
+        DefaultTableModel table_pengembalian_daftar_pinjam = (DefaultTableModel)TABLE_LIST_PENGEMBALIAN.getModel();
+        DefaultTableModel table_pengembalian_daftar_kembali = (DefaultTableModel)TABLE_LIST_PENGEMBALIAN1.getModel();        
+        
+        if(evt.getClickCount() == 2){
+            
+            int row = TABLE_LIST_PENGEMBALIAN.getSelectedRow();
+            
+            String status = TABLE_LIST_PENGEMBALIAN.getValueAt(row, 2).toString();
+            
+            if(status.equals("Dipinjam")){
+                
+                if(table_pengembalian_daftar_kembali.getValueAt(0, 0) == null){
+                    table_pengembalian_daftar_kembali.setRowCount(0);
+                }
+            
+                table_pengembalian_daftar_kembali.addRow(new String[]{
+                    TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(),
+                    TABLE_LIST_PENGEMBALIAN.getValueAt(row, 1).toString(),
+                    "Dikembalikan"
+                });
+             
+                table_pengembalian_daftar_pinjam.removeRow(row);
+            
+            }else {
+            
+                JOptionPane.showMessageDialog(null, "Buku ini mengalami masalah, lakukan konfirmasi !", "Tidak dapat dikembalikan !", JOptionPane.INFORMATION_MESSAGE);
+  
+                // ubah status
+                new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(), row).setVisible(true);
+
+            }
+            
+        }
+        
+    }//GEN-LAST:event_TABLE_LIST_PENGEMBALIANMouseClicked
+
+    private void TABLE_LIST_PENGEMBALIANKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TABLE_LIST_PENGEMBALIANKeyPressed
+        
+        if(evt.getKeyCode() == evt.VK_F2){
+        
+            int row = TABLE_LIST_PENGEMBALIAN.getSelectedRow();
+            // ubah status
+            new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(), row).setVisible(true);
+            
+        }
+        
+    }//GEN-LAST:event_TABLE_LIST_PENGEMBALIANKeyPressed
+
+    private void TABLE_LIST_PENGEMBALIAN1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TABLE_LIST_PENGEMBALIAN1KeyPressed
+        
+        if(evt.getKeyCode() == evt.VK_F7){
+            
+            int row = TABLE_LIST_PENGEMBALIAN1.getSelectedRow();
+            if(TABLE_LIST_PENGEMBALIAN1.getValueAt(row, 0) != null){
+                
+                DefaultTableModel table_list_daftar_pinjam = (DefaultTableModel)TABLE_LIST_PENGEMBALIAN.getModel();
+                
+                DefaultTableModel table_pengembalian_daftar_kembali = (DefaultTableModel)TABLE_LIST_PENGEMBALIAN1.getModel();
+                
+                table_list_daftar_pinjam.addRow(new String[]{
+                    TABLE_LIST_PENGEMBALIAN1.getValueAt(row, 0).toString(),
+                    TABLE_LIST_PENGEMBALIAN1.getValueAt(row, 1).toString(),
+                    "Dipinjam"
+                });
+                
+                table_pengembalian_daftar_kembali.removeRow(row);
+                
+                if(table_pengembalian_daftar_kembali.getRowCount() == 0){
+                    table_pengembalian_daftar_kembali.setRowCount(1);
+                }
+                
+                
+            }
+            
+        }
+        
+    }//GEN-LAST:event_TABLE_LIST_PENGEMBALIAN1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -2977,11 +3126,11 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JLabel BTN_DATABUKU;
     private javax.swing.JLabel BTN_EXIT;
     private javax.swing.JLabel BTN_RESET_DAFTAR_BUKU;
-    private javax.swing.JLabel BTN_RESET_DAFTAR_BUKU_PENGEMBALIAN;
     public static javax.swing.JLabel BTN_SETTING;
     private javax.swing.JButton BTN_SET_SIMPAN;
     public static javax.swing.JLabel BTN_TRANSAKSI;
     public static javax.swing.JLabel BTN_USER;
+    private javax.swing.JPanel CONTAINER_FORM;
     public static javax.swing.JPanel DASHBOARD;
     public static javax.swing.JPanel DATABUKU;
     private javax.swing.JLabel FILTER_KATEGORI_BUKU;
@@ -3086,6 +3235,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTable TABLE_LIST_LOG;
     public static javax.swing.JTable TABLE_LIST_PENERBIT;
     public static javax.swing.JTable TABLE_LIST_PENGEMBALIAN;
+    public static javax.swing.JTable TABLE_LIST_PENGEMBALIAN1;
     private javax.swing.JScrollPane TABLE_LIST_PENGURUS;
     public static javax.swing.JTable TABLE_LIST_PINJAM;
     public static javax.swing.JTable TABLE_LIST_RAK;
@@ -3093,6 +3243,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane TABLE_LOG;
     private javax.swing.JScrollPane TABLE_PENERBIT;
     public static javax.swing.JScrollPane TABLE_PENGEMBALIAN;
+    public static javax.swing.JScrollPane TABLE_PENGEMBALIAN1;
     private javax.swing.JScrollPane TABLE_PINJAM;
     private javax.swing.JScrollPane TABLE_RAK;
     public static javax.swing.JComboBox<String> TAMPILKAN_COMBOBOX_BUKU;
@@ -3125,8 +3276,11 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JLabel T_DB_KATEGORI;
     public static javax.swing.JLabel T_DB_PENERBIT;
     public static javax.swing.JLabel T_DB_RAK;
+    private javax.swing.JLabel T_PJ_ALERT_PENGEMBALIAN;
+    private javax.swing.JLabel T_PJ_ALERT_PENGEMBALIAN1;
     private javax.swing.JLabel T_PJ_BUKU;
     private javax.swing.JLabel T_PJ_BUKU_PENGEMBALIAN;
+    private javax.swing.JLabel T_PJ_BUKU_PENGEMBALIAN1;
     public static javax.swing.JLabel T_TR_KEMBALI;
     public static javax.swing.JLabel T_TR_LAPORAN;
     public static javax.swing.JLabel T_TR_PINJAM;

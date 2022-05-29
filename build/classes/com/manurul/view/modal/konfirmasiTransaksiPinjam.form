@@ -99,11 +99,11 @@
                       <Component id="LABEL_PENGURUS" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="LABEL_NAMA_PEMINJAM" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="INPUT_NAMA_PEMINJAM" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="INPUT_NAMA_PEMINJAM" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="LABEL_JENIS_BUKU" min="-2" max="-2" attributes="0"/>

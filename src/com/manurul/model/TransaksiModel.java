@@ -9,8 +9,10 @@ import com.manurul.lib.DBConfig;
 import com.manurul.lib.GenKode;
 import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
+import static com.manurul.view.Dashboard.TABLE_LIST_PENGEMBALIAN1;
 import com.manurul.view.modal.getDaftarBukuTRANSAKSI;
 import com.manurul.view.modal.getPeminjamTRANSAKSI;
+import com.manurul.view.modal.konfirmasiBukuPengembalian;
 import com.manurul.view.modal.konfirmasiTransaksiPinjam;
 import java.awt.Color;
 import java.awt.Component;
@@ -491,12 +493,23 @@ public class TransaksiModel extends DBConfig{
 
         table_peminjaman.setRowCount(0);
         table_peminjaman.setRowCount(1);
+        
+        DefaultTableModel table_peminjaman_1 = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN1.getModel();
+        
+        table_peminjaman_1.setRowCount(0);
+        table_peminjaman_1.setRowCount(1);
 
     }
 
     public void getDataPinjam(String id_transaksi){
 
         DefaultTableModel table_detail_buku = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+        
+        // reset form list buku yang dikembalikan
+        DefaultTableModel table_list_buku_pengembalian = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN1.getModel();
+
+        table_list_buku_pengembalian.setRowCount(0);
+        table_list_buku_pengembalian.setRowCount(1);
 
         try{
 
@@ -551,26 +564,19 @@ public class TransaksiModel extends DBConfig{
 
                 table_detail_buku.setRowCount(0);
 
+                int i = 0;
                 while(res_detail.next()){
                     
                     // cek apakah buku terlambat
                     Long epoch = Long.parseLong(GenKode.getTimeMiliSecond());
                     Long masa = Long.parseLong(res_detail.getString("masa_pinjam"));
                     
-                    boolean terlambat = false;
-                    if(epoch >= masa){
-                        terlambat = true;
-                    }
-                    
                     table_detail_buku.addRow(new Object[]{
-                        terlambat ? false : true,
                         res_detail.getString("isbn"),
                         res_detail.getString("judul"),
-                        terlambat ? "Bermasalah" : "Dipinjam",
-                        terlambat ? "Terlambat" : "Tidak Bermasalah",
-                        "Rp.0"
+                        masa <= epoch ? "Bermasalah" : "Dipinjam"
                     });
-
+                    i++;
                 }
 
             }else{
@@ -585,13 +591,48 @@ public class TransaksiModel extends DBConfig{
                 Dashboard.PJ_INPUT_TGL_PINJAM_PENGEMBALIAN.setText("");
                 Dashboard.PJ_INPUT_PENGURUS_PENGEMBALIAN.setText("");
 
-                table_detail_buku.setRowCount(0);
-                table_detail_buku.setRowCount(1);
+                initTablePengembalian();
 
                 JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
 
         }
 
+    }
+    
+    public void getDetailBukuPengembalian(String id_transaksi, String isbn, int row){
+    
+        try{
+            
+            String sql = "SELECT " +
+                            "ma_detail_transaksi.id_transaksi AS id_transaksi," +
+                            "ma_buku.judul AS judul," +
+                            "ma_buku.harga AS harga," +
+                            "ma_detail_transaksi.status_buku AS status," +
+                            "ma_detail_transaksi.status_masalah AS detail_masalah," +
+                            "ma_detail_transaksi.masa_pinjam AS masa_pinjam " +
+                            "FROM ma_detail_transaksi JOIN ma_buku " +
+                            "ON ma_detail_transaksi.isbn = ma_buku.isbn " +
+                            "WHERE ma_detail_transaksi.id_transaksi = ? AND ma_detail_transaksi.isbn = ?";
+            PreparedStatement pst = conn.prepareCall(sql);
+            pst.setString(1, id_transaksi);
+            pst.setString(2, isbn);
+            ResultSet res = pst.executeQuery();
+            
+            if(res.next()){
+            
+                konfirmasiBukuPengembalian.INPUT_JUDUL.setText(res.getString("judul"));
+                konfirmasiBukuPengembalian.INPUT_STATUS.setSelectedItem(res.getString("status"));
+                konfirmasiBukuPengembalian.INPUT_MASALAH.setSelectedItem(res.getString("detail_masalah"));
+                konfirmasiBukuPengembalian.INPUT_DENDA.setText("Rp. " + res.getString("harga"));
+                
+            }
+            
+        }catch(SQLException error){
+        
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+        
     }
 
     public void resetForm(String mode){
@@ -610,12 +651,6 @@ public class TransaksiModel extends DBConfig{
 
             form_model.setRowCount(0);
             form_model.setRowCount(1);
-
-        }else{
-
-            // reset form pengembalian
-
-
 
         }
 
