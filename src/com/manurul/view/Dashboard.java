@@ -574,7 +574,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBARLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -911,7 +911,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_TR_LAPORAN)))
                     .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1484,7 +1484,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_DB_RAK)))
                     .addGroup(TOPBAR_DATABUKULayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -2014,7 +2014,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_U_PENGURUS)))
                     .addGroup(TOPBAR_USERLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -2373,7 +2373,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBAR_SETTINGLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3013,6 +3013,7 @@ public class Dashboard extends javax.swing.JFrame {
             
             int row = TABLE_LIST_PENGEMBALIAN.getSelectedRow();
             
+            String isbn = TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString();
             String status = TABLE_LIST_PENGEMBALIAN.getValueAt(row, 2).toString();
             
             if(status.equals("Dipinjam")){
@@ -3034,7 +3035,7 @@ public class Dashboard extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Buku ini mengalami masalah, lakukan konfirmasi !", "Tidak dapat dikembalikan !", JOptionPane.INFORMATION_MESSAGE);
   
                 // ubah status
-                new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(), row).setVisible(true);
+                new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), isbn, status, row).setVisible(true);
 
             }
             
@@ -3048,7 +3049,7 @@ public class Dashboard extends javax.swing.JFrame {
         
             int row = TABLE_LIST_PENGEMBALIAN.getSelectedRow();
             // ubah status
-            new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(), row).setVisible(true);
+            new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 2).toString(), row).setVisible(true);
             
         }
         
@@ -3288,7 +3289,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JLabel T_U_JURUSAN;
     public static javax.swing.JLabel T_U_PENGURUS;
     public static javax.swing.JPanel USER;
-    private javax.swing.JLabel USERNAME;
+    public static javax.swing.JLabel USERNAME;
     public static javax.swing.JLabel USERNAME_DATABUKU;
     public static javax.swing.JLabel USERNAME_SETTING;
     public static javax.swing.JLabel USERNAME_TRANSAKSI;

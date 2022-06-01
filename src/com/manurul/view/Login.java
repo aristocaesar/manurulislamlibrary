@@ -3,7 +3,6 @@
  */
 package com.manurul.view;
 
-import com.manurul.model.LogModel;
 import com.manurul.model.PengurusModel;
 import java.awt.Dimension;
 import java.awt.Toolkit;

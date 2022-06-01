@@ -21,8 +21,11 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
      * Creates new form konfirmasiBukuPengembalian
      */
     private String status;
+    public static String HARGA_BUKU;
+    public static int HARI_TERLAMBAT;
+    public static double DENDA_TERLAMBAT;
     
-    public konfirmasiBukuPengembalian(String id_transaksi, String isbn, int row) {
+    public konfirmasiBukuPengembalian(String id_transaksi, String isbn, String status_buku , int row) {
         initComponents();
         
         // SET ICON
@@ -31,6 +34,12 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - Konfirmasi Pengembalian Buku");
         
+        // SET CENTER LOCATION
+        this.setLocationRelativeTo(null);
+        
+        // SET DISABLE RESIZESABLE
+        this.setResizable(false);
+        
         // SET PADDING
         InputBorder.set(INPUT_JUDUL, 8);
         InputBorder.set(INPUT_DENDA, 8);
@@ -38,16 +47,38 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         // GET DATA FROM DATABASE
         Dashboard.TM.getDetailBukuPengembalian(id_transaksi, isbn, row);
         
-        // VISIBLE WHERE ON STATUS
         
-        if(INPUT_STATUS.getSelectedItem().equals("Dipinjam")){
+        // CHECK BUKU FROM STATUS PINJAM OR BERMASALAH
+        
+        INPUT_STATUS.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));
+        
+        if(status_buku.equals("Dipinjam")){
+        
+            INPUT_STATUS.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Dipinjam", "Bermasalah"}));
+            INPUT_STATUS.setSelectedItem(1);
+            
+            INPUT_MASALAH.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Rusak", "Hilang"}));
+            
             INPUT_MASALAH.setEnabled(false);
             INPUT_DENDA.setEnabled(false);
             INPUT_BAYAR.setEnabled(false);
-        }
+            
+            INPUT_DENDA.setText("Rp. " + HARGA_BUKU);
+            
+        }else if(status_buku.equals("Bermasalah")){
         
-        // set status
-        status = INPUT_STATUS.getSelectedItem().toString();
+            INPUT_STATUS.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Bermasalah"}));
+            INPUT_MASALAH.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Terlambat", "Rusak", "Hilang"}));
+            
+            INPUT_MASALAH.setEnabled(true);
+            INPUT_DENDA.setEnabled(true);
+            INPUT_BAYAR.setEnabled(true);
+            
+            if(INPUT_MASALAH.getSelectedItem().toString().equals("Terlambat")){
+                INPUT_DENDA.setText(HARI_TERLAMBAT + " Hari - " + "Rp." + DENDA_TERLAMBAT);
+            }
+        
+        }
         
     }
 
@@ -113,6 +144,11 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         INPUT_MASALAH.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         INPUT_MASALAH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Terlamat", "Hilang", "Rusak" }));
         INPUT_MASALAH.setBorder(null);
+        INPUT_MASALAH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPUT_MASALAHActionPerformed(evt);
+            }
+        });
 
         INPUT_BAYAR.setBackground(new java.awt.Color(255, 102, 51));
         INPUT_BAYAR.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
@@ -202,6 +238,16 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         
     }//GEN-LAST:event_INPUT_STATUSActionPerformed
 
+    private void INPUT_MASALAHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_MASALAHActionPerformed
+        
+        if(INPUT_MASALAH.getSelectedItem().toString().equals("Terlambat")){
+            INPUT_DENDA.setText(HARI_TERLAMBAT + " Hari - " + "Rp." + DENDA_TERLAMBAT);
+        }else{
+            INPUT_DENDA.setText("Rp. "+HARGA_BUKU);
+        }
+        
+    }//GEN-LAST:event_INPUT_MASALAHActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -232,7 +278,7 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new konfirmasiBukuPengembalian("", "", 0).setVisible(true);
+                new konfirmasiBukuPengembalian("", "", "", 0).setVisible(true);
             }
         });
     }
