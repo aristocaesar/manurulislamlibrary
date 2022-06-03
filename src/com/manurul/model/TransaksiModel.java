@@ -5,19 +5,21 @@
  */
 package com.manurul.model;
 
+import com.barcodelib.barcode.Linear;
 import com.manurul.lib.DBConfig;
 import com.manurul.lib.GenKode;
 import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
-import static com.manurul.view.Dashboard.TABLE_LIST_PENGEMBALIAN1;
 import com.manurul.view.modal.getDaftarBukuTRANSAKSI;
 import com.manurul.view.modal.getPeminjamTRANSAKSI;
 import com.manurul.view.modal.konfirmasiBukuPengembalian;
 import com.manurul.view.modal.konfirmasiTransaksiPinjam;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import javax.swing.Timer;
 import java.sql.PreparedStatement;
@@ -26,11 +28,14 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -467,8 +472,57 @@ public class TransaksiModel extends DBConfig{
             }
 
             // print transaksi pinjam
-            System.out.println("cetak pinjam !");
+            try{
+                
+                String barcodePath = null;
+                File filePath = new File("src/com/manurul/report/barcode/"+id_transaksi+".png");
+                // buat barcode 
+                try{
+                
+                    Linear barcode = new Linear();
+                    barcode.setType(Linear.CODE128B);
+                    barcode.setData(id_transaksi);
+                    barcode.setI(11.0f);
+                    barcodePath = filePath.getAbsolutePath();
+                    barcode.renderBarcode(barcodePath);
+                    
+                }catch(Exception error){
+                
+                    throw new SQLException(error.getMessage());
+                    
+                }
+            
+                String fileName = "/com/manurul/report/transaksi/reportPeminjaman.jasper";
+                InputStream Report;
+                Report = getClass().getResourceAsStream(fileName);
 
+                HashMap hash = new HashMap();
+                hash.put("id_transaksi", id_transaksi);
+                hash.put("nama_lengkap", getNama());
+                
+                // get date 
+                Date timeDate = new Date(dateNow.getTime());
+                SimpleDateFormat timeFormat = new SimpleDateFormat("dd / MM / YYYY ");
+                
+                
+                hash.put("tanggal_transaksi", timeFormat.format(timeDate));
+                hash.put("pengurus", Dashboard.USERNAME.getText());
+                hash.put("barcode", barcodePath);
+                
+//                // hapus barcode
+//                filePath.delete();
+
+                JasperPrint print;
+                print = JasperFillManager.fillReport(Report, hash, conn);
+                JasperPrintManager.printReport(print, false);
+                new JasperViewer(print, false).setVisible(true);
+                
+            }catch(Exception error){
+            
+                throw new SQLException(error.getMessage());
+                
+            }
+            
             // cetak log
             new LogModel().Action("MEMBUAT TRANSAKSI", "Berhasil membuat Transaksi " + id_transaksi, Dashboard.nama_user);
 
@@ -622,8 +676,38 @@ public class TransaksiModel extends DBConfig{
             
                 konfirmasiBukuPengembalian.INPUT_JUDUL.setText(res.getString("judul"));
                 konfirmasiBukuPengembalian.INPUT_STATUS.setSelectedItem(res.getString("status"));
-                konfirmasiBukuPengembalian.INPUT_MASALAH.setSelectedItem(res.getString("detail_masalah"));
-                konfirmasiBukuPengembalian.INPUT_DENDA.setText("Rp. " + res.getString("harga"));
+                
+                Long epoch = Long.parseLong(GenKode.getTimeMiliSecond());
+                Long masa = Long.parseLong(res.getString("masa_pinjam"));
+                
+                if( masa <= epoch){
+                    konfirmasiBukuPengembalian.INPUT_MASALAH.setSelectedItem("Terlambat");
+                    
+                    // HITUNG DENDA TERLAMBAT
+                    
+                        int jumlahHariTelat = 0;
+                        // nilai epoch dikurangi masa pinjam, lalu bagi 86400000, dapat dibagi sampai berapa ?
+                        Long hariSisa = epoch - masa;
+                        
+                        // kurangi dengan 86400000, jika hasil < dari 86400000, maka stop
+                        int satuHari = 86400000;
+                        if(hariSisa >= 86400000){
+                        
+                            while(hariSisa >= satuHari){
+                                hariSisa = hariSisa - satuHari;
+                                jumlahHariTelat++;
+                            }
+                            
+                        }
+                        // hasil dari bagi hari tersebut dikalikan dengan jumlah denda
+                        int denda = jumlahHariTelat * 2000;
+                    
+                    
+                    konfirmasiBukuPengembalian.HARI_TERLAMBAT = jumlahHariTelat;
+                    konfirmasiBukuPengembalian.DENDA_TERLAMBAT = denda;
+                }
+                
+                konfirmasiBukuPengembalian.HARGA_BUKU = res.getString("harga");
                 
             }
             

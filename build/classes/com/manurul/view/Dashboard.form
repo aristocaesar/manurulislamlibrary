@@ -26,7 +26,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="SIDEBAR" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="MAIN_FRAME" pref="1278" max="32767" attributes="0"/>
+              <Component id="MAIN_FRAME" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -303,7 +303,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_USER" pref="48" max="32767" attributes="0"/>
+                          <Component id="ICON_USER" pref="44" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -331,6 +331,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="USERNAME"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="ICON_USER">
                   <Properties>
@@ -368,7 +371,7 @@
                               <Component id="TITLE_TOTAL_BUKU" min="-2" max="-2" attributes="0"/>
                               <Component id="VALUE_TOTAL_BUKU" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="89" max="32767" attributes="0"/>
+                          <EmptySpace pref="79" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -533,7 +536,7 @@
                               <Component id="TITLE_BERMASALAH" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="VALUE_BERMASALAH" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="84" max="32767" attributes="0"/>
+                          <EmptySpace pref="74" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -690,7 +693,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="TABLE_LOG" pref="1210" max="32767" attributes="0"/>
+                              <Component id="TABLE_LOG" pref="1168" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -822,8 +825,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="TOPBAR_TRANSAKSI" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="TOPBAR_TRANSAKSI" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="FRAME_TRANSAKSI" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -877,7 +880,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_TR_TRANSAKSI" pref="48" max="32767" attributes="0"/>
+                                  <Component id="ICON_TR_TRANSAKSI" pref="46" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -985,7 +988,7 @@
                 <Container class="javax.swing.JPanel" name="F_TR_LAPORAN">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="66" red="cc" type="rgb"/>
+                      <Color blue="f5" green="f0" red="ef" type="rgb"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -1000,15 +1003,225 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1280" max="32767" attributes="0"/>
+                          <Component id="F_TB_LAPORAN" alignment="0" max="32767" attributes="0"/>
+                          <Component id="F_TR_CONTENT_LAPORAN" alignment="1" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="638" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="F_TB_LAPORAN" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                              <Component id="F_TR_CONTENT_LAPORAN" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="F_TB_LAPORAN">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="f5" green="f0" red="ef" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RoundedPanel(15, Color.WHITE)"/>
+                      </AuxValues>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Component id="T_LP_TRANSAKSI" min="-2" pref="81" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="T_LP_BUKU_BERMASALAH" min="-2" pref="146" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="T_LP_DENDA" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="T_LP_TRANSAKSI" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="T_LP_BUKU_BERMASALAH" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="T_LP_DENDA" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="T_LP_TRANSAKSI">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Trebuchet MS" size="18" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="60" green="60" red="60" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Transaksi"/>
+                            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                              <Color id="Hand Cursor"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="T_LP_TRANSAKSIMouseClicked"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="T_LP_BUKU_BERMASALAH">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Trebuchet MS" size="18" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="60" green="60" red="60" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Buku Bermasalah"/>
+                            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                              <Color id="Hand Cursor"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="T_LP_BUKU_BERMASALAHMouseClicked"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="T_LP_DENDA">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Trebuchet MS" size="18" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="60" green="60" red="60" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Denda"/>
+                            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                              <Color id="Hand Cursor"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="T_LP_DENDAMouseClicked"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="F_TR_CONTENT_LAPORAN">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="f5" green="f0" red="ef" type="rgb"/>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RoundedPanel(15, Color.WHITE)"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="F_CONTENT_DENDA">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="f5" green="f0" red="ef" type="rgb"/>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RoundedPanel(15, Color.WHITE)"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                              <CardConstraints cardName="card2"/>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="1238" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="557" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="F_CONTENT_BUKU_BERMASALAH">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="f5" green="f0" red="ef" type="rgb"/>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RoundedPanel(15, Color.WHITE)"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                              <CardConstraints cardName="card2"/>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="1238" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="557" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="F_CONTENT_TRANSAKSI">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="f5" green="f0" red="ef" type="rgb"/>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RoundedPanel(15, Color.WHITE)"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                              <CardConstraints cardName="card2"/>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="1238" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <EmptySpace min="0" pref="557" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="F_TR_KEMBALI">
                   <Properties>
@@ -1314,7 +1527,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="TABLE_PENGEMBALIAN" alignment="1" max="32767" attributes="0"/>
-                              <Component id="TABLE_PENGEMBALIAN1" alignment="0" pref="842" max="32767" attributes="0"/>
+                              <Component id="TABLE_PENGEMBALIAN1" alignment="0" pref="800" max="32767" attributes="0"/>
                               <Component id="T_PJ_ALERT_PENGEMBALIAN" alignment="0" pref="800" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="T_PJ_BUKU_PENGEMBALIAN1" max="32767" attributes="0"/>
@@ -1526,7 +1739,7 @@
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="BTN_RESET_DAFTAR_BUKU" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="TABLE_PINJAM" pref="842" max="32767" attributes="0"/>
+                                          <Component id="TABLE_PINJAM" pref="800" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1921,7 +2134,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_DB_DATABUKU" pref="48" max="32767" attributes="0"/>
+                                  <Component id="ICON_DB_DATABUKU" pref="44" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -2083,7 +2296,7 @@
                                           <Component id="TABLE_LIST_DB_BUKU" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_BUKU" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="671" max="32767" attributes="0"/>
+                                              <EmptySpace pref="629" max="32767" attributes="0"/>
                                               <Component id="SEARCH_BUKU" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_BUKU" min="-2" pref="34" max="-2" attributes="0"/>
@@ -2353,7 +2566,7 @@
                                           <Component id="TABLE_KATEGORI" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_KATEGORI" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="732" max="32767" attributes="0"/>
+                                              <EmptySpace pref="690" max="32767" attributes="0"/>
                                               <Component id="SEARCH_KATEGORI" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_KATEGORI" min="-2" pref="34" max="-2" attributes="0"/>
@@ -2555,7 +2768,7 @@
                                           <Component id="TABLE_PENERBIT" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_PENERBIT" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="730" max="32767" attributes="0"/>
+                                              <EmptySpace pref="688" max="32767" attributes="0"/>
                                               <Component id="SEARCH_PENERBIT" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_PENERBIT" min="-2" pref="34" max="-2" attributes="0"/>
@@ -2757,7 +2970,7 @@
                                           <Component id="TABLE_RAK" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="TITLE_FRAME_RAK" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="790" max="32767" attributes="0"/>
+                                              <EmptySpace pref="748" max="32767" attributes="0"/>
                                               <Component id="SEARCH_RAK" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_RAK" min="-2" pref="34" max="-2" attributes="0"/>
@@ -3017,7 +3230,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ICON_U_USER" pref="48" max="32767" attributes="0"/>
+                                  <Component id="ICON_U_USER" pref="44" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -3158,7 +3371,7 @@
                                           <Component id="TABLE_LIST_U_ANGGOTA" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="TITLE_FRAME_USER" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="634" max="32767" attributes="0"/>
+                                              <EmptySpace pref="592" max="32767" attributes="0"/>
                                               <Component id="SEARCH_USER" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_USER" min="-2" pref="34" max="-2" attributes="0"/>
@@ -3420,7 +3633,7 @@
                                   <Component id="TABLE_LIST_JURUSAN" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="TITLE_FRAME_JURUSAN" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="739" max="32767" attributes="0"/>
+                                      <EmptySpace pref="697" max="32767" attributes="0"/>
                                       <Component id="SEARCH_JURUSAN" min="-2" pref="256" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="ICON_ADD_JURUSAN" min="-2" pref="34" max="-2" attributes="0"/>
@@ -3573,7 +3786,7 @@
                                   <Component id="TABLE_LIST_PENGURUS" alignment="1" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="TITLE_FRAME_PENGURUS" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="724" max="32767" attributes="0"/>
+                                      <EmptySpace pref="682" max="32767" attributes="0"/>
                                       <Component id="SEARCH_PENGURUS" min="-2" pref="256" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="ICON_ADD_PENGURUS" min="-2" pref="34" max="-2" attributes="0"/>
@@ -3789,7 +4002,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ICON_SETTING" pref="48" max="32767" attributes="0"/>
+                          <Component id="ICON_SETTING" pref="44" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -3851,7 +4064,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="LABEL_SET_RP" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                                          <Component id="INPUT_SET_1" pref="341" max="32767" attributes="0"/>
+                                          <Component id="INPUT_SET_1" pref="327" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="LABEL_SET_1" max="32767" attributes="0"/>
@@ -3860,7 +4073,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="LABEL_SET_2" pref="366" max="32767" attributes="0"/>
+                                      <Component id="LABEL_SET_2" pref="352" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="INPUT_SET_2" max="32767" attributes="0"/>
                                           <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
@@ -3868,7 +4081,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="LABEL_SET_3" pref="366" max="32767" attributes="0"/>
+                                      <Component id="LABEL_SET_3" pref="353" max="32767" attributes="0"/>
                                       <Component id="INPUT_SET_3" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>

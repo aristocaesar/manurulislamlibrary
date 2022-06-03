@@ -32,7 +32,8 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -110,6 +111,17 @@ public class Dashboard extends javax.swing.JFrame {
             
             PJ_INPUT_JENIS_BUKU_PENGEMBALIAN.disable();
             
+            BTN_CETAK_PENGEMBALIAN.setEnabled(false);
+            
+            TABLE_LIST_PENGEMBALIAN1.getModel().addTableModelListener(new TableModelListener() {
+
+                    @Override
+                    public void tableChanged(TableModelEvent e) {
+                        System.out.println(e.getFirstRow());
+                    }
+                    
+              });
+            
             
             // DATA BUKU
             InputBorder.set(SEARCH_BUKU, 8);
@@ -133,6 +145,7 @@ public class Dashboard extends javax.swing.JFrame {
         if(this.hak_akses.equals("STAF")){
             
             SIDEBAR.remove(BTN_USER);
+            SIDEBAR.remove(BTN_SETTING);
             SIDEBAR.repaint();
             SIDEBAR.revalidate();
             
@@ -220,6 +233,14 @@ public class Dashboard extends javax.swing.JFrame {
         ICON_TR_TRANSAKSI = new javax.swing.JLabel();
         FRAME_TRANSAKSI = new RoundedPanel(15, Color.WHITE);
         F_TR_LAPORAN = new javax.swing.JPanel();
+        F_TB_LAPORAN = new RoundedPanel(15, Color.WHITE);
+        T_LP_TRANSAKSI = new javax.swing.JLabel();
+        T_LP_BUKU_BERMASALAH = new javax.swing.JLabel();
+        T_LP_DENDA = new javax.swing.JLabel();
+        F_TR_CONTENT_LAPORAN = new RoundedPanel(15, Color.WHITE);
+        F_CONTENT_DENDA = new RoundedPanel(15, Color.WHITE);
+        F_CONTENT_BUKU_BERMASALAH = new RoundedPanel(15, Color.WHITE);
+        F_CONTENT_TRANSAKSI = new RoundedPanel(15, Color.WHITE);
         F_TR_KEMBALI = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PENGEMBALIAN = new javax.swing.JLabel();
         BTN_CETAK_PENGEMBALIAN = new javax.swing.JButton();
@@ -574,7 +595,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBARLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(ICON_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -603,7 +624,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(P_TOTAL_BUKULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TITLE_TOTAL_BUKU)
                     .addComponent(VALUE_TOTAL_BUKU))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         P_TOTAL_BUKULayout.setVerticalGroup(
             P_TOTAL_BUKULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -687,7 +708,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(P_BERMASALAHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TITLE_BERMASALAH)
                     .addComponent(VALUE_BERMASALAH))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         P_BERMASALAHLayout.setVerticalGroup(
             P_BERMASALAHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -778,7 +799,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(P_TABLE_LOGLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(P_TABLE_LOGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TABLE_LOG, javax.swing.GroupLayout.DEFAULT_SIZE, 1210, Short.MAX_VALUE)
+                    .addComponent(TABLE_LOG, javax.swing.GroupLayout.DEFAULT_SIZE, 1168, Short.MAX_VALUE)
                     .addGroup(P_TABLE_LOGLayout.createSequentialGroup()
                         .addGroup(P_TABLE_LOGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(P_TABLE_LOGLayout.createSequentialGroup()
@@ -911,24 +932,132 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_TR_LAPORAN)))
                     .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         FRAME_TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
         FRAME_TRANSAKSI.setLayout(new java.awt.CardLayout());
 
-        F_TR_LAPORAN.setBackground(new java.awt.Color(204, 102, 0));
+        F_TR_LAPORAN.setBackground(new java.awt.Color(239, 240, 245));
+
+        F_TB_LAPORAN.setBackground(new java.awt.Color(239, 240, 245));
+
+        T_LP_TRANSAKSI.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        T_LP_TRANSAKSI.setForeground(new java.awt.Color(96, 96, 96));
+        T_LP_TRANSAKSI.setText("Transaksi");
+        T_LP_TRANSAKSI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        T_LP_TRANSAKSI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                T_LP_TRANSAKSIMouseClicked(evt);
+            }
+        });
+
+        T_LP_BUKU_BERMASALAH.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        T_LP_BUKU_BERMASALAH.setForeground(new java.awt.Color(96, 96, 96));
+        T_LP_BUKU_BERMASALAH.setText("Buku Bermasalah");
+        T_LP_BUKU_BERMASALAH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        T_LP_BUKU_BERMASALAH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                T_LP_BUKU_BERMASALAHMouseClicked(evt);
+            }
+        });
+
+        T_LP_DENDA.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        T_LP_DENDA.setForeground(new java.awt.Color(96, 96, 96));
+        T_LP_DENDA.setText("Denda");
+        T_LP_DENDA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        T_LP_DENDA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                T_LP_DENDAMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout F_TB_LAPORANLayout = new javax.swing.GroupLayout(F_TB_LAPORAN);
+        F_TB_LAPORAN.setLayout(F_TB_LAPORANLayout);
+        F_TB_LAPORANLayout.setHorizontalGroup(
+            F_TB_LAPORANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(F_TB_LAPORANLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(T_LP_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(T_LP_BUKU_BERMASALAH, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(T_LP_DENDA)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        F_TB_LAPORANLayout.setVerticalGroup(
+            F_TB_LAPORANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(F_TB_LAPORANLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(F_TB_LAPORANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(T_LP_TRANSAKSI)
+                    .addComponent(T_LP_BUKU_BERMASALAH)
+                    .addComponent(T_LP_DENDA))
+                .addGap(25, 25, 25))
+        );
+
+        F_TR_CONTENT_LAPORAN.setBackground(new java.awt.Color(239, 240, 245));
+        F_TR_CONTENT_LAPORAN.setLayout(new java.awt.CardLayout());
+
+        F_CONTENT_DENDA.setBackground(new java.awt.Color(239, 240, 245));
+
+        javax.swing.GroupLayout F_CONTENT_DENDALayout = new javax.swing.GroupLayout(F_CONTENT_DENDA);
+        F_CONTENT_DENDA.setLayout(F_CONTENT_DENDALayout);
+        F_CONTENT_DENDALayout.setHorizontalGroup(
+            F_CONTENT_DENDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1238, Short.MAX_VALUE)
+        );
+        F_CONTENT_DENDALayout.setVerticalGroup(
+            F_CONTENT_DENDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 557, Short.MAX_VALUE)
+        );
+
+        F_TR_CONTENT_LAPORAN.add(F_CONTENT_DENDA, "card2");
+
+        F_CONTENT_BUKU_BERMASALAH.setBackground(new java.awt.Color(239, 240, 245));
+
+        javax.swing.GroupLayout F_CONTENT_BUKU_BERMASALAHLayout = new javax.swing.GroupLayout(F_CONTENT_BUKU_BERMASALAH);
+        F_CONTENT_BUKU_BERMASALAH.setLayout(F_CONTENT_BUKU_BERMASALAHLayout);
+        F_CONTENT_BUKU_BERMASALAHLayout.setHorizontalGroup(
+            F_CONTENT_BUKU_BERMASALAHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1238, Short.MAX_VALUE)
+        );
+        F_CONTENT_BUKU_BERMASALAHLayout.setVerticalGroup(
+            F_CONTENT_BUKU_BERMASALAHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 557, Short.MAX_VALUE)
+        );
+
+        F_TR_CONTENT_LAPORAN.add(F_CONTENT_BUKU_BERMASALAH, "card2");
+
+        F_CONTENT_TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
+
+        javax.swing.GroupLayout F_CONTENT_TRANSAKSILayout = new javax.swing.GroupLayout(F_CONTENT_TRANSAKSI);
+        F_CONTENT_TRANSAKSI.setLayout(F_CONTENT_TRANSAKSILayout);
+        F_CONTENT_TRANSAKSILayout.setHorizontalGroup(
+            F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1238, Short.MAX_VALUE)
+        );
+        F_CONTENT_TRANSAKSILayout.setVerticalGroup(
+            F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 557, Short.MAX_VALUE)
+        );
+
+        F_TR_CONTENT_LAPORAN.add(F_CONTENT_TRANSAKSI, "card2");
 
         javax.swing.GroupLayout F_TR_LAPORANLayout = new javax.swing.GroupLayout(F_TR_LAPORAN);
         F_TR_LAPORAN.setLayout(F_TR_LAPORANLayout);
         F_TR_LAPORANLayout.setHorizontalGroup(
             F_TR_LAPORANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addComponent(F_TB_LAPORAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(F_TR_CONTENT_LAPORAN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         F_TR_LAPORANLayout.setVerticalGroup(
             F_TR_LAPORANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGroup(F_TR_LAPORANLayout.createSequentialGroup()
+                .addComponent(F_TB_LAPORAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(F_TR_CONTENT_LAPORAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         FRAME_TRANSAKSI.add(F_TR_LAPORAN, "card2");
@@ -1118,7 +1247,7 @@ public class Dashboard extends javax.swing.JFrame {
         CONTAINER_FORMLayout.setHorizontalGroup(
             CONTAINER_FORMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(TABLE_PENGEMBALIAN, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(TABLE_PENGEMBALIAN1, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+            .addComponent(TABLE_PENGEMBALIAN1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addComponent(T_PJ_ALERT_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addGroup(CONTAINER_FORMLayout.createSequentialGroup()
                 .addComponent(T_PJ_BUKU_PENGEMBALIAN1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1321,7 +1450,7 @@ public class Dashboard extends javax.swing.JFrame {
                                 .addComponent(T_PJ_BUKU)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BTN_RESET_DAFTAR_BUKU))
-                            .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE))
+                            .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(F_TR_PINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BTN_CETAK_PINJAMAN, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1392,8 +1521,8 @@ public class Dashboard extends javax.swing.JFrame {
             TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TRANSAKSILayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(TOPBAR_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addComponent(TOPBAR_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(FRAME_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
@@ -1484,7 +1613,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_DB_RAK)))
                     .addGroup(TOPBAR_DATABUKULayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_DB_DATABUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1595,7 +1724,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(TABLE_LIST_DB_BUKU)
                             .addGroup(F_DB_BUKULayout.createSequentialGroup()
                                 .addComponent(TITLE_FRAME_BUKU)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 671, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 629, Short.MAX_VALUE)
                                 .addComponent(SEARCH_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ICON_ADD_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1701,7 +1830,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(TABLE_KATEGORI)
                             .addGroup(F_DB_KATEGORILayout.createSequentialGroup()
                                 .addComponent(TITLE_FRAME_KATEGORI)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 732, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 690, Short.MAX_VALUE)
                                 .addComponent(SEARCH_KATEGORI, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ICON_ADD_KATEGORI, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -1798,7 +1927,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(TABLE_PENERBIT)
                             .addGroup(F_DB_PENERBITLayout.createSequentialGroup()
                                 .addComponent(TITLE_FRAME_PENERBIT)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 730, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 688, Short.MAX_VALUE)
                                 .addComponent(SEARCH_PENERBIT, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ICON_ADD_PENERBIT, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -1895,7 +2024,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(TABLE_RAK)
                             .addGroup(F_DB_RAKLayout.createSequentialGroup()
                                 .addComponent(TITLE_FRAME_RAK)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 790, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 748, Short.MAX_VALUE)
                                 .addComponent(SEARCH_RAK, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ICON_ADD_RAK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -2014,7 +2143,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_U_PENGURUS)))
                     .addGroup(TOPBAR_USERLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -2130,7 +2259,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(TABLE_LIST_U_ANGGOTA)
                             .addGroup(F_U_ANGGOTALayout.createSequentialGroup()
                                 .addComponent(TITLE_FRAME_USER)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 634, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 592, Short.MAX_VALUE)
                                 .addComponent(SEARCH_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ICON_ADD_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2218,7 +2347,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(TABLE_LIST_JURUSAN)
                     .addGroup(F_U_JURUSANLayout.createSequentialGroup()
                         .addComponent(TITLE_FRAME_JURUSAN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 739, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 697, Short.MAX_VALUE)
                         .addComponent(SEARCH_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ICON_ADD_JURUSAN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -2291,7 +2420,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(TABLE_LIST_PENGURUS)
                     .addGroup(F_U_PENGURUSLayout.createSequentialGroup()
                         .addComponent(TITLE_FRAME_PENGURUS)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 724, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 682, Short.MAX_VALUE)
                         .addComponent(SEARCH_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ICON_ADD_PENGURUS, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -2373,7 +2502,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(TOPBAR_SETTINGLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(ICON_SETTING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2425,19 +2554,19 @@ public class Dashboard extends javax.swing.JFrame {
                             .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
                                 .addComponent(LABEL_SET_RP)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
+                                .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
                             .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
                                 .addComponent(LABEL_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(2, 2, 2)))
                         .addGap(63, 63, 63)
                         .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LABEL_SET_2, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                            .addComponent(LABEL_SET_2, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                             .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
                                 .addComponent(INPUT_SET_2)
                                 .addGap(2, 2, 2)))
                         .addGap(63, 63, 63)
                         .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LABEL_SET_3, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                            .addComponent(LABEL_SET_3, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                             .addComponent(INPUT_SET_3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(27, 27, 27))
                     .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
@@ -2510,7 +2639,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(SIDEBAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(MAIN_FRAME, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE)
+                .addComponent(MAIN_FRAME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
@@ -3013,29 +3142,36 @@ public class Dashboard extends javax.swing.JFrame {
             
             int row = TABLE_LIST_PENGEMBALIAN.getSelectedRow();
             
+            String isbn = TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString();
             String status = TABLE_LIST_PENGEMBALIAN.getValueAt(row, 2).toString();
             
-            if(status.equals("Dipinjam")){
-                
-                if(table_pengembalian_daftar_kembali.getValueAt(0, 0) == null){
-                    table_pengembalian_daftar_kembali.setRowCount(0);
-                }
-            
-                table_pengembalian_daftar_kembali.addRow(new String[]{
-                    TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(),
-                    TABLE_LIST_PENGEMBALIAN.getValueAt(row, 1).toString(),
-                    "Dikembalikan"
-                });
-             
-                table_pengembalian_daftar_pinjam.removeRow(row);
-            
-            }else {
-            
-                JOptionPane.showMessageDialog(null, "Buku ini mengalami masalah, lakukan konfirmasi !", "Tidak dapat dikembalikan !", JOptionPane.INFORMATION_MESSAGE);
-  
-                // ubah status
-                new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(), row).setVisible(true);
+            if(!isbn.equals("")){
+                if(status.equals("Dipinjam")){
 
+                    if(table_pengembalian_daftar_kembali.getValueAt(0, 0) == null){
+                        table_pengembalian_daftar_kembali.setRowCount(0);
+                    }
+
+                    table_pengembalian_daftar_kembali.addRow(new String[]{
+                        TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(),
+                        TABLE_LIST_PENGEMBALIAN.getValueAt(row, 1).toString(),
+                        "Dikembalikan"
+                    });
+
+                    table_pengembalian_daftar_pinjam.removeRow(row);
+
+                    if(table_pengembalian_daftar_pinjam.getRowCount() == 0){
+                        table_pengembalian_daftar_pinjam.setRowCount(1);
+                    }
+
+                }else {
+
+                    JOptionPane.showMessageDialog(null, "Buku ini mengalami masalah, lakukan konfirmasi !", "Tidak dapat dikembalikan !", JOptionPane.INFORMATION_MESSAGE);
+
+                    // ubah status
+                    new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), isbn, status, row).setVisible(true);
+
+                }
             }
             
         }
@@ -3048,7 +3184,7 @@ public class Dashboard extends javax.swing.JFrame {
         
             int row = TABLE_LIST_PENGEMBALIAN.getSelectedRow();
             // ubah status
-            new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(), row).setVisible(true);
+            new konfirmasiBukuPengembalian("TR-" + PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 0).toString(), TABLE_LIST_PENGEMBALIAN.getValueAt(row, 2).toString(), row).setVisible(true);
             
         }
         
@@ -3064,6 +3200,11 @@ public class Dashboard extends javax.swing.JFrame {
                 DefaultTableModel table_list_daftar_pinjam = (DefaultTableModel)TABLE_LIST_PENGEMBALIAN.getModel();
                 
                 DefaultTableModel table_pengembalian_daftar_kembali = (DefaultTableModel)TABLE_LIST_PENGEMBALIAN1.getModel();
+                
+//                if(table_list_daftar_pinjam.getValueAt(0, 0).toString().equals("")){
+//                    table_list_daftar_pinjam.setRowCount(0);
+//                }
+                System.out.println(table_list_daftar_pinjam.getValueAt(0, 0));
                 
                 table_list_daftar_pinjam.addRow(new String[]{
                     TABLE_LIST_PENGEMBALIAN1.getValueAt(row, 0).toString(),
@@ -3083,6 +3224,18 @@ public class Dashboard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_TABLE_LIST_PENGEMBALIAN1KeyPressed
+
+    private void T_LP_TRANSAKSIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_LP_TRANSAKSIMouseClicked
+        new SideBar().setLaporanPageSelected("TRANSAKSI");
+    }//GEN-LAST:event_T_LP_TRANSAKSIMouseClicked
+
+    private void T_LP_BUKU_BERMASALAHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_LP_BUKU_BERMASALAHMouseClicked
+        new SideBar().setLaporanPageSelected("BUKU_BERMASALAH");
+    }//GEN-LAST:event_T_LP_BUKU_BERMASALAHMouseClicked
+
+    private void T_LP_DENDAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_LP_DENDAMouseClicked
+        new SideBar().setLaporanPageSelected("DENDA");
+    }//GEN-LAST:event_T_LP_DENDAMouseClicked
 
     /**
      * @param args the command line arguments
@@ -3143,10 +3296,15 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel FRAME_MAIN_SETTING;
     public static javax.swing.JPanel FRAME_TRANSAKSI;
     public static javax.swing.JPanel FRAME_USER;
+    public static javax.swing.JPanel F_CONTENT_BUKU_BERMASALAH;
+    public static javax.swing.JPanel F_CONTENT_DENDA;
+    public static javax.swing.JPanel F_CONTENT_TRANSAKSI;
     public static javax.swing.JPanel F_DB_BUKU;
     public static javax.swing.JPanel F_DB_KATEGORI;
     public static javax.swing.JPanel F_DB_PENERBIT;
     public static javax.swing.JPanel F_DB_RAK;
+    private javax.swing.JPanel F_TB_LAPORAN;
+    public static javax.swing.JPanel F_TR_CONTENT_LAPORAN;
     public static javax.swing.JPanel F_TR_KEMBALI;
     public static javax.swing.JPanel F_TR_LAPORAN;
     public static javax.swing.JPanel F_TR_PINJAM;
@@ -3276,6 +3434,9 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JLabel T_DB_KATEGORI;
     public static javax.swing.JLabel T_DB_PENERBIT;
     public static javax.swing.JLabel T_DB_RAK;
+    public static javax.swing.JLabel T_LP_BUKU_BERMASALAH;
+    public static javax.swing.JLabel T_LP_DENDA;
+    public static javax.swing.JLabel T_LP_TRANSAKSI;
     private javax.swing.JLabel T_PJ_ALERT_PENGEMBALIAN;
     private javax.swing.JLabel T_PJ_ALERT_PENGEMBALIAN1;
     private javax.swing.JLabel T_PJ_BUKU;
@@ -3288,7 +3449,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JLabel T_U_JURUSAN;
     public static javax.swing.JLabel T_U_PENGURUS;
     public static javax.swing.JPanel USER;
-    private javax.swing.JLabel USERNAME;
+    public static javax.swing.JLabel USERNAME;
     public static javax.swing.JLabel USERNAME_DATABUKU;
     public static javax.swing.JLabel USERNAME_SETTING;
     public static javax.swing.JLabel USERNAME_TRANSAKSI;
