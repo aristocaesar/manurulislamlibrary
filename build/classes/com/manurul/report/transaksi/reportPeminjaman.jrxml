@@ -162,7 +162,7 @@ WHERE
 				<reportElement x="0" y="151" width="539" height="1"/>
 			</line>
 			<image>
-				<reportElement x="184" y="8" width="171" height="41"/>
+				<reportElement x="163" y="8" width="215" height="41"/>
 				<imageExpression><![CDATA[$P{barcode}]]></imageExpression>
 			</image>
 		</band>

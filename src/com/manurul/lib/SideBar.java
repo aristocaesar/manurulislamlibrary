@@ -88,36 +88,71 @@ public class SideBar {
     
     public void setTransaksiPageSelected(String selected){
             
-            Dashboard.FRAME_TRANSAKSI.removeAll();
+        Dashboard.FRAME_TRANSAKSI.removeAll();
+
+        Dashboard.T_TR_PINJAM.setForeground(new Color(96, 96, 96));
+        Dashboard.T_TR_KEMBALI.setForeground(new Color(96, 96, 96));
+        Dashboard.T_TR_LAPORAN.setForeground(new Color(96, 96, 96));
+
+        if(selected.equals("PINJAM")){
+
+            Dashboard.FRAME_TRANSAKSI.add(Dashboard.F_TR_PINJAM);
+
+            Dashboard.T_TR_PINJAM.setForeground(new Color(78, 204, 121));
+
+        }else if(selected.equals("KEMBALI")){
+
+            Dashboard.FRAME_TRANSAKSI.add(Dashboard.F_TR_KEMBALI);
+
+            Dashboard.T_TR_KEMBALI.setForeground(new Color(78, 204, 121));
+
+        }else{
+
+            Dashboard.FRAME_TRANSAKSI.add(Dashboard.F_TR_LAPORAN);
+
+            Dashboard.T_TR_LAPORAN.setForeground(new Color(78, 204, 121));
             
-            Dashboard.T_TR_PINJAM.setForeground(new Color(96, 96, 96));
-            Dashboard.T_TR_KEMBALI.setForeground(new Color(96, 96, 96));
-            Dashboard.T_TR_LAPORAN.setForeground(new Color(96, 96, 96));
-            
-            if(selected.equals("PINJAM")){
-                
-                Dashboard.FRAME_TRANSAKSI.add(Dashboard.F_TR_PINJAM);
-                
-                Dashboard.T_TR_PINJAM.setForeground(new Color(78, 204, 121));
-                
-            }else if(selected.equals("KEMBALI")){
-            
-                Dashboard.FRAME_TRANSAKSI.add(Dashboard.F_TR_KEMBALI);
-                
-                Dashboard.T_TR_KEMBALI.setForeground(new Color(78, 204, 121));
-                
-            }else{
-            
-                Dashboard.FRAME_TRANSAKSI.add(Dashboard.F_TR_LAPORAN);
-                
-                Dashboard.T_TR_LAPORAN.setForeground(new Color(78, 204, 121));
-                
-            }
-            
-            Dashboard.FRAME_TRANSAKSI.repaint();
-            Dashboard.FRAME_TRANSAKSI.revalidate();
-        
+            setLaporanPageSelected("TRANSAKSI");
+
         }
+
+        Dashboard.FRAME_TRANSAKSI.repaint();
+        Dashboard.FRAME_TRANSAKSI.revalidate();
+
+    }
+    
+    // TRANSAKSI - LAPORAN
+    public void setLaporanPageSelected(String selected){
+    
+        Dashboard.F_TR_CONTENT_LAPORAN.removeAll();
+        
+        Dashboard.T_LP_TRANSAKSI.setForeground(new Color(96, 96, 96));
+        Dashboard.T_LP_BUKU_BERMASALAH.setForeground(new Color(96, 96, 96));
+        Dashboard.T_LP_DENDA.setForeground(new Color(96, 96, 96));
+        
+        if(selected.equals("TRANSAKSI")){
+        
+            Dashboard.F_TR_CONTENT_LAPORAN.add(Dashboard.F_CONTENT_TRANSAKSI);
+            
+            Dashboard.T_LP_TRANSAKSI.setForeground(new Color(78, 204, 121));
+            
+        }else if(selected.equals("BUKU_BERMASALAH")){
+            
+            Dashboard.F_TR_CONTENT_LAPORAN.add(Dashboard.F_CONTENT_BUKU_BERMASALAH);
+            
+            Dashboard.T_LP_BUKU_BERMASALAH.setForeground(new Color(78, 204, 121));
+            
+        }else{
+            
+            Dashboard.F_TR_CONTENT_LAPORAN.add(Dashboard.F_CONTENT_DENDA);
+            Dashboard.T_LP_DENDA.setForeground(new Color(78, 204, 121));
+            
+        }
+        
+        Dashboard.F_TR_CONTENT_LAPORAN.repaint();
+        Dashboard.F_TR_CONTENT_LAPORAN.revalidate();
+        
+    }
     
     // BUKU
     
@@ -164,9 +199,9 @@ public class SideBar {
         
     }
     
+    
+    // USER
     public void setUserPageSelected(String selected){
-        
-//            new AnggotaModel().getDataTable("", "Semua", 25);
             
             Dashboard.FRAME_USER.removeAll();
             

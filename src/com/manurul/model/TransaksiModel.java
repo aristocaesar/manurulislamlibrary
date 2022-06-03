@@ -480,7 +480,7 @@ public class TransaksiModel extends DBConfig{
                 try{
                 
                     Linear barcode = new Linear();
-                    barcode.setType(Linear.CODE128A);
+                    barcode.setType(Linear.CODE128B);
                     barcode.setData(id_transaksi);
                     barcode.setI(11.0f);
                     barcodePath = filePath.getAbsolutePath();
