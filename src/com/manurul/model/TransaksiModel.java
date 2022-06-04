@@ -636,7 +636,7 @@ public class TransaksiModel extends DBConfig{
                         table_detail_buku.addRow(new Object[]{
                             res_detail.getString("isbn"),
                             res_detail.getString("judul"),
-                            masa <= epoch ? "Bermasalah" : "Dipinjam"
+                            masa <= epoch ? "Bermasalah - Terlambat" : "Dipinjam"
                         });
                         
                     }else{
@@ -644,13 +644,16 @@ public class TransaksiModel extends DBConfig{
                         table_list_buku_pengembalian.addRow(new Object[]{
                             res_detail.getString("isbn"),
                             res_detail.getString("judul"),
-                            res_detail.getString("denda") != null ? "Dikembalikan - LUNAS" : "Dikembalikan"
+                            res_detail.getString("denda") != null ? "Dikembalikan - LUNAS" : "Dikembalikan - SELESAI"
                         });
                         
                     }
                     
                 }
                 
+                if(table_detail_buku.getRowCount() == 0){
+                    table_detail_buku.setRowCount(1);
+                }
                 if(table_list_buku_pengembalian.getRowCount() == 0){
                     table_list_buku_pengembalian.setRowCount(1);
                 }
@@ -770,6 +773,10 @@ public class TransaksiModel extends DBConfig{
             table_list_kembali.addRow(new String[]{col_isbn, col_judul, col_status});
             
             table_list_pinjam.removeRow(row);
+            
+            if(table_list_pinjam.getRowCount() == 0){
+                table_list_pinjam.setRowCount(1);
+            }
             
             JOptionPane.showMessageDialog(null, "Pembayaran dan status berhasil diperbarui !", "Sukses !", JOptionPane.INFORMATION_MESSAGE);
             
