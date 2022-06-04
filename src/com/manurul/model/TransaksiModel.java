@@ -497,6 +497,10 @@ public class TransaksiModel extends DBConfig{
                 Report = getClass().getResourceAsStream(fileName);
 
                 HashMap hash = new HashMap();
+                
+                File logoPath = new File("src/com/manurul/src/LOGO_MANURUL.png");
+                
+                hash.put("logo", logoPath.toString());
                 hash.put("id_transaksi", id_transaksi);
                 hash.put("nama_lengkap", getNama());
                 
@@ -562,14 +566,12 @@ public class TransaksiModel extends DBConfig{
         // reset form list buku yang dikembalikan
         DefaultTableModel table_list_buku_pengembalian = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN1.getModel();
 
-        table_list_buku_pengembalian.setRowCount(0);
-        table_list_buku_pengembalian.setRowCount(1);
-
         try{
 
             // SET DATA PENGEMBALIAN
             String sql = "SELECT "
                     + "ma_transaksi.id_transaksi AS id_transaksi"
+                    + ",ma_transaksi.status_transaksi AS status_transaksi"
                     + ",ma_anggota.nis AS nis"
                     + ",ma_anggota.nama_lengkap AS nama_lengkap"
                     + ",ma_transaksi.jenis_buku AS jenis_buku"
@@ -585,6 +587,10 @@ public class TransaksiModel extends DBConfig{
             ResultSet res = pst.executeQuery();
 
             if(res.next()){
+                
+                if(res.getString("status_transaksi").equals("SELESAI")){
+                    throw new SQLException("Transaksi Buku sudah berakhir !");
+                }
 
                 Dashboard.PJ_INPUT_PEMINJAM_PENGEMBALIAN.setText(res.getString("nis") + " - " + res.getString("nama_lengkap"));
                 int jenisIndex = 0;
@@ -617,20 +623,36 @@ public class TransaksiModel extends DBConfig{
                 ResultSet res_detail = pst_detail.executeQuery();
 
                 table_detail_buku.setRowCount(0);
+                table_list_buku_pengembalian.setRowCount(0);
 
-                int i = 0;
                 while(res_detail.next()){
                     
                     // cek apakah buku terlambat
                     Long epoch = Long.parseLong(GenKode.getTimeMiliSecond());
                     Long masa = Long.parseLong(res_detail.getString("masa_pinjam"));
                     
-                    table_detail_buku.addRow(new Object[]{
-                        res_detail.getString("isbn"),
-                        res_detail.getString("judul"),
-                        masa <= epoch ? "Bermasalah" : "Dipinjam"
-                    });
-                    i++;
+                    if(!res_detail.getString("status_buku").equals("Dikembalikan")){
+                    
+                        table_detail_buku.addRow(new Object[]{
+                            res_detail.getString("isbn"),
+                            res_detail.getString("judul"),
+                            masa <= epoch ? "Bermasalah" : "Dipinjam"
+                        });
+                        
+                    }else{
+                    
+                        table_list_buku_pengembalian.addRow(new Object[]{
+                            res_detail.getString("isbn"),
+                            res_detail.getString("judul"),
+                            res_detail.getString("denda") != null ? "Dikembalikan - LUNAS" : "Dikembalikan"
+                        });
+                        
+                    }
+                    
+                }
+                
+                if(table_list_buku_pengembalian.getRowCount() == 0){
+                    table_list_buku_pengembalian.setRowCount(1);
                 }
 
             }else{
@@ -715,6 +737,46 @@ public class TransaksiModel extends DBConfig{
         
             JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
             
+        }
+        
+    }
+    
+    public void updateBukuBermasalah(String id_transaksi, String isbn, String nominal, int row){
+        
+        try{
+            
+            String sql = "UPDATE ma_detail_transaksi SET status_buku = 'Dikembalikan', jumlah_denda = ? WHERE id_transaksi = ? AND isbn =  ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, nominal);
+            pst.setString(2, id_transaksi);
+            pst.setString(3, isbn);
+            
+            if(pst.execute()){
+                throw new Exception("Gagal memperbarui status buku !");
+            }
+            
+            // UBAH ROW BUKU KE TABLE PENGEMBALIAN
+            DefaultTableModel table_list_pinjam = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+            DefaultTableModel table_list_kembali = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN1.getModel();
+            
+            String col_isbn = table_list_pinjam.getValueAt(row, 0).toString();
+            String col_judul = table_list_pinjam.getValueAt(row, 1).toString();
+            String col_status = "Dikembalikan - LUNAS";
+            
+            if(table_list_kembali.getValueAt(0, 0) == null){
+                table_list_kembali.setRowCount(0);
+            }
+            
+            table_list_kembali.addRow(new String[]{col_isbn, col_judul, col_status});
+            
+            table_list_pinjam.removeRow(row);
+            
+            JOptionPane.showMessageDialog(null, "Pembayaran dan status berhasil diperbarui !", "Sukses !", JOptionPane.INFORMATION_MESSAGE);
+            
+        }catch(Exception error){
+            
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+        
         }
         
     }

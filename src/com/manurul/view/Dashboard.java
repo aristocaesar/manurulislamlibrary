@@ -111,16 +111,16 @@ public class Dashboard extends javax.swing.JFrame {
             
             PJ_INPUT_JENIS_BUKU_PENGEMBALIAN.disable();
             
-            BTN_CETAK_PENGEMBALIAN.setEnabled(false);
+//            BTN_CETAK_PENGEMBALIAN.setEnabled(false);
             
-            TABLE_LIST_PENGEMBALIAN1.getModel().addTableModelListener(new TableModelListener() {
-
-                    @Override
-                    public void tableChanged(TableModelEvent e) {
-                        System.out.println(e.getFirstRow());
-                    }
-                    
-              });
+//            TABLE_LIST_PENGEMBALIAN1.getModel().addTableModelListener(new TableModelListener() {
+//
+//                    @Override
+//                    public void tableChanged(TableModelEvent e) {
+//                        System.out.println(e.getFirstRow());
+//                    }
+//                    
+//              });
             
             
             // DATA BUKU
@@ -3201,23 +3201,29 @@ public class Dashboard extends javax.swing.JFrame {
                 
                 DefaultTableModel table_pengembalian_daftar_kembali = (DefaultTableModel)TABLE_LIST_PENGEMBALIAN1.getModel();
                 
-//                if(table_list_daftar_pinjam.getValueAt(0, 0).toString().equals("")){
-//                    table_list_daftar_pinjam.setRowCount(0);
-//                }
-                System.out.println(table_list_daftar_pinjam.getValueAt(0, 0));
+                if(!table_pengembalian_daftar_kembali.getValueAt(row, 2).toString().contains("LUNAS")){
                 
-                table_list_daftar_pinjam.addRow(new String[]{
-                    TABLE_LIST_PENGEMBALIAN1.getValueAt(row, 0).toString(),
-                    TABLE_LIST_PENGEMBALIAN1.getValueAt(row, 1).toString(),
-                    "Dipinjam"
-                });
+                    if(table_list_daftar_pinjam.getValueAt(0, 0) == null){
+                        table_list_daftar_pinjam.setRowCount(0);
+                    }
+
+                    table_list_daftar_pinjam.addRow(new String[]{
+                        TABLE_LIST_PENGEMBALIAN1.getValueAt(row, 0).toString(),
+                        TABLE_LIST_PENGEMBALIAN1.getValueAt(row, 1).toString(),
+                        "Dipinjam"
+                    });
+
+                    table_pengembalian_daftar_kembali.removeRow(row);
+
+                    if(table_pengembalian_daftar_kembali.getRowCount() == 0){
+                        table_pengembalian_daftar_kembali.setRowCount(1);
+                    }
+                    
+                }else{
                 
-                table_pengembalian_daftar_kembali.removeRow(row);
+                    JOptionPane.showMessageDialog(null, "Buku telah dikembalikan !", "Informasi !", JOptionPane.INFORMATION_MESSAGE);
                 
-                if(table_pengembalian_daftar_kembali.getRowCount() == 0){
-                    table_pengembalian_daftar_kembali.setRowCount(1);
                 }
-                
                 
             }
             

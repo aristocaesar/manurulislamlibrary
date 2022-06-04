@@ -10,6 +10,8 @@ import com.manurul.lib.RoundedPanel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,10 +22,15 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
     /**
      * Creates new form konfirmasiBukuPengembalian
      */
+    private String id_transaksi;
+    private String isbn;
+    private int row;
     private String status;
     public static String HARGA_BUKU;
     public static int HARI_TERLAMBAT;
     public static double DENDA_TERLAMBAT;
+    
+    private boolean konfirmasi_bayar = false;
     
     public konfirmasiBukuPengembalian(String id_transaksi, String isbn, String status_buku , int row) {
         initComponents();
@@ -47,6 +54,11 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         // GET DATA FROM DATABASE
         Dashboard.TM.getDetailBukuPengembalian(id_transaksi, isbn, row);
         
+        // SETTER
+        this.id_transaksi = id_transaksi;
+        this.isbn = isbn;
+        this.row = row;
+        this.status = status_buku;
         
         // CHECK BUKU FROM STATUS PINJAM OR BERMASALAH
         
@@ -92,7 +104,6 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
     private void initComponents() {
 
         CONTAINER = new RoundedPanel(15, Color.WHITE);
-        BTN_KONFIRMASI = new javax.swing.JButton();
         LABEL_JUDUL = new javax.swing.JLabel();
         INPUT_JUDUL = new javax.swing.JTextField();
         LABEL_STATUS = new javax.swing.JLabel();
@@ -104,12 +115,6 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         INPUT_BAYAR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        BTN_KONFIRMASI.setBackground(new java.awt.Color(0, 171, 60));
-        BTN_KONFIRMASI.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
-        BTN_KONFIRMASI.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_KONFIRMASI.setText("KONFIRMASI");
-        BTN_KONFIRMASI.setBorder(null);
 
         LABEL_JUDUL.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         LABEL_JUDUL.setText("Judul Buku");
@@ -155,6 +160,11 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         INPUT_BAYAR.setForeground(new java.awt.Color(255, 255, 255));
         INPUT_BAYAR.setText("BAYAR");
         INPUT_BAYAR.setBorder(null);
+        INPUT_BAYAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                INPUT_BAYARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout CONTAINERLayout = new javax.swing.GroupLayout(CONTAINER);
         CONTAINER.setLayout(CONTAINERLayout);
@@ -166,7 +176,6 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
                     .addComponent(INPUT_STATUS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LABEL_JUDUL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(INPUT_JUDUL, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BTN_KONFIRMASI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LABEL_STATUS, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LABEL_MASALAH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LABEL_DENDA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,8 +207,6 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(INPUT_DENDA, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(INPUT_BAYAR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(BTN_KONFIRMASI, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
 
@@ -216,7 +223,7 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(CONTAINER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CONTAINER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
 
@@ -231,9 +238,27 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         INPUT_BAYAR.setEnabled(false);
             
         if(INPUT_STATUS.getSelectedItem().equals("Bermasalah")){
-            INPUT_MASALAH.setEnabled(true);
-            INPUT_DENDA.setEnabled(true);
-            INPUT_BAYAR.setEnabled(true);
+            
+            if(this.status.equals("Dipinjam")){
+                
+                int konfirmasiBermasalah = JOptionPane.showConfirmDialog(null, "Apakah buku ini bermasalah ?", "Konfirmasi !", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
+                
+                if(konfirmasiBermasalah == 0){
+                
+                    DefaultTableModel table_list_pinjam = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+                    table_list_pinjam.setValueAt("Bermasalah", row, 2);
+                    
+                    INPUT_MASALAH.setEnabled(true);
+                    INPUT_DENDA.setEnabled(true);
+                    INPUT_BAYAR.setEnabled(true);
+                    
+                }else{
+                    
+                    INPUT_STATUS.setSelectedIndex(0);
+                    
+                }
+                
+            }
         }
         
     }//GEN-LAST:event_INPUT_STATUSActionPerformed
@@ -247,6 +272,28 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_INPUT_MASALAHActionPerformed
+
+    private void INPUT_BAYARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_INPUT_BAYARMouseClicked
+        
+        String nominalSanksi = HARGA_BUKU;
+        if(INPUT_DENDA.getText().contains("-")){
+        
+            nominalSanksi = String.valueOf(DENDA_TERLAMBAT);
+            
+        }
+        
+        int konfirmasiBayar = JOptionPane.showConfirmDialog(null, "Peminjam melakukan pembayaran \n denda nominal (Rp."+nominalSanksi+") ", "Konfirmasi Pembayaran !", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        if(konfirmasiBayar == 0){
+            
+            // UPDATE DATA BUKU MENJADI DIKEMBALIKAN
+            // DAN UPDATE NOMINAL
+            Dashboard.TM.updateBukuBermasalah(id_transaksi, isbn, nominalSanksi, this.row);
+            this.dispose();
+            
+        }
+        
+    }//GEN-LAST:event_INPUT_BAYARMouseClicked
 
     /**
      * @param args the command line arguments
@@ -284,7 +331,6 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_KONFIRMASI;
     private javax.swing.JPanel CONTAINER;
     private javax.swing.JButton INPUT_BAYAR;
     public static javax.swing.JTextField INPUT_DENDA;
