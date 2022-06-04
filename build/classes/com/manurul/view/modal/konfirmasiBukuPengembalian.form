@@ -52,6 +52,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="BTN_KONFIRMASI" max="32767" attributes="0"/>
                       <Component id="INPUT_STATUS" max="32767" attributes="0"/>
                       <Component id="LABEL_JUDUL" max="32767" attributes="0"/>
                       <Component id="INPUT_JUDUL" alignment="0" max="32767" attributes="0"/>
@@ -62,7 +63,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="INPUT_DENDA" min="-2" pref="331" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="INPUT_BAYAR" pref="160" max="32767" attributes="0"/>
+                          <Component id="INPUT_BAYAR" pref="157" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -91,6 +92,8 @@
                       <Component id="INPUT_DENDA" pref="35" max="32767" attributes="0"/>
                       <Component id="INPUT_BAYAR" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="BTN_KONFIRMASI" min="-2" pref="48" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -227,6 +230,23 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="INPUT_BAYARMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="BTN_KONFIRMASI">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="3c" green="ab" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Trebuchet MS" size="16" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="KONFIRMASI"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_KONFIRMASIMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

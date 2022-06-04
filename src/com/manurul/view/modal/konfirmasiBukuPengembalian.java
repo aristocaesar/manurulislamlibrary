@@ -66,6 +66,8 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         
         if(status_buku.equals("Dipinjam")){
         
+            this.setSize(595, 480);
+            
             INPUT_STATUS.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Dipinjam", "Bermasalah"}));
             INPUT_STATUS.setSelectedItem(1);
             
@@ -77,10 +79,29 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
             
             INPUT_DENDA.setText("Rp. " + HARGA_BUKU);
             
-        }else if(status_buku.equals("Bermasalah")){
+        }else if(status_buku.contains("Bermasalah")){
         
-            INPUT_STATUS.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Bermasalah"}));
-            INPUT_MASALAH.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Terlambat", "Rusak", "Hilang"}));
+            
+            
+            if(!status_buku.equals("Bermasalah - Terlambat")){
+                
+                this.setSize(595, 480);
+                
+                INPUT_STATUS.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Dipinjam", "Bermasalah"}));
+                INPUT_MASALAH.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Rusak", "Hilang"}));
+                
+                BTN_KONFIRMASI.setVisible(true);
+            }else{
+                INPUT_STATUS.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Bermasalah"}));
+                INPUT_MASALAH.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Terlambat", "Rusak", "Hilang"}));
+                
+                this.setSize(595, 440);
+                BTN_KONFIRMASI.setVisible(false);
+            }
+            
+            String splitStatus[] = status_buku.split("-");
+            INPUT_STATUS.setSelectedItem(splitStatus[0].trim());
+            INPUT_MASALAH.setSelectedItem(splitStatus[1].trim());
             
             INPUT_MASALAH.setEnabled(true);
             INPUT_DENDA.setEnabled(true);
@@ -113,6 +134,7 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         INPUT_DENDA = new javax.swing.JTextField();
         INPUT_MASALAH = new javax.swing.JComboBox<>();
         INPUT_BAYAR = new javax.swing.JButton();
+        BTN_KONFIRMASI = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -166,6 +188,16 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
             }
         });
 
+        BTN_KONFIRMASI.setBackground(new java.awt.Color(0, 171, 60));
+        BTN_KONFIRMASI.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
+        BTN_KONFIRMASI.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_KONFIRMASI.setText("KONFIRMASI");
+        BTN_KONFIRMASI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_KONFIRMASIMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout CONTAINERLayout = new javax.swing.GroupLayout(CONTAINER);
         CONTAINER.setLayout(CONTAINERLayout);
         CONTAINERLayout.setHorizontalGroup(
@@ -173,6 +205,7 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CONTAINERLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BTN_KONFIRMASI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(INPUT_STATUS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(LABEL_JUDUL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(INPUT_JUDUL, javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +216,7 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CONTAINERLayout.createSequentialGroup()
                         .addComponent(INPUT_DENDA, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(INPUT_BAYAR, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
+                        .addComponent(INPUT_BAYAR, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
         CONTAINERLayout.setVerticalGroup(
@@ -207,6 +240,8 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
                 .addGroup(CONTAINERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(INPUT_DENDA, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(INPUT_BAYAR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(BTN_KONFIRMASI, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
 
@@ -238,27 +273,11 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
         INPUT_BAYAR.setEnabled(false);
             
         if(INPUT_STATUS.getSelectedItem().equals("Bermasalah")){
-            
-            if(this.status.equals("Dipinjam")){
-                
-                int konfirmasiBermasalah = JOptionPane.showConfirmDialog(null, "Apakah buku ini bermasalah ?", "Konfirmasi !", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
-                
-                if(konfirmasiBermasalah == 0){
-                
-                    DefaultTableModel table_list_pinjam = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
-                    table_list_pinjam.setValueAt("Bermasalah", row, 2);
                     
-                    INPUT_MASALAH.setEnabled(true);
-                    INPUT_DENDA.setEnabled(true);
-                    INPUT_BAYAR.setEnabled(true);
+            INPUT_MASALAH.setEnabled(true);
+            INPUT_DENDA.setEnabled(true);
+            INPUT_BAYAR.setEnabled(true);
                     
-                }else{
-                    
-                    INPUT_STATUS.setSelectedIndex(0);
-                    
-                }
-                
-            }
         }
         
     }//GEN-LAST:event_INPUT_STATUSActionPerformed
@@ -282,18 +301,44 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
             
         }
         
-        int konfirmasiBayar = JOptionPane.showConfirmDialog(null, "Peminjam melakukan pembayaran \n denda nominal (Rp."+nominalSanksi+") ", "Konfirmasi Pembayaran !", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int konfirmasiBayar = JOptionPane.showConfirmDialog(null, "Peminjam melakukan pembayaran denda nominal (Rp."+nominalSanksi+") ", "Konfirmasi Pembayaran !", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         
         if(konfirmasiBayar == 0){
             
             // UPDATE DATA BUKU MENJADI DIKEMBALIKAN
             // DAN UPDATE NOMINAL
             Dashboard.TM.updateBukuBermasalah(id_transaksi, isbn, nominalSanksi, this.row);
+            
             this.dispose();
             
         }
         
     }//GEN-LAST:event_INPUT_BAYARMouseClicked
+
+    private void BTN_KONFIRMASIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_KONFIRMASIMouseClicked
+        
+        DefaultTableModel daftar_pinjam = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+        
+        if(INPUT_STATUS.getSelectedItem().equals("Dipinjam")){
+        
+            daftar_pinjam.setValueAt("Dipinjam", row, 2);
+            
+            this.dispose();
+            
+        }else{
+            String masalah = INPUT_MASALAH.getSelectedItem().toString();
+            int konfirmasiBermasalah = JOptionPane.showConfirmDialog(null, "Status buku ini akan diubah menjadi bermasalah ("+masalah+") ? ", "Konfirmasi !", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            
+            if(konfirmasiBermasalah == 0){
+            
+                daftar_pinjam.setValueAt("Bermasalah - " + masalah, row, 2);
+                this.dispose();
+                
+            }
+        
+        }
+        
+    }//GEN-LAST:event_BTN_KONFIRMASIMouseClicked
 
     /**
      * @param args the command line arguments
@@ -331,6 +376,7 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTN_KONFIRMASI;
     private javax.swing.JPanel CONTAINER;
     private javax.swing.JButton INPUT_BAYAR;
     public static javax.swing.JTextField INPUT_DENDA;
