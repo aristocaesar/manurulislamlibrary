@@ -22,6 +22,7 @@ import com.manurul.model.SettingModel;
 import com.manurul.model.TransaksiModel;
 import com.manurul.view.modal.BukuDATABUKU;
 import com.manurul.view.modal.KategoriDATABUKU;
+import com.manurul.view.modal.KonfirmasiPengembalian;
 import com.manurul.view.modal.PenerbitDATABUKU;
 import com.manurul.view.modal.PengurusUSER;
 import com.manurul.view.modal.RakDATABUKU;
@@ -828,7 +829,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(LABEL_TAMPILKAN)
                     .addComponent(SORT_LIST_LOG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(TABLE_LOG, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(TABLE_LOG, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
 
@@ -930,18 +931,14 @@ public class Dashboard extends javax.swing.JFrame {
         TOPBAR_TRANSAKSILayout.setVerticalGroup(
             TOPBAR_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
-                .addGroup(TOPBAR_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(TOPBAR_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(T_TR_PINJAM)
-                            .addComponent(USERNAME_TRANSAKSI)
-                            .addComponent(T_TR_KEMBALI)
-                            .addComponent(T_TR_LAPORAN)))
-                    .addGroup(TOPBAR_TRANSAKSILayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)))
+                .addGap(25, 25, 25)
+                .addGroup(TOPBAR_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(T_TR_PINJAM)
+                    .addComponent(USERNAME_TRANSAKSI)
+                    .addComponent(T_TR_KEMBALI)
+                    .addComponent(T_TR_LAPORAN))
                 .addContainerGap())
+            .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
         );
 
         FRAME_TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
@@ -1018,7 +1015,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
         F_CONTENT_DENDALayout.setVerticalGroup(
             F_CONTENT_DENDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGap(0, 558, Short.MAX_VALUE)
         );
 
         F_TR_CONTENT_LAPORAN.add(F_CONTENT_DENDA, "card2");
@@ -1033,7 +1030,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
         F_CONTENT_BUKU_BERMASALAHLayout.setVerticalGroup(
             F_CONTENT_BUKU_BERMASALAHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGap(0, 558, Short.MAX_VALUE)
         );
 
         F_TR_CONTENT_LAPORAN.add(F_CONTENT_BUKU_BERMASALAH, "card2");
@@ -1048,7 +1045,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
         F_CONTENT_TRANSAKSILayout.setVerticalGroup(
             F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGap(0, 558, Short.MAX_VALUE)
         );
 
         F_TR_CONTENT_LAPORAN.add(F_CONTENT_TRANSAKSI, "card2");
@@ -1064,7 +1061,7 @@ public class Dashboard extends javax.swing.JFrame {
             F_TR_LAPORANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(F_TR_LAPORANLayout.createSequentialGroup()
                 .addComponent(F_TB_LAPORAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(F_TR_CONTENT_LAPORAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1140,7 +1137,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         PJ_LABEL_PENGURUS_PENGEMBALIAN.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         PJ_LABEL_PENGURUS_PENGEMBALIAN.setForeground(new java.awt.Color(96, 96, 96));
-        PJ_LABEL_PENGURUS_PENGEMBALIAN.setText("Pengurus");
+        PJ_LABEL_PENGURUS_PENGEMBALIAN.setText("Pengurus Peminjaman");
 
         PJ_INPUT_PENGURUS_PENGEMBALIAN.setEditable(false);
         PJ_INPUT_PENGURUS_PENGEMBALIAN.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
@@ -1270,13 +1267,13 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(CONTAINER_FORMLayout.createSequentialGroup()
                 .addComponent(T_PJ_BUKU_PENGEMBALIAN)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TABLE_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addComponent(TABLE_PENGEMBALIAN, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(T_PJ_ALERT_PENGEMBALIAN, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(T_PJ_BUKU_PENGEMBALIAN1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TABLE_PENGEMBALIAN1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addComponent(TABLE_PENGEMBALIAN1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                 .addGap(17, 17, 17)
                 .addComponent(T_PJ_ALERT_PENGEMBALIAN1))
         );
@@ -1338,7 +1335,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(PJ_LABEL_PENGURUS_PENGEMBALIAN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PJ_INPUT_PENGURUS_PENGEMBALIAN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addComponent(BTN_CETAK_PENGEMBALIAN, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(CONTAINER_FORM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
@@ -1486,7 +1483,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(BTN_RESET_DAFTAR_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(T_PJ_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
+                        .addComponent(TABLE_PINJAM, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE))
                     .addGroup(F_TR_PINJAMLayout.createSequentialGroup()
                         .addComponent(PJ_ID_TRANSAKSI)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1529,7 +1526,7 @@ public class Dashboard extends javax.swing.JFrame {
             TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TRANSAKSILayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(TOPBAR_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TOPBAR_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(FRAME_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
@@ -1753,7 +1750,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_EXPORT_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_BUKU))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_LIST_DB_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addComponent(TABLE_LIST_DB_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(F_DB_BUKULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(F_DB_BUKULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1853,7 +1850,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_ADD_KATEGORI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_KATEGORI))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_KATEGORI, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addComponent(TABLE_KATEGORI, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(F_DB_KATEGORILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TAMPILKAN_KATEGORI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1950,7 +1947,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_ADD_PENERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_PENERBIT))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_PENERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addComponent(TABLE_PENERBIT, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(F_DB_PENERBITLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TAMPILKAN_PENERBIT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2047,7 +2044,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_ADD_RAK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_RAK))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_RAK, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addComponent(TABLE_RAK, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(F_DB_RAKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TAMPILKAN_RAK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2151,7 +2148,7 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(T_U_PENGURUS)))
                     .addGroup(TOPBAR_USERLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(ICON_U_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -2370,7 +2367,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_ADD_JURUSAN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_JURUSAN))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_LIST_JURUSAN, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addComponent(TABLE_LIST_JURUSAN, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
         );
 
@@ -2443,7 +2440,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(ICON_ADD_PENGURUS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_PENGURUS))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_LIST_PENGURUS, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addComponent(TABLE_LIST_PENGURUS, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
         );
 
@@ -2464,8 +2461,8 @@ public class Dashboard extends javax.swing.JFrame {
             USERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(USERLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(TOPBAR_USER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addComponent(TOPBAR_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(FRAME_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
@@ -3100,7 +3097,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_PJ_INPUT_JENIS_BUKUActionPerformed
 
     private void BTN_CETAK_PENGEMBALIANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_CETAK_PENGEMBALIANMouseClicked
-        // TODO add your handling code here:
+        new KonfirmasiPengembalian().setVisible(true);
     }//GEN-LAST:event_BTN_CETAK_PENGEMBALIANMouseClicked
 
     private void PJ_INPUT_PEMINJAM_PENGEMBALIANKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PJ_INPUT_PEMINJAM_PENGEMBALIANKeyPressed

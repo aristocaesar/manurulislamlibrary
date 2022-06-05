@@ -46,9 +46,6 @@ public class TransaksiModel extends DBConfig{
 
     private Connection conn = (Connection)DBConfig.getConnection();
 
-    // dashboard
-//    DefaultTableModel table_pinjam_model = new DefaultTableModel();
-
     // getPeminjamTransaksi
     DefaultTableModel table_model = new DefaultTableModel();
 
@@ -427,11 +424,12 @@ public class TransaksiModel extends DBConfig{
 
             Timestamp dateNow =  new SqlTime().getTimeStamp();
 
-            String sql_transaksi = "INSERT INTO ma_transaksi VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql_transaksi = "INSERT INTO ma_transaksi VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst_transaksi = conn.prepareStatement(sql_transaksi);
             pst_transaksi.setString(1, id_transaksi);
             pst_transaksi.setString(2, nis_peminjam);
             pst_transaksi.setString(3, kode_pengurus);
+            pst_transaksi.setString(4, null);
 
             if(jenis_buku.contains("UMUM")){
                 jenis_buku = "UMUM";
@@ -439,10 +437,10 @@ public class TransaksiModel extends DBConfig{
                 jenis_buku = "PAKET";
             }
 
-            pst_transaksi.setString(4, jenis_buku);
-            pst_transaksi.setString(5, "DIPINJAM");
-            pst_transaksi.setTimestamp(6, dateNow);
+            pst_transaksi.setString(5, jenis_buku);
+            pst_transaksi.setString(6, "DIPINJAM");
             pst_transaksi.setTimestamp(7, dateNow);
+            pst_transaksi.setTimestamp(8, dateNow);
 
             if(pst_transaksi.execute()){
 
@@ -513,7 +511,7 @@ public class TransaksiModel extends DBConfig{
                 hash.put("pengurus", Dashboard.USERNAME.getText());
                 hash.put("barcode", barcodePath);
                 
-//                // hapus barcode
+                // hapus barcode
 //                filePath.delete();
 
                 JasperPrint print;
@@ -764,6 +762,7 @@ public class TransaksiModel extends DBConfig{
             
             String col_isbn = table_list_pinjam.getValueAt(row, 0).toString();
             String col_judul = table_list_pinjam.getValueAt(row, 1).toString();
+            String col_status_old = table_list_pinjam.getValueAt(row, 2).toString();
             String col_status = "Dikembalikan - LUNAS";
             
             if(table_list_kembali.getValueAt(0, 0) == null){
@@ -778,12 +777,104 @@ public class TransaksiModel extends DBConfig{
                 table_list_pinjam.setRowCount(1);
             }
             
+            // get nis
+            String[] nis = Dashboard.PJ_INPUT_PEMINJAM_PENGEMBALIAN.getText().split("-");
+            
+            if(col_status_old.contains("Terlambat")){
+                
+                updateStokBuku(isbn, nis[0].trim());
+                updateSkorPeminjam(nis[0].trim(), "LESS", 10);
+                
+            }else{
+            
+                // peminjam dianggap bermasalah -> point dikurangi 10
+                // penalaran buku rusak dan hilang, maka stok buku tidak diperbarui
+                
+                // update stok buku
+                // buku hanya dikurangi, karena dianggap hilang / rusak, yang tertulis hanya nilai denda
+                
+                String sql_buku_dipinjam = "UPDATE ma_buku SET jumlah_dipinjam = jumlah_dipinjam - 1 WHERE isbn = ?";
+                PreparedStatement pst_buku_dipinjam = conn.prepareStatement(sql_buku_dipinjam);
+                pst_buku_dipinjam.setString(1, isbn);
+                if(pst_buku_dipinjam.execute()){
+                    throw new SQLException("Gagal melakukan perubahan data pinjam !");
+                }
+                
+                updateSkorPeminjam(nis[0].trim(), "LESS", 10);
+            
+            }
+            
             JOptionPane.showMessageDialog(null, "Pembayaran dan status berhasil diperbarui !", "Sukses !", JOptionPane.INFORMATION_MESSAGE);
             
         }catch(Exception error){
             
             JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
         
+        }
+        
+    }
+    
+    public void updateStokBuku(String isbn, String nis){
+    
+        try{
+        
+            // update stok buku
+            String sql = "UPDATE ma_buku SET stok = stok + 1 WHERE isbn = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, isbn);
+            if(pst.execute()){
+                throw new SQLException("Gagal melakukan perubahan stok !");
+            }
+            
+            // update stok buku
+            String sql_buku_dipinjam = "UPDATE ma_buku SET jumlah_dipinjam = jumlah_dipinjam - 1 WHERE isbn = ?";
+            PreparedStatement pst_buku_dipinjam = conn.prepareStatement(sql_buku_dipinjam);
+            pst_buku_dipinjam.setString(1, isbn);
+            if(pst_buku_dipinjam.execute()){
+                throw new SQLException("Gagal melakukan perubahan data pinjam !");
+            }
+            
+            //update kesempatan pinjam
+            String sql_peminjam = "UPDATE ma_anggota SET jumlah_buku_dipinjam = jumlah_buku_dipinjam - 1 WHERE nis = ?";
+            PreparedStatement pst_peminjam = conn.prepareStatement(sql_peminjam);
+            pst_peminjam.setString(1, nis);
+            if(pst_peminjam.execute()){
+                throw new SQLException("Gagal melakukan perubahan status peminjam !");
+            }
+            
+        }catch(SQLException error){
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }
+    
+    public void updateSkorPeminjam(String nis, String mode, int jumlah){
+    
+        try{
+            
+            String sql  = "UPDATE ma_anggota SET skor = skor + ? WHERE nis = ?";
+            if(mode.equals("LESS")){
+                sql  = "UPDATE ma_anggota SET skor = skor - ? WHERE nis = ?";
+            }
+            
+            // perubahan skor
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, jumlah);
+            pst.setString(2, nis);
+            if(pst.execute()){
+                throw new SQLException("Gagal melakukan perubahan skor peminjam");
+            }
+            
+            //update kesempatan pinjam
+            String sql_peminjam = "UPDATE ma_anggota SET jumlah_buku_dipinjam = jumlah_buku_dipinjam - 1 WHERE nis = ?";
+            PreparedStatement pst_peminjam = conn.prepareStatement(sql_peminjam);
+            pst_peminjam.setString(1, nis);
+            if(pst_peminjam.execute()){
+                throw new SQLException("Gagal melakukan perubahan status peminjam !");
+            }
+        
+        }catch(SQLException error){
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
         }
         
     }
