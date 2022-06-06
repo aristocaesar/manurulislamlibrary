@@ -498,7 +498,7 @@ public class TransaksiModel extends DBConfig{
                 
                 File logoPath = new File("src/com/manurul/src/LOGO_MANURUL.png");
                 
-                hash.put("logo", logoPath.toString());
+                hash.put("logo", logoPath.getAbsolutePath());
                 hash.put("id_transaksi", id_transaksi);
                 hash.put("nama_lengkap", getNama());
                 
@@ -631,10 +631,15 @@ public class TransaksiModel extends DBConfig{
                     
                     if(!res_detail.getString("status_buku").equals("Dikembalikan")){
                     
+                        String masalah = "Dipinjam";
+                        if(res_detail.getString("status_buku").equals("Bermasalah")){
+                            masalah = res_detail.getString("status_buku") + " - " + res_detail.getString("status_masalah");
+                        }
+                        
                         table_detail_buku.addRow(new Object[]{
                             res_detail.getString("isbn"),
                             res_detail.getString("judul"),
-                            masa <= epoch ? "Bermasalah - Terlambat" : "Dipinjam"
+                            masa <= epoch ? "Bermasalah - Terlambat" : masalah
                         });
                         
                     }else{
@@ -876,6 +881,21 @@ public class TransaksiModel extends DBConfig{
         }catch(SQLException error){
             JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
         }
+        
+    }
+    
+    public void cetakPengembalian(){
+    
+        DefaultTableModel table_list_dipinjam = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+        DefaultTableModel table_list_dikembali = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN1.getModel();
+        
+//        try{
+//        
+//            // update status table p
+//            
+//        }catch(SQLException error){
+//        
+//        }
         
     }
 

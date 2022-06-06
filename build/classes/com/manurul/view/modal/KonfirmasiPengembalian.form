@@ -75,29 +75,29 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="LABEL_NAMA_PEMINJAM1" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
-                              <Component id="INPUT_NAMA_PEMINJAM1" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="LABEL_BUKU_DIPINJAM" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="INPUT_BUKU_DIPINJAM" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="LABEL_JENIS_BUKU1" alignment="0" max="32767" attributes="0"/>
-                              <Component id="INPUT_JENIS_BUKU1" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="LABEL_BUKU_BERMASALAH" alignment="0" max="32767" attributes="0"/>
+                              <Component id="INPUT_BUKU_BERMASALAH" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="LABEL_NAMA_PEMINJAM2" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
-                              <Component id="INPUT_NAMA_PEMINJAM2" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="LABEL_BUKU_YANG_AKAN_DIKEMBALIKAN" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="INPUT_BUKU_YANG_AKAN_DIKEMBALIKAN" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="LABEL_JENIS_BUKU3" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="INPUT_JENIS_BUKU3" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
+                                  <Component id="LABEL_STATUS_TRANSAKSI" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="INPUT_STATUS_TRANSAKSI" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="LABEL_JENIS_BUKU2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="INPUT_JENIS_BUKU2" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
+                                  <Component id="LABEL_BUKU_YANG_SUDAH_DIKEMBALIKAN" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="INPUT_BUKU_YANG_SUDAH_DIKEMBALIKAN" alignment="0" min="-2" pref="323" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -106,7 +106,7 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="239" max="-2" attributes="0"/>
-                  <Component id="BTN_CETAK_TRANSAKSI" min="-2" pref="274" max="-2" attributes="0"/>
+                  <Component id="BTN_CETAK_PENGEMBALIAN_TRANSAKSI" min="-2" pref="274" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -140,35 +140,35 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="LABEL_NAMA_PEMINJAM1" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_BUKU_DIPINJAM" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="INPUT_NAMA_PEMINJAM1" max="32767" attributes="0"/>
+                          <Component id="INPUT_BUKU_DIPINJAM" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="LABEL_JENIS_BUKU1" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_BUKU_BERMASALAH" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="INPUT_JENIS_BUKU1" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="INPUT_BUKU_BERMASALAH" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="LABEL_NAMA_PEMINJAM2" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_BUKU_YANG_AKAN_DIKEMBALIKAN" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="INPUT_NAMA_PEMINJAM2" max="32767" attributes="0"/>
+                          <Component id="INPUT_BUKU_YANG_AKAN_DIKEMBALIKAN" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="LABEL_JENIS_BUKU2" min="-2" max="-2" attributes="0"/>
+                          <Component id="LABEL_BUKU_YANG_SUDAH_DIKEMBALIKAN" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="INPUT_JENIS_BUKU2" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="INPUT_BUKU_YANG_SUDAH_DIKEMBALIKAN" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="LABEL_JENIS_BUKU3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LABEL_STATUS_TRANSAKSI" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="INPUT_JENIS_BUKU3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="INPUT_STATUS_TRANSAKSI" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="BTN_CETAK_TRANSAKSI" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="BTN_CETAK_PENGEMBALIAN_TRANSAKSI" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -253,7 +253,7 @@
             <Property name="text" type="java.lang.String" value="Jenis Buku"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BTN_CETAK_TRANSAKSI">
+        <Component class="javax.swing.JButton" name="BTN_CETAK_PENGEMBALIAN_TRANSAKSI">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="ab" red="0" type="rgb"/>
@@ -267,7 +267,7 @@
             <Property name="text" type="java.lang.String" value="Cetak Transaksi"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_CETAK_TRANSAKSIMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_CETAK_PENGEMBALIAN_TRANSAKSIMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="LABEL_PENGURUS">
@@ -275,13 +275,13 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Hana Wulan Agusta"/>
+            <Property name="text" type="java.lang.String" value="Indah Novitasari"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="INPUT_JENIS_BUKU1">
+        <Component class="javax.swing.JTextField" name="INPUT_BUKU_BERMASALAH">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -297,7 +297,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="INPUT_NAMA_PEMINJAM1">
+        <Component class="javax.swing.JTextField" name="INPUT_BUKU_DIPINJAM">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -313,7 +313,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="LABEL_NAMA_PEMINJAM1">
+        <Component class="javax.swing.JLabel" name="LABEL_BUKU_DIPINJAM">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="14" style="1"/>
@@ -321,7 +321,7 @@
             <Property name="text" type="java.lang.String" value="Buku Dipinjam"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="LABEL_JENIS_BUKU1">
+        <Component class="javax.swing.JLabel" name="LABEL_BUKU_BERMASALAH">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="14" style="1"/>
@@ -329,7 +329,7 @@
             <Property name="text" type="java.lang.String" value="Buku Bermasalah"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="INPUT_JENIS_BUKU2">
+        <Component class="javax.swing.JTextField" name="INPUT_BUKU_YANG_SUDAH_DIKEMBALIKAN">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -345,7 +345,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="INPUT_NAMA_PEMINJAM2">
+        <Component class="javax.swing.JTextField" name="INPUT_BUKU_YANG_AKAN_DIKEMBALIKAN">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -361,7 +361,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="LABEL_JENIS_BUKU2">
+        <Component class="javax.swing.JLabel" name="LABEL_BUKU_YANG_SUDAH_DIKEMBALIKAN">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="14" style="1"/>
@@ -369,7 +369,7 @@
             <Property name="text" type="java.lang.String" value="Buku Yang Sudah DiKembalikan"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="LABEL_NAMA_PEMINJAM2">
+        <Component class="javax.swing.JLabel" name="LABEL_BUKU_YANG_AKAN_DIKEMBALIKAN">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="14" style="1"/>
@@ -377,7 +377,7 @@
             <Property name="text" type="java.lang.String" value="Buku Yang Akan Dikembalikan"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="INPUT_JENIS_BUKU3">
+        <Component class="javax.swing.JTextField" name="INPUT_STATUS_TRANSAKSI">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -393,7 +393,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="LABEL_JENIS_BUKU3">
+        <Component class="javax.swing.JLabel" name="LABEL_STATUS_TRANSAKSI">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="14" style="1"/>
