@@ -1029,8 +1029,6 @@
                                   <Component id="T_LP_TRANSAKSI" min="-2" pref="81" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                                   <Component id="T_LP_BUKU_BERMASALAH" min="-2" pref="146" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="T_LP_DENDA" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -1042,7 +1040,6 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="T_LP_TRANSAKSI" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="T_LP_BUKU_BERMASALAH" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="T_LP_DENDA" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
@@ -1090,26 +1087,6 @@
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                           </AuxValues>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="T_LP_DENDA">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Trebuchet MS" size="18" style="1"/>
-                            </Property>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="60" green="60" red="60" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Denda"/>
-                            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                              <Color id="Hand Cursor"/>
-                            </Property>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="T_LP_DENDAMouseClicked"/>
-                          </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-                          </AuxValues>
-                        </Component>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="F_TR_CONTENT_LAPORAN">
@@ -1125,92 +1102,6 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="F_CONTENT_DENDA">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="f5" green="f0" red="ef" type="rgb"/>
-                            </Property>
-                          </Properties>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RoundedPanel(15, Color.WHITE)"/>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-                          </AuxValues>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                              <CardConstraints cardName="card2"/>
-                            </Constraint>
-                          </Constraints>
-
-                          <Layout>
-                            <DimensionLayout dim="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="jComboBox1" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Component id="jScrollPane1" pref="1184" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                            </DimensionLayout>
-                            <DimensionLayout dim="1">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane1" pref="449" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                            </DimensionLayout>
-                          </Layout>
-                          <SubComponents>
-                            <Component class="javax.swing.JComboBox" name="jComboBox1">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Trebuchet MS" size="14" style="0"/>
-                                </Property>
-                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="4">
-                                    <StringItem index="0" value="Item 1"/>
-                                    <StringItem index="1" value="Item 2"/>
-                                    <StringItem index="2" value="Item 3"/>
-                                    <StringItem index="3" value="Item 4"/>
-                                  </StringArray>
-                                </Property>
-                              </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                              </AuxValues>
-                            </Component>
-                            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-                              <AuxValues>
-                                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                              </AuxValues>
-
-                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                              <SubComponents>
-                                <Component class="javax.swing.JTable" name="jTable1">
-                                  <Properties>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="4" rowCount="4">
-                                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                                      </Table>
-                                    </Property>
-                                  </Properties>
-                                </Component>
-                              </SubComponents>
-                            </Container>
-                          </SubComponents>
-                        </Container>
                         <Container class="javax.swing.JPanel" name="F_CONTENT_BUKU_BERMASALAH">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -1262,11 +1153,12 @@
                                   <Font name="Trebuchet MS" size="14" style="0"/>
                                 </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="4">
-                                    <StringItem index="0" value="Item 1"/>
-                                    <StringItem index="1" value="Item 2"/>
-                                    <StringItem index="2" value="Item 3"/>
-                                    <StringItem index="3" value="Item 4"/>
+                                  <StringArray count="5">
+                                    <StringItem index="0" value="10"/>
+                                    <StringItem index="1" value="20"/>
+                                    <StringItem index="2" value="50"/>
+                                    <StringItem index="3" value="100"/>
+                                    <StringItem index="4" value="Semua"/>
                                   </StringArray>
                                 </Property>
                               </Properties>
@@ -1283,13 +1175,43 @@
                               <SubComponents>
                                 <Component class="javax.swing.JTable" name="jTable2">
                                   <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Trebuchet MS" size="14" style="0"/>
+                                    </Property>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="4" rowCount="4">
-                                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                                      <Table columnCount="4" rowCount="0">
+                                        <Column editable="false" title="ID Transaksi" type="java.lang.Object"/>
+                                        <Column editable="false" title="Peminjam" type="java.lang.Object"/>
+                                        <Column editable="false" title="Jumlah Buku" type="java.lang.Object"/>
+                                        <Column editable="false" title="Status" type="java.lang.Object"/>
                                       </Table>
+                                    </Property>
+                                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                      <TableColumnModel selectionModel="0">
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="200" minWidth="-1" prefWidth="200" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="200" minWidth="-1" prefWidth="200" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                      </TableColumnModel>
+                                    </Property>
+                                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
                                 </Component>
@@ -1348,11 +1270,12 @@
                                   <Font name="Trebuchet MS" size="14" style="0"/>
                                 </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="4">
-                                    <StringItem index="0" value="Item 1"/>
-                                    <StringItem index="1" value="Item 2"/>
-                                    <StringItem index="2" value="Item 3"/>
-                                    <StringItem index="3" value="Item 4"/>
+                                  <StringArray count="5">
+                                    <StringItem index="0" value="10"/>
+                                    <StringItem index="1" value="20"/>
+                                    <StringItem index="2" value="50"/>
+                                    <StringItem index="3" value="100"/>
+                                    <StringItem index="4" value="Semua"/>
                                   </StringArray>
                                 </Property>
                               </Properties>
@@ -2445,7 +2368,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="678" max="32767" attributes="0"/>
                                       <Component id="FILTER_KATEGORI_BUKU" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="KATEGORI_COMBOBOX_BUKU" min="-2" pref="141" max="-2" attributes="0"/>
@@ -2457,17 +2380,13 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="TABLE_LIST_DB_BUKU" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
+                                          <Component id="TABLE_LIST_DB_BUKU" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
                                               <Component id="TITLE_FRAME_BUKU" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="629" max="32767" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Component id="SEARCH_BUKU" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_BUKU" min="-2" pref="34" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                              <Component id="ICON_IMPORT_BUKU" min="-2" pref="34" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                              <Component id="ICON_EXPORT_BUKU" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -2482,9 +2401,7 @@
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="TITLE_FRAME_BUKU" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ICON_IMPORT_BUKU" alignment="0" max="32767" attributes="0"/>
                                   <Component id="ICON_ADD_BUKU" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="ICON_EXPORT_BUKU" alignment="0" max="32767" attributes="0"/>
                                   <Component id="SEARCH_BUKU" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -2514,32 +2431,6 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Daftar Buku"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="ICON_EXPORT_BUKU">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/com/manurul/src/ICON_EXPORT.png"/>
-                        </Property>
-                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ICON_EXPORT_BUKUMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="ICON_IMPORT_BUKU">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/com/manurul/src/ICON_IMPORT.png"/>
-                        </Property>
-                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ICON_IMPORT_BUKUMouseClicked"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="ICON_ADD_BUKU">
                       <Properties>
@@ -3520,7 +3411,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="696" max="32767" attributes="0"/>
                                       <Component id="GROUP_KELAS_USER" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="GROUP_COMBOBOX_USER" min="-2" pref="141" max="-2" attributes="0"/>
@@ -3535,14 +3426,10 @@
                                           <Component id="TABLE_LIST_U_ANGGOTA" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="TITLE_FRAME_USER" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="592" max="32767" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Component id="SEARCH_USER" min="-2" pref="256" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                               <Component id="ICON_ADD_USER" min="-2" pref="34" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                              <Component id="ICON_IMPORT_USER" min="-2" pref="34" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                              <Component id="ICON_EXPORT_USER" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -3557,13 +3444,11 @@
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="TITLE_FRAME_USER" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ICON_IMPORT_USER" max="32767" attributes="0"/>
                                   <Component id="ICON_ADD_USER" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="ICON_EXPORT_USER" alignment="0" max="32767" attributes="0"/>
                                   <Component id="SEARCH_USER" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="TABLE_LIST_U_ANGGOTA" pref="489" max="32767" attributes="0"/>
+                              <Component id="TABLE_LIST_U_ANGGOTA" pref="492" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -3589,32 +3474,6 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Daftar Anggota"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="ICON_EXPORT_USER">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/com/manurul/src/ICON_EXPORT.png"/>
-                        </Property>
-                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ICON_EXPORT_USERMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="ICON_IMPORT_USER">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/com/manurul/src/ICON_IMPORT.png"/>
-                        </Property>
-                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ICON_IMPORT_USERMouseClicked"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="ICON_ADD_USER">
                       <Properties>

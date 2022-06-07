@@ -17,7 +17,10 @@ import com.manurul.view.modal.konfirmasiTransaksiPinjam;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import javax.swing.Timer;
 import java.sql.PreparedStatement;
@@ -410,16 +413,16 @@ public class TransaksiModel extends DBConfig{
     }
 
     public boolean cetakPinjam(){
-
+        
+        String id_transaksi = Dashboard.PJ_INPUT_ID_TRANSAKSI.getText();
+        String nis_peminjam = getNis();
+        String jenis_buku = Dashboard.PJ_INPUT_JENIS_BUKU.getSelectedItem().toString();
+        String kode_pengurus = Dashboard.id_kode;
+        
         try{
 
             // insert transaksi
-
-            String id_transaksi = Dashboard.PJ_INPUT_ID_TRANSAKSI.getText();
-            String nis_peminjam = getNis();
-            String jenis_buku = Dashboard.PJ_INPUT_JENIS_BUKU.getSelectedItem().toString();
-            String kode_pengurus = Dashboard.id_kode;
-
+            
             Timestamp dateNow =  new SqlTime().getTimeStamp();
 
             String sql_transaksi = "INSERT INTO ma_transaksi VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -504,13 +507,9 @@ public class TransaksiModel extends DBConfig{
                 Date timeDate = new Date(dateNow.getTime());
                 SimpleDateFormat timeFormat = new SimpleDateFormat("dd / MM / YYYY ");
                 
-                
                 hash.put("tanggal_transaksi", timeFormat.format(timeDate));
                 hash.put("pengurus", Dashboard.USERNAME.getText());
                 hash.put("barcode", barcodePath);
-                
-                // hapus barcode
-//                filePath.delete();
 
                 JasperPrint print;
                 print = JasperFillManager.fillReport(Report, hash, conn);
@@ -526,10 +525,10 @@ public class TransaksiModel extends DBConfig{
             // cetak log
             new LogModel().Action("MEMBUAT TRANSAKSI", "Berhasil membuat Transaksi " + id_transaksi, Dashboard.nama_user);
 
-
             resetForm("PINJAM");
             JOptionPane.showMessageDialog(null, "Transaksi #" + id_transaksi + " sukses !", "Sukses !", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
 
+            
             return true;
         }catch(SQLException error){
 
@@ -984,6 +983,9 @@ public class TransaksiModel extends DBConfig{
                 throw new SQLException("Gagal melakukan pengembalian buku !");
             }
             
+            cetakPengembalian(id_transaksi_p);
+            
+            resetForm("PENGEMBALIAN");
             JOptionPane.showMessageDialog(null, "Transaksi #" + id_transaksi_p + " diperbarui !", "Sukses !", JOptionPane.INFORMATION_MESSAGE, this.successIcon);
 
         }catch(SQLException error){
@@ -1016,6 +1018,62 @@ public class TransaksiModel extends DBConfig{
         }
         
     }
+    
+    public void cetakPengembalian(String id_transaksi){
+    
+        try{
+            
+            String nama[] = Dashboard.PJ_INPUT_PEMINJAM_PENGEMBALIAN.getText().split("-");
+            
+            String barcodePath = null;
+            File filePath = new File("src/com/manurul/report/barcode/"+id_transaksi+".png");
+            // buat barcode 
+            try{
+
+                Linear barcode = new Linear();
+                barcode.setType(Linear.CODE128B);
+                barcode.setData(id_transaksi);
+                barcode.setI(11.0f);
+                barcodePath = filePath.getAbsolutePath();
+                barcode.renderBarcode(barcodePath);
+
+            }catch(Exception error){
+
+                throw new SQLException(error.getMessage());
+
+            }
+
+            String fileName = "/com/manurul/report/transaksi/reportPengembalian.jasper";
+            InputStream Report;
+            Report = getClass().getResourceAsStream(fileName);
+
+            HashMap hash = new HashMap();
+
+            File logoPath = new File("src/com/manurul/src/LOGO_MANURUL.png");
+
+            hash.put("logo", logoPath.getAbsolutePath());
+            hash.put("id_transaksi", id_transaksi);
+            hash.put("nama_lengkap", nama[1]);
+
+            // get date 
+            Date timeDate = new Date(new SqlTime().getTimeStamp().getTime());
+            SimpleDateFormat timeFormat = new SimpleDateFormat("dd / MM / YYYY ");
+            hash.put("tanggal_transaksi", timeFormat.format(timeDate));
+            hash.put("pengurus", Dashboard.USERNAME.getText());
+            hash.put("barcode", barcodePath);
+
+            JasperPrint print;
+            print = JasperFillManager.fillReport(Report, hash, conn);
+            JasperPrintManager.printReport(print, false);
+            new JasperViewer(print, false).setVisible(true);
+        
+        }catch(Exception error){
+        
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+    
+    }
 
     public void resetForm(String mode){
 
@@ -1034,6 +1092,27 @@ public class TransaksiModel extends DBConfig{
             form_model.setRowCount(0);
             form_model.setRowCount(1);
 
+        }else if(mode.equals("PENGEMBALIAN")){
+        
+            // reset form pengembalian
+            
+            DefaultTableModel table_pinjam = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN.getModel();
+            DefaultTableModel table_kembali = (DefaultTableModel)Dashboard.TABLE_LIST_PENGEMBALIAN1.getModel();
+            
+                // reset table
+                table_pinjam.setRowCount(0);
+                table_pinjam.setRowCount(1);
+                
+                table_kembali.setRowCount(0);
+                table_kembali.setRowCount(1);
+                
+                // hapus value input
+                Dashboard.PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.setText("");
+                Dashboard.PJ_INPUT_PEMINJAM_PENGEMBALIAN.setText("");
+                Dashboard.PJ_INPUT_JENIS_BUKU_PENGEMBALIAN.setSelectedIndex(0);
+                Dashboard.PJ_INPUT_TGL_PINJAM_PENGEMBALIAN.setText("");
+                Dashboard.PJ_INPUT_PENGURUS_PENGEMBALIAN.setText("");
+            
         }
 
     }

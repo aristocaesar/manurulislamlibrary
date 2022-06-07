@@ -128,7 +128,6 @@ public class SideBar {
         
         Dashboard.T_LP_TRANSAKSI.setForeground(new Color(96, 96, 96));
         Dashboard.T_LP_BUKU_BERMASALAH.setForeground(new Color(96, 96, 96));
-        Dashboard.T_LP_DENDA.setForeground(new Color(96, 96, 96));
         
         if(selected.equals("TRANSAKSI")){
         
@@ -141,11 +140,6 @@ public class SideBar {
             Dashboard.F_TR_CONTENT_LAPORAN.add(Dashboard.F_CONTENT_BUKU_BERMASALAH);
             
             Dashboard.T_LP_BUKU_BERMASALAH.setForeground(new Color(78, 204, 121));
-            
-        }else{
-            
-            Dashboard.F_TR_CONTENT_LAPORAN.add(Dashboard.F_CONTENT_DENDA);
-            Dashboard.T_LP_DENDA.setForeground(new Color(78, 204, 121));
             
         }
         

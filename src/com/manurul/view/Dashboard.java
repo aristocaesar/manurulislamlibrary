@@ -237,12 +237,7 @@ public class Dashboard extends javax.swing.JFrame {
         F_TB_LAPORAN = new RoundedPanel(15, Color.WHITE);
         T_LP_TRANSAKSI = new javax.swing.JLabel();
         T_LP_BUKU_BERMASALAH = new javax.swing.JLabel();
-        T_LP_DENDA = new javax.swing.JLabel();
         F_TR_CONTENT_LAPORAN = new RoundedPanel(15, Color.WHITE);
-        F_CONTENT_DENDA = new RoundedPanel(15, Color.WHITE);
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         F_CONTENT_BUKU_BERMASALAH = new RoundedPanel(15, Color.WHITE);
         jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -342,8 +337,6 @@ public class Dashboard extends javax.swing.JFrame {
         FRAME_DATABUKU = new RoundedPanel(15, Color.WHITE);
         F_DB_BUKU = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_BUKU = new javax.swing.JLabel();
-        ICON_EXPORT_BUKU = new javax.swing.JLabel();
-        ICON_IMPORT_BUKU = new javax.swing.JLabel();
         ICON_ADD_BUKU = new javax.swing.JLabel();
         SEARCH_BUKU = new javax.swing.JTextField();
         TABLE_LIST_DB_BUKU = new javax.swing.JScrollPane();
@@ -416,8 +409,6 @@ public class Dashboard extends javax.swing.JFrame {
         FRAME_USER = new javax.swing.JPanel();
         F_U_ANGGOTA = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_USER = new javax.swing.JLabel();
-        ICON_EXPORT_USER = new javax.swing.JLabel();
-        ICON_IMPORT_USER = new javax.swing.JLabel();
         ICON_ADD_USER = new javax.swing.JLabel();
         SEARCH_USER = new javax.swing.JTextField();
         TABLE_LIST_U_ANGGOTA = new javax.swing.JScrollPane();
@@ -977,16 +968,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        T_LP_DENDA.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        T_LP_DENDA.setForeground(new java.awt.Color(96, 96, 96));
-        T_LP_DENDA.setText("Denda");
-        T_LP_DENDA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        T_LP_DENDA.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                T_LP_DENDAMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout F_TB_LAPORANLayout = new javax.swing.GroupLayout(F_TB_LAPORAN);
         F_TB_LAPORAN.setLayout(F_TB_LAPORANLayout);
         F_TB_LAPORANLayout.setHorizontalGroup(
@@ -996,8 +977,6 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(T_LP_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(T_LP_BUKU_BERMASALAH, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(T_LP_DENDA)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         F_TB_LAPORANLayout.setVerticalGroup(
@@ -1006,74 +985,42 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(F_TB_LAPORANLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(T_LP_TRANSAKSI)
-                    .addComponent(T_LP_BUKU_BERMASALAH)
-                    .addComponent(T_LP_DENDA))
+                    .addComponent(T_LP_BUKU_BERMASALAH))
                 .addGap(25, 25, 25))
         );
 
         F_TR_CONTENT_LAPORAN.setBackground(new java.awt.Color(239, 240, 245));
         F_TR_CONTENT_LAPORAN.setLayout(new java.awt.CardLayout());
 
-        F_CONTENT_DENDA.setBackground(new java.awt.Color(239, 240, 245));
-
-        jComboBox1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout F_CONTENT_DENDALayout = new javax.swing.GroupLayout(F_CONTENT_DENDA);
-        F_CONTENT_DENDA.setLayout(F_CONTENT_DENDALayout);
-        F_CONTENT_DENDALayout.setHorizontalGroup(
-            F_CONTENT_DENDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(F_CONTENT_DENDALayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(F_CONTENT_DENDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(F_CONTENT_DENDALayout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE))
-                .addGap(27, 27, 27))
-        );
-        F_CONTENT_DENDALayout.setVerticalGroup(
-            F_CONTENT_DENDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(F_CONTENT_DENDALayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
-                .addGap(27, 27, 27))
-        );
-
-        F_TR_CONTENT_LAPORAN.add(F_CONTENT_DENDA, "card2");
-
         F_CONTENT_BUKU_BERMASALAH.setBackground(new java.awt.Color(239, 240, 245));
 
         jComboBox2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "50", "100", "Semua" }));
 
+        jTable2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Transaksi", "Peminjam", "Jumlah Buku", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTable2.getColumnModel().getColumn(2).setMaxWidth(200);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTable2.getColumnModel().getColumn(3).setMaxWidth(200);
+        }
 
         javax.swing.GroupLayout F_CONTENT_BUKU_BERMASALAHLayout = new javax.swing.GroupLayout(F_CONTENT_BUKU_BERMASALAH);
         F_CONTENT_BUKU_BERMASALAH.setLayout(F_CONTENT_BUKU_BERMASALAHLayout);
@@ -1103,7 +1050,7 @@ public class Dashboard extends javax.swing.JFrame {
         F_CONTENT_TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
 
         jComboBox3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "50", "100", "Semua" }));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1724,22 +1671,6 @@ public class Dashboard extends javax.swing.JFrame {
         TITLE_FRAME_BUKU.setForeground(new java.awt.Color(96, 96, 96));
         TITLE_FRAME_BUKU.setText("Daftar Buku");
 
-        ICON_EXPORT_BUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_EXPORT.png"))); // NOI18N
-        ICON_EXPORT_BUKU.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ICON_EXPORT_BUKU.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ICON_EXPORT_BUKUMouseClicked(evt);
-            }
-        });
-
-        ICON_IMPORT_BUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_IMPORT.png"))); // NOI18N
-        ICON_IMPORT_BUKU.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ICON_IMPORT_BUKU.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ICON_IMPORT_BUKUMouseClicked(evt);
-            }
-        });
-
         ICON_ADD_BUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_ADD.png"))); // NOI18N
         ICON_ADD_BUKU.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ICON_ADD_BUKU.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1808,7 +1739,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_DB_BUKULayout.createSequentialGroup()
                 .addGroup(F_DB_BUKULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(F_DB_BUKULayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(678, Short.MAX_VALUE)
                         .addComponent(FILTER_KATEGORI_BUKU)
                         .addGap(18, 18, 18)
                         .addComponent(KATEGORI_COMBOBOX_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1822,14 +1753,10 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(TABLE_LIST_DB_BUKU)
                             .addGroup(F_DB_BUKULayout.createSequentialGroup()
                                 .addComponent(TITLE_FRAME_BUKU)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 629, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(SEARCH_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(ICON_ADD_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ICON_IMPORT_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ICON_EXPORT_BUKU)))))
+                                .addComponent(ICON_ADD_BUKU, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(27, 27, 27))
         );
         F_DB_BUKULayout.setVerticalGroup(
@@ -1838,9 +1765,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(F_DB_BUKULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TITLE_FRAME_BUKU)
-                    .addComponent(ICON_IMPORT_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ICON_ADD_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ICON_EXPORT_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_BUKU))
                 .addGap(29, 29, 29)
                 .addComponent(TABLE_LIST_DB_BUKU, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
@@ -2254,22 +2179,6 @@ public class Dashboard extends javax.swing.JFrame {
         TITLE_FRAME_USER.setForeground(new java.awt.Color(96, 96, 96));
         TITLE_FRAME_USER.setText("Daftar Anggota");
 
-        ICON_EXPORT_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_EXPORT.png"))); // NOI18N
-        ICON_EXPORT_USER.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ICON_EXPORT_USER.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ICON_EXPORT_USERMouseClicked(evt);
-            }
-        });
-
-        ICON_IMPORT_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_IMPORT.png"))); // NOI18N
-        ICON_IMPORT_USER.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ICON_IMPORT_USER.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ICON_IMPORT_USERMouseClicked(evt);
-            }
-        });
-
         ICON_ADD_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_ADD.png"))); // NOI18N
         ICON_ADD_USER.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ICON_ADD_USER.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2343,7 +2252,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_U_ANGGOTALayout.createSequentialGroup()
                 .addGroup(F_U_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(F_U_ANGGOTALayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(696, Short.MAX_VALUE)
                         .addComponent(GROUP_KELAS_USER)
                         .addGap(18, 18, 18)
                         .addComponent(GROUP_COMBOBOX_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2357,14 +2266,10 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(TABLE_LIST_U_ANGGOTA)
                             .addGroup(F_U_ANGGOTALayout.createSequentialGroup()
                                 .addComponent(TITLE_FRAME_USER)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 592, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(SEARCH_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(ICON_ADD_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ICON_IMPORT_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ICON_EXPORT_USER)))))
+                                .addComponent(ICON_ADD_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(27, 27, 27))
         );
         F_U_ANGGOTALayout.setVerticalGroup(
@@ -2373,12 +2278,10 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(F_U_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TITLE_FRAME_USER)
-                    .addComponent(ICON_IMPORT_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ICON_ADD_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ICON_EXPORT_USER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(SEARCH_USER))
                 .addGap(29, 29, 29)
-                .addComponent(TABLE_LIST_U_ANGGOTA, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(TABLE_LIST_U_ANGGOTA, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(F_U_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(F_U_ANGGOTALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2821,14 +2724,6 @@ public class Dashboard extends javax.swing.JFrame {
         new AnggotaUSER("ADD", "").setVisible(true);
     }//GEN-LAST:event_ICON_ADD_USERMouseClicked
 
-    private void ICON_IMPORT_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_IMPORT_USERMouseClicked
-        // OPEN MODAL ANGGOTA
-    }//GEN-LAST:event_ICON_IMPORT_USERMouseClicked
-
-    private void ICON_EXPORT_USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_EXPORT_USERMouseClicked
-        // EXPORT DATA USER
-    }//GEN-LAST:event_ICON_EXPORT_USERMouseClicked
-
     private void SEARCH_USERKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SEARCH_USERKeyTyped
         new AnggotaModel().getDataTable(SEARCH_USER.getText(), GROUP_COMBOBOX_USER.getSelectedItem().toString(), TAMPILKAN_COMBOBOX_USER.getSelectedItem().toString());
     }//GEN-LAST:event_SEARCH_USERKeyTyped
@@ -2869,14 +2764,6 @@ public class Dashboard extends javax.swing.JFrame {
         new SideBar().setBukuPageSelected("RAK");
         new RakModel().getDataTable(SEARCH_RAK.getText(), TAMPILKAN_RAK.getSelectedItem().toString());
     }//GEN-LAST:event_T_DB_RAKMouseClicked
-
-    private void ICON_EXPORT_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_EXPORT_BUKUMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ICON_EXPORT_BUKUMouseClicked
-
-    private void ICON_IMPORT_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_IMPORT_BUKUMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ICON_IMPORT_BUKUMouseClicked
 
     private void ICON_ADD_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ICON_ADD_BUKUMouseClicked
         new BukuDATABUKU("ADD", "").setVisible(true);
@@ -3190,7 +3077,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_PJ_INPUT_JENIS_BUKUActionPerformed
 
     private void BTN_CETAK_PENGEMBALIANMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_CETAK_PENGEMBALIANMouseClicked
-        new KonfirmasiPengembalian().setVisible(true);
+        if(!PJ_INPUT_PEMINJAM_PENGEMBALIAN.getText().equals("")){
+            new KonfirmasiPengembalian().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Data pengembalian belum terpenuhi !", "Terjadi Kesalahaan!", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_BTN_CETAK_PENGEMBALIANMouseClicked
 
     private void PJ_INPUT_PEMINJAM_PENGEMBALIANKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PJ_INPUT_PEMINJAM_PENGEMBALIANKeyPressed
@@ -3337,10 +3228,6 @@ public class Dashboard extends javax.swing.JFrame {
         new SideBar().setLaporanPageSelected("BUKU_BERMASALAH");
     }//GEN-LAST:event_T_LP_BUKU_BERMASALAHMouseClicked
 
-    private void T_LP_DENDAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_LP_DENDAMouseClicked
-        new SideBar().setLaporanPageSelected("DENDA");
-    }//GEN-LAST:event_T_LP_DENDAMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -3401,7 +3288,6 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel FRAME_TRANSAKSI;
     public static javax.swing.JPanel FRAME_USER;
     public static javax.swing.JPanel F_CONTENT_BUKU_BERMASALAH;
-    public static javax.swing.JPanel F_CONTENT_DENDA;
     public static javax.swing.JPanel F_CONTENT_TRANSAKSI;
     public static javax.swing.JPanel F_DB_BUKU;
     public static javax.swing.JPanel F_DB_KATEGORI;
@@ -3428,10 +3314,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel ICON_BERMASALAH;
     private javax.swing.JLabel ICON_DB_DATABUKU;
     private javax.swing.JLabel ICON_DIPINJAM;
-    private javax.swing.JLabel ICON_EXPORT_BUKU;
-    private javax.swing.JLabel ICON_EXPORT_USER;
-    private javax.swing.JLabel ICON_IMPORT_BUKU;
-    private javax.swing.JLabel ICON_IMPORT_USER;
     private javax.swing.JLabel ICON_SETTING;
     private javax.swing.JLabel ICON_TOTAL_BUKU;
     private javax.swing.JLabel ICON_TR_TRANSAKSI;
@@ -3539,7 +3421,6 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JLabel T_DB_PENERBIT;
     public static javax.swing.JLabel T_DB_RAK;
     public static javax.swing.JLabel T_LP_BUKU_BERMASALAH;
-    public static javax.swing.JLabel T_LP_DENDA;
     public static javax.swing.JLabel T_LP_TRANSAKSI;
     private javax.swing.JLabel T_PJ_ALERT_PENGEMBALIAN;
     private javax.swing.JLabel T_PJ_ALERT_PENGEMBALIAN1;
@@ -3562,13 +3443,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel VALUE_BERMASALAH;
     private javax.swing.JLabel VALUE_DIPINJAM;
     private javax.swing.JLabel VALUE_TOTAL_BUKU;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
