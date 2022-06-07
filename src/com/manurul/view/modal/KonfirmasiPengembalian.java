@@ -348,7 +348,7 @@ public class KonfirmasiPengembalian extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_CETAK_PENGEMBALIAN_TRANSAKSIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_CETAK_PENGEMBALIAN_TRANSAKSIMouseClicked
-        Dashboard.TM.cetakPengembalian();
+        Dashboard.TM.cetakPengembalian("TR-"+Dashboard.PJ_INPUT_ID_TRANSAKSI_PENGEMBALIAN.getText(), INPUT_STATUS_TRANSAKSI.getText());
         this.dispose();
     }//GEN-LAST:event_BTN_CETAK_PENGEMBALIAN_TRANSAKSIMouseClicked
 
