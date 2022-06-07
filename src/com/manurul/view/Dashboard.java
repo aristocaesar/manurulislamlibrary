@@ -240,8 +240,17 @@ public class Dashboard extends javax.swing.JFrame {
         T_LP_DENDA = new javax.swing.JLabel();
         F_TR_CONTENT_LAPORAN = new RoundedPanel(15, Color.WHITE);
         F_CONTENT_DENDA = new RoundedPanel(15, Color.WHITE);
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         F_CONTENT_BUKU_BERMASALAH = new RoundedPanel(15, Color.WHITE);
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         F_CONTENT_TRANSAKSI = new RoundedPanel(15, Color.WHITE);
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         F_TR_KEMBALI = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PENGEMBALIAN = new javax.swing.JLabel();
         BTN_CETAK_PENGEMBALIAN = new javax.swing.JButton();
@@ -1007,45 +1016,129 @@ public class Dashboard extends javax.swing.JFrame {
 
         F_CONTENT_DENDA.setBackground(new java.awt.Color(239, 240, 245));
 
+        jComboBox1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout F_CONTENT_DENDALayout = new javax.swing.GroupLayout(F_CONTENT_DENDA);
         F_CONTENT_DENDA.setLayout(F_CONTENT_DENDALayout);
         F_CONTENT_DENDALayout.setHorizontalGroup(
             F_CONTENT_DENDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1238, Short.MAX_VALUE)
+            .addGroup(F_CONTENT_DENDALayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(F_CONTENT_DENDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(F_CONTENT_DENDALayout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
         F_CONTENT_DENDALayout.setVerticalGroup(
             F_CONTENT_DENDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 558, Short.MAX_VALUE)
+            .addGroup(F_CONTENT_DENDALayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
         );
 
         F_TR_CONTENT_LAPORAN.add(F_CONTENT_DENDA, "card2");
 
         F_CONTENT_BUKU_BERMASALAH.setBackground(new java.awt.Color(239, 240, 245));
 
+        jComboBox2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout F_CONTENT_BUKU_BERMASALAHLayout = new javax.swing.GroupLayout(F_CONTENT_BUKU_BERMASALAH);
         F_CONTENT_BUKU_BERMASALAH.setLayout(F_CONTENT_BUKU_BERMASALAHLayout);
         F_CONTENT_BUKU_BERMASALAHLayout.setHorizontalGroup(
             F_CONTENT_BUKU_BERMASALAHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1238, Short.MAX_VALUE)
+            .addGroup(F_CONTENT_BUKU_BERMASALAHLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(F_CONTENT_BUKU_BERMASALAHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(F_CONTENT_BUKU_BERMASALAHLayout.createSequentialGroup()
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
         F_CONTENT_BUKU_BERMASALAHLayout.setVerticalGroup(
             F_CONTENT_BUKU_BERMASALAHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 558, Short.MAX_VALUE)
+            .addGroup(F_CONTENT_BUKU_BERMASALAHLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
         );
 
         F_TR_CONTENT_LAPORAN.add(F_CONTENT_BUKU_BERMASALAH, "card2");
 
         F_CONTENT_TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
 
+        jComboBox3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
         javax.swing.GroupLayout F_CONTENT_TRANSAKSILayout = new javax.swing.GroupLayout(F_CONTENT_TRANSAKSI);
         F_CONTENT_TRANSAKSI.setLayout(F_CONTENT_TRANSAKSILayout);
         F_CONTENT_TRANSAKSILayout.setHorizontalGroup(
             F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1238, Short.MAX_VALUE)
+            .addGroup(F_CONTENT_TRANSAKSILayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(F_CONTENT_TRANSAKSILayout.createSequentialGroup()
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
         F_CONTENT_TRANSAKSILayout.setVerticalGroup(
             F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 558, Short.MAX_VALUE)
+            .addGroup(F_CONTENT_TRANSAKSILayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
         );
 
         F_TR_CONTENT_LAPORAN.add(F_CONTENT_TRANSAKSI, "card2");
@@ -3469,6 +3562,15 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel VALUE_BERMASALAH;
     private javax.swing.JLabel VALUE_DIPINJAM;
     private javax.swing.JLabel VALUE_TOTAL_BUKU;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 
 }
