@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jun 2022 pada 05.51
--- Versi server: 10.4.21-MariaDB
--- Versi PHP: 8.0.11
+-- Generation Time: Jun 10, 2022 at 11:01 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,40 +25,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_anggota`
+-- Table structure for table `ma_anggota`
 --
 
 CREATE TABLE `ma_anggota` (
   `nis` varchar(28) CHARACTER SET utf8mb4 NOT NULL,
   `nama_lengkap` varchar(128) CHARACTER SET utf8mb4 DEFAULT '',
   `jurusan` varchar(8) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `jumlah_buku_dipinjam` int(11) NOT NULL DEFAULT 0,
-  `skor` int(100) DEFAULT 100,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `jumlah_buku_dipinjam` int(11) NOT NULL DEFAULT '0',
+  `skor` int(100) DEFAULT '100',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `ma_anggota`
+-- Dumping data for table `ma_anggota`
 --
 
 INSERT INTO `ma_anggota` (`nis`, `nama_lengkap`, `jurusan`, `jumlah_buku_dipinjam`, `skor`, `created_at`, `updated_at`) VALUES
-('41211601', 'M Lutfi Zein A', 'TKJ', 2, 100, '2022-05-25 10:50:48', '2022-05-25 10:50:48'),
-('41211674', 'Slamet Daeroni', 'TKJ', 2, 100, '2022-05-26 00:43:22', '2022-05-26 00:43:22'),
-('41211696', 'Bachtiar Arya Habibi', 'TPL', 2, 100, '2022-05-25 10:48:10', '2022-05-25 10:48:48'),
-('41211739', 'Fifa Fajar Firdaus', 'TKJ', 2, 100, '2022-05-11 16:20:11', '2022-05-28 01:00:11'),
-('41211741', 'Karren Novita', 'TKJ', 2, 100, '2022-05-11 23:01:06', '2022-05-25 10:54:43'),
-('41211742', 'Hana Wulan Agusta', 'TKJ', 2, 100, '2022-05-11 16:18:58', '2022-05-28 01:26:01'),
-('41212221', 'Naufal A', 'MIF', 1, 100, '2022-05-25 10:49:30', '2022-05-28 01:02:23'),
-('41212263', 'Zulfianti Rahmawati', 'TGK', 2, 100, '2022-05-30 10:44:43', '2022-05-30 10:44:43'),
-('41212278', 'Diaz Bagus Maulana', 'TGK', 2, 100, '2022-05-25 10:50:16', '2022-05-25 10:50:16'),
-('41212285', 'Elisa Christian Alfrido Mantolas', 'TGK', 2, 100, '2022-05-25 09:54:28', '2022-05-25 10:53:28'),
-('41212335', 'Mohammad Tajut Zam Zami', 'MIF', 2, 100, '2022-05-25 10:46:51', '2022-05-25 10:46:51'),
-('41212382', 'Dwi Nafis Mahardika', 'TKJ', 1, 100, '2022-05-25 10:51:40', '2022-05-25 10:54:22'),
-('41212739', 'Willian Tanuwijaya', 'TKJ', 1, 100, '2022-05-29 00:51:00', '2022-05-29 00:51:00');
+('41211739', 'Syahiba Saufa', 'TKJ', 0, 100, '2022-06-05 22:45:41', '2022-06-05 22:45:41'),
+('41211740', 'Vita Alvia', 'AK', 0, 100, '2022-06-05 23:21:56', '2022-06-05 23:21:56'),
+('41211741', 'Demy Yoker', 'TKJ', 0, 100, '2022-06-07 23:37:47', '2022-06-07 23:37:47');
 
 --
--- Trigger `ma_anggota`
+-- Triggers `ma_anggota`
 --
 DELIMITER $$
 CREATE TRIGGER `ADD_COUNT_ANGGOTA` AFTER INSERT ON `ma_anggota` FOR EACH ROW BEGIN
@@ -79,7 +70,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_buku`
+-- Table structure for table `ma_buku`
 --
 
 CREATE TABLE `ma_buku` (
@@ -93,31 +84,31 @@ CREATE TABLE `ma_buku` (
   `penerbit` varchar(32) DEFAULT NULL,
   `stok` int(11) NOT NULL,
   `rak` varchar(16) DEFAULT NULL,
-  `deskripsi` text DEFAULT NULL,
+  `deskripsi` text,
   `max_hari_pinjam` int(11) NOT NULL,
   `jumlah_dipinjam` int(11) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_buku`
+-- Dumping data for table `ma_buku`
 --
 
 INSERT INTO `ma_buku` (`isbn`, `judul`, `jenis`, `kategori`, `harga`, `tahun_terbit`, `penulis`, `penerbit`, `stok`, `rak`, `deskripsi`, `max_hari_pinjam`, `jumlah_dipinjam`, `created_at`, `updated_at`) VALUES
-('602-6232-57-1', 'Buku Security Jaringan Komputer Berbasis Ceh | Belajar Menjadi White Hacker', 'UMUM', 'TGNI', '89000.0', '2018', 'Rifkie Primartha?', 'Cakradenta Agung Pertiwi, Pt', 0, 'TIK', 'Penulis mendapati bahwa permasalahan riil yang terkait security jaringan komputer, khususnya yang terkait dengan aktifitas hacking, sudah mencapai batas ambang gawat darurat. Sehingga diperlukan obat penawar dengan dosis tinggi untuk mengatasi penyakit akut tersebut.?? ??', 7, 2, '2022-05-22 14:39:42', '2022-05-22 14:39:42'),
-('978-602-0823-06-5', 'Buku Hacking Aplikasi Web Uncensored Untuk Pemula', 'UMUM', 'TGNI', '70000.0', '2015', 'Efvy Zam', 'Cakradenta Agung Pertiwi, Pt', 0, 'TIK', 'Buku ini akan menunjukkan kepada kamu, bahwa dengan logika yang sederhana saja maka seseorang sudah bisa melakukan aksi website hacking. Dimulai dari proses menggali informasi sebuah website hingga melakukan eksekusi untuk menerobos website. Tentu saja, ada banyak jalan menuju Roma dan banyak pula cara atau teknik yang dapat ditempuh. Teknik itulah yang akan diulas dan dibahas dalam buku ini', 7, 3, '2022-05-22 14:38:31', '2022-05-22 14:38:31'),
-('978-602-1514-71-9', 'Buku Belajar Otodidak Mysql Teknik Pembuatan Dan Pengelolaan Database', 'UMUM', 'TGNI', '85000.0', '2022', 'Budi Raharjo', 'Calista Alam, Pt', 2, 'TIK', ' MySQL adalah software yang berfungsi untuk membuat, mengatur, dan mengelola database. Dengan MySQL, Anda dapat membuat sendiri database untuk menyimpan dan mengelola data perusahaan (misal: data pegawai, keuangan dan akuntansi, aset, dll), data pribadi Anda, koleksi foto keluarga Anda dan sebagainya secara mudah dan aman.?', 7, 3, '2022-05-22 14:44:17', '2022-05-22 14:46:47'),
-('978-602-6231-28-4', 'Buku 5 Langkah Mudah Menguasai React Native | Lukmanul Hakim', 'UMUM', 'TGNI', '75000.0', '2021', 'Lukmanul Hakim', 'Calista Alam, Pt', 7, 'TIK', 'React Native merupakan salah satu tool terbaik untuk membuat aplikasi mobile (mobile apps). Karena sesuai tagline-nya Learn Once, Write Anywhere, App dapat dijalankan di dua platform sekaligus, yaitu Android dan iOS (Apple). Selain itu, App yang dibuat dengan React Native berkinerja bagus, cepat dan stabil.', 7, 3, '2022-05-22 14:40:46', '2022-05-22 14:40:46'),
-('978-602-62311-8-5', 'Buku Analisa Dan Perancangan Sistem Informasi Dengan Codeigniter Dan Laravel', 'UMUM', 'TGNI', '65000.0', '2018', 'Meilan Anastasia Maharani', 'Cibaliung Tunggal Plantation, Pt', 4, 'TIK', 'Sistem Informasi dibuat tidak harus mewah, yang paling penting adalah sesuai dengan kebutuhan user. Buku ini membahas tentang cara merancang sebuah sistem informasi sesuai dengan kebutuhan user. Step by step merancang sebuah sistem sampai menjadi sistem informasi yang handal. Buku ini menjelaskan bagaimana sebuah sistem informasi dibuat, dimulai dari mengumpulkan informasi suatu instansi, memahami proses bisnis berjalan, menganalisa masalah yang dihadapi pada proses bisnis berjalan, membuat Fishbone untuk menganalisa permasalahan, membuat usulan dan menganalisa untuk memecahakan tiap masalah yang dihadapi.', 7, 4, '2022-05-22 14:45:52', '2022-05-23 01:54:53'),
-('978-602-6232-24-3', 'Buku Belajar Pemrograman Web Dari Dasar Edisi Revisi', 'UMUM', 'TGNI', '95000.0', '2017', 'Priyanto Hidayatullah', 'Cahaya Pelita Andika, Pt', 9, 'TIK', 'Buku Pemrograman Web: Studi Kasus Web Sistem Informasi Akademik ini cocok untuk Mahasiswa/ Siswa SMK dalam menyelesaikan tugas mata kuliah pemrograman web dan tugas akhir dengan topik web atau sistem informasi. Buku ini juga cocok untuk freelance programmer maupun programmer profesional yang bekerja di perusahaan serta orang awam terhadap dunia pemrograman web karena dijelaskan dari nol secara runtut dan terperinci dengan bahasa yang sederhana dan mudah dimengerti.', 7, 0, '2022-05-22 14:32:41', '2022-05-22 14:34:29'),
-('978-602-6232-75-5', 'Buku Pemrograman Javascript Untuk Aplikasi Web | Belajar Javascript Untuk Pemula', 'UMUM', 'TGNI', '130000.0', '2018', 'Betha Sidik', 'Calista Alam, Pt', 7, 'TIK', ' Salah satu bahasa Pemrograman yang harus dikuasai oleh pengembang aplikasi berbasis web adalah Javascript. Secara de fakto, Javascript adalah satu-satunya bahasa pemrograman yang ada dalam lingkungan browser web, yang didukung oleh semua browser web modern. Menguasai dasar pemrograman javascript menjadi keharusan, karena kita akan dapat mengetahui bagaimana suatu halaman web bisa ditampilkan untuk menjadi aplikasi berbasis web atau untuk menampilkan informasi dengan banyak cara.?', 7, 3, '2022-05-22 14:36:14', '2022-05-22 14:36:21'),
-('978-602-8759-42-7', 'Buku Logika Algoritma Dan Pemrograman Dasar Bahasa Pascal C C++', 'UMUM', 'TGNI', '170000.0', '2018', 'Rosa A.s.?', 'Cipta Narada Sejati', 5, 'TIK', ' Algoritma berarti solusi. Ketika orang berbicara mengenai algoritma di bidang pemrograman, maka yang dimaksud adalah solusi dari suatu masalah yang harus dipecahkan dengan menggunakan komputer. Algoritma harus dibuat secara runut agar komputer mengerti dan mampu mengeksekusinya. Analisis kasus sangat dibutuhkan dalam membuat sebuah algoritma, misalnya proses apa saja yang sekiranya dibutuhkan untuk menyelesaikan masalah yang harus diselesaikan.??', 7, 1, '2022-05-22 14:35:16', '2022-05-22 14:36:26'),
-('978-623-7131-03-8', 'Buku Network Security Dan Cyber Security | Cisco Ccna | Linux | Windows | Amazon Aws | Android', 'UMUM', 'TGNI', '130000.0', '2019', 'Iwan Sofana, Rifkie Primartha', 'Cahaya Pelita Andika, Pt', 4, 'TIK', 'Buku ini berisi tentang seluk-beluk computer security dan network security, mulai dari teori hingga praktik. Beberapa materi inti yang dibahas dalam buku ini antara lain: Ciscosecurity, Windows security, Linux security, Android security, AWS cloud computing security, Security Audit ISO 27001 dan NIST 800-53. ?', 7, 3, '2022-05-22 14:34:08', '2022-05-22 14:34:08'),
-('978-860-2556-84-04', 'Buku Fundamental Of Python For Machine Learning Untuk Pemula', 'UMUM', 'TGNI', '60000.0', '2018', 'Teguh Wahyono', 'Cibaliung Tunggal Plantation, Pt', 3, 'TIK', 'Artificial intelligence  (AI) dan machine learning saat ini kembali memasuki fase booming setelah beberapa dekade mengalami pasang surut. Kecerdasan Buatan kembali digandrungi, di mana penerapannya dilakukan secara masive pada aplikasi-aplikasi bisnis dan social media jaman sekarang.', 1, 1, '2022-05-22 14:42:43', '2022-05-28 00:33:53');
+('602-6232-57-1', 'Buku Security Jaringan Komputer Berbasis Ceh | Belajar Menjadi White Hacker', 'UMUM', 'TGNI', '89000.0', '2018', 'Rifkie Primartha?', 'Cakradenta Agung Pertiwi, Pt', 5, 'TIK', 'Penulis mendapati bahwa permasalahan riil yang terkait security jaringan komputer, khususnya yang terkait dengan aktifitas hacking, sudah mencapai batas ambang gawat darurat. Sehingga diperlukan obat penawar dengan dosis tinggi untuk mengatasi penyakit akut tersebut.?? ??', 7, 0, '2022-05-22 14:39:42', '2022-05-22 14:39:42'),
+('978-602-0823-06-5', 'Buku Hacking Aplikasi Web Uncensored Untuk Pemula', 'UMUM', 'TGNI', '70000.0', '2015', 'Efvy Zam', 'Cakradenta Agung Pertiwi, Pt', 5, 'TIK', 'Buku ini akan menunjukkan kepada kamu, bahwa dengan logika yang sederhana saja maka seseorang sudah bisa melakukan aksi website hacking. Dimulai dari proses menggali informasi sebuah website hingga melakukan eksekusi untuk menerobos website. Tentu saja, ada banyak jalan menuju Roma dan banyak pula cara atau teknik yang dapat ditempuh. Teknik itulah yang akan diulas dan dibahas dalam buku ini', 7, 0, '2022-05-22 14:38:31', '2022-05-22 14:38:31'),
+('978-602-1514-71-9', 'Buku Belajar Otodidak Mysql Teknik Pembuatan Dan Pengelolaan Database', 'UMUM', 'TGNI', '85000.0', '2022', 'Budi Raharjo', 'Calista Alam, Pt', 5, 'TIK', ' MySQL adalah software yang berfungsi untuk membuat, mengatur, dan mengelola database. Dengan MySQL, Anda dapat membuat sendiri database untuk menyimpan dan mengelola data perusahaan (misal: data pegawai, keuangan dan akuntansi, aset, dll), data pribadi Anda, koleksi foto keluarga Anda dan sebagainya secara mudah dan aman.?', 7, 0, '2022-05-22 14:44:17', '2022-05-22 14:46:47'),
+('978-602-6231-28-4', 'Buku 5 Langkah Mudah Menguasai React Native | Lukmanul Hakim', 'UMUM', 'TGNI', '75000.0', '2021', 'Lukmanul Hakim', 'Calista Alam, Pt', 5, 'TIK', 'React Native merupakan salah satu tool terbaik untuk membuat aplikasi mobile (mobile apps). Karena sesuai tagline-nya Learn Once, Write Anywhere, App dapat dijalankan di dua platform sekaligus, yaitu Android dan iOS (Apple). Selain itu, App yang dibuat dengan React Native berkinerja bagus, cepat dan stabil.', 7, 0, '2022-05-22 14:40:46', '2022-05-22 14:40:46'),
+('978-602-62311-8-5', 'Buku Analisa Dan Perancangan Sistem Informasi Dengan Codeigniter Dan Laravel', 'UMUM', 'TGNI', '65000.0', '2018', 'Meilan Anastasia Maharani', 'Cibaliung Tunggal Plantation, Pt', 5, 'TIK', 'Sistem Informasi dibuat tidak harus mewah, yang paling penting adalah sesuai dengan kebutuhan user. Buku ini membahas tentang cara merancang sebuah sistem informasi sesuai dengan kebutuhan user. Step by step merancang sebuah sistem sampai menjadi sistem informasi yang handal. Buku ini menjelaskan bagaimana sebuah sistem informasi dibuat, dimulai dari mengumpulkan informasi suatu instansi, memahami proses bisnis berjalan, menganalisa masalah yang dihadapi pada proses bisnis berjalan, membuat Fishbone untuk menganalisa permasalahan, membuat usulan dan menganalisa untuk memecahakan tiap masalah yang dihadapi.', 7, 0, '2022-05-22 14:45:52', '2022-05-23 01:54:53'),
+('978-602-6232-24-3', 'Buku Belajar Pemrograman Web Dari Dasar Edisi Revisi', 'UMUM', 'TGNI', '95000.0', '2017', 'Priyanto Hidayatullah', 'Cahaya Pelita Andika, Pt', 5, 'TIK', 'Buku Pemrograman Web: Studi Kasus Web Sistem Informasi Akademik ini cocok untuk Mahasiswa/ Siswa SMK dalam menyelesaikan tugas mata kuliah pemrograman web dan tugas akhir dengan topik web atau sistem informasi. Buku ini juga cocok untuk freelance programmer maupun programmer profesional yang bekerja di perusahaan serta orang awam terhadap dunia pemrograman web karena dijelaskan dari nol secara runtut dan terperinci dengan bahasa yang sederhana dan mudah dimengerti.', 7, 0, '2022-05-22 14:32:41', '2022-05-22 14:34:29'),
+('978-602-6232-75-5', 'Buku Pemrograman Javascript Untuk Aplikasi Web | Belajar Javascript Untuk Pemula', 'UMUM', 'TGNI', '130000.0', '2018', 'Betha Sidik', 'Calista Alam, Pt', 5, 'TIK', ' Salah satu bahasa Pemrograman yang harus dikuasai oleh pengembang aplikasi berbasis web adalah Javascript. Secara de fakto, Javascript adalah satu-satunya bahasa pemrograman yang ada dalam lingkungan browser web, yang didukung oleh semua browser web modern. Menguasai dasar pemrograman javascript menjadi keharusan, karena kita akan dapat mengetahui bagaimana suatu halaman web bisa ditampilkan untuk menjadi aplikasi berbasis web atau untuk menampilkan informasi dengan banyak cara.?', 7, 0, '2022-05-22 14:36:14', '2022-05-22 14:36:21'),
+('978-602-8759-42-7', 'Buku Logika Algoritma Dan Pemrograman Dasar Bahasa Pascal C C++', 'UMUM', 'TGNI', '170000.0', '2018', 'Rosa A.s.?', 'Cipta Narada Sejati', 5, 'TIK', ' Algoritma berarti solusi. Ketika orang berbicara mengenai algoritma di bidang pemrograman, maka yang dimaksud adalah solusi dari suatu masalah yang harus dipecahkan dengan menggunakan komputer. Algoritma harus dibuat secara runut agar komputer mengerti dan mampu mengeksekusinya. Analisis kasus sangat dibutuhkan dalam membuat sebuah algoritma, misalnya proses apa saja yang sekiranya dibutuhkan untuk menyelesaikan masalah yang harus diselesaikan.??', 7, 0, '2022-05-22 14:35:16', '2022-05-22 14:36:26'),
+('978-623-7131-03-8', 'Buku Network Security Dan Cyber Security | Cisco Ccna | Linux | Windows | Amazon Aws | Android', 'UMUM', 'TGNI', '130000.0', '2019', 'Iwan Sofana, Rifkie Primartha', 'Cahaya Pelita Andika, Pt', 5, 'TIK', 'Buku ini berisi tentang seluk-beluk computer security dan network security, mulai dari teori hingga praktik. Beberapa materi inti yang dibahas dalam buku ini antara lain: Ciscosecurity, Windows security, Linux security, Android security, AWS cloud computing security, Security Audit ISO 27001 dan NIST 800-53. ?', 7, 0, '2022-05-22 14:34:08', '2022-05-22 14:34:08'),
+('978-860-2556-84-04', 'Buku Fundamental Of Python For Machine Learning Untuk Pemula', 'UMUM', 'TGNI', '60000.0', '2018', 'Teguh Wahyono', 'Cibaliung Tunggal Plantation, Pt', 5, 'TIK', 'Artificial intelligence  (AI) dan machine learning saat ini kembali memasuki fase booming setelah beberapa dekade mengalami pasang surut. Kecerdasan Buatan kembali digandrungi, di mana penerapannya dilakukan secara masive pada aplikasi-aplikasi bisnis dan social media jaman sekarang.', 7, 0, '2022-05-22 14:42:43', '2022-05-28 00:33:53');
 
 --
--- Trigger `ma_buku`
+-- Triggers `ma_buku`
 --
 DELIMITER $$
 CREATE TRIGGER `ADD_COUNT_BUKU` AFTER INSERT ON `ma_buku` FOR EACH ROW BEGIN
@@ -139,29 +130,29 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_dashboard`
+-- Table structure for table `ma_dashboard`
 --
 
 CREATE TABLE `ma_dashboard` (
   `id` int(11) NOT NULL,
-  `total_buku` int(11) NOT NULL DEFAULT 0,
-  `buku_dipinjam` int(11) NOT NULL DEFAULT 0,
-  `buku_bermasalah` int(11) NOT NULL DEFAULT 0,
+  `total_buku` int(11) NOT NULL DEFAULT '0',
+  `buku_dipinjam` int(11) NOT NULL DEFAULT '0',
+  `buku_bermasalah` int(11) NOT NULL DEFAULT '0',
   `total_anggota` int(11) DEFAULT NULL,
-  `updated_at` datetime DEFAULT current_timestamp()
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_dashboard`
+-- Dumping data for table `ma_dashboard`
 --
 
 INSERT INTO `ma_dashboard` (`id`, `total_buku`, `buku_dipinjam`, `buku_bermasalah`, `total_anggota`, `updated_at`) VALUES
-(1, 10, 0, 0, 13, '2022-05-11 15:41:11');
+(1, 10, 2, 0, 3, '2022-05-11 15:41:11');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_detail_transaksi`
+-- Table structure for table `ma_detail_transaksi`
 --
 
 CREATE TABLE `ma_detail_transaksi` (
@@ -171,41 +162,12 @@ CREATE TABLE `ma_detail_transaksi` (
   `status_buku` enum('Dipinjam','Dikembalikan','Bermasalah') DEFAULT 'Dipinjam',
   `status_masalah` enum('Tidak Bermasalah','Terlambat','Hilang','Rusak') DEFAULT 'Tidak Bermasalah',
   `jumlah_denda` varchar(128) DEFAULT '0',
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_detail_transaksi`
---
-
-INSERT INTO `ma_detail_transaksi` (`id_transaksi`, `isbn`, `masa_pinjam`, `status_buku`, `status_masalah`, `jumlah_denda`, `created_at`, `updated_at`) VALUES
-('TR-1653760303948', '978-860-2556-84-04', '1953946748476', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-29 00:52:28', '2022-05-29 00:52:28'),
-('TR-1653767453687', '602-6232-57-1', '1654372307454', 'Bermasalah', 'Tidak Bermasalah', '0', '2022-05-29 02:51:47', '2022-05-29 02:51:47'),
-('TR-1653767453687', '978-602-0823-06-5', '1652072307470', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-29 02:51:47', '2022-05-29 02:51:47'),
-('TR-1653881509697', '602-6232-57-1', '1654486329093', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-30 10:32:09', '2022-05-30 10:32:09'),
-('TR-1653881583597', '978-602-0823-06-5', '1654486395278', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-30 10:33:15', '2022-05-30 10:33:15'),
-('TR-1653881883794', '978-602-0823-06-5', '1654486702316', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-30 10:38:22', '2022-05-30 10:38:22'),
-('TR-1653882128965', '978-602-1514-71-9', '1654486946764', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-30 10:42:26', '2022-05-30 10:42:26'),
-('TR-1653882128965', '978-602-6232-75-5', '1654486946764', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-30 10:42:26', '2022-05-30 10:42:26'),
-('TR-1653882287217', '978-602-6232-75-5', '1654487101314', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-30 10:45:01', '2022-05-30 10:45:01'),
-('TR-1653882287217', '978-602-6231-28-4', '1654487101314', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-30 10:45:01', '2022-05-30 10:45:01'),
-('TR-1653917106770', '978-602-8759-42-7', '1654521934640', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-30 20:25:34', '2022-05-30 20:25:34'),
-('TR-1653962874637', '978-602-6231-28-4', '1654567698509', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 09:08:18', '2022-05-31 09:08:18'),
-('TR-1653963669134', '978-602-6231-28-4', '1654568612526', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 09:23:32', '2022-05-31 09:23:32'),
-('TR-1653963669134', '978-602-62311-8-5', '1654568612530', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 09:23:32', '2022-05-31 09:23:32'),
-('TR-1653963868665', '978-602-62311-8-5', '1654568678352', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 09:24:38', '2022-05-31 09:24:38'),
-('TR-1653965661465', '978-602-1514-71-9', '1654570480969', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 09:54:40', '2022-05-31 09:54:40'),
-('TR-1653965789274', '978-623-7131-03-8', '1654570602543', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 09:56:42', '2022-05-31 09:56:42'),
-('TR-1653965946093', '978-602-62311-8-5', '1654570760030', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 09:59:20', '2022-05-31 09:59:20'),
-('TR-1653966420088', '978-602-62311-8-5', '1654571232394', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 10:07:12', '2022-05-31 10:07:12'),
-('TR-1653966759389', '978-623-7131-03-8', '1654571571410', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 10:12:51', '2022-05-31 10:12:51'),
-('TR-1653966852802', '978-602-6232-75-5', '1654571668191', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-05-31 10:14:28', '2022-05-31 10:14:28'),
-('TR-1654217211424', '978-602-1514-71-9', '1654822066356', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-06-03 07:47:46', '2022-06-03 07:47:46'),
-('TR-1654217281815', '978-623-7131-03-8', '1654822804232', 'Dipinjam', 'Tidak Bermasalah', '0', '2022-06-03 08:00:04', '2022-06-03 08:00:04');
-
---
--- Trigger `ma_detail_transaksi`
+-- Triggers `ma_detail_transaksi`
 --
 DELIMITER $$
 CREATE TRIGGER `CHANGE_STOKBUKU_USRPINJAM_AFTER_PINJAM` AFTER INSERT ON `ma_detail_transaksi` FOR EACH ROW BEGIN
@@ -221,23 +183,22 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_jurusan`
+-- Table structure for table `ma_jurusan`
 --
 
 CREATE TABLE `ma_jurusan` (
   `kode` varchar(8) NOT NULL,
   `nama` varchar(32) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_jurusan`
+-- Dumping data for table `ma_jurusan`
 --
 
 INSERT INTO `ma_jurusan` (`kode`, `nama`, `created_at`, `updated_at`) VALUES
 ('AK', 'Akutansi', '2022-04-17 15:50:09', '2022-05-08 02:26:35'),
-('MIF', 'Manajemen Informatika', '2022-04-17 15:47:01', '2022-04-17 16:09:10'),
 ('RPL', 'Rekayasa Perangkat Lunak', '2022-04-17 16:44:01', '2022-04-17 16:44:01'),
 ('TGK', 'Teknik Geomatika dan Fisika', '2022-04-17 16:09:50', '2022-04-17 16:44:35'),
 ('TKJ', 'Teknik Komputer Dan Jaringan', '2022-04-17 15:48:21', '2022-04-17 16:07:10'),
@@ -247,19 +208,19 @@ INSERT INTO `ma_jurusan` (`kode`, `nama`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_kategori`
+-- Table structure for table `ma_kategori`
 --
 
 CREATE TABLE `ma_kategori` (
   `kode` varchar(16) NOT NULL,
   `nama` varchar(64) NOT NULL,
   `deskripsi` text NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_kategori`
+-- Dumping data for table `ma_kategori`
 --
 
 INSERT INTO `ma_kategori` (`kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
@@ -271,39 +232,71 @@ INSERT INTO `ma_kategori` (`kode`, `nama`, `deskripsi`, `created_at`, `updated_a
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_log`
+-- Table structure for table `ma_log`
 --
 
 CREATE TABLE `ma_log` (
   `id` int(11) NOT NULL,
   `process` varchar(64) NOT NULL,
   `message` text NOT NULL,
-  `pengurus` varchar(16) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `pengurus` varchar(64) CHARACTER SET utf8mb4 NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `ma_log`
+-- Dumping data for table `ma_log`
 --
 
 INSERT INTO `ma_log` (`id`, `process`, `message`, `pengurus`, `created_at`) VALUES
-(1, 'LOGIN', 'Berhasil Login', 'PGS-69696', '2022-05-12 00:05:52');
+(1, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 00:18:55'),
+(2, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 00:20:39'),
+(3, 'TAMBAH RAK', 'Menambahkan rak Majalah', 'Hana Wulan Agusta', '2022-06-11 00:21:18'),
+(4, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 00:28:09'),
+(5, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 00:28:55'),
+(6, 'TAMBAH PENERBIT', 'Berhasil menambahkan Pt. Menjelang Siang sebagai penerbit', 'Hana Wulan Agusta', '2022-06-11 00:29:34'),
+(7, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 00:30:27'),
+(8, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 01:11:45'),
+(9, 'MEMBUAT TRANSAKSI', 'Berhasil membuat Transaksi TR-1654884709690', 'Aristo Caesar Pratama', '2022-06-11 01:12:12'),
+(10, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 01:13:48'),
+(11, 'MEMBUAT TRANSAKSI', 'Berhasil membuat Transaksi TR-1654884834776', 'Hana Wulan Agusta', '2022-06-11 01:14:14'),
+(12, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 01:21:13'),
+(13, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 01:22:38'),
+(14, 'MEMPERBARUI TRANSAKSI', 'Berhasil memperbarui Transaksi TR-1654884834776', 'Aristo Caesar Pratama', '2022-06-11 01:23:35'),
+(15, 'MEMPERBARUI TRANSAKSI', 'Berhasil memperbarui Transaksi TR-1654884834776', 'Aristo Caesar Pratama', '2022-06-11 01:24:26'),
+(16, 'MEMBUAT TRANSAKSI', 'Berhasil membuat Transaksi TR-1654885522663', 'Aristo Caesar Pratama', '2022-06-11 01:25:42'),
+(17, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 01:42:34'),
+(18, 'UPDATE PENGATURAN', 'Memperbarui data pengaturan', 'Aristo Caesar Pratama', '2022-06-11 01:42:43'),
+(19, 'UPDATE PENGATURAN', 'Memperbarui data pengaturan', 'Aristo Caesar Pratama', '2022-06-11 01:42:55'),
+(20, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:12:00'),
+(21, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:14:17'),
+(22, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:15:56'),
+(23, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 02:23:22'),
+(24, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:28:39'),
+(25, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:32:10'),
+(26, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:33:48'),
+(27, 'MEMBUAT TRANSAKSI', 'Berhasil membuat Transaksi TR-1654889630321', 'Aristo Caesar Pratama', '2022-06-11 02:34:15'),
+(28, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:52:01'),
+(29, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:56:08'),
+(30, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:59:09'),
+(31, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:59:33'),
+(32, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 03:03:04'),
+(33, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 03:03:43');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_penerbit`
+-- Table structure for table `ma_penerbit`
 --
 
 CREATE TABLE `ma_penerbit` (
   `nama` varchar(32) NOT NULL,
   `kontak` varchar(13) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_penerbit`
+-- Dumping data for table `ma_penerbit`
 --
 
 INSERT INTO `ma_penerbit` (`nama`, `kontak`, `created_at`, `updated_at`) VALUES
@@ -317,12 +310,13 @@ INSERT INTO `ma_penerbit` (`nama`, `kontak`, `created_at`, `updated_at`) VALUES
 ('Pt Player Cell', '085655990781', '2022-05-08 15:35:10', '2022-05-08 15:38:31'),
 ('PT. Erlangga', '085235119101', '2022-03-23 10:17:59', '2022-03-23 10:17:59'),
 ('PT. Maju Mundur Cantik', '543534534545', '2022-05-08 13:24:59', '2022-05-08 13:24:59'),
-('Pt. Mencari Cinta Sejatii', '654657654345', '2022-05-08 13:25:35', '2022-05-16 14:17:56');
+('Pt. Mencari Cinta Sejatii', '654657654345', '2022-05-08 13:25:35', '2022-05-16 14:17:56'),
+('Pt. Menjelang Siang', '087467287345', '2022-06-11 00:29:34', '2022-06-11 00:29:34');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_pengurus`
+-- Table structure for table `ma_pengurus`
 --
 
 CREATE TABLE `ma_pengurus` (
@@ -333,45 +327,46 @@ CREATE TABLE `ma_pengurus` (
   `nama_lengkap` varchar(64) NOT NULL,
   `hak_akses` enum('ADMINISTRATOR','STAF') DEFAULT 'STAF',
   `status` enum('AKTIF','BLOKIR') DEFAULT 'AKTIF',
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_pengurus`
+-- Dumping data for table `ma_pengurus`
 --
 
 INSERT INTO `ma_pengurus` (`kode`, `nip`, `username`, `password`, `nama_lengkap`, `hak_akses`, `status`, `created_at`, `updated_at`) VALUES
-('PGS - 23125', '2342343434', 'as', 'as', 'Hana Wulan Agusta', 'STAF', 'AKTIF', '2022-05-16 13:46:53', '2022-05-28 01:00:44'),
-('PGS-69696', '5345435', 'a', 'a', 'Aristo Caesar Pratama', 'ADMINISTRATOR', 'AKTIF', '2022-04-29 21:59:11', '2022-05-15 02:42:27');
+('PGS - 04070', '5345435', 'admin', 'admin', 'Aristo Caesar Pratama', 'ADMINISTRATOR', 'AKTIF', '2022-04-29 21:59:11', '2022-05-15 02:42:27'),
+('PGS - 23125', '2342343434', 'staf', 'staf', 'Indah Novitasari', 'STAF', 'AKTIF', '2022-05-16 13:46:53', '2022-05-28 01:00:44');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_rak`
+-- Table structure for table `ma_rak`
 --
 
 CREATE TABLE `ma_rak` (
   `kode` varchar(16) NOT NULL,
   `nama` varchar(64) NOT NULL,
   `deskripsi` text NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_rak`
+-- Dumping data for table `ma_rak`
 --
 
 INSERT INTO `ma_rak` (`kode`, `nama`, `deskripsi`, `created_at`, `updated_at`) VALUES
 ('IPS', 'Ilmu Pengetahuan Sosial', 'rak buku ilmu pengetahuan sosial bor', '2022-05-08 00:01:33', '2022-05-22 12:40:50'),
+('MJLH', 'Majalah', 'rak buku yang menampung mengenai kumpulan majalah', '2022-06-11 00:21:18', '2022-06-11 00:21:18'),
 ('MTK', 'Matematika', 'rak buku matematika', '2022-05-07 23:59:30', '2022-05-07 23:59:30'),
 ('TIK', 'Teknik Informatika', 'rak buku teknik informatika', '2022-03-23 10:15:02', '2022-03-23 10:15:02');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_setting`
+-- Table structure for table `ma_setting`
 --
 
 CREATE TABLE `ma_setting` (
@@ -379,117 +374,92 @@ CREATE TABLE `ma_setting` (
   `denda_terlambat` int(11) NOT NULL,
   `max_pinjam_buku_umum` int(11) NOT NULL,
   `time_backup_database` int(28) NOT NULL,
-  `updated_at` datetime DEFAULT current_timestamp()
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ma_setting`
+-- Dumping data for table `ma_setting`
 --
 
 INSERT INTO `ma_setting` (`id`, `denda_terlambat`, `max_pinjam_buku_umum`, `time_backup_database`, `updated_at`) VALUES
-(1, 2000, 2, 0, '2022-05-25 21:25:11');
+(1, 5000, 2, 2, '2022-06-11 01:42:55');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ma_transaksi`
+-- Table structure for table `ma_transaksi`
 --
 
 CREATE TABLE `ma_transaksi` (
   `id_transaksi` varchar(64) NOT NULL,
   `nis_anggota` varchar(28) NOT NULL,
   `kode_pengurus` varchar(16) NOT NULL,
+  `kode_pengurus_kembali` varchar(16) DEFAULT NULL,
   `jenis_buku` enum('UMUM','PAKET') DEFAULT NULL,
   `status_transaksi` enum('DIPINJAM','BERMASALAH','SELESAI') DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `ma_transaksi`
---
-
-INSERT INTO `ma_transaksi` (`id_transaksi`, `nis_anggota`, `kode_pengurus`, `jenis_buku`, `status_transaksi`, `created_at`, `updated_at`) VALUES
-('TR-1653760303948', '41212739', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-29 00:52:28', '2022-05-29 00:52:28'),
-('TR-1653767453687', '41211742', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-29 02:51:47', '2022-05-29 02:51:47'),
-('TR-1653881509697', '41211601', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-30 10:32:09', '2022-05-30 10:32:09'),
-('TR-1653881583597', '41211601', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-30 10:33:15', '2022-05-30 10:33:15'),
-('TR-1653881883794', '41211739', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-30 10:38:22', '2022-05-30 10:38:22'),
-('TR-1653882128965', '41212278', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-30 10:42:26', '2022-05-30 10:42:26'),
-('TR-1653882287217', '41212263', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-30 10:45:01', '2022-05-30 10:45:01'),
-('TR-1653917106770', '41212285', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-30 20:25:34', '2022-05-30 20:25:34'),
-('TR-1653962874637', '41211741', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-31 09:08:18', '2022-05-31 09:08:18'),
-('TR-1653963669134', '41211696', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-31 09:23:32', '2022-05-31 09:23:32'),
-('TR-1653963868665', '41211741', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-31 09:24:38', '2022-05-31 09:24:38'),
-('TR-1653965661465', '41212335', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-31 09:54:40', '2022-05-31 09:54:40'),
-('TR-1653965789274', '41212285', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-31 09:56:42', '2022-05-31 09:56:42'),
-('TR-1653965946093', '41211674', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-31 09:59:20', '2022-05-31 09:59:20'),
-('TR-1653966420088', '41212221', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-31 10:07:12', '2022-05-31 10:07:12'),
-('TR-1653966759389', '41212382', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-31 10:12:51', '2022-05-31 10:12:51'),
-('TR-1653966852802', '41211674', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-05-31 10:14:28', '2022-05-31 10:14:28'),
-('TR-1654217211424', '41211739', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-06-03 07:47:46', '2022-06-03 07:47:46'),
-('TR-1654217281815', '41212335', 'PGS-69696', 'UMUM', 'DIPINJAM', '2022-06-03 08:00:04', '2022-06-03 08:00:04');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `ma_anggota`
+-- Indexes for table `ma_anggota`
 --
 ALTER TABLE `ma_anggota`
   ADD PRIMARY KEY (`nis`),
-  ADD KEY `FK Jurusan` (`jurusan`);
+  ADD KEY `FK_ma_anggota_ma_jurusan` (`jurusan`);
 
 --
--- Indeks untuk tabel `ma_buku`
+-- Indexes for table `ma_buku`
 --
 ALTER TABLE `ma_buku`
   ADD PRIMARY KEY (`isbn`),
-  ADD KEY `FK_Kategori` (`kategori`),
-  ADD KEY `FK_Penerbit` (`penerbit`),
-  ADD KEY `FK_Rak` (`rak`);
+  ADD KEY `FK_ma_buku_ma_kategori` (`kategori`),
+  ADD KEY `FK_ma_buku_ma_penerbit` (`penerbit`),
+  ADD KEY `FK_ma_buku_ma_rak` (`rak`);
 
 --
--- Indeks untuk tabel `ma_dashboard`
+-- Indexes for table `ma_dashboard`
 --
 ALTER TABLE `ma_dashboard`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `ma_detail_transaksi`
+-- Indexes for table `ma_detail_transaksi`
 --
 ALTER TABLE `ma_detail_transaksi`
-  ADD KEY `FK_ma_detail_transaksi_ma_buku` (`isbn`),
-  ADD KEY `FK_ma_detail_transaksi_ma_transaksi` (`id_transaksi`);
+  ADD KEY `FK_ma_detail_transaksi_ma_transaksi` (`id_transaksi`),
+  ADD KEY `FK_ma_detail_transaksi_ma_buku` (`isbn`);
 
 --
--- Indeks untuk tabel `ma_jurusan`
+-- Indexes for table `ma_jurusan`
 --
 ALTER TABLE `ma_jurusan`
   ADD PRIMARY KEY (`kode`);
 
 --
--- Indeks untuk tabel `ma_kategori`
+-- Indexes for table `ma_kategori`
 --
 ALTER TABLE `ma_kategori`
   ADD PRIMARY KEY (`kode`);
 
 --
--- Indeks untuk tabel `ma_log`
+-- Indexes for table `ma_log`
 --
 ALTER TABLE `ma_log`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_Pengurus` (`pengurus`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `ma_penerbit`
+-- Indexes for table `ma_penerbit`
 --
 ALTER TABLE `ma_penerbit`
   ADD PRIMARY KEY (`nama`);
 
 --
--- Indeks untuk tabel `ma_pengurus`
+-- Indexes for table `ma_pengurus`
 --
 ALTER TABLE `ma_pengurus`
   ADD PRIMARY KEY (`kode`),
@@ -497,46 +467,80 @@ ALTER TABLE `ma_pengurus`
   ADD UNIQUE KEY `nip` (`nip`);
 
 --
--- Indeks untuk tabel `ma_rak`
+-- Indexes for table `ma_rak`
 --
 ALTER TABLE `ma_rak`
   ADD PRIMARY KEY (`kode`);
 
 --
--- Indeks untuk tabel `ma_setting`
+-- Indexes for table `ma_setting`
 --
 ALTER TABLE `ma_setting`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `ma_transaksi`
+-- Indexes for table `ma_transaksi`
 --
 ALTER TABLE `ma_transaksi`
   ADD UNIQUE KEY `id_transaksi` (`id_transaksi`),
   ADD KEY `FK_ma_transaksi_ma_anggota` (`nis_anggota`),
-  ADD KEY `FK_ma_transaksi_ma_pengurus` (`kode_pengurus`);
+  ADD KEY `FK_ma_transaksi_ma_pengurus` (`kode_pengurus`),
+  ADD KEY `FK_ma_transaksi_ma_pengurus_2` (`kode_pengurus_kembali`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `ma_dashboard`
+-- AUTO_INCREMENT for table `ma_dashboard`
 --
 ALTER TABLE `ma_dashboard`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `ma_log`
+-- AUTO_INCREMENT for table `ma_log`
 --
 ALTER TABLE `ma_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT untuk tabel `ma_setting`
+-- AUTO_INCREMENT for table `ma_setting`
 --
 ALTER TABLE `ma_setting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `ma_anggota`
+--
+ALTER TABLE `ma_anggota`
+  ADD CONSTRAINT `FK_ma_anggota_ma_jurusan` FOREIGN KEY (`jurusan`) REFERENCES `ma_jurusan` (`kode`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ma_buku`
+--
+ALTER TABLE `ma_buku`
+  ADD CONSTRAINT `FK_ma_buku_ma_kategori` FOREIGN KEY (`kategori`) REFERENCES `ma_kategori` (`kode`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ma_buku_ma_penerbit` FOREIGN KEY (`penerbit`) REFERENCES `ma_penerbit` (`nama`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ma_buku_ma_rak` FOREIGN KEY (`rak`) REFERENCES `ma_rak` (`kode`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ma_detail_transaksi`
+--
+ALTER TABLE `ma_detail_transaksi`
+  ADD CONSTRAINT `FK_ma_detail_transaksi_ma_buku` FOREIGN KEY (`isbn`) REFERENCES `ma_buku` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ma_detail_transaksi_ma_transaksi` FOREIGN KEY (`id_transaksi`) REFERENCES `ma_transaksi` (`id_transaksi`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ma_transaksi`
+--
+ALTER TABLE `ma_transaksi`
+  ADD CONSTRAINT `FK_ma_transaksi_ma_anggota` FOREIGN KEY (`nis_anggota`) REFERENCES `ma_anggota` (`nis`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ma_transaksi_ma_pengurus` FOREIGN KEY (`kode_pengurus`) REFERENCES `ma_pengurus` (`kode`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ma_transaksi_ma_pengurus_2` FOREIGN KEY (`kode_pengurus_kembali`) REFERENCES `ma_pengurus` (`kode`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
