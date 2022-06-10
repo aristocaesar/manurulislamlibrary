@@ -22,6 +22,7 @@ import com.manurul.model.RakModel;
 import com.manurul.model.SettingModel;
 import com.manurul.model.TransaksiModel;
 import com.manurul.view.modal.BukuDATABUKU;
+import com.manurul.view.modal.DetailLaporanTransaksi;
 import com.manurul.view.modal.KategoriDATABUKU;
 import com.manurul.view.modal.KonfirmasiPengembalian;
 import com.manurul.view.modal.PenerbitDATABUKU;
@@ -235,11 +236,17 @@ public class Dashboard extends javax.swing.JFrame {
         F_CONTENT_BUKU_BERMASALAH = new RoundedPanel(15, Color.WHITE);
         jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TABLES_LAPORAN_BERMASALAH = new javax.swing.JTable();
         F_CONTENT_TRANSAKSI = new RoundedPanel(15, Color.WHITE);
         INPUT_LAPORAN_LIMIT_TRANSAKSI = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TABLE_LAPORAN_TRANSAKSI = new javax.swing.JTable();
+        TABLE_LAPORAN_TRANSAKSI = new javax.swing.JTable(){
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+        };
         INPUT_LAPORAN_ID_TRANSAKSI = new javax.swing.JTextField();
         F_TR_KEMBALI = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PENGEMBALIAN = new javax.swing.JLabel();
@@ -992,8 +999,8 @@ public class Dashboard extends javax.swing.JFrame {
         jComboBox2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "50", "100", "Semua" }));
 
-        jTable2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TABLES_LAPORAN_BERMASALAH.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        TABLES_LAPORAN_BERMASALAH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1009,12 +1016,17 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(200);
-            jTable2.getColumnModel().getColumn(2).setMaxWidth(200);
-            jTable2.getColumnModel().getColumn(3).setPreferredWidth(200);
-            jTable2.getColumnModel().getColumn(3).setMaxWidth(200);
+        TABLES_LAPORAN_BERMASALAH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLES_LAPORAN_BERMASALAHMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TABLES_LAPORAN_BERMASALAH);
+        if (TABLES_LAPORAN_BERMASALAH.getColumnModel().getColumnCount() > 0) {
+            TABLES_LAPORAN_BERMASALAH.getColumnModel().getColumn(2).setPreferredWidth(200);
+            TABLES_LAPORAN_BERMASALAH.getColumnModel().getColumn(2).setMaxWidth(200);
+            TABLES_LAPORAN_BERMASALAH.getColumnModel().getColumn(3).setPreferredWidth(200);
+            TABLES_LAPORAN_BERMASALAH.getColumnModel().getColumn(3).setMaxWidth(200);
         }
 
         javax.swing.GroupLayout F_CONTENT_BUKU_BERMASALAHLayout = new javax.swing.GroupLayout(F_CONTENT_BUKU_BERMASALAH);
@@ -1059,19 +1071,15 @@ public class Dashboard extends javax.swing.JFrame {
             new String [] {
                 "ID Transaksi", "Peminjam", "Jumlah Buku", "Status"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        ));
+        TABLE_LAPORAN_TRANSAKSI.setRowHeight(30);
+        TABLE_LAPORAN_TRANSAKSI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABLE_LAPORAN_TRANSAKSIMouseClicked(evt);
             }
         });
-        TABLE_LAPORAN_TRANSAKSI.setRowHeight(30);
         jScrollPane3.setViewportView(TABLE_LAPORAN_TRANSAKSI);
         if (TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumnCount() > 0) {
-            TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumn(0).setResizable(false);
             TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumn(2).setPreferredWidth(150);
             TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumn(2).setMaxWidth(150);
             TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumn(3).setPreferredWidth(150);
@@ -3260,6 +3268,20 @@ public class Dashboard extends javax.swing.JFrame {
         new LaporanModel().getLaporanTransaksi(INPUT_LAPORAN_ID_TRANSAKSI.getText(), INPUT_LAPORAN_LIMIT_TRANSAKSI.getSelectedItem().toString());
     }//GEN-LAST:event_INPUT_LAPORAN_LIMIT_TRANSAKSIActionPerformed
 
+    private void TABLES_LAPORAN_BERMASALAHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLES_LAPORAN_BERMASALAHMouseClicked
+        
+        
+        
+    }//GEN-LAST:event_TABLES_LAPORAN_BERMASALAHMouseClicked
+
+    private void TABLE_LAPORAN_TRANSAKSIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LAPORAN_TRANSAKSIMouseClicked
+        if(evt.getClickCount() == 2){
+            int row = TABLE_LAPORAN_TRANSAKSI.getSelectedRow();
+            String id_transaksi = TABLE_LAPORAN_TRANSAKSI.getValueAt(row, 0).toString();
+            new DetailLaporanTransaksi(id_transaksi).setVisible(true);
+        }
+    }//GEN-LAST:event_TABLE_LAPORAN_TRANSAKSIMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -3402,6 +3424,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel SETTING;
     private javax.swing.JPanel SIDEBAR;
     private javax.swing.JComboBox<String> SORT_LIST_LOG;
+    public static javax.swing.JTable TABLES_LAPORAN_BERMASALAH;
     private javax.swing.JScrollPane TABLE_KATEGORI;
     public static javax.swing.JTable TABLE_LAPORAN_TRANSAKSI;
     public static javax.swing.JTable TABLE_LIST_ANGGOTA;
@@ -3481,7 +3504,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 
 }

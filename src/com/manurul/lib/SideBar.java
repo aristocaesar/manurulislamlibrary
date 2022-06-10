@@ -94,6 +94,8 @@ public class SideBar {
         Dashboard.T_TR_PINJAM.setForeground(new Color(96, 96, 96));
         Dashboard.T_TR_KEMBALI.setForeground(new Color(96, 96, 96));
         Dashboard.T_TR_LAPORAN.setForeground(new Color(96, 96, 96));
+        
+        Dashboard.T_LP_BUKU_BERMASALAH.setVisible(false);
 
         if(selected.equals("PINJAM")){
 
