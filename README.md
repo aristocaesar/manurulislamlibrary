@@ -12,6 +12,6 @@ Pastikan semua sudah dapat berjalan dengan sesuai
 
 1. Buka halaman localhost/phpmyadmin
 2. Buat sebuah database kosong dengan nama **manurulislam**
-3. Masukkan / Import file **manurulislam.sql** pada database
+3. Masukkan / Import file **manurulislam.sql** yang tersedia didirektori **./DB**
 
 Pastikan nama database harus sesuai dan authentikasi database yang dibutuhkan -u root -p (kosong)
