@@ -56,9 +56,6 @@ public class PengurusUSER extends javax.swing.JFrame {
         // SET DISABLE RESIZESABLE
         this.setResizable(false);
         
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
-        
         // INIT INPUT BORDER PADDING
         InputBorder.set(INPUT_ID_PENGURUS, 8);
         InputBorder.set(INPUT_USERNAME, 8);

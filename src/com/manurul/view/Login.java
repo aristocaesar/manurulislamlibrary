@@ -5,7 +5,6 @@ package com.manurul.view;
 
 import com.manurul.model.PengurusModel;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -32,8 +31,6 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         // SET DISABLE RESIZESABLE
         this.setResizable(false);
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../src/LOGO_MANURUL.png")));
         
         // SET BORDER INPUT
         INPUT_USERNAME.setBorder(BorderFactory.createCompoundBorder(INPUT_USERNAME.getBorder(), BorderFactory.createEmptyBorder(0, 8, 0, 0)));

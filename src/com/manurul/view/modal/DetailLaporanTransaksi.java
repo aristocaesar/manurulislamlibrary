@@ -8,7 +8,6 @@ package com.manurul.view.modal;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.model.LaporanModel;
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
@@ -25,9 +24,6 @@ public class DetailLaporanTransaksi extends javax.swing.JFrame {
     private LaporanModel LM = new LaporanModel();
     public DetailLaporanTransaksi(String id_transaksi) {
         initComponents();
-        
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
 
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - Detail Transaksi");

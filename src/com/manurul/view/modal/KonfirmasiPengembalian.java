@@ -9,9 +9,7 @@ import com.manurul.lib.GenKode;
 import com.manurul.lib.InputBorder;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.view.Dashboard;
-import static com.manurul.view.modal.konfirmasiTransaksiPinjam.LABEL_TGL_PINJAM_TRANSAKSI;
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -35,9 +33,6 @@ public class KonfirmasiPengembalian extends javax.swing.JFrame {
     public KonfirmasiPengembalian() {
         
         initComponents();
-        
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
 
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - Konfirmasi Pengembalian");

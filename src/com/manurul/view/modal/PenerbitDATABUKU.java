@@ -7,7 +7,6 @@ package com.manurul.view.modal;
 
 import com.manurul.lib.Characters;
 import com.manurul.lib.InputBorder;
-import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.model.PenerbitModel;
 import com.manurul.view.Dashboard;
@@ -48,9 +47,6 @@ public class PenerbitDATABUKU extends javax.swing.JFrame {
         
         // SET DISABLE RESIZESABLE
         this.setResizable(false);
-        
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
         
         // SET SUCCESS ICON
         ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));

@@ -38,9 +38,6 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame{
         // SET DISABLE RESIZESABLE
         this.setResizable(false);
         
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
-        
         // SET BORDER
         InputBorder.set(INPUT_SEARCH, 8);
         INPUT_SEARCH.setFocusable(true);

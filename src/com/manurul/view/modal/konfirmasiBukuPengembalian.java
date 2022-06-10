@@ -9,7 +9,6 @@ import com.manurul.lib.InputBorder;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
-import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,9 +33,6 @@ public class konfirmasiBukuPengembalian extends javax.swing.JFrame {
     
     public konfirmasiBukuPengembalian(String id_transaksi, String isbn, String status_buku , int row) {
         initComponents();
-        
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
 
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - Konfirmasi Pengembalian Buku");

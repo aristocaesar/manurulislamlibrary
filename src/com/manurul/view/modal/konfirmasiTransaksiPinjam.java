@@ -10,7 +10,6 @@ import com.manurul.lib.InputBorder;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -26,9 +25,6 @@ public class konfirmasiTransaksiPinjam extends javax.swing.JFrame {
      */
     public konfirmasiTransaksiPinjam() {
         initComponents();
-        
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
 
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - Konfirmasi Pinjam");

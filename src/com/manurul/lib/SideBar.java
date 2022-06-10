@@ -6,6 +6,7 @@
 package com.manurul.lib;
 
 import com.manurul.model.BukuModel;
+import com.manurul.model.DashboardModel;
 import com.manurul.model.LaporanModel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
@@ -31,6 +32,8 @@ public class SideBar {
             Dashboard.BTN_DASHBOARD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_AIRPLAY.png")));
             
             Dashboard.MAIN_FRAME.add(Dashboard.DASHBOARD);
+            
+            new DashboardModel().getDashboardData(Dashboard.SORT_LIST_LOG.getSelectedItem().toString());
         
         }else if (Bar.equals("TRANSAKSI")) {
             

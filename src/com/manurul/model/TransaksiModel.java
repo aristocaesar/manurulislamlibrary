@@ -465,6 +465,8 @@ public class TransaksiModel extends DBConfig{
                     if(pst_detail_transaksi.execute()){
                         throw new SQLException("Gagal membuat transaksi !");
                     }
+                    
+                    updateDashboardBukuDipinjam("ADD");
 
                 }
 
@@ -788,11 +790,16 @@ public class TransaksiModel extends DBConfig{
                 updateSkorPeminjam(nis[0].trim(), "LESS");
                 updateStokBuku(isbn, "TAMBAH");
                 
+                updateDashboardBukuDipinjam("LESS");
+                
             }else{
                 
                 updateKesempatanPinjam(nis[0].trim(), "KURANG");
                 updateSkorPeminjam(nis[0].trim(), "LESS");
                 updateStokBuku(isbn, "BERMASALAH");
+                
+                updateDashboardBukuDipinjam("LESS");
+                updateDashboardBukuBermasalah("LESS");
             
             }
             
@@ -941,6 +948,7 @@ public class TransaksiModel extends DBConfig{
                         
                         updateStatusBuku(id_transaksi_p, table_list_dipinjam.getValueAt(i, 0).toString(), masalah[0].trim(), masalah[1].trim());
                         
+                        updateDashboardBukuBermasalah("ADD");
                     }
                     
                 }
@@ -966,6 +974,9 @@ public class TransaksiModel extends DBConfig{
                         // rubah skor peminjam (+10) dan ma_anggota.jumlah_buku_dipinjam -= 1
                         updateSkorPeminjam(nis[0].trim(), "ADD");
                         updateKesempatanPinjam(nis[0].trim(), "KURANG");
+                        
+                        // rubah total peminjaman
+                        updateDashboardBukuDipinjam("LESS");
                         
                     }
                     
@@ -1077,6 +1088,44 @@ public class TransaksiModel extends DBConfig{
             
         }
     
+    }
+    
+    public void updateDashboardBukuDipinjam(String action){
+    
+        try{
+        
+            String sql = "UPDATE ma_dashboard SET buku_dipinjam = buku_dipinjam - 1 WHERE id = 1";
+            if(action.equals("ADD")){
+                sql = "UPDATE ma_dashboard SET buku_dipinjam = buku_dipinjam + 1 WHERE id = 1";
+            }
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            if(pst.execute()){
+                throw new SQLException("Gagal melakukan perubahan buku pinjam !");
+            }
+            
+        }catch(SQLException error){
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }
+    
+    public void updateDashboardBukuBermasalah(String action){
+         try{
+        
+            String sql = "UPDATE ma_dashboard SET buku_bermasalah = buku_bermasalah - 1 WHERE id = 1";
+            if(action.equals("ADD")){
+                sql = "UPDATE ma_dashboard SET buku_bermasalah = buku_bermasalah + 1 WHERE id = 1";
+            }
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            if(pst.execute()){
+                throw new SQLException("Gagal melakukan perubahan buku masalah !");
+            }
+            
+        }catch(SQLException error){
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public void resetForm(String mode){

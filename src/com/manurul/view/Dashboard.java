@@ -13,6 +13,7 @@ import com.manurul.lib.RoundedPanel;
 import com.manurul.lib.SideBar;
 import com.manurul.model.AnggotaModel;
 import com.manurul.model.BukuModel;
+import com.manurul.model.DashboardModel;
 import com.manurul.model.JurusanModel;
 import com.manurul.model.KategoriModel;
 import com.manurul.model.LaporanModel;
@@ -35,8 +36,6 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -46,9 +45,6 @@ import javax.swing.table.TableCellRenderer;
  */
 public class Dashboard extends javax.swing.JFrame {
 
-    // INIT STATE || GLOBAL VARIABEL
-    private String title = "Dahsboard";
-    
     // GLOBAL INIT
     public static String id_kode;
     public static String nama_user;
@@ -66,23 +62,21 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * INIT FORM DASHBOARD
      */
+        
     public Dashboard(String kode, String nama, String hak_akses) {
+        
         initComponents();
         
         // SET STATE
-        this.id_kode = kode;
+        id_kode = kode;
         nama_user = nama;
         this.hak_akses = hak_akses;
-        
         
         // SET TITLE
         this.setTitleApp("Dashboard");
         
         // SET TOP BAR
         USERNAME.setText(nama_user);
-        
-        // SET ICON WINDOWS
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../src/LOGO_MANURUL.png")));
         
         // JFRAME FULL SCREEN
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -118,7 +112,6 @@ public class Dashboard extends javax.swing.JFrame {
             
             InputBorder.set(INPUT_LAPORAN_ID_TRANSAKSI, 8);
             
-            
             // DATA BUKU
             InputBorder.set(SEARCH_BUKU, 8);
             InputBorder.set(SEARCH_KATEGORI, 8);
@@ -132,6 +125,9 @@ public class Dashboard extends javax.swing.JFrame {
         
             //SETTING
             InputBorder.set(INPUT_SET_1, 8);
+            
+            LABEL_SET_3.setVisible(false);
+            INPUT_SET_3.setVisible(false);
             
         // SET SUCCESS ICON
         ImageIcon successIcon = new ImageIcon(getClass().getResource("/com/manurul/src/ICON_SUCCESS.png"));
@@ -150,17 +146,8 @@ public class Dashboard extends javax.swing.JFrame {
         // start realtime for trancaction
         new TransaksiModel().getDateRealTime();
         
-                
-        // KONFIRMASI KELUAR APP ( WINDOWS CLOSING )
-//         this.addWindowListener(new java.awt.event.WindowAdapter() {
-//            @Override
-//            public void windowClosing(java.awt.event.WindowEvent e) {
-//                int close = JOptionPane.showOptionDialog(null, "Apakah yakin kamu ingin keluar ?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-//                if(close == 0){
-//                    System.exit(0);
-//                }
-//            }
-//        });
+        // GET DATA DASHBOARD
+        new DashboardModel().getDashboardData(Dashboard.SORT_LIST_LOG.getSelectedItem().toString());
         
         
     }
@@ -184,6 +171,7 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         SIDEBAR = new javax.swing.JPanel();
         MANURUL_LOGO = new javax.swing.JLabel();
         BTN_DASHBOARD = new javax.swing.JLabel();
@@ -218,7 +206,13 @@ public class Dashboard extends javax.swing.JFrame {
         LABEL_LOG = new javax.swing.JLabel();
         LABEL_TAMPILKAN = new javax.swing.JLabel();
         TABLE_LOG = new javax.swing.JScrollPane();
-        TABLE_LIST_LOG = new javax.swing.JTable();
+        TABLE_LIST_LOG = new javax.swing.JTable(){
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+        };
         SORT_LIST_LOG = new javax.swing.JComboBox<>();
         TRANSAKSI = new javax.swing.JPanel();
         TOPBAR_TRANSAKSI = new RoundedPanel(15, Color.WHITE);
@@ -471,6 +465,8 @@ public class Dashboard extends javax.swing.JFrame {
         INPUT_SET_3 = new javax.swing.JComboBox<>();
         BTN_SET_SIMPAN = new javax.swing.JButton();
 
+        jLabel1.setText("jLabel1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         SIDEBAR.setBackground(new java.awt.Color(255, 255, 255));
@@ -611,7 +607,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         P_TOTAL_BUKU.setBackground(new java.awt.Color(239, 240, 245));
-        P_TOTAL_BUKU.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        P_TOTAL_BUKU.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         P_TOTAL_BUKU.setPreferredSize(new java.awt.Dimension(290, 143));
 
         ICON_TOTAL_BUKU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_BOOK.png"))); // NOI18N
@@ -652,7 +648,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         P_DIPINJAM.setBackground(new java.awt.Color(239, 240, 245));
-        P_DIPINJAM.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        P_DIPINJAM.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         P_DIPINJAM.setPreferredSize(new java.awt.Dimension(290, 143));
 
         ICON_DIPINJAM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_DIPINJAM.png"))); // NOI18N
@@ -677,7 +673,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(P_DIPINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TITLE_DIPINJAM)
                     .addComponent(VALUE_DIPINJAM))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         P_DIPINJAMLayout.setVerticalGroup(
             P_DIPINJAMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -694,7 +690,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         P_BERMASALAH.setBackground(new java.awt.Color(239, 240, 245));
-        P_BERMASALAH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        P_BERMASALAH.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         P_BERMASALAH.setPreferredSize(new java.awt.Dimension(290, 143));
 
         ICON_BERMASALAH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/manurul/src/ICON_BERMASALAH.png"))); // NOI18N
@@ -736,7 +732,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
 
         P_ANGGOTA.setBackground(new java.awt.Color(239, 240, 245));
-        P_ANGGOTA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        P_ANGGOTA.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         P_ANGGOTA.setPreferredSize(new java.awt.Dimension(290, 143));
 
         TITLE_ANGGOTA.setBackground(new java.awt.Color(204, 204, 204));
@@ -795,13 +791,19 @@ public class Dashboard extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Proces", "Pesan", "Pengurus", "Tanggal"
             }
         ));
+        TABLE_LIST_LOG.setRowHeight(30);
         TABLE_LOG.setViewportView(TABLE_LIST_LOG);
 
         SORT_LIST_LOG.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        SORT_LIST_LOG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        SORT_LIST_LOG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "10", "20", "50", "100" }));
+        SORT_LIST_LOG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SORT_LIST_LOGActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout P_TABLE_LOGLayout = new javax.swing.GroupLayout(P_TABLE_LOG);
         P_TABLE_LOG.setLayout(P_TABLE_LOGLayout);
@@ -2581,30 +2583,28 @@ public class Dashboard extends javax.swing.JFrame {
             FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                        .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
+                        .addComponent(MAIN_TTILE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
+                        .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
                                 .addComponent(LABEL_SET_RP)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
-                            .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                                .addComponent(LABEL_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(2, 2, 2)))
-                        .addGap(63, 63, 63)
+                                .addComponent(INPUT_SET_1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LABEL_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LABEL_SET_2, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                            .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                                .addComponent(INPUT_SET_2)
-                                .addGap(2, 2, 2)))
-                        .addGap(63, 63, 63)
-                        .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LABEL_SET_3, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-                            .addComponent(INPUT_SET_3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(27, 27, 27))
-                    .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                        .addComponent(MAIN_TTILE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(INPUT_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LABEL_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FRAME_MAIN_SETTINGLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LABEL_SET_3, javax.swing.GroupLayout.DEFAULT_SIZE, 1218, Short.MAX_VALUE)
+                    .addComponent(INPUT_SET_3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         FRAME_MAIN_SETTINGLayout.setVerticalGroup(
             FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2614,15 +2614,17 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LABEL_SET_1)
-                    .addComponent(LABEL_SET_2)
-                    .addComponent(LABEL_SET_3))
+                    .addComponent(LABEL_SET_2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(INPUT_SET_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LABEL_SET_RP)
-                    .addComponent(INPUT_SET_2, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(INPUT_SET_3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(240, 240, 240))
+                    .addComponent(INPUT_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(LABEL_SET_3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(INPUT_SET_3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(332, 332, 332))
         );
 
         BTN_SET_SIMPAN.setBackground(new java.awt.Color(0, 171, 60));
@@ -3282,6 +3284,10 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TABLE_LAPORAN_TRANSAKSIMouseClicked
 
+    private void SORT_LIST_LOGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SORT_LIST_LOGActionPerformed
+        new DashboardModel().getDashboardData(SORT_LIST_LOG.getSelectedItem().toString());        
+    }//GEN-LAST:event_SORT_LIST_LOGActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3423,7 +3429,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JTextField SEARCH_USER;
     public static javax.swing.JPanel SETTING;
     private javax.swing.JPanel SIDEBAR;
-    private javax.swing.JComboBox<String> SORT_LIST_LOG;
+    public static javax.swing.JComboBox<String> SORT_LIST_LOG;
     public static javax.swing.JTable TABLES_LAPORAN_BERMASALAH;
     private javax.swing.JScrollPane TABLE_KATEGORI;
     public static javax.swing.JTable TABLE_LAPORAN_TRANSAKSI;
@@ -3434,7 +3440,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JTable TABLE_LIST_ITEM_PENGURUS;
     private javax.swing.JScrollPane TABLE_LIST_JURUSAN;
     public static javax.swing.JTable TABLE_LIST_KATEGORI;
-    private javax.swing.JTable TABLE_LIST_LOG;
+    public static javax.swing.JTable TABLE_LIST_LOG;
     public static javax.swing.JTable TABLE_LIST_PENERBIT;
     public static javax.swing.JTable TABLE_LIST_PENGEMBALIAN;
     public static javax.swing.JTable TABLE_LIST_PENGEMBALIAN1;
@@ -3497,11 +3503,12 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JLabel USERNAME_SETTING;
     public static javax.swing.JLabel USERNAME_TRANSAKSI;
     public static javax.swing.JLabel USERNAME_USER;
-    private javax.swing.JLabel VALUE_ANGGOTA;
-    private javax.swing.JLabel VALUE_BERMASALAH;
-    private javax.swing.JLabel VALUE_DIPINJAM;
-    private javax.swing.JLabel VALUE_TOTAL_BUKU;
+    public static javax.swing.JLabel VALUE_ANGGOTA;
+    public static javax.swing.JLabel VALUE_BERMASALAH;
+    public static javax.swing.JLabel VALUE_DIPINJAM;
+    public static javax.swing.JLabel VALUE_TOTAL_BUKU;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables

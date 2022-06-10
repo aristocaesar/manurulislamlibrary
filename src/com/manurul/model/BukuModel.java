@@ -38,6 +38,7 @@ public class BukuModel extends DBConfig {
     String rak;
     String deskripsi;
     String max_dipinjam;
+    int dipinjam;
     String created_at;
     String updated_at;
     String message;
@@ -163,6 +164,14 @@ public class BukuModel extends DBConfig {
     
     public String getMaxDipinjam() {
         return this.max_dipinjam;
+    }
+    
+    public void setDipinjam(int pinjam){
+        this.dipinjam = pinjam;
+    }
+    
+    public int getDipinjam(){
+        return this.dipinjam;
     }
     
     public void setCreated(String tgl) {
@@ -427,6 +436,7 @@ public class BukuModel extends DBConfig {
             setStok(res.getInt("stok"));
             setRak(res.getString("rak"));
             setDeskripsi(res.getString("deskripsi"));
+            setDipinjam(res.getInt("jumlah_dipinjam"));
             
             setCreated(res.getString("created_at"));
             setUpdated(res.getString("updated_at"));
