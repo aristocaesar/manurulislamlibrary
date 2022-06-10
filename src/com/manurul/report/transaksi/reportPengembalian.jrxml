@@ -85,7 +85,7 @@ WHERE
 					<font fontName="Serif" size="15" isBold="true"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
-				<text><![CDATA[PEMINJAMAN BUKU]]></text>
+				<text><![CDATA[PENGEMBALIAN BUKU]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

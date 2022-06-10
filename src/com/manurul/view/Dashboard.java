@@ -15,6 +15,7 @@ import com.manurul.model.AnggotaModel;
 import com.manurul.model.BukuModel;
 import com.manurul.model.JurusanModel;
 import com.manurul.model.KategoriModel;
+import com.manurul.model.LaporanModel;
 import com.manurul.model.PenerbitModel;
 import com.manurul.model.PengurusModel;
 import com.manurul.model.RakModel;
@@ -112,16 +113,9 @@ public class Dashboard extends javax.swing.JFrame {
             
             PJ_INPUT_JENIS_BUKU_PENGEMBALIAN.disable();
             
-//            BTN_CETAK_PENGEMBALIAN.setEnabled(false);
+            // TRANSAKSI - LAPORAN
             
-//            TABLE_LIST_PENGEMBALIAN1.getModel().addTableModelListener(new TableModelListener() {
-//
-//                    @Override
-//                    public void tableChanged(TableModelEvent e) {
-//                        System.out.println(e.getFirstRow());
-//                    }
-//                    
-//              });
+            InputBorder.set(INPUT_LAPORAN_ID_TRANSAKSI, 8);
             
             
             // DATA BUKU
@@ -243,9 +237,10 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         F_CONTENT_TRANSAKSI = new RoundedPanel(15, Color.WHITE);
-        jComboBox3 = new javax.swing.JComboBox<>();
+        INPUT_LAPORAN_LIMIT_TRANSAKSI = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        TABLE_LAPORAN_TRANSAKSI = new javax.swing.JTable();
+        INPUT_LAPORAN_ID_TRANSAKSI = new javax.swing.JTextField();
         F_TR_KEMBALI = new RoundedPanel(15, Color.WHITE);
         TITLE_FRAME_PENGEMBALIAN = new javax.swing.JLabel();
         BTN_CETAK_PENGEMBALIAN = new javax.swing.JButton();
@@ -1049,32 +1044,59 @@ public class Dashboard extends javax.swing.JFrame {
 
         F_CONTENT_TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
 
-        jComboBox3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "50", "100", "Semua" }));
+        INPUT_LAPORAN_LIMIT_TRANSAKSI.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        INPUT_LAPORAN_LIMIT_TRANSAKSI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "10", "20", "50", "100" }));
+        INPUT_LAPORAN_LIMIT_TRANSAKSI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPUT_LAPORAN_LIMIT_TRANSAKSIActionPerformed(evt);
+            }
+        });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        TABLE_LAPORAN_TRANSAKSI.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Transaksi", "Peminjam", "Jumlah Buku", "Status"
             }
-        ));
-        jScrollPane3.setViewportView(jTable3);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TABLE_LAPORAN_TRANSAKSI.setRowHeight(30);
+        jScrollPane3.setViewportView(TABLE_LAPORAN_TRANSAKSI);
+        if (TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumnCount() > 0) {
+            TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumn(0).setResizable(false);
+            TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumn(2).setPreferredWidth(150);
+            TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumn(2).setMaxWidth(150);
+            TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumn(3).setPreferredWidth(150);
+            TABLE_LAPORAN_TRANSAKSI.getColumnModel().getColumn(3).setMaxWidth(150);
+        }
+
+        INPUT_LAPORAN_ID_TRANSAKSI.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        INPUT_LAPORAN_ID_TRANSAKSI.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        INPUT_LAPORAN_ID_TRANSAKSI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                INPUT_LAPORAN_ID_TRANSAKSIKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout F_CONTENT_TRANSAKSILayout = new javax.swing.GroupLayout(F_CONTENT_TRANSAKSI);
         F_CONTENT_TRANSAKSI.setLayout(F_CONTENT_TRANSAKSILayout);
         F_CONTENT_TRANSAKSILayout.setHorizontalGroup(
             F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(F_CONTENT_TRANSAKSILayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, F_CONTENT_TRANSAKSILayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(F_CONTENT_TRANSAKSILayout.createSequentialGroup()
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(INPUT_LAPORAN_ID_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(INPUT_LAPORAN_LIMIT_TRANSAKSI, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
@@ -1082,7 +1104,9 @@ public class Dashboard extends javax.swing.JFrame {
             F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(F_CONTENT_TRANSAKSILayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(F_CONTENT_TRANSAKSILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(INPUT_LAPORAN_LIMIT_TRANSAKSI, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(INPUT_LAPORAN_ID_TRANSAKSI))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
@@ -3228,6 +3252,14 @@ public class Dashboard extends javax.swing.JFrame {
         new SideBar().setLaporanPageSelected("BUKU_BERMASALAH");
     }//GEN-LAST:event_T_LP_BUKU_BERMASALAHMouseClicked
 
+    private void INPUT_LAPORAN_ID_TRANSAKSIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_INPUT_LAPORAN_ID_TRANSAKSIKeyTyped
+        new LaporanModel().getLaporanTransaksi(INPUT_LAPORAN_ID_TRANSAKSI.getText(), INPUT_LAPORAN_LIMIT_TRANSAKSI.getSelectedItem().toString());
+    }//GEN-LAST:event_INPUT_LAPORAN_ID_TRANSAKSIKeyTyped
+
+    private void INPUT_LAPORAN_LIMIT_TRANSAKSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_LAPORAN_LIMIT_TRANSAKSIActionPerformed
+        new LaporanModel().getLaporanTransaksi(INPUT_LAPORAN_ID_TRANSAKSI.getText(), INPUT_LAPORAN_LIMIT_TRANSAKSI.getSelectedItem().toString());
+    }//GEN-LAST:event_INPUT_LAPORAN_LIMIT_TRANSAKSIActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3319,6 +3351,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel ICON_TR_TRANSAKSI;
     private javax.swing.JLabel ICON_USER;
     private javax.swing.JLabel ICON_U_USER;
+    public static javax.swing.JTextField INPUT_LAPORAN_ID_TRANSAKSI;
+    public static javax.swing.JComboBox<String> INPUT_LAPORAN_LIMIT_TRANSAKSI;
     public static javax.swing.JTextField INPUT_SET_1;
     public static javax.swing.JSpinner INPUT_SET_2;
     public static javax.swing.JComboBox<String> INPUT_SET_3;
@@ -3369,6 +3403,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel SIDEBAR;
     private javax.swing.JComboBox<String> SORT_LIST_LOG;
     private javax.swing.JScrollPane TABLE_KATEGORI;
+    public static javax.swing.JTable TABLE_LAPORAN_TRANSAKSI;
     public static javax.swing.JTable TABLE_LIST_ANGGOTA;
     public static javax.swing.JTable TABLE_LIST_BUKU;
     private javax.swing.JScrollPane TABLE_LIST_DB_BUKU;
@@ -3444,11 +3479,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel VALUE_DIPINJAM;
     private javax.swing.JLabel VALUE_TOTAL_BUKU;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 
 }

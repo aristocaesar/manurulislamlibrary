@@ -1066,6 +1066,10 @@ public class TransaksiModel extends DBConfig{
             print = JasperFillManager.fillReport(Report, hash, conn);
             JasperPrintManager.printReport(print, false);
             new JasperViewer(print, false).setVisible(true);
+            
+            // cetak log
+            new LogModel().Action("MEMPERBARUI TRANSAKSI", "Berhasil memperbarui Transaksi " + id_transaksi, Dashboard.nama_user);
+
         
         }catch(Exception error){
         

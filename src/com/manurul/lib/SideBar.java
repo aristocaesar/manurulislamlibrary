@@ -6,6 +6,7 @@
 package com.manurul.lib;
 
 import com.manurul.model.BukuModel;
+import com.manurul.model.LaporanModel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
 
@@ -134,6 +135,8 @@ public class SideBar {
             Dashboard.F_TR_CONTENT_LAPORAN.add(Dashboard.F_CONTENT_TRANSAKSI);
             
             Dashboard.T_LP_TRANSAKSI.setForeground(new Color(78, 204, 121));
+            
+            new LaporanModel().getLaporanTransaksi(Dashboard.INPUT_LAPORAN_ID_TRANSAKSI.getText(), Dashboard.INPUT_LAPORAN_LIMIT_TRANSAKSI.getSelectedItem().toString());
             
         }else if(selected.equals("BUKU_BERMASALAH")){
             
