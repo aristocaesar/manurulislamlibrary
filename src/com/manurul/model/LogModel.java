@@ -7,6 +7,7 @@ package com.manurul.model;
 
 import com.manurul.lib.DBConfig;
 import com.manurul.lib.SqlTime;
+import com.manurul.view.Dashboard;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -24,26 +25,23 @@ public class LogModel extends DBConfig{
    public void Action(String Process, String Message, String Petugas){
        
        try{
+         
            
            if(Process.equals("") || Message.equals("")){
             throw new SQLException("Terjadi kesalahan pada data aktifitas !");
            }
            
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_log (process, message, petugas, created_at) VALUES (?, ?, ?, ?) ");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO ma_log (process, message, pengurus, created_at) VALUES (?, ?, ?, ?) ");
             pst.setString(1, Process);
             pst.setString(2, Message);
             pst.setString(3, Petugas);
-            
-            
             pst.setTimestamp(4, new SqlTime().getTimeStamp());
-            
-            
-//            if(pst.execute()){
-//                throw new SQLException("Terjadi kesalahan pada data aktifitas !");
-//            }
-            System.out.println(Process +" , "+ Message +" , "+ Petugas);
+            if(pst.execute()){
+                throw new SQLException("Terjadi kesalahan pada data aktifitas !");
+            }
             
        }catch(SQLException error){
+           System.out.println(error.getMessage());
            this.error = error.getMessage();
        }
        

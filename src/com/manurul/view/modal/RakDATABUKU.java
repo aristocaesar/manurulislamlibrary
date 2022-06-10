@@ -7,7 +7,6 @@ package com.manurul.view.modal;
 
 import com.manurul.lib.Characters;
 import com.manurul.lib.InputBorder;
-import java.awt.Toolkit;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.model.RakModel;
 import static com.manurul.view.Dashboard.SEARCH_RAK;
@@ -51,9 +50,6 @@ public class RakDATABUKU extends javax.swing.JFrame {
         
         // SET DISABLE RESIZESABLE
         this.setResizable(false);
-        
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
         
         // INIT INPUT BORDER PADDING
         InputBorder.set(INPUT_KODE_RAK, 8);

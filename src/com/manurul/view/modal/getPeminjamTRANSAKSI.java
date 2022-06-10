@@ -38,9 +38,6 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame{
         // SET DISABLE RESIZESABLE
         this.setResizable(false);
         
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
-        
         // SET BORDER
         InputBorder.set(INPUT_SEARCH, 8);
         INPUT_SEARCH.setFocusable(true);
@@ -203,6 +200,12 @@ public class getPeminjamTRANSAKSI extends javax.swing.JFrame{
             }
             
             if(!nis.equals("")){
+                
+                DefaultTableModel list_buku = (DefaultTableModel)Dashboard.TABLE_LIST_PINJAM.getModel();
+                
+                list_buku.setRowCount(0);
+                list_buku.addRow(new String[]{"", "", ""});
+                
                 Dashboard.TM.setNis(nis);
                 Dashboard.TM.setNama(nama);
                 Dashboard.TM.setJumlahBukuDipinjam(buku_dipinjam);

@@ -10,7 +10,6 @@ import com.manurul.lib.InputBorder;
 import com.manurul.lib.RoundedPanel;
 import com.manurul.view.Dashboard;
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -26,15 +25,13 @@ public class konfirmasiTransaksiPinjam extends javax.swing.JFrame {
      */
     public konfirmasiTransaksiPinjam() {
         initComponents();
-        
-        // SET ICON
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../src/LOGO_MANURUL.png")));
 
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - Konfirmasi Pinjam");
         
         // REQ FOCUS
         TABLE_LIST_BUKU_PINJAM.requestFocus();
+        TABLE_LIST_BUKU_PINJAM.setRowSelectionInterval(0, 0);
         
         // SET INPUT BORDE
         InputBorder.set(INPUT_NAMA_PEMINJAM, 8);
@@ -184,11 +181,11 @@ public class konfirmasiTransaksiPinjam extends javax.swing.JFrame {
                     .addComponent(LABEL_ID_TRANSAKSI)
                     .addComponent(LABEL_PENGURUS))
                 .addGap(25, 25, 25)
-                .addGroup(WRAPPERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(WRAPPERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(WRAPPERLayout.createSequentialGroup()
                         .addComponent(LABEL_NAMA_PEMINJAM)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(INPUT_NAMA_PEMINJAM, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(INPUT_NAMA_PEMINJAM))
                     .addGroup(WRAPPERLayout.createSequentialGroup()
                         .addComponent(LABEL_JENIS_BUKU)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
