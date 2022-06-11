@@ -777,7 +777,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         LABEL_LOG.setFont(new java.awt.Font("Trebuchet MS", 1, 28)); // NOI18N
         LABEL_LOG.setForeground(new java.awt.Color(96, 96, 96));
-        LABEL_LOG.setText("Aktifitas Terbaru");
+        LABEL_LOG.setText("Aktivitas Terbaru");
 
         LABEL_TAMPILKAN.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         LABEL_TAMPILKAN.setForeground(new java.awt.Color(204, 204, 204));
@@ -791,7 +791,7 @@ public class Dashboard extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Proces", "Pesan", "Pengurus", "Tanggal"
+                "Proses", "Pesan", "Pengurus", "Tanggal"
             }
         ));
         TABLE_LIST_LOG.setRowHeight(30);
@@ -1463,7 +1463,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         PJ_ID_TRANSAKSI.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         PJ_ID_TRANSAKSI.setForeground(new java.awt.Color(96, 96, 96));
-        PJ_ID_TRANSAKSI.setText("ID Transkasi");
+        PJ_ID_TRANSAKSI.setText("ID Transaksi");
 
         PJ_INPUT_PEMINJAM.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         PJ_INPUT_PEMINJAM.setForeground(new java.awt.Color(96, 96, 96));
@@ -1492,7 +1492,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         PJ_LABEL_INFO_2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         PJ_LABEL_INFO_2.setForeground(new java.awt.Color(96, 96, 96));
-        PJ_LABEL_INFO_2.setText("memahi peraturan dan tata tertib perpustakaan.");
+        PJ_LABEL_INFO_2.setText("memahami peraturan dan tata tertib perpustakaan.");
 
         PJ_INPUT_JENIS_BUKU.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         PJ_INPUT_JENIS_BUKU.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UMUM - Buku Umum", "PAKET - Buku Paket" }));
@@ -2588,23 +2588,23 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(MAIN_TTILE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                        .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                                .addComponent(LABEL_SET_RP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(INPUT_SET_1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(LABEL_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(INPUT_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LABEL_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(INPUT_SET_3, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
+                                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(FRAME_MAIN_SETTINGLayout.createSequentialGroup()
+                                        .addComponent(LABEL_SET_RP)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(INPUT_SET_1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(LABEL_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(INPUT_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LABEL_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LABEL_SET_3, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(27, 27, 27))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FRAME_MAIN_SETTINGLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LABEL_SET_3, javax.swing.GroupLayout.DEFAULT_SIZE, 1218, Short.MAX_VALUE)
-                    .addComponent(INPUT_SET_3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
         );
         FRAME_MAIN_SETTINGLayout.setVerticalGroup(
             FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2616,12 +2616,11 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(LABEL_SET_1)
                     .addComponent(LABEL_SET_2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                    .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(LABEL_SET_RP)
-                        .addComponent(INPUT_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(LABEL_SET_RP)
+                    .addComponent(INPUT_SET_1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(INPUT_SET_2, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                .addGap(18, 23, Short.MAX_VALUE)
                 .addComponent(LABEL_SET_3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(INPUT_SET_3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)

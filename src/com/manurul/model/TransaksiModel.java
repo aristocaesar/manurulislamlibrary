@@ -209,7 +209,7 @@ public class TransaksiModel extends DBConfig{
         table_model.addColumn("Nama");
         table_model.addColumn("Jurusan");
         table_model.addColumn("Skor");
-        table_model.addColumn("Ksmptn Pinjam");
+        table_model.addColumn("Kesempatan Pinjam");
 
         table_model.setRowCount(0);
 

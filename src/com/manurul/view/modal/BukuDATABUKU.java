@@ -613,7 +613,7 @@ public class BukuDATABUKU extends javax.swing.JFrame {
             return true;
             
         }catch(Exception error){
-   
+                System.out.println(error);
             JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         
