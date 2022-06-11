@@ -141,6 +141,11 @@ public class BukuDATABUKU extends javax.swing.JFrame {
             
         }
         
+        // ENABLE DISABLE MAX PINJAM
+        if(INPUT_JENIS.getSelectedItem().toString().equals("PAKET")){
+            INPUT_MAX_BATAS_PINJAM.setVisible(false);
+        }
+        
         // SET TITLE
         this.setTitle("MA Nurul Islam Library Management - "+this.title+" Buku");
         
@@ -587,7 +592,7 @@ public class BukuDATABUKU extends javax.swing.JFrame {
                 throw new Exception("Nilai penulis harus terisi !");
             }
             
-            if(max_dipinjam.equals("UMUM")){
+            if(jenis.equals("UMUM")){
                 if(hari_max_pinjam <= 0){
                     throw new Exception("Nilai hari pinjam terlalu rendah !");
                 }
@@ -613,10 +618,8 @@ public class BukuDATABUKU extends javax.swing.JFrame {
             return true;
             
         }catch(Exception error){
-                System.out.println(error);
             JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
             return false;
-        
         }
         
     }
@@ -681,8 +684,10 @@ public class BukuDATABUKU extends javax.swing.JFrame {
     private void INPUT_JENISActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPUT_JENISActionPerformed
         
         String jenis = INPUT_JENIS.getSelectedItem().toString();
-        if(jenis != "UMUM"){
-            INPUT_MAX_BATAS_PINJAM.disable();
+        if(!jenis.equals("UMUM")){
+            INPUT_MAX_BATAS_PINJAM.setEnabled(false);
+        }else{
+            INPUT_MAX_BATAS_PINJAM.setEnabled(true);
         }
         
     }//GEN-LAST:event_INPUT_JENISActionPerformed

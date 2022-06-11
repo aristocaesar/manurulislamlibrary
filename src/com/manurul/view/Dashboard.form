@@ -933,7 +933,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Component id="ICON_TR_TRANSAKSI" alignment="1" pref="68" max="32767" attributes="0"/>
+                      <Component id="ICON_TR_TRANSAKSI" alignment="1" pref="70" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -1582,7 +1582,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="60" green="60" red="60" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="ID Transkasi"/>
+                        <Property name="text" type="java.lang.String" value="ID Transaksi"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="PJ_INPUT_PEMINJAM_PENGEMBALIAN">

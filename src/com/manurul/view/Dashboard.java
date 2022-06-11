@@ -942,7 +942,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(T_TR_KEMBALI)
                     .addComponent(T_TR_LAPORAN))
                 .addContainerGap())
-            .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+            .addComponent(ICON_TR_TRANSAKSI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
         FRAME_TRANSAKSI.setBackground(new java.awt.Color(239, 240, 245));
@@ -1168,7 +1168,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         PJ_ID_TRANSAKSI_PENGEMBALIAN.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         PJ_ID_TRANSAKSI_PENGEMBALIAN.setForeground(new java.awt.Color(96, 96, 96));
-        PJ_ID_TRANSAKSI_PENGEMBALIAN.setText("ID Transkasi");
+        PJ_ID_TRANSAKSI_PENGEMBALIAN.setText("ID Transaksi");
 
         PJ_INPUT_PEMINJAM_PENGEMBALIAN.setEditable(false);
         PJ_INPUT_PEMINJAM_PENGEMBALIAN.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
