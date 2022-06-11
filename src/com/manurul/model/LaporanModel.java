@@ -204,8 +204,6 @@ public class LaporanModel extends DBConfig {
             JasperPrintManager.printReport(print, false);
             new JasperViewer(print, false).setVisible(true);
             
-            //
-            
             // cetak log
             new LogModel().Action("MENCETAK LAPORAN TRANSAKSI", "Berhasil mencetak laporan Transaksi " + this.id_tr, Dashboard.nama_user);
             

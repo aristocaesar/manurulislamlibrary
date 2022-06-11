@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2022 at 11:01 PM
+-- Generation Time: Jun 11, 2022 at 02:08 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -45,7 +45,9 @@ CREATE TABLE `ma_anggota` (
 INSERT INTO `ma_anggota` (`nis`, `nama_lengkap`, `jurusan`, `jumlah_buku_dipinjam`, `skor`, `created_at`, `updated_at`) VALUES
 ('41211739', 'Syahiba Saufa', 'TKJ', 0, 100, '2022-06-05 22:45:41', '2022-06-05 22:45:41'),
 ('41211740', 'Vita Alvia', 'AK', 0, 100, '2022-06-05 23:21:56', '2022-06-05 23:21:56'),
-('41211741', 'Demy Yoker', 'TKJ', 0, 100, '2022-06-07 23:37:47', '2022-06-07 23:37:47');
+('41211741', 'Demy Yoker', 'AK', 0, 100, '2022-06-07 23:37:47', '2022-06-11 17:52:52'),
+('41211742', 'Suliana', 'TKJ', 0, 100, '2022-06-11 17:50:34', '2022-06-11 17:50:40'),
+('41211743', 'Mahesa', 'TPL', 0, 100, '2022-06-11 17:53:21', '2022-06-11 17:53:21');
 
 --
 -- Triggers `ma_anggota`
@@ -86,7 +88,7 @@ CREATE TABLE `ma_buku` (
   `rak` varchar(16) DEFAULT NULL,
   `deskripsi` text,
   `max_hari_pinjam` int(11) NOT NULL,
-  `jumlah_dipinjam` int(11) NOT NULL,
+  `jumlah_dipinjam` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -96,7 +98,7 @@ CREATE TABLE `ma_buku` (
 --
 
 INSERT INTO `ma_buku` (`isbn`, `judul`, `jenis`, `kategori`, `harga`, `tahun_terbit`, `penulis`, `penerbit`, `stok`, `rak`, `deskripsi`, `max_hari_pinjam`, `jumlah_dipinjam`, `created_at`, `updated_at`) VALUES
-('602-6232-57-1', 'Buku Security Jaringan Komputer Berbasis Ceh | Belajar Menjadi White Hacker', 'UMUM', 'TGNI', '89000.0', '2018', 'Rifkie Primartha?', 'Cakradenta Agung Pertiwi, Pt', 5, 'TIK', 'Penulis mendapati bahwa permasalahan riil yang terkait security jaringan komputer, khususnya yang terkait dengan aktifitas hacking, sudah mencapai batas ambang gawat darurat. Sehingga diperlukan obat penawar dengan dosis tinggi untuk mengatasi penyakit akut tersebut.?? ??', 7, 0, '2022-05-22 14:39:42', '2022-05-22 14:39:42'),
+('602-6232-57-1', 'Buku Security Jaringan Komputer Berbasis Ceh | Belajar Menjadi White Hacker', 'UMUM', 'TGNI', '89000.0', '2018', 'Rifkie Primartha?', 'Cakradenta Agung Pertiwi, Pt', 4, 'TIK', 'Penulis mendapati bahwa permasalahan riil yang terkait security jaringan komputer, khususnya yang terkait dengan aktifitas hacking, sudah mencapai batas ambang gawat darurat. Sehingga diperlukan obat penawar dengan dosis tinggi untuk mengatasi penyakit akut tersebut.?? ??', 7, 0, '2022-05-22 14:39:42', '2022-05-22 14:39:42'),
 ('978-602-0823-06-5', 'Buku Hacking Aplikasi Web Uncensored Untuk Pemula', 'UMUM', 'TGNI', '70000.0', '2015', 'Efvy Zam', 'Cakradenta Agung Pertiwi, Pt', 5, 'TIK', 'Buku ini akan menunjukkan kepada kamu, bahwa dengan logika yang sederhana saja maka seseorang sudah bisa melakukan aksi website hacking. Dimulai dari proses menggali informasi sebuah website hingga melakukan eksekusi untuk menerobos website. Tentu saja, ada banyak jalan menuju Roma dan banyak pula cara atau teknik yang dapat ditempuh. Teknik itulah yang akan diulas dan dibahas dalam buku ini', 7, 0, '2022-05-22 14:38:31', '2022-05-22 14:38:31'),
 ('978-602-1514-71-9', 'Buku Belajar Otodidak Mysql Teknik Pembuatan Dan Pengelolaan Database', 'UMUM', 'TGNI', '85000.0', '2022', 'Budi Raharjo', 'Calista Alam, Pt', 5, 'TIK', ' MySQL adalah software yang berfungsi untuk membuat, mengatur, dan mengelola database. Dengan MySQL, Anda dapat membuat sendiri database untuk menyimpan dan mengelola data perusahaan (misal: data pegawai, keuangan dan akuntansi, aset, dll), data pribadi Anda, koleksi foto keluarga Anda dan sebagainya secara mudah dan aman.?', 7, 0, '2022-05-22 14:44:17', '2022-05-22 14:46:47'),
 ('978-602-6231-28-4', 'Buku 5 Langkah Mudah Menguasai React Native | Lukmanul Hakim', 'UMUM', 'TGNI', '75000.0', '2021', 'Lukmanul Hakim', 'Calista Alam, Pt', 5, 'TIK', 'React Native merupakan salah satu tool terbaik untuk membuat aplikasi mobile (mobile apps). Karena sesuai tagline-nya Learn Once, Write Anywhere, App dapat dijalankan di dua platform sekaligus, yaitu Android dan iOS (Apple). Selain itu, App yang dibuat dengan React Native berkinerja bagus, cepat dan stabil.', 7, 0, '2022-05-22 14:40:46', '2022-05-22 14:40:46'),
@@ -105,7 +107,8 @@ INSERT INTO `ma_buku` (`isbn`, `judul`, `jenis`, `kategori`, `harga`, `tahun_ter
 ('978-602-6232-75-5', 'Buku Pemrograman Javascript Untuk Aplikasi Web | Belajar Javascript Untuk Pemula', 'UMUM', 'TGNI', '130000.0', '2018', 'Betha Sidik', 'Calista Alam, Pt', 5, 'TIK', ' Salah satu bahasa Pemrograman yang harus dikuasai oleh pengembang aplikasi berbasis web adalah Javascript. Secara de fakto, Javascript adalah satu-satunya bahasa pemrograman yang ada dalam lingkungan browser web, yang didukung oleh semua browser web modern. Menguasai dasar pemrograman javascript menjadi keharusan, karena kita akan dapat mengetahui bagaimana suatu halaman web bisa ditampilkan untuk menjadi aplikasi berbasis web atau untuk menampilkan informasi dengan banyak cara.?', 7, 0, '2022-05-22 14:36:14', '2022-05-22 14:36:21'),
 ('978-602-8759-42-7', 'Buku Logika Algoritma Dan Pemrograman Dasar Bahasa Pascal C C++', 'UMUM', 'TGNI', '170000.0', '2018', 'Rosa A.s.?', 'Cipta Narada Sejati', 5, 'TIK', ' Algoritma berarti solusi. Ketika orang berbicara mengenai algoritma di bidang pemrograman, maka yang dimaksud adalah solusi dari suatu masalah yang harus dipecahkan dengan menggunakan komputer. Algoritma harus dibuat secara runut agar komputer mengerti dan mampu mengeksekusinya. Analisis kasus sangat dibutuhkan dalam membuat sebuah algoritma, misalnya proses apa saja yang sekiranya dibutuhkan untuk menyelesaikan masalah yang harus diselesaikan.??', 7, 0, '2022-05-22 14:35:16', '2022-05-22 14:36:26'),
 ('978-623-7131-03-8', 'Buku Network Security Dan Cyber Security | Cisco Ccna | Linux | Windows | Amazon Aws | Android', 'UMUM', 'TGNI', '130000.0', '2019', 'Iwan Sofana, Rifkie Primartha', 'Cahaya Pelita Andika, Pt', 5, 'TIK', 'Buku ini berisi tentang seluk-beluk computer security dan network security, mulai dari teori hingga praktik. Beberapa materi inti yang dibahas dalam buku ini antara lain: Ciscosecurity, Windows security, Linux security, Android security, AWS cloud computing security, Security Audit ISO 27001 dan NIST 800-53. ?', 7, 0, '2022-05-22 14:34:08', '2022-05-22 14:34:08'),
-('978-860-2556-84-04', 'Buku Fundamental Of Python For Machine Learning Untuk Pemula', 'UMUM', 'TGNI', '60000.0', '2018', 'Teguh Wahyono', 'Cibaliung Tunggal Plantation, Pt', 5, 'TIK', 'Artificial intelligence  (AI) dan machine learning saat ini kembali memasuki fase booming setelah beberapa dekade mengalami pasang surut. Kecerdasan Buatan kembali digandrungi, di mana penerapannya dilakukan secara masive pada aplikasi-aplikasi bisnis dan social media jaman sekarang.', 7, 0, '2022-05-22 14:42:43', '2022-05-28 00:33:53');
+('978-860-2556-84-04', 'Buku Fundamental Of Python For Machine Learning Untuk Pemula', 'UMUM', 'TGNI', '60000.0', '2018', 'Teguh Wahyono', 'Cibaliung Tunggal Plantation, Pt', 5, 'TIK', 'Artificial intelligence  (AI) dan machine learning saat ini kembali memasuki fase booming setelah beberapa dekade mengalami pasang surut. Kecerdasan Buatan kembali digandrungi, di mana penerapannya dilakukan secara masive pada aplikasi-aplikasi bisnis dan social media jaman sekarang.', 7, 0, '2022-05-22 14:42:43', '2022-05-28 00:33:53'),
+('9786026673343', 'Buku Sakti Pemrograman Web - Html Css Php Mysql Dan Javascript', 'UMUM', 'MAT', '47.5', '2018', 'Didik Setiawan', 'Cakung Permata Nusa, Pt', 5, 'TIK', ' Buku Pemrograman Web ini mengenalkan bagian dari sebuah pembentukan pemrograman web. Buku ini sebagian besar menyajikan langkah-langkah program yang disusun secara terstruktur. Dengan adanya langkah-langkah program tersebut, diharapkan pembaca dapat mempraktikkan secara langsung dan dapat menyimpulkan sendiri maksud dari setiap perintah dalam program dengan cara melihat hasil yang ditampilkan di web browser.', 5, 0, '2022-06-11 19:03:16', '2022-06-11 19:03:30');
 
 --
 -- Triggers `ma_buku`
@@ -147,7 +150,7 @@ CREATE TABLE `ma_dashboard` (
 --
 
 INSERT INTO `ma_dashboard` (`id`, `total_buku`, `buku_dipinjam`, `buku_bermasalah`, `total_anggota`, `updated_at`) VALUES
-(1, 10, 2, 0, 3, '2022-05-11 15:41:11');
+(1, 11, 0, 0, 5, '2022-05-11 15:41:11');
 
 -- --------------------------------------------------------
 
@@ -199,6 +202,7 @@ CREATE TABLE `ma_jurusan` (
 
 INSERT INTO `ma_jurusan` (`kode`, `nama`, `created_at`, `updated_at`) VALUES
 ('AK', 'Akutansi', '2022-04-17 15:50:09', '2022-05-08 02:26:35'),
+('APH', 'Perhotela', '2022-06-11 17:51:40', '2022-06-11 17:51:53'),
 ('RPL', 'Rekayasa Perangkat Lunak', '2022-04-17 16:44:01', '2022-04-17 16:44:01'),
 ('TGK', 'Teknik Geomatika dan Fisika', '2022-04-17 16:09:50', '2022-04-17 16:44:35'),
 ('TKJ', 'Teknik Komputer Dan Jaringan', '2022-04-17 15:48:21', '2022-04-17 16:07:10'),
@@ -243,45 +247,6 @@ CREATE TABLE `ma_log` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ma_log`
---
-
-INSERT INTO `ma_log` (`id`, `process`, `message`, `pengurus`, `created_at`) VALUES
-(1, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 00:18:55'),
-(2, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 00:20:39'),
-(3, 'TAMBAH RAK', 'Menambahkan rak Majalah', 'Hana Wulan Agusta', '2022-06-11 00:21:18'),
-(4, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 00:28:09'),
-(5, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 00:28:55'),
-(6, 'TAMBAH PENERBIT', 'Berhasil menambahkan Pt. Menjelang Siang sebagai penerbit', 'Hana Wulan Agusta', '2022-06-11 00:29:34'),
-(7, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 00:30:27'),
-(8, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 01:11:45'),
-(9, 'MEMBUAT TRANSAKSI', 'Berhasil membuat Transaksi TR-1654884709690', 'Aristo Caesar Pratama', '2022-06-11 01:12:12'),
-(10, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 01:13:48'),
-(11, 'MEMBUAT TRANSAKSI', 'Berhasil membuat Transaksi TR-1654884834776', 'Hana Wulan Agusta', '2022-06-11 01:14:14'),
-(12, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 01:21:13'),
-(13, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 01:22:38'),
-(14, 'MEMPERBARUI TRANSAKSI', 'Berhasil memperbarui Transaksi TR-1654884834776', 'Aristo Caesar Pratama', '2022-06-11 01:23:35'),
-(15, 'MEMPERBARUI TRANSAKSI', 'Berhasil memperbarui Transaksi TR-1654884834776', 'Aristo Caesar Pratama', '2022-06-11 01:24:26'),
-(16, 'MEMBUAT TRANSAKSI', 'Berhasil membuat Transaksi TR-1654885522663', 'Aristo Caesar Pratama', '2022-06-11 01:25:42'),
-(17, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 01:42:34'),
-(18, 'UPDATE PENGATURAN', 'Memperbarui data pengaturan', 'Aristo Caesar Pratama', '2022-06-11 01:42:43'),
-(19, 'UPDATE PENGATURAN', 'Memperbarui data pengaturan', 'Aristo Caesar Pratama', '2022-06-11 01:42:55'),
-(20, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:12:00'),
-(21, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:14:17'),
-(22, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:15:56'),
-(23, 'LOGIN', 'Akses login berhasil', 'Hana Wulan Agusta', '2022-06-11 02:23:22'),
-(24, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:28:39'),
-(25, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:32:10'),
-(26, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:33:48'),
-(27, 'MEMBUAT TRANSAKSI', 'Berhasil membuat Transaksi TR-1654889630321', 'Aristo Caesar Pratama', '2022-06-11 02:34:15'),
-(28, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:52:01'),
-(29, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:56:08'),
-(30, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:59:09'),
-(31, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 02:59:33'),
-(32, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 03:03:04'),
-(33, 'LOGIN', 'Akses login berhasil', 'Aristo Caesar Pratama', '2022-06-11 03:03:43');
-
 -- --------------------------------------------------------
 
 --
@@ -305,7 +270,7 @@ INSERT INTO `ma_penerbit` (`nama`, `kontak`, `created_at`, `updated_at`) VALUES
 ('Cakung Permata Nusa, Pt', '43523455', '2022-05-08 15:56:36', '2022-05-08 15:56:36'),
 ('Calista Alam, Pt', '6965523445', '2022-05-08 15:56:47', '2022-05-08 15:56:47'),
 ('Cibaliung Tunggal Plantation, Pt', '55234234', '2022-05-08 15:57:00', '2022-05-08 15:57:00'),
-('Cipta Narada Sejati', '55243', '2022-05-08 15:57:08', '2022-05-08 15:57:08'),
+('Cipta Narada Sejati', '55243768768', '2022-05-08 15:57:08', '2022-06-11 17:52:32'),
 ('Cv Casear Cell', '47408934932', '2022-05-08 15:32:53', '2022-05-08 15:43:04'),
 ('Pt Player Cell', '085655990781', '2022-05-08 15:35:10', '2022-05-08 15:38:31'),
 ('PT. Erlangga', '085235119101', '2022-03-23 10:17:59', '2022-03-23 10:17:59'),
@@ -382,7 +347,7 @@ CREATE TABLE `ma_setting` (
 --
 
 INSERT INTO `ma_setting` (`id`, `denda_terlambat`, `max_pinjam_buku_umum`, `time_backup_database`, `updated_at`) VALUES
-(1, 5000, 2, 2, '2022-06-11 01:42:55');
+(1, 2000, 2, 2, '2022-06-11 17:49:53');
 
 -- --------------------------------------------------------
 
@@ -501,7 +466,7 @@ ALTER TABLE `ma_dashboard`
 -- AUTO_INCREMENT for table `ma_log`
 --
 ALTER TABLE `ma_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `ma_setting`

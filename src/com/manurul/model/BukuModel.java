@@ -385,7 +385,6 @@ public class BukuModel extends DBConfig {
             return true;
         
         }catch(SQLException error){
-        
             if(error.getErrorCode() == 1062){
                 setMessage("Buku ini sudah tersedia !");
             }else{
