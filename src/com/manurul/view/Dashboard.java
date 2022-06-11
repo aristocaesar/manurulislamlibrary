@@ -777,7 +777,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         LABEL_LOG.setFont(new java.awt.Font("Trebuchet MS", 1, 28)); // NOI18N
         LABEL_LOG.setForeground(new java.awt.Color(96, 96, 96));
-        LABEL_LOG.setText("Transaksi Terbaru");
+        LABEL_LOG.setText("Aktifitas Terbaru");
 
         LABEL_TAMPILKAN.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         LABEL_TAMPILKAN.setForeground(new java.awt.Color(204, 204, 204));
@@ -2616,10 +2616,11 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(LABEL_SET_1)
                     .addComponent(LABEL_SET_2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LABEL_SET_RP)
-                    .addComponent(INPUT_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(INPUT_SET_1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addGroup(FRAME_MAIN_SETTINGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LABEL_SET_RP)
+                        .addComponent(INPUT_SET_2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(LABEL_SET_3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
