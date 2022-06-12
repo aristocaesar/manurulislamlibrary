@@ -22,9 +22,13 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -53,7 +57,7 @@ public class LaporanModel extends DBConfig {
                             "ON ma_transaksi.nis_anggota = ma_anggota.nis " +
                             "JOIN ma_detail_transaksi " +
                             "ON ma_transaksi.id_transaksi = ma_detail_transaksi.id_transaksi " +
-                            "WHERE ma_transaksi.id_transaksi LIKE '%"+id_transaksi+"%' " +
+                            "WHERE ma_transaksi.id_transaksi LIKE '%"+id_transaksi+"%' OR ma_anggota.nama_lengkap LIKE '%"+id_transaksi+"%' " +
                             "GROUP BY id_transaksi ";
             
             if(!limit.equals("Semua")){
@@ -67,7 +71,7 @@ public class LaporanModel extends DBConfig {
                             "ON ma_transaksi.nis_anggota = ma_anggota.nis " +
                             "JOIN ma_detail_transaksi " +
                             "ON ma_transaksi.id_transaksi = ma_detail_transaksi.id_transaksi " +
-                            "WHERE ma_transaksi.id_transaksi LIKE '%"+id_transaksi+"%' " +
+                            "WHERE ma_transaksi.id_transaksi LIKE '%"+id_transaksi+"%' OR ma_anggota.nama_lengkap LIKE '%"+id_transaksi+"%' " +
                             "GROUP BY id_transaksi " +
                             "LIMIT " + limit + "";
             }
@@ -178,17 +182,14 @@ public class LaporanModel extends DBConfig {
 
             }
             
-            String fileName = "/com/manurul/report/transaksi/reportPengembalian.jasper";
-            InputStream Report;
-            Report = getClass().getResourceAsStream(fileName);
-            
             HashMap hash = new HashMap();
+            
             File logoPath = new File("src/com/manurul/src/LOGO_MANURUL.png");
             
             hash.put("logo", logoPath.getAbsolutePath());
             hash.put("id_transaksi", this.id_tr);
             
-            String[] nama = DetailLaporanTransaksi.INPUT_PENGURUS.getText().split("-");
+            String[] nama = DetailLaporanTransaksi.INPUT_PEMINJAM.getText().split("-");
             
             hash.put("nama_lengkap", nama[1]);
             
@@ -199,10 +200,15 @@ public class LaporanModel extends DBConfig {
             hash.put("pengurus", Dashboard.USERNAME.getText());
             hash.put("barcode", barcodePath);
             
-            JasperPrint print;
-            print = JasperFillManager.fillReport(Report, hash, conn);
-            JasperPrintManager.printReport(print, false);
-            new JasperViewer(print, false).setVisible(true);
+            InputStream Report = getClass().getResourceAsStream("/com/manurul/report/transaksi/reportPengembalian.jrxml");
+            System.out.println(Report.toString());
+            JasperDesign jasperDesign = JRXmlLoader.load(Report);
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            
+            JasperPrint print = JasperFillManager.fillReport(jasperReport, hash, conn);
+//            JasperPrintManager.printReport(print, false);
+            
+            JasperViewer.viewReport(print, false);
             
             // cetak log
             new LogModel().Action("MENCETAK LAPORAN TRANSAKSI", "Berhasil mencetak laporan Transaksi " + this.id_tr, Dashboard.nama_user);

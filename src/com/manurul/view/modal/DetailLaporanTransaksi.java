@@ -70,9 +70,9 @@ public class DetailLaporanTransaksi extends javax.swing.JFrame {
         BTN_CETAK.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         BTN_CETAK.setForeground(new java.awt.Color(255, 255, 255));
         BTN_CETAK.setText("CETAK");
-        BTN_CETAK.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BTN_CETAKKeyPressed(evt);
+        BTN_CETAK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_CETAKMouseClicked(evt);
             }
         });
 
@@ -220,15 +220,15 @@ public class DetailLaporanTransaksi extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BTN_DISPOSEMouseClicked
 
-    private void BTN_CETAKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BTN_CETAKKeyPressed
-        try {
+    private void BTN_CETAKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_CETAKMouseClicked
+       try {
             LM.cetakDetailTransaksi();
         } catch (JRException ex) {
             Logger.getLogger(DetailLaporanTransaksi.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             this.dispose();
         }
-    }//GEN-LAST:event_BTN_CETAKKeyPressed
+    }//GEN-LAST:event_BTN_CETAKMouseClicked
 
     /**
      * @param args the command line arguments
