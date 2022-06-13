@@ -475,8 +475,6 @@ public class TransaksiModel extends DBConfig{
             // print transaksi pinjam
             try{
                 
-                String barcodePath = null;
-                File filePath = new File("src/com/manurul/report/barcode/"+id_transaksi+".png");
                 // buat barcode 
                 try{
                 
@@ -484,18 +482,15 @@ public class TransaksiModel extends DBConfig{
                     barcode.setType(Linear.CODE128B);
                     barcode.setData(id_transaksi);
                     barcode.setI(11.0f);
-                    barcodePath = filePath.getAbsolutePath();
-                    barcode.renderBarcode(barcodePath);
+                    barcode.renderBarcode("src/com/manurul/report/barcode/"+id_transaksi+".png");
                     
                 }catch(Exception error){
                 
                     throw new SQLException(error.getMessage());
                     
                 }
-            
-                String fileName = "/com/manurul/report/transaksi/reportPeminjaman.jasper";
-                InputStream Report;
-                Report = getClass().getResourceAsStream(fileName);
+                
+                InputStream Report = getClass().getResourceAsStream("src/com/manurul/report/transaksi/reportPeminjaman.jasper");
 
                 HashMap hash = new HashMap();
                 
@@ -511,12 +506,15 @@ public class TransaksiModel extends DBConfig{
                 
                 hash.put("tanggal_transaksi", timeFormat.format(timeDate));
                 hash.put("pengurus", Dashboard.USERNAME.getText());
-                hash.put("barcode", barcodePath);
+                hash.put("barcode", "src/com/manurul/report/barcode/"+id_transaksi+".png");
 
-                JasperPrint print;
-                print = JasperFillManager.fillReport(Report, hash, conn);
-                JasperPrintManager.printReport(print, false);
-                new JasperViewer(print, false).setVisible(true);
+                JasperPrint print = JasperFillManager.fillReport(Report, hash, conn);
+                
+                JasperViewer.viewReport(print, false);
+            
+                // hapus 
+                File fileDelete = new File("src/com/manurul/report/barcode/"+id_transaksi+".png");
+                fileDelete.delete();
                 
             }catch(Exception error){
             

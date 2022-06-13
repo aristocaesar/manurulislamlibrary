@@ -222,7 +222,7 @@ public class getDaftarBukuTRANSAKSI extends javax.swing.JFrame {
     }
     
     private void INPUT_SEARCHKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_INPUT_SEARCHKeyTyped
-        new TransaksiModel().setDataAnggota(INPUT_SEARCH.getText());
+        new TransaksiModel().setDataBuku(INPUT_SEARCH.getText(), Dashboard.PJ_INPUT_JENIS_BUKU.getSelectedItem().toString());
     }//GEN-LAST:event_INPUT_SEARCHKeyTyped
 
     private void TABLE_LIST_BUKUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLE_LIST_BUKUMouseClicked
