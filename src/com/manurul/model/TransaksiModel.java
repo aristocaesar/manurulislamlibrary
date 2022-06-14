@@ -17,6 +17,7 @@ import com.manurul.view.modal.konfirmasiTransaksiPinjam;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -482,7 +483,7 @@ public class TransaksiModel extends DBConfig{
                     barcode.setType(Linear.CODE128B);
                     barcode.setData(id_transaksi);
                     barcode.setI(11.0f);
-                    barcode.renderBarcode("src/com/manurul/report/barcode/"+id_transaksi+".png");
+                    barcode.renderBarcode(new File("src/com/manurul/report/barcode/"+id_transaksi+".png").getAbsolutePath());
                     
                 }catch(Exception error){
                 
@@ -490,13 +491,12 @@ public class TransaksiModel extends DBConfig{
                     
                 }
                 
-                InputStream Report = getClass().getResourceAsStream("src/com/manurul/report/transaksi/reportPeminjaman.jasper");
+                // ambil file jasper
+                InputStream Report = new FileInputStream(new File("src/com/manurul/report/transaksi/reportPeminjaman.jasper"));
 
                 HashMap hash = new HashMap();
                 
-                File logoPath = new File("src/com/manurul/src/LOGO_MANURUL.png");
-                
-                hash.put("logo", logoPath.getAbsolutePath());
+                hash.put("logo", new File("src/com/manurul/src/LOGO_MANURUL.png").getAbsolutePath());
                 hash.put("id_transaksi", id_transaksi);
                 hash.put("nama_lengkap", getNama());
                 
@@ -506,15 +506,14 @@ public class TransaksiModel extends DBConfig{
                 
                 hash.put("tanggal_transaksi", timeFormat.format(timeDate));
                 hash.put("pengurus", Dashboard.USERNAME.getText());
-                hash.put("barcode", "src/com/manurul/report/barcode/"+id_transaksi+".png");
+                hash.put("barcode", new File("src/com/manurul/report/barcode/"+id_transaksi+".png").getAbsolutePath());
 
                 JasperPrint print = JasperFillManager.fillReport(Report, hash, conn);
                 
                 JasperViewer.viewReport(print, false);
             
                 // hapus 
-                File fileDelete = new File("src/com/manurul/report/barcode/"+id_transaksi+".png");
-                fileDelete.delete();
+                new File("src/com/manurul/report/barcode/"+id_transaksi+".png").delete();
                 
             }catch(Exception error){
             
