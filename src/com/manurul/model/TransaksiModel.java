@@ -483,10 +483,12 @@ public class TransaksiModel extends DBConfig{
                     barcode.setType(Linear.CODE128B);
                     barcode.setData(id_transaksi);
                     barcode.setI(11.0f);
+                    
+                    //fungsinya cetaknya mas
                     barcode.renderBarcode(new File("src/com/manurul/report/barcode/"+id_transaksi+".png").getAbsolutePath());
                     
                 }catch(Exception error){
-                
+                    
                     throw new SQLException(error.getMessage());
                     
                 }
@@ -1033,8 +1035,6 @@ public class TransaksiModel extends DBConfig{
             
             String nama[] = Dashboard.PJ_INPUT_PEMINJAM_PENGEMBALIAN.getText().split("-");
             
-            String barcodePath = null;
-            File filePath = new File("src/com/manurul/report/barcode/"+id_transaksi+".png");
             // buat barcode 
             try{
 
@@ -1042,8 +1042,7 @@ public class TransaksiModel extends DBConfig{
                 barcode.setType(Linear.CODE128B);
                 barcode.setData(id_transaksi);
                 barcode.setI(11.0f);
-                barcodePath = filePath.getAbsolutePath();
-                barcode.renderBarcode(barcodePath);
+                barcode.renderBarcode(new File("src/com/manurul/report/barcode/"+id_transaksi+".png").getAbsolutePath());
 
             }catch(Exception error){
 
@@ -1051,15 +1050,9 @@ public class TransaksiModel extends DBConfig{
 
             }
 
-            String fileName = "/com/manurul/report/transaksi/reportPengembalian.jasper";
-            InputStream Report;
-            Report = getClass().getResourceAsStream(fileName);
-
             HashMap hash = new HashMap();
-
-            File logoPath = new File("src/com/manurul/src/LOGO_MANURUL.png");
-
-            hash.put("logo", logoPath.getAbsolutePath());
+            
+            hash.put("logo", new File("src/com/manurul/src/LOGO_MANURUL.png").getAbsolutePath());
             hash.put("id_transaksi", id_transaksi);
             hash.put("nama_lengkap", nama[1]);
 
@@ -1068,12 +1061,14 @@ public class TransaksiModel extends DBConfig{
             SimpleDateFormat timeFormat = new SimpleDateFormat("dd / MM / YYYY ");
             hash.put("tanggal_transaksi", timeFormat.format(timeDate));
             hash.put("pengurus", Dashboard.USERNAME.getText());
-            hash.put("barcode", barcodePath);
+            hash.put("barcode", new File("src/com/manurul/report/barcode/"+id_transaksi+".png").getAbsolutePath());
 
-            JasperPrint print;
-            print = JasperFillManager.fillReport(Report, hash, conn);
-            JasperPrintManager.printReport(print, false);
-            new JasperViewer(print, false).setVisible(true);
+            // ambil file jasper
+            InputStream Report = new FileInputStream(new File("src/com/manurul/report/transaksi/reportPengembalian.jasper"));
+
+            JasperPrint print = JasperFillManager.fillReport(Report, hash, conn);
+            
+            JasperViewer.viewReport(print, false);
             
             // cetak log
             new LogModel().Action("MEMPERBARUI TRANSAKSI", "Berhasil memperbarui Transaksi " + id_transaksi, Dashboard.nama_user);
