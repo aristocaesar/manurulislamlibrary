@@ -11,6 +11,7 @@ import com.manurul.lib.SqlTime;
 import com.manurul.view.Dashboard;
 import com.manurul.view.modal.DetailLaporanTransaksi;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -170,7 +171,7 @@ public class LaporanModel extends DBConfig {
                 barcode.setType(Linear.CODE128B);
                 barcode.setData(this.id_tr);
                 barcode.setI(11.0f);
-                barcode.renderBarcode("src/com/manurul/report/barcode/"+this.id_tr+".png");
+                barcode.renderBarcode(new File("src/com/manurul/report/barcode/"+this.id_tr+".png").getAbsolutePath());
 
             }catch(Exception error){
 
@@ -180,7 +181,7 @@ public class LaporanModel extends DBConfig {
             
             HashMap hash = new HashMap();
             
-            hash.put("logo", "src/com/manurul/src/LOGO_MANURUL.png");
+            hash.put("logo", new File("src/com/manurul/src/LOGO_MANURUL.png").getAbsolutePath());
             hash.put("id_transaksi", this.id_tr);
             
             String[] nama = DetailLaporanTransaksi.INPUT_PEMINJAM.getText().split("-");
@@ -192,25 +193,23 @@ public class LaporanModel extends DBConfig {
             SimpleDateFormat timeFormat = new SimpleDateFormat("dd / MM / YYYY ");
             hash.put("tanggal_transaksi", timeFormat.format(timeDate));
             hash.put("pengurus", Dashboard.USERNAME.getText());
-            hash.put("barcode", "src/com/manurul/report/barcode/"+this.id_tr+".png");
+            hash.put("barcode", new File("src/com/manurul/report/barcode/"+this.id_tr+".png").getAbsolutePath());
             
-            InputStream Report = getClass().getResourceAsStream("/com/manurul/report/transaksi/reportPengembalian.jrxml");
-            JasperDesign jasperDesign = JRXmlLoader.load(Report);
-            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-            
-            JasperPrint print = JasperFillManager.fillReport(jasperReport, hash, conn);
+            // ambil file jasper
+            InputStream Report = new FileInputStream(new File("src/com/manurul/report/transaksi/reportPengembalian.jasper"));
+
+            JasperPrint print = JasperFillManager.fillReport(Report, hash, conn);
             
             JasperViewer.viewReport(print, false);
             
             // hapus 
-            File fileDelete = new File("src/com/manurul/report/barcode/"+this.id_tr+".png");
-            fileDelete.delete();
+            new File("src/com/manurul/report/barcode/"+this.id_tr+".png").delete();
             
             // cetak log
             new LogModel().Action("MENCETAK LAPORAN TRANSAKSI", "Berhasil mencetak laporan Transaksi " + this.id_tr, Dashboard.nama_user);
             
             
-        }catch(SQLException error){
+        }catch(Exception error){
         
             JOptionPane.showMessageDialog(null, error.getMessage(), "Terjadi Kesalahan!", JOptionPane.INFORMATION_MESSAGE);
             

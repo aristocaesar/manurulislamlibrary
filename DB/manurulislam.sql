@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2022 at 08:52 AM
+-- Generation Time: Jun 14, 2022 at 01:19 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -347,7 +347,7 @@ CREATE TABLE `ma_setting` (
 --
 
 INSERT INTO `ma_setting` (`id`, `denda_terlambat`, `max_pinjam_buku_umum`, `time_backup_database`, `updated_at`) VALUES
-(1, 2000, 9, 2, '2022-06-11 17:49:53');
+(1, 2000, 2, 2, '2022-06-11 17:49:53');
 
 -- --------------------------------------------------------
 
@@ -466,7 +466,7 @@ ALTER TABLE `ma_dashboard`
 -- AUTO_INCREMENT for table `ma_log`
 --
 ALTER TABLE `ma_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `ma_setting`
